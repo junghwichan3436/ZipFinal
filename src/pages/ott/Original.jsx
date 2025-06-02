@@ -11,7 +11,8 @@ const Container = styled.div`
     content: "";
     padding: 0;
     background: #0e100f
-      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png")
+      center;
     position: fixed;
     top: 0;
     left: 0;
@@ -55,6 +56,7 @@ const MainTitle = styled.div`
     }
   }
 `;
+
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -142,7 +144,10 @@ const Original = () => {
           </ZipItem>
           <ZipItem>
             <div className="img_container">
-              <img src="https://blog.kakaocdn.net/dn/bJFizW/btrsQrcaFoy/2uW9icruTumlPzLSpoGv2K/img.gif" alt="강새벽" />
+              <img
+                src="https://blog.kakaocdn.net/dn/bJFizW/btrsQrcaFoy/2uW9icruTumlPzLSpoGv2K/img.gif"
+                alt="강새벽"
+              />
             </div>
             <p>강새벽의 생존 가방</p>
             <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
