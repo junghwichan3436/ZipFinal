@@ -110,6 +110,7 @@ const HeaderGnb = styled.ul`
     transition: all 0.5s ease-in-out;
   }
   li {
+    white-space: nowrap;
     cursor: pointer;
     width: 100%;
     height: 100%;
@@ -611,11 +612,11 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb>
-              <li>OTT</li>
-              <li>OTT</li>
-              <li>OTT</li>
-              <li onClick={() => navigate("/ott/short")}>Short</li>
-              <li onClick={() => navigate("/ott/original")}>Original</li>
+              <li>BAG ZIP</li>
+              <li>STYLE ZIP</li>
+              <li>TALK ZIP</li>
+              <li>SHORTS ZIP</li>
+              <li onClick={() => navigate("/ott/original")}>ZIP ORIGINAL</li>
             </HeaderGnb>
           )}
           <HeaderBars>|</HeaderBars>
