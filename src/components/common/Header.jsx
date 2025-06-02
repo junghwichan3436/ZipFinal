@@ -614,7 +614,7 @@ const Header = () => {
               <li>OTT</li>
               <li>OTT</li>
               <li>OTT</li>
-              <li>OTT</li>
+              <li onClick={() => navigate("/ott/short")}>Short</li>
               <li onClick={() => navigate("/ott/original")}>Original</li>
             </HeaderGnb>
           )}
