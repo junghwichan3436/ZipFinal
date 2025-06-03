@@ -23,6 +23,8 @@ import IntroduceTattoo from "./pages/commerce/eventpages/IntroduceTattoo";
 import Star from "./pages/commerce/Star";
 import StarDetail from "./pages/commerce/StarDetail";
 import Original from "./pages/ott/Original";
+import Short from "./pages/ott/Short";
+
 import InMyBag from "./pages/ott/InMyBag";
 export const router = createBrowserRouter([
   {
@@ -130,6 +132,10 @@ export const router = createBrowserRouter([
       {
         path: "original",
         element: <Original />,
+      },
+      {
+        path: "short",
+        element: <Short />,
       },
       {
         path: "bagzip",
