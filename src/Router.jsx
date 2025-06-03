@@ -7,7 +7,8 @@ import Ott from "./pages/ott/Ott";
 import FilterCategory from "./pages/commerce/FilterCategory";
 import Cart from "./pages/commerce/Cart";
 import Login from "./pages/commerce/Login";
-import Signup from "./pages/commerce/Signup";
+import Signup from "./pages/commerce/signuppages/Signup";
+import Signupv2 from "./pages/commerce/signuppages/Signupv2";
 import Search from "./pages/commerce/Search";
 import Payment from "./pages/commerce/Payment";
 import Mypage from "./pages/commerce/mypages/Mypage";
@@ -24,6 +25,7 @@ import StarDetail from "./pages/commerce/StarDetail";
 import Original from "./pages/ott/Original";
 import Short from "./pages/ott/Short";
 
+import InMyBag from "./pages/ott/InMyBag";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -74,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "signupv2",
+        element: <Signupv2 />,
       },
       {
         path: "search/:name",
@@ -130,6 +136,10 @@ export const router = createBrowserRouter([
       {
         path: "short",
         element: <Short />,
+      },
+      {
+        path: "bagzip",
+        element: <InMyBag />,
       },
     ],
   },

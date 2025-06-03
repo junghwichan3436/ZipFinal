@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Agreement from "../../components/signup/Agreement";
-import Address from "../../components/signup/Address";
+import Agreement from "../../../components/signup/Agreement";
+import Address from "../../../components/signup/Address";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth } from "../../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db } from "../../../firebase/firebase";
 
 const Wrapper = styled.div`
   width: 540px;
@@ -218,7 +218,7 @@ const Signup = () => {
       </Form>
       <Agreement setIsAgreed={setIsAgreed} />
       <Btn type="submit" form="form">
-        회원가입 하기
+        다음
       </Btn>
     </Wrapper>
   );
