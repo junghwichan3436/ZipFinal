@@ -132,7 +132,7 @@ const FilterItemPick = styled.span`
 `;
 
 /*--- 출력 ---*/
-const ProductItem = ({ img, subtitle, name, price, artistName, detailURL }) => {
+const ProductItem = ({ thumbnail, subtitle, name, price, artistName, detailURL }) => {
   const navigate = useNavigate();
 
   return (
@@ -142,7 +142,7 @@ const ProductItem = ({ img, subtitle, name, price, artistName, detailURL }) => {
           {artistName} <br />
           PICK
         </FilterItemPick>
-        <img src={img} alt="{img} 제품" onClick={() => navigate(`/detail/${detailURL}`)} />
+        <img src={thumbnail} alt="{img} 제품" onClick={() => navigate(`/detail/${detailURL}`)} />
       </ProductImg>
       <ProductInfo onClick={() => navigate(`/detail/${detailURL}`)}>
         <Prod_sub>{subtitle}</Prod_sub>
