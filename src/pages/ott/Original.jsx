@@ -56,6 +56,7 @@ const MainTitle = styled.div`
     }
   }
 `;
+
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -99,6 +100,8 @@ const Original = () => {
               thumbnail={item.thumbnail}
               subTitle={item.subTitle}
               mainTitle={item.mainTitle}
+              bagThumbnail={item.bagThumbnail}
+              shorts={item.shorts}
             />
           ))}
         </ZipList>

@@ -129,7 +129,11 @@ const Footer = () => {
             </FooterFnb>
           ) : (
             <FooterFnb>
-              <li>OTT</li>
+              <li>BAG ZIP</li>
+              <li>STYLE ZIP</li>
+              <li>TALK ZIP</li>
+              <li>SHORTS ZIP</li>
+              <li onClick={() => navigate("/ott/original")}>ZIP ORIGINAL</li>
             </FooterFnb>
           )}
         </Fnb>

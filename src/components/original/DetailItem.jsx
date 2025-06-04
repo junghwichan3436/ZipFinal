@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import CardItem from "../home/CardItem";
-import StylePick from "../home/StylePick";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+import CardItem from "../home/CardItem";
+import RollingBanner from "../home/RollingBanner";
+import YouTube from "react-youtube";
 /*--- 스와이퍼 ---*/
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -109,12 +110,13 @@ const CharaterSection = styled.section`
       & > h5 {
         font-size: 3rem;
         font-weight: 500;
+        margin-bottom: 30px;
       }
       & > p {
         font-size: 2rem;
         font-weight: 300;
         line-height: 1.8;
-        margin: 20px 0 40px;
+        margin-bottom: 20px;
       }
       & > ul {
         display: flex;
@@ -135,8 +137,91 @@ const CharaterSection = styled.section`
 const CardList = styled.div`
   width: 1100px;
   height: 600px;
-  border: 1px solid #f00;
   overflow: hidden;
+`;
+const RealStarSection = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 100px 3%;
+  & > .real-title {
+    font-size: 5.4rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
+  & > .contents-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 0;
+    & > h4 {
+      width: 47%;
+      font-size: 6rem;
+      letter-spacing: -2px;
+      font-family: "EHNormalTrial";
+    }
+    & > .video-container {
+      width: 700px;
+      aspect-ratio: 16 / 9;
+      .VideoImg {
+        width: 100%;
+        height: 100%;
+        background: #323240;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+`;
+const ShortSection = styled.div`
+  width: 100%;
+  height: 100%;
+  border: 1px solid #f00;
+  & > h4 {
+    width: 50%;
+    font-size: 6rem;
+    letter-spacing: -2px;
+    font-family: "EHNormalTrial";
+    margin-bottom: 40px;
+  }
+  & > .shorts-container {
+    width: 100%;
+    background: #f00;
+    /* background: #717171; */
+    ul {
+      display: flex;
+      /* justify-content: space-between; */
+      /* align-items: center; */
+      gap: 20px;
+      li {
+        .thumbnail-info {
+          width: 300px;
+          aspect-ratio: 9 / 16;
+          img {
+            border-radius: 8px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            background: #868686;
+          }
+        }
+        .short-info {
+          margin-top: 18px;
+          p {
+            font-size: 2.4rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+          }
+          span {
+            font-size: 1.4rem;
+            color: #888888;
+          }
+        }
+      }
+    }
+  }
 `;
 
 const DetailItem = ({
@@ -149,6 +234,8 @@ const DetailItem = ({
   keyword,
   characterKeyword,
   characterName,
+  bagThumbnail,
+  shorts,
 }) => {
   const navigate = useNavigate();
 
@@ -159,6 +246,7 @@ const DetailItem = ({
       .then((response) => response.json())
       .then((data) => setSlideData(data.slideData));
   }, []);
+
   return (
     <Container>
       <TitleSection>
@@ -184,7 +272,7 @@ const DetailItem = ({
       </ImgSection>
       <CharaterSection>
         <aside>
-          <h4>ZIP scene</h4>
+          <h4 className="">ZIP scene</h4>
           <div>
             <h5>{episode}</h5>
             <p>{description}</p>
@@ -219,6 +307,38 @@ const DetailItem = ({
           </div>
         </aside>
       </CharaterSection>
+      <RollingBanner />
+      <RealStarSection>
+        <p className="real-title">
+          {characterName}이 아닌, 진짜 {starName}의 취향은?
+        </p>
+        <div className="contents-container">
+          <h4>bag ZIP</h4>
+          <div className="video-container">
+            <div className="VideoImg">
+              <img src={bagThumbnail} alt={starName} />
+            </div>
+          </div>
+        </div>
+        <ShortSection>
+          <h4>short ZIP</h4>
+          <div className="shorts-container">
+            <ul>
+              {shorts?.map((item, index) => (
+                <li key={index}>
+                  <div className="thumbnail-info">
+                    <img src={item.shortThumbnail} alt={starName} />
+                  </div>
+                  <div className="short-info">
+                    <p>{item.shortTitle}</p>
+                    <span>조회수 {item.viewRated.toLocaleString()}회</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </ShortSection>
+      </RealStarSection>
     </Container>
   );
 };
