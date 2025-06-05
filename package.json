@@ -34,7 +34,7 @@
     "react-youtube": "^10.1.0",
     "styled-components": "^6.1.17",
     "styled-reset": "^4.5.2",
-    "swiper": "^11.2.6",
+    "swiper": "^11.2.8",
     "youtube": "^0.1.0"
   },
   "devDependencies": {
