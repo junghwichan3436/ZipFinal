@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import ZipItem from "../../components/original/ZipItem";
+// import { Link } from "react-router-dom";
 
 // 스타일 정의
 const Container = styled.div`
   width: 100%;
   height: 100%;
   color: #fff;
-  /* letter-spacing: -0.3px; */
   &::before {
     content: "";
     padding: 0;
     background: #0e100f
-      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png")
-      center;
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,32 +25,47 @@ const Container = styled.div`
 const TitleSection = styled.section`
   text-transform: uppercase;
   padding: 0 3%;
-  span {
-    display: inline-block;
-    font-size: 2.6rem;
-    font-family: "EHNormalTrial";
-    font-weight: 500;
+  .allZips {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 20px 0 40px;
+    .redDot {
+      width: 8px;
+      height: 8px;
+      background: #f00;
+      border-radius: 50%;
+    }
+    span {
+      display: inline-block;
+      font-size: 2rem;
+      font-family: "EHNormalTrial";
+      font-weight: 500;
+      color: #505050;
+      letter-spacing: -1px;
+    }
   }
 `;
 const MainTitle = styled.div`
   display: flex;
   gap: 40px;
   align-items: end;
-  padding-top: 200px;
+  padding-top: 180px;
   padding-bottom: 50px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
-    font-size: 11rem;
+    font-size: 10rem;
     font-family: "EHNormalTrial";
     font-weight: 500;
-    letter-spacing: -5px;
+    letter-spacing: -6px;
   }
   p {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 300;
     line-height: 1.4;
     b {
+      font-size: 1.7rem;
       font-weight: 300;
       font-family: "EHNormalTrial";
     }
@@ -62,55 +77,21 @@ const ZipList = styled.ul`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 3%;
+  letter-spacing: -0.2px;
+  padding-bottom: 100px;
   /* gap: 40px; */
 `;
-const ZipItem = styled.li`
-  /* box-shadow: 10px 10px 5px white inset; */
-  padding-bottom: 40px;
-  border-bottom: 1px solid #3c3c3c;
-  width: 47%;
-  margin-bottom: 100px;
-  .img_container {
-    height: 480px;
-    overflow: hidden;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-  p {
-    font-size: 4rem;
-    font-weight: 600;
-    margin-top: 30px;
-  }
-  span {
-    display: inline-block;
-    font-size: 2rem;
-    font-weight: 300;
-    margin: 20px 0 40px;
-  }
-  .keword {
-    display: flex;
-    gap: 10px;
-    /* color: #a0a0a0; */
-    li {
-      /* font-weight: 300; */
-      font-size: 1.4rem;
-      padding: 12px 24px;
-      border: 1px solid #585858;
-      border-radius: 30px;
-    }
-  }
-`;
-const Overlay = styled.div`
-  position: relative;
-  top: 0;
-  left: 0;
-`;
-const mockData = {};
 
+/*--- 출력 ---*/
 const Original = () => {
+  const [originalData, setOriginaldata] = useState([]);
+
+  useEffect(() => {
+    fetch("/API/originalData.json")
+      .then((response) => response.json())
+      .then((data) => setOriginaldata(data.originalData));
+  }, []);
+
   return (
     <Container>
       <TitleSection>
@@ -122,101 +103,25 @@ const Original = () => {
             <b>zip original</b>에서
           </p>
         </MainTitle>
-        <span>all zips(6)</span>
+        <div className="allZips">
+          <div className="redDot"></div>
+          <span>all zips [6]</span>
+        </div>
       </TitleSection>
       <section>
         <ZipList>
-          <ZipItem>
-            <Overlay></Overlay>
-            <div className="img_container">
-              <img
-                src="https://i.namu.wiki/i/zHUM_5GhB_UKBcTEdwOIDexh5u9vGUNwYcm0O_hnedk2sX94et5ECiKYj7UTEzdmxt7LYr1hcaEExmsPP2Ya6w.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
-          <ZipItem>
-            <div className="img_container">
-              <img
-                src="https://blog.kakaocdn.net/dn/bJFizW/btrsQrcaFoy/2uW9icruTumlPzLSpoGv2K/img.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
-          <ZipItem>
-            <div className="img_container">
-              <img
-                src="https://i.namu.wiki/i/zHUM_5GhB_UKBcTEdwOIDexh5u9vGUNwYcm0O_hnedk2sX94et5ECiKYj7UTEzdmxt7LYr1hcaEExmsPP2Ya6w.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
-          <ZipItem>
-            <div className="img_container">
-              <img
-                src="https://i.namu.wiki/i/zHUM_5GhB_UKBcTEdwOIDexh5u9vGUNwYcm0O_hnedk2sX94et5ECiKYj7UTEzdmxt7LYr1hcaEExmsPP2Ya6w.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
-          <ZipItem>
-            <div className="img_container">
-              <img
-                src="https://i.namu.wiki/i/zHUM_5GhB_UKBcTEdwOIDexh5u9vGUNwYcm0O_hnedk2sX94et5ECiKYj7UTEzdmxt7LYr1hcaEExmsPP2Ya6w.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
-          <ZipItem>
-            <div className="img_container">
-              <img
-                src="https://i.namu.wiki/i/zHUM_5GhB_UKBcTEdwOIDexh5u9vGUNwYcm0O_hnedk2sX94et5ECiKYj7UTEzdmxt7LYr1hcaEExmsPP2Ya6w.gif"
-                alt="강새벽"
-              />
-            </div>
-            <p>강새벽의 생존 가방</p>
-            <span>말은 없어도, 필요한 건 다 챙기는 사람</span>
-            <ul className="keword">
-              <li>#오징어게임</li>
-              <li>#강새벽</li>
-              <li>#정호연</li>
-            </ul>
-          </ZipItem>
+          {originalData?.map((item, index) => (
+            <ZipItem
+              id={item.id}
+              key={index}
+              onClick={() => navigate(`/ott/originalDetail/${item.id}`)}
+              thumbnail={item.thumbnail}
+              subTitle={item.subTitle}
+              mainTitle={item.mainTitle}
+              bagThumbnail={item.bagThumbnail}
+              shorts={item.shorts}
+            />
+          ))}
         </ZipList>
       </section>
     </Container>
