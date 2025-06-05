@@ -27,6 +27,7 @@ import OriginalDetail from "./pages/ott/OriginalDetail";
 import Short from "./pages/ott/Short";
 
 import InMyBag from "./pages/ott/InMyBag";
+import OttDetail from "./pages/ott/OttDetail";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -146,6 +147,10 @@ export const router = createBrowserRouter([
         path: "bagzip",
         element: <InMyBag />,
       },
+      {
+        path: "detail",
+        element: <OttDetail/>
+      }
     ],
   },
 ]);
