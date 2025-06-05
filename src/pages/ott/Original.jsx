@@ -25,12 +25,26 @@ const Container = styled.div`
 const TitleSection = styled.section`
   text-transform: uppercase;
   padding: 0 3%;
-  span {
-    display: inline-block;
-    font-size: 2.6rem;
-    font-family: "EHNormalTrial";
-    font-weight: 500;
+  .allZips {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 20px 0 40px;
+    .redDot {
+      width: 8px;
+      height: 8px;
+      background: #f00;
+      border-radius: 50%;
+    }
+    span {
+      display: inline-block;
+      font-size: 2rem;
+      font-family: "EHNormalTrial";
+      font-weight: 500;
+      color: #505050;
+      letter-spacing: -1px;
+    }
   }
 `;
 const MainTitle = styled.div`
@@ -41,16 +55,17 @@ const MainTitle = styled.div`
   padding-bottom: 50px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
-    font-size: 11rem;
+    font-size: 10rem;
     font-family: "EHNormalTrial";
     font-weight: 500;
-    letter-spacing: -5px;
+    letter-spacing: -6px;
   }
   p {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 300;
     line-height: 1.4;
     b {
+      font-size: 1.7rem;
       font-weight: 300;
       font-family: "EHNormalTrial";
     }
@@ -88,7 +103,10 @@ const Original = () => {
             <b>zip original</b>에서
           </p>
         </MainTitle>
-        <span>all zips(6)</span>
+        <div className="allZips">
+          <div className="redDot"></div>
+          <span>all zips [6]</span>
+        </div>
       </TitleSection>
       <section>
         <ZipList>

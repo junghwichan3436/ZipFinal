@@ -4,7 +4,22 @@ import DetailItem from "../../components/original/DetailItem";
 import styled from "styled-components";
 
 const Container = styled.main`
-  background: #0e100f;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  &::before {
+    content: "";
+    padding: 0;
+    background: #0e100f
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    filter: brightness(0.2) contrast(1.1);
+    z-index: -1;
+  }
 `;
 
 const OriginalDetail = () => {
@@ -41,6 +56,8 @@ const OriginalDetail = () => {
             keyword={selectedItem.keyword}
             characterKeyword={selectedItem.characterKeyword}
             characterName={selectedItem.characterName}
+            bagThumbnail={selectedItem.bagThumbnail}
+            shorts={selectedItem.shorts}
           />
         )}
       </section>

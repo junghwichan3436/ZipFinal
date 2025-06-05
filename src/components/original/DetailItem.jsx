@@ -97,13 +97,13 @@ const CharaterSection = styled.section`
     justify-content: space-between;
     align-items: flex-start;
     & > h4 {
-      width: 50%;
+      /* width: 50%; */
       font-size: 6rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
     & > div {
-      width: 50%;
+      width: 60%;
       display: flex;
       flex-direction: column;
       padding-top: 8px;
@@ -120,7 +120,7 @@ const CharaterSection = styled.section`
       }
       & > ul {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         li {
           padding: 12px 24px;
           border-radius: 50px;
@@ -130,7 +130,7 @@ const CharaterSection = styled.section`
       }
     }
     &.item-zip {
-      margin-top: 80px;
+      margin-top: 120px;
     }
   }
 `;
@@ -142,29 +142,29 @@ const CardList = styled.div`
 const RealStarSection = styled.div`
   width: 100%;
   height: 100%;
-  padding: 100px 3%;
+  padding: 140px 3%;
   & > .real-title {
-    font-size: 5.4rem;
+    font-size: 6rem;
     font-weight: 600;
     letter-spacing: -1px;
   }
   & > .contents-container {
     display: flex;
     justify-content: space-between;
-    margin: 80px 0;
+    margin: 120px 0;
     & > h4 {
-      width: 47%;
       font-size: 6rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
     & > .video-container {
-      width: 700px;
+      width: 60%;
       aspect-ratio: 16 / 9;
       .VideoImg {
         width: 100%;
         height: 100%;
         background: #323240;
+        overflow: hidden;
         img {
           width: 100%;
           height: 100%;
@@ -177,29 +177,32 @@ const RealStarSection = styled.div`
 const ShortSection = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid #f00;
   & > h4 {
     width: 50%;
     font-size: 6rem;
     letter-spacing: -2px;
     font-family: "EHNormalTrial";
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
   & > .shorts-container {
     width: 100%;
-    background: #f00;
-    /* background: #717171; */
+    height: 100%;
     ul {
+      width: 100%;
+      height: 100%;
       display: flex;
-      /* justify-content: space-between; */
-      /* align-items: center; */
-      gap: 20px;
+      gap: 60px;
       li {
+        height: 50%;
+        flex: 1;
         .thumbnail-info {
-          width: 300px;
+          width: 100%;
+          height: 100%;
           aspect-ratio: 9 / 16;
+          overflow: hidden;
+          border-radius: 8px;
+          cursor: pointer;
           img {
-            border-radius: 8px;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -208,15 +211,24 @@ const ShortSection = styled.div`
           }
         }
         .short-info {
-          margin-top: 18px;
+          margin-top: 20px;
           p {
-            font-size: 2.4rem;
+            width: 100%;
+            font-size: 2.8rem;
             font-weight: 500;
-            margin-bottom: 18px;
+            /* margin-bottom: 14px; */
+            cursor: pointer;
+          }
+          div {
+            width: 100%;
+            height: 1px;
+            background: #393939;
+            margin: 24px 0 12px;
           }
           span {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #888888;
+            letter-spacing: 0;
           }
         }
       }
@@ -246,6 +258,8 @@ const DetailItem = ({
       .then((response) => response.json())
       .then((data) => setSlideData(data.slideData));
   }, []);
+
+  console.log("shorts data:", shorts);
 
   return (
     <Container>
@@ -286,7 +300,7 @@ const DetailItem = ({
         <aside className="item-zip">
           <h4>item ZIP</h4>
           <div>
-            <h5>{characterName}이 사용했을 아이템은?</h5>
+            <h5>당신도 궁금했던, {characterName}의 리얼템</h5>
             <CardList>
               <Swiper
                 slidesPerView={3}
@@ -310,7 +324,7 @@ const DetailItem = ({
       <RollingBanner />
       <RealStarSection>
         <p className="real-title">
-          {characterName}이 아닌, 진짜 {starName}의 취향은?
+          {characterName}이 아닌, 본체 {starName}의 취향은?
         </p>
         <div className="contents-container">
           <h4>bag ZIP</h4>
@@ -331,6 +345,7 @@ const DetailItem = ({
                   </div>
                   <div className="short-info">
                     <p>{item.shortTitle}</p>
+                    <div></div>
                     <span>조회수 {item.viewRated.toLocaleString()}회</span>
                   </div>
                 </li>
