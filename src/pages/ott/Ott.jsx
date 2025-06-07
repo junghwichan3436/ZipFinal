@@ -1,7 +1,10 @@
+import { useRef, useEffect } from "react";
 import styled from "styled-components";
 import YouTube from "react-youtube";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useState, useRef, useEffect } from "react";
+import { StarData } from "../../StarData";
+
 const Container = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -19,37 +22,40 @@ const Container = styled.div`
     flex-direction: column;
     gap: 20px;
   }
-  .swiper-slide {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
 `;
-const MainSlide = styled.div`
-  top: 0;
-  width: 100%;
+
+const BannerWrapper = styled.div`
   position: relative;
-  cursor: pointer;
-  z-index: 1;
-  padding-top: 56.25%;
-  iframe {
+  width: 100%;
+`;
+
+const MainSlide = styled.div`
+  width: 100%;
+  height: 100vh;
+  img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    position: absolute;
-    pointer-events: none;
-    left: 0;
-    top: 0;
-    scroll-behavior: none;
-    z-index: -1;
+    background-attachment: fixed;
   }
 `;
 
+const SlideText = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 3%;
+`;
 const UserLike = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
   width: 100%;
   padding: 5% 3%;
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 const SlideTitle = styled.h3`
@@ -64,6 +70,9 @@ const VideoCon = styled.div`
   position: relative;
   img {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    height: 100%;
+    object-fit: cover;
     z-index: 1;
     display: block;
     transition: all 0.3s;
@@ -91,6 +100,7 @@ const VideoText = styled.div`
   div {
     &:nth-child(1) {
       flex: 1;
+      cursor: pointer;
     }
     &:nth-child(2) {
       flex: 9;
@@ -120,9 +130,10 @@ const ZipOriginal = styled(UserLike)`
 const BagInside = styled(UserLike)``;
 const Interview = styled(UserLike)``;
 const ZipShorts = styled(UserLike)``;
+
 const Ott = () => {
   const VideoRef = useRef(null);
-
+  const navigate = useNavigate();
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;
@@ -140,7 +151,12 @@ const Ott = () => {
       VideoRef.current.stopVideo();
     }
   };
-  const [mouseEnter, SetMouseEnter] = useState(false);
+  const { isLoading, data } = StarData();
+  const orgData = data?.artists.map((artist) => artist);
+  const bagInsideVid = orgData?.slice(0, 8);
+  const bagInsideVid02 = orgData?.slice(8, 16);
+  const bagInsideVid03 = orgData?.slice(16, 24);
+  const bagInsideVid04 = orgData?.slice(24, 32);
   const opts = {
     width: "100%",
     height: "100%",
@@ -159,9 +175,49 @@ const Ott = () => {
   };
   return (
     <Container>
-      <MainSlide>
-        <YouTube videoId="V9PVRfjEBTI" opts={opts} />
-      </MainSlide>
+      <BannerWrapper>
+        <Swiper
+          breakpoints={{
+            1920: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            0: {
+              slidesPerView: 1, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              spaceBetween: 0,
+            },
+          }}
+        >
+          <SwiperSlide>
+            <MainSlide>
+              <div>
+                <img
+                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
+                  alt=""
+                />
+              </div>
+              <SlideText>
+                <p>에스파 닝닝의 애장템은?</p>
+                <p>W 코리아</p>
+              </SlideText>
+            </MainSlide>
+          </SwiperSlide>
+          <SwiperSlide>
+            <MainSlide>
+              <div>
+                <img
+                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
+                  alt=""
+                />
+              </div>
+              <SlideText>
+                <p>에스파 닝닝의 애장템은?</p>
+                <p>W 코리아</p>
+              </SlideText>
+            </MainSlide>
+          </SwiperSlide>
+        </Swiper>
+      </BannerWrapper>
       <UserLike>
         <SlideTitle>You Also Like</SlideTitle>
         <Swiper
@@ -181,141 +237,166 @@ const Ott = () => {
             },
           }}
         >
-          <SwiperSlide>
-            <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
-            </VideoCon>
-            <VideoText>
-              <div>
+          {bagInsideVid02?.map((video) => (
+            <SwiperSlide key={video.artistName}>
+              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
                 <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
+                  src={`https://i.ytimg.com/vi/${video.videoURL}/hqdefault.jpg`}
                   alt=""
                 />
-              </div>
-              <div>
-                <p>에스파 닝닝의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </SwiperSlide>
-          <SwiperSlide>
-            <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
-            </VideoCon>
-            <VideoText>
-              <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
+                <YouTube
+                  videoId={video.videoURL}
+                  opts={opts}
+                  onReady={handleReady}
                 />
-              </div>
-              <div>
-                <p>에스파 닝닝의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </SwiperSlide>
-          <SwiperSlide>
-            <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
-            </VideoCon>
-            <VideoText>
-              <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
-              </div>
-              <div>
-                <p>에스파 닝닝의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </SwiperSlide>
-          <SwiperSlide>
-            <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
-            </VideoCon>
-            <VideoText>
-              <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
-              </div>
-              <div>
-                <p>에스파 닝닝의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </SwiperSlide>
-          <SwiperSlide>
-            <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
-            </VideoCon>
-            <VideoText>
-              <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
-              </div>
-              <div>
-                <p>에스파 닝닝의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </SwiperSlide>
+              </VideoCon>
+              <VideoText>
+                <div onClick={() => navigate(`/star/${video.artistName}`)}>
+                  <img src={video.artistImg} alt="" />
+                </div>
+                <div>
+                  <p>{video.artistName}의 애장템은?</p>
+                  <p>W 코리아</p>
+                </div>
+              </VideoText>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </UserLike>
       <ZipOriginal>
         <SlideTitle>오직 ZIP.에서만 만나는 이야기</SlideTitle>
+        <Swiper
+          className="videoWrapper"
+          breakpoints={{
+            1920: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            0: {
+              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {bagInsideVid03?.map((video) => (
+            <SwiperSlide key={video.artistName}>
+              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+                <img
+                  src={`https://i.ytimg.com/vi/${video.videoURL}/hqdefault.jpg`}
+                  alt=""
+                />
+                <YouTube
+                  videoId={video.videoURL}
+                  opts={opts}
+                  onReady={handleReady}
+                />
+              </VideoCon>
+              <VideoText>
+                <div onClick={() => navigate(`/star/${video.artistName}`)}>
+                  <img src={video.artistImg} alt="" />
+                </div>
+                <div>
+                  <p>{video.artistName}의 애장템은?</p>
+                  <p>W 코리아</p>
+                </div>
+              </VideoText>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </ZipOriginal>
       <BagInside>
         <SlideTitle>BAG INSIDE</SlideTitle>
+        <Swiper
+          className="videoWrapper"
+          breakpoints={{
+            1920: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            0: {
+              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {bagInsideVid?.map((video) => (
+            <SwiperSlide key={video.artistName}>
+              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+                <img
+                  src={`https://i.ytimg.com/vi/${video.videoURL}/hqdefault.jpg`}
+                  alt=""
+                />
+                <YouTube
+                  videoId={video.videoURL}
+                  opts={opts}
+                  onReady={handleReady}
+                />
+              </VideoCon>
+              <VideoText>
+                <div onClick={() => navigate(`/star/${video.artistName}`)}>
+                  <img src={video.artistImg} alt="" />
+                </div>
+                <div>
+                  <p>{video.artistName}의 애장템은?</p>
+                  <p>W 코리아</p>
+                </div>
+              </VideoText>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </BagInside>
       <Interview>
         <SlideTitle>INTERVIEW</SlideTitle>
+        <Swiper
+          className="videoWrapper"
+          breakpoints={{
+            1920: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            0: {
+              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {bagInsideVid04?.map((video) => (
+            <SwiperSlide key={video.artistName}>
+              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+                <img
+                  src={`https://i.ytimg.com/vi/${video.videoURL}/hqdefault.jpg`}
+                  alt=""
+                />
+                <YouTube
+                  videoId={video.videoURL}
+                  opts={opts}
+                  onReady={handleReady}
+                />
+              </VideoCon>
+              <VideoText>
+                <div onClick={() => navigate(`/star/${video.artistName}`)}>
+                  <img src={video.artistImg} alt="" />
+                </div>
+                <div>
+                  <p>{video.artistName}의 애장템은?</p>
+                  <p>W 코리아</p>
+                </div>
+              </VideoText>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Interview>
       <ZipShorts>
         <SlideTitle>ZIP. SHORTS</SlideTitle>
