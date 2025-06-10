@@ -133,7 +133,7 @@ const SearchComp = ({ searchClick, setSearchClick }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (inputRef.current.value !== "") {
-      navigate(`search/${inputRef.current.value}`);
+      navigate(`/search/${inputRef.current.value}`);
       setSearchClick(false);
       inputRef.current.value = "";
     }

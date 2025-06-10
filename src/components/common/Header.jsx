@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import SearchComp from "./SearchComp";
+import OttSearch from "./OttSearch";
 import { Link, useMatch, useNavigate, useParams } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -125,7 +126,7 @@ const HeaderGnb = styled.ul`
     }
     &:hover {
       span {
-        transform: translateY(-100%);
+        transform: translateY(-120%);
       }
       &::after {
         transform: translateY(0%);
@@ -389,7 +390,8 @@ const Header = () => {
   const mypageMatch02 = useMatch("/mypage/:name");
   const starMatch = useMatch("/star");
   const starDetailMatch = useMatch("/star/:starName");
-
+  const ottMatch = useMatch("/ott");
+  const ottMatch02 = useMatch("/ott/:params");
   const handleCategory = (e) => {
     const category = e.target.innerText;
     navigate(`/filtercategory/${category}`.toLowerCase());
@@ -565,7 +567,7 @@ const Header = () => {
         <HeaderLeft>
           <Logo className="logo">
             <Link
-              to="/"
+              to={ottMatch || ottMatch02 ? "/ott" : "/"}
               onClick={() => {
                 setMenuClick(false);
                 setToggleClick(false);
@@ -611,12 +613,25 @@ const Header = () => {
               </li>
             </HeaderGnb>
           ) : (
-            <HeaderGnb>
-              <li>BAG ZIP</li>
-              <li>STYLE ZIP</li>
-              <li>TALK ZIP</li>
-              <li onClick={() => navigate("/ott/short")}>SHORTS ZIP</li>
-              <li onClick={() => navigate("/ott/original")}>ZIP ORIGINAL</li>
+            <HeaderGnb className={menuClick ? "active" : ""}>
+              <li data-li="Bag">
+                <span>Bag</span>
+              </li>
+              <li data-li="Style">
+                <span>Style</span>
+              </li>
+              <li data-li="Talk">
+                <span>Talk</span>
+              </li>
+              <li onClick={() => navigate("/ott/short")} data-li="Shorts">
+                <span>Shorts</span>
+              </li>
+              <li onClick={() => navigate("/star")} data-li="Star">
+                <span>Star</span>
+              </li>
+              <li onClick={() => navigate("/ott/original")} data-li="Original">
+                <span>Original</span>
+              </li>
             </HeaderGnb>
           )}
           <HeaderBars>|</HeaderBars>
@@ -714,7 +729,11 @@ const Header = () => {
           </MenuBars>
         </HeaderRight>
       </Wrapper>
-      <SearchComp searchClick={searchClick} setSearchClick={setSearchClick} />
+      {ottMatch ? (
+        <></>
+      ) : (
+        <SearchComp searchClick={searchClick} setSearchClick={setSearchClick} />
+      )}
       <TopBtn onClick={scrollToTop} className={topBtnScroll ? "active" : ""}>
         ZIP
       </TopBtn>
