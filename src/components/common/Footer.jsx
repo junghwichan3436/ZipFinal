@@ -58,9 +58,6 @@ const AddressList = styled.ul`
   }
 `;
 const FooterRight = styled.div``;
-const HeaderLogoImg = styled.img`
-  width: 90px;
-`;
 
 const Footer = () => {
   const [filterCheck, setFilterCheck] = useState(false);
@@ -129,11 +126,12 @@ const Footer = () => {
             </FooterFnb>
           ) : (
             <FooterFnb>
-              <li>BAG ZIP</li>
-              <li>STYLE ZIP</li>
-              <li>TALK ZIP</li>
-              <li>SHORTS ZIP</li>
-              <li onClick={() => navigate("/ott/original")}>ZIP ORIGINAL</li>
+              <li>Bag</li>
+              <li>Style</li>
+              <li>Talk</li>
+              <li onClick={() => navigate("/ott/short")}>Shorts</li>
+              <li onClick={() => navigate("/star")}>Star</li>
+              <li onClick={() => navigate("/ott/original")}>Original</li>
             </FooterFnb>
           )}
         </Fnb>
