@@ -285,23 +285,37 @@ const VideoText = styled.div`
 `;
 
 const NewArrived = styled(UserLike)``;
+
 const ZipOriginal = styled(UserLike)`
   background: var(--light-color);
   color: var(--dark-color);
   z-index: 1;
 `;
 const BagInside = styled(UserLike)``;
+
 const Interview = styled(UserLike)``;
-const ZipShorts = styled(UserLike)``;
+
+const ZipShorts = styled(UserLike)`
+  .swiper-slide {
+    div {
+      img,
+      iframe {
+        aspect-ratio: 4/ 6;
+      }
+    }
+  }
+`;
 
 const Ott = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
+
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;
   };
+
   const VideoPlay = (e) => {
     if (VideoRef.current) {
       e.target.style.opacity = 0;
@@ -309,12 +323,14 @@ const Ott = () => {
       VideoRef.current.playVideo();
     }
   };
+
   const VideoStop = (e) => {
     if (VideoRef.current) {
       e.target.style.opacity = 1;
       VideoRef.current.stopVideo();
     }
   };
+
   const { isLoading, data } = StarData();
   const orgData = data?.artists.map((artist) => artist);
   const bagInsideVid = orgData?.slice(0, 8);
@@ -322,6 +338,7 @@ const Ott = () => {
   const bagInsideVid03 = orgData?.slice(16, 24);
   const bagInsideVid04 = orgData?.slice(24, 32);
   const bagInsideVid05 = orgData?.slice(32, 40);
+  const bagInsideVid06 = orgData?.slice(40, 48);
   const opts = {
     width: "100%",
     height: "100%",
@@ -653,6 +670,50 @@ const Ott = () => {
       </Interview>
       <ZipShorts>
         <SlideTitle>ZIP. SHORTS</SlideTitle>
+        <Swiper
+          className="videoWrapper"
+          modules={[Navigation]}
+          navigation={true}
+          breakpoints={{
+            1920: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+            0: {
+              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {bagInsideVid06?.map((video) => (
+            <SwiperSlide key={video.artistName}>
+              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+                <img
+                  src={`https://i.ytimg.com/vi/${video.videoURL}/maxresdefault.jpg`}
+                  alt=""
+                />
+                <YouTube
+                  videoId={video.videoURL}
+                  opts={opts}
+                  onReady={handleReady}
+                />
+              </VideoCon>
+              <VideoText>
+                <div onClick={() => navigate(`/star/${video.artistName}`)}>
+                  <img src={video.artistImg} alt="" />
+                </div>
+                <div>
+                  <p>{video.artistName}의 애장템은?</p>
+                  <p>W 코리아</p>
+                </div>
+              </VideoText>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </ZipShorts>
     </Container>
   );
