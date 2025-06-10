@@ -28,6 +28,8 @@ import Short from "./pages/ott/Short";
 
 import InMyBag from "./pages/ott/InMyBag";
 import OttDetail from "./pages/ott/OttDetail";
+import Talk from "./pages/ott/Talk";
+import StyleZip from "./pages/ott/StyleZip";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -146,6 +148,14 @@ export const router = createBrowserRouter([
       {
         path: "bagzip",
         element: <InMyBag />,
+      },
+      {
+        path: "stylezip",
+        element: <StyleZip />,
+      },
+      {
+        path: "talkzip",
+        element: <Talk />,
       },
       {
         path: "detail",
