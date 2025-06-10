@@ -614,13 +614,13 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb className={menuClick ? "active" : ""}>
-              <li data-li="Bag">
+              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag" >
                 <span>Bag</span>
               </li>
-              <li data-li="Style">
+              <li onClick={() => navigate("/ott/stylezip")} data-li="Style">
                 <span>Style</span>
               </li>
-              <li data-li="Talk">
+              <li onClick={() => navigate("/ott/talkzip")} data-li="Talk">
                 <span>Talk</span>
               </li>
               <li onClick={() => navigate("/ott/short")} data-li="Shorts">

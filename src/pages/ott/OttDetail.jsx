@@ -7,7 +7,7 @@ import { StarData } from "../../StarData"
 // import Swiper core and required modules
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useState } from "react";
+import { useRef } from "react";
 
 
 
@@ -62,24 +62,39 @@ padding-left: 50px;
 cursor: pointer;
 `
 
-const Like = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 50px;
-height: 50px;
-border: 1px solid var(--light-color);
-transition: all 0.3s;
-background: ${({selected}) => 
-  selected ? 'var(--light-color)' : 'var(--dark-color)'};
-color: ${({selected}) => 
-  selected ? 'var(--dark-color)' : 'var(--light-color)'};
 
-&:hover {
-  color: #000;
-  background: #fff;
-}
+const Like = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--light-color);
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &.like-default {
+    background: var(--dark-color);
+    color: var(--light-color);
+  }
+
+  &.like-default:hover {
+    background: #fff;
+    color: #000;
+  }
+
+  &.like-selected {
+    background: var(--light-color);
+    color: var(--dark-color);
+  }
+
+  &.like-selected:hover {
+    background: #fff;
+    color: #000;
+  }
 `
+
+
 
 const Insta = styled.div`
 display: flex;
@@ -224,11 +239,21 @@ gap: 5px;
 
 
 const OttDetail = () => {
-  const [selected,setSelected] =useState(false)
   const navigate = useNavigate()
   const { isLoading, data } = StarData();
-  console.log(StarData);
+  console.log(data?.artists)
+  const likeRef = useRef(null);
+const isSelected = useRef(false); // 상태 저장용
   
+
+const handleLikeClick = () => {
+  isSelected.current = !isSelected.current;
+
+  if (likeRef.current) {
+    likeRef.current.classList.toggle("like-selected", isSelected.current);
+    likeRef.current.classList.toggle("like-default", !isSelected.current);
+  }
+};
   const YouTubeEmbed = ({ videoId }) => (
     <iframe
       width="100%"
@@ -252,7 +277,7 @@ const OttDetail = () => {
   <div>By W코리아</div>
 </LeftMain>
 <Buttons>
-<Like selected={selected} onClick={() => setSelected(!selected)}>
+<Like ref={likeRef} className="like-default" onClick={handleLikeClick}>
   <AiOutlineLike size={30} />
 </Like>
   <Insta onClick={() => window.open("https://www.instagram.com/accounts/login/?next=%2Flogin%2F&source=desktop_nav")}>
