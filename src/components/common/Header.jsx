@@ -612,7 +612,7 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb>
-              <li>BAG ZIP</li>
+              <li onClick={() => navigate("/ott/bagzip")}>BAG ZIP</li>
               <li>STYLE ZIP</li>
               <li>TALK ZIP</li>
               <li onClick={() => navigate("/ott/short")}>SHORTS ZIP</li>
