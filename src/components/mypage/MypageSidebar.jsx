@@ -136,8 +136,7 @@ const MobileMenuItem = styled.div`
     display: inline-block; /* 텍스트 너비만큼만 요소 크기 설정 */
     padding: 14px 20px;
     font-size: 1.3rem;
-    color: ${(props) =>
-      props.isWithdrawal ? "#999" : props.isActive ? "#ACE0FF" : "#666"};
+    color: ${(props) => (props.isActive ? "#ACE0FF" : "#666")};
     text-decoration: none;
     font-family: "Pretendard", sans-serif;
     border-bottom: 1px solid #f5f5f5;
@@ -201,8 +200,7 @@ const MenuItem = styled.li`
     display: inline-block; /* 텍스트 너비만큼만 요소 크기 설정 */
     padding: 16px 0 8px 0;
     font-size: 1.4rem;
-    color: ${(props) =>
-      props.isWithdrawal ? "#ccc" : props.isActive ? "#ACE0FF" : "#666"};
+    color: ${(props) => (props.isActive ? "#ACE0FF" : "#666")};
     font-family: "Pretendard", sans-serif;
     white-space: pre-line;
     text-align: left;
@@ -245,7 +243,7 @@ const MypageSidebar = () => {
     return location.pathname === path;
   };
 
-  // 메뉴 카테고리 및 항목 정의
+  // 메뉴 카테고리 및 항목 정의 (회원탈퇴 메뉴 제거)
   const menuCategories = [
     {
       name: "SHOPPING",
@@ -263,10 +261,15 @@ const MypageSidebar = () => {
           label: "비밀번호 / 휴대폰 번호 변경 및 관리",
         },
         {
-          path: "/mypage/delete-account",
-          label: "회원 탈퇴",
-          isWithdrawal: true,
+          path: "/mypage/FavoriteArtist",
+          label: "관심 아티스트 등록 / 수정",
         },
+        // 회원탈퇴 메뉴 제거됨
+        // {
+        //   path: "/mypage/delete-account",
+        //   label: "회원 탈퇴",
+        //   isWithdrawal: true,
+        // },
       ],
     },
     {
@@ -326,7 +329,6 @@ const MypageSidebar = () => {
             {category.items.map((item, itemIndex) => (
               <MobileMenuItem
                 key={`${catIndex}-${itemIndex}`}
-                isWithdrawal={item.isWithdrawal}
                 isActive={isActive(item.path)}
               >
                 <Link to={item.path} onClick={handleItemClick}>
@@ -348,10 +350,7 @@ const MypageSidebar = () => {
             {category.items.map((item, itemIndex) => (
               <MenuGroup key={`${index}-${itemIndex}`}>
                 <MenuList>
-                  <MenuItem
-                    isWithdrawal={item.isWithdrawal}
-                    isActive={isActive(item.path)}
-                  >
+                  <MenuItem isActive={isActive(item.path)}>
                     <Link to={item.path}>{item.label}</Link>
                   </MenuItem>
                 </MenuList>

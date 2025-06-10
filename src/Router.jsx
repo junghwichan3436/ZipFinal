@@ -17,6 +17,7 @@ import OrderConfirmation from "./pages/commerce/mypages/OrderConfirmation";
 import FAQ from "./pages/commerce/mypages/FAQ";
 import DeleteAccount from "./pages/commerce/mypages/DeleteAccount";
 import ChangeUserInfo from "./pages/commerce/mypages/ChangeUserInfo";
+import FavoriteArtist from "./pages/commerce/mypages/FavoriteArtist";
 import UserAddress from "./pages/commerce/mypages/UserAddress";
 import Promotion from "./pages/commerce/eventpages/Influencer";
 import IntroduceTattoo from "./pages/commerce/eventpages/IntroduceTattoo";
@@ -121,6 +122,10 @@ export const router = createBrowserRouter([
             path: "user-address",
             element: <UserAddress />,
           },
+          {
+            path: "FavoriteArtist",
+            element: <FavoriteArtist />,
+          },
         ],
       },
     ],
@@ -159,8 +164,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "detail",
-        element: <OttDetail/>
-      }
+        element: <OttDetail />,
+      },
     ],
   },
 ]);

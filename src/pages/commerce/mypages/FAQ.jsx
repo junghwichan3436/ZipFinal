@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// React Router를 사용하는 경우
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 0 3%;
@@ -111,7 +113,7 @@ const ContentContainer = styled.div`
 const FAQSection = styled.div`
   margin-bottom: 48px;
   width: 100%;
-  min-height: 500px; /* Ensure content area has a minimum height */
+  min-height: 500px;
 
   @media screen and (max-width: 1024px) {
     margin-bottom: 40px;
@@ -191,6 +193,27 @@ const ToggleIcon = styled.span`
   }
 `;
 
+// 회원탈퇴 관련 질문을 위한 특별한 스타일링
+const NavigationIcon = styled.span`
+  position: absolute;
+  right: 20px;
+  font-size: 1.8rem;
+  color: #666;
+  &::before {
+    content: "→";
+  }
+
+  @media screen and (max-width: 1024px) {
+    right: 18px;
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 402px) {
+    right: 15px;
+    font-size: 1.4rem;
+  }
+`;
+
 const Answer = styled.div`
   padding: ${(props) => (props.isOpen ? "0 20px 20px 20px" : "0 20px")};
   font-size: 1.4rem;
@@ -237,45 +260,78 @@ const FAQ = () => {
   const [openItems, setOpenItems] = useState(new Set());
   const [searchQuery, setSearchQuery] = useState("");
 
+  // React Router 사용 시
+  const navigate = useNavigate();
+
   const faqItems = [
     {
       id: 1,
       question: "기본 배송지를 바꾸고 싶어요.",
       answer:
         "안전하게 회원님의 정보를 보호하기 위해 비밀번호를 다시 한 번 입력해주세요.",
+      type: "normal",
     },
     {
       id: 2,
       question: "결제수단을 변경할 수 있나요?",
       answer: "결제 완료 후에는 결제수단 변경이 불가능합니다.",
+      type: "normal",
     },
     {
       id: 3,
       question: "부분 결제가 가능한가요?",
       answer: "부분 결제는 지원하지 않습니다.",
+      type: "normal",
     },
     {
       id: 4,
       question: "주문 상품 배송지를 변경하고 싶어요.",
       answer: "배송 준비 중 상태인 경우 배송지 변경이 가능합니다.",
+      type: "normal",
     },
     {
       id: 5,
       question: "주문 상품(사이즈)을 변경하고 싶어요.",
       answer: "배송 시작 전까지는 주문 취소 후 재주문이 가능합니다.",
+      type: "normal",
     },
     {
       id: 6,
       question: "주문 상품을 취소(부분 취소) 하고 싶어요.",
       answer: "부분 취소는 배송 완료 후에만 가능합니다.",
+      type: "normal",
     },
     {
       id: 7,
       question: "주문 내역은 어디서 조회할 수 있나요?",
       answer:
         "기본 배송지는 로그인 후 MYPAGE > ACCOUNT > 배송지 관리에서 변경할 수 있습니다.",
+      type: "normal",
+    },
+    {
+      id: 8,
+      question: "회원 탈퇴를 진행하고 싶은데 어떻게 해야 하나요?",
+      answer: "회원 탈퇴 페이지로 이동합니다.",
+      type: "navigation", // 페이지 이동을 위한 타입
+      path: "/mypage/delete-account", // 현재 라우터 구조에 맞는 경로
     },
   ];
+
+  const handleItemClick = (item) => {
+    if (item.type === "navigation") {
+      // 페이지 이동 처리
+      if (item.path) {
+        // React Router 사용 시
+        navigate(item.path);
+
+        // 또는 일반 페이지 이동 시
+        // window.location.href = item.path;
+      }
+    } else {
+      // 일반 FAQ 토글 처리
+      toggleItem(item.id);
+    }
+  };
 
   const toggleItem = (itemId) => {
     const newOpenItems = new Set(openItems);
@@ -295,7 +351,7 @@ const FAQ = () => {
 
   return (
     <Container>
-      <PageTitle>Frequently Asked Questions</PageTitle>
+      <PageTitle>FAQ</PageTitle>
       <SearchSection>
         <SearchContainer>
           <SearchInput
@@ -314,11 +370,17 @@ const FAQ = () => {
           {filteredFAQs.length > 0 ? (
             filteredFAQs.map((item) => (
               <FAQItem key={item.id}>
-                <Question onClick={() => toggleItem(item.id)}>
+                <Question onClick={() => handleItemClick(item)}>
                   {item.question}
-                  <ToggleIcon isOpen={openItems.has(item.id)} />
+                  {item.type === "navigation" ? (
+                    <NavigationIcon />
+                  ) : (
+                    <ToggleIcon isOpen={openItems.has(item.id)} />
+                  )}
                 </Question>
-                <Answer isOpen={openItems.has(item.id)}>{item.answer}</Answer>
+                {item.type === "normal" && (
+                  <Answer isOpen={openItems.has(item.id)}>{item.answer}</Answer>
+                )}
               </FAQItem>
             ))
           ) : (
