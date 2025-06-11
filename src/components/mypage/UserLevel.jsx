@@ -86,7 +86,6 @@ const LevelDisplay = styled.div`
   margin: 15px 0 30px;
 `;
 
-// 배경색이 있는 정보 테이블 (이미지와 동일)
 const InfoBox = styled.div`
   background-color: #f0f0f0;
   border-radius: 4px;
@@ -130,7 +129,6 @@ const LevelTitle = styled.h3`
   font-weight: bold;
 `;
 
-// 배경색이 없는 혜택 테이블 (이미지와 동일)
 const BenefitsTable = styled.div`
   width: 100%;
   margin-top: 20px;
@@ -210,8 +208,247 @@ const TableRow = styled.div`
   }
 `;
 
+const OTTSection = styled.div`
+  margin-top: 40px;
+`;
+
+const OTTPlansContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const OTTPlanCard = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: white;
+
+  /* 호버 효과 */
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #ff6b00;
+  }
+
+  /* 클릭 효과 */
+  &:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &.recommended {
+    border: 1px solid #ddd;
+    background-color: white;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: #ff6b00;
+    }
+  }
+
+  /* 선택된 상태 */
+  &.selected {
+    border-color: #ff6b00;
+    background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
+    box-shadow: 0 4px 20px rgba(255, 107, 0, 0.15);
+  }
+`;
+
+const RecommendedBadge = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
+  animation: pulse 2s infinite;
+
+  @keyframes pulse {
+    0% {
+      transform: translateX(-50%) scale(1);
+    }
+    50% {
+      transform: translateX(-50%) scale(1.05);
+    }
+    100% {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+`;
+
+const PlanPeriod = styled.div`
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-family: "Pretendard", sans-serif;
+  color: #333;
+`;
+
+const PlanPrice = styled.div`
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-family: "Pretendard", sans-serif;
+  color: #ff6b00;
+`;
+
+const PlanSubPrice = styled.div`
+  font-size: 1rem;
+  color: #999;
+  margin-bottom: 10px;
+  font-family: "Pretendard", sans-serif;
+`;
+
+const PlanDiscount = styled.div`
+  font-size: 1rem;
+  color: #28a745;
+  margin-bottom: 15px;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 500;
+`;
+
+const PlanFeatures = styled.div`
+  text-align: left;
+  margin-bottom: 15px;
+
+  .feature {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-family: "Pretendard", sans-serif;
+    display: flex;
+    align-items: center;
+    color: #555;
+
+    &:before {
+      content: "✓";
+      color: #28a745;
+      margin-right: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+`;
+
+const PlanBadge = styled.div`
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.color || "#666"} 0%,
+    ${(props) => props.color || "#666"}dd 100%
+  );
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  display: inline-block;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const PurchaseButton = styled.button`
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "Pretendard", sans-serif;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  &:hover:before {
+    left: 100%;
+  }
+
+  &.primary {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, #e55a00 0%, #ff6b00 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+    }
+  }
+
+  &.secondary {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: linear-gradient(135deg, #444 0%, #666 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+`;
+
+const OTTNotice = styled.div`
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #666;
+  font-family: "Pretendard", sans-serif;
+
+  .notice-item {
+    margin-bottom: 5px;
+
+    &:before {
+      content: "• ";
+      margin-right: 5px;
+      color: #ace0ff;
+    }
+  }
+`;
+
 const UserLevel = ({ isOpen, onClose }) => {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
 
   const handleOpenInfoModal = (e) => {
     e.stopPropagation();
@@ -220,6 +457,14 @@ const UserLevel = ({ isOpen, onClose }) => {
 
   const handleCloseInfoModal = () => {
     setIsInfoModalOpen(false);
+  };
+
+  const handlePlanClick = (planId) => {
+    setSelectedPlan(planId);
+  };
+
+  const handlePurchase = (planName) => {
+    alert(`${planName} 구독을 시작합니다!`);
   };
 
   if (!isOpen) return null;
@@ -299,6 +544,125 @@ const UserLevel = ({ isOpen, onClose }) => {
             <div className="row-cell">30%</div>
           </TableRow>
         </BenefitsTable>
+
+        <OTTSection>
+          <LevelTitle>OTT + 커머스 통합 멤버십 구독 플랜</LevelTitle>
+
+          <OTTPlansContainer>
+            <OTTPlanCard
+              className={selectedPlan === "1month" ? "selected" : ""}
+              onClick={() => handlePlanClick("1month")}
+            >
+              <PlanPeriod>1개월 구독</PlanPeriod>
+              <PlanPrice>3,000원</PlanPrice>
+              <PlanSubPrice>/월</PlanSubPrice>
+              <PlanDiscount>첫 구독 시 1개월 무료</PlanDiscount>
+              <PlanFeatures>
+                <div className="feature">모든 콘텐츠 무제한 시청</div>
+                <div className="feature">구매혜택 2% 적립</div>
+                <div className="feature">생일쿠폰 10% 제공</div>
+              </PlanFeatures>
+              <PlanBadge color="#333333">WELCOME 등급 혜택</PlanBadge>
+              <PurchaseButton
+                className="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePurchase("1개월 구독");
+                }}
+              >
+                구독하기
+              </PurchaseButton>
+            </OTTPlanCard>
+
+            <OTTPlanCard
+              className={`recommended ${
+                selectedPlan === "3month" ? "selected" : ""
+              }`}
+              onClick={() => handlePlanClick("3month")}
+            >
+              <RecommendedBadge>인기</RecommendedBadge>
+              <PlanPeriod>3개월 구독</PlanPeriod>
+              <PlanPrice>8,000원</PlanPrice>
+              <PlanSubPrice>/3개월</PlanSubPrice>
+              <PlanDiscount>월 2,667원 (11% 할인)</PlanDiscount>
+              <PlanFeatures>
+                <div className="feature">모든 콘텐츠 무제한 시청</div>
+                <div className="feature">구매혜택 3% 적립</div>
+                <div className="feature">5% 할인쿠폰 1장 제공</div>
+              </PlanFeatures>
+              <PlanBadge color="#d08c58">BRONZE 등급 혜택</PlanBadge>
+              <PurchaseButton
+                className="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePurchase("3개월 구독");
+                }}
+              >
+                구독하기
+              </PurchaseButton>
+            </OTTPlanCard>
+
+            <OTTPlanCard
+              className={selectedPlan === "6month" ? "selected" : ""}
+              onClick={() => handlePlanClick("6month")}
+            >
+              <PlanPeriod>6개월 구독</PlanPeriod>
+              <PlanPrice>15,000원</PlanPrice>
+              <PlanSubPrice>/6개월</PlanSubPrice>
+              <PlanDiscount>월 2,500원 (16% 할인)</PlanDiscount>
+              <PlanFeatures>
+                <div className="feature">모든 콘텐츠 무제한 시청</div>
+                <div className="feature">구매혜택 4% 적립</div>
+                <div className="feature">5% 할인쿠폰 매달 제공</div>
+              </PlanFeatures>
+              <PlanBadge color="#a6a8a9">SILVER 등급 혜택</PlanBadge>
+              <PurchaseButton
+                className="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePurchase("6개월 구독");
+                }}
+              >
+                구독하기
+              </PurchaseButton>
+            </OTTPlanCard>
+
+            <OTTPlanCard
+              className={selectedPlan === "12month" ? "selected" : ""}
+              onClick={() => handlePlanClick("12month")}
+            >
+              <PlanPeriod>연간 구독</PlanPeriod>
+              <PlanPrice>27,000원</PlanPrice>
+              <PlanSubPrice>/12개월</PlanSubPrice>
+              <PlanDiscount>월 2,250원 (25% 할인)</PlanDiscount>
+              <PlanFeatures>
+                <div className="feature">모든 콘텐츠 무제한 시청</div>
+                <div className="feature">구매혜택 5% 적립</div>
+                <div className="feature">7% 할인쿠폰 매달 제공</div>
+              </PlanFeatures>
+              <PlanBadge color="#e1bb35">GOLD 등급 혜택</PlanBadge>
+              <PurchaseButton
+                className="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePurchase("연간 구독");
+                }}
+              >
+                구독하기
+              </PurchaseButton>
+            </OTTPlanCard>
+          </OTTPlansContainer>
+
+          <OTTNotice>
+            <div className="notice-item">
+              멤버십 구독은 선택한 기간 동안 혜택을 제공합니다.
+            </div>
+            <div className="notice-item">
+              첫 구독 무료 혜택은 신규 가입자에게 적용됩니다.
+            </div>
+          </OTTNotice>
+        </OTTSection>
+
         <UserInfo isOpen={isInfoModalOpen} onClose={handleCloseInfoModal} />
       </ModalContainer>
     </ModalOverlay>

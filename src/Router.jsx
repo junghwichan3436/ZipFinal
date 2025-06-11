@@ -17,6 +17,7 @@ import OrderConfirmation from "./pages/commerce/mypages/OrderConfirmation";
 import FAQ from "./pages/commerce/mypages/FAQ";
 import DeleteAccount from "./pages/commerce/mypages/DeleteAccount";
 import ChangeUserInfo from "./pages/commerce/mypages/ChangeUserInfo";
+import FavoriteArtist from "./pages/commerce/mypages/FavoriteArtist";
 import UserAddress from "./pages/commerce/mypages/UserAddress";
 import Promotion from "./pages/commerce/eventpages/Influencer";
 import IntroduceTattoo from "./pages/commerce/eventpages/IntroduceTattoo";
@@ -27,6 +28,9 @@ import OriginalDetail from "./pages/ott/OriginalDetail";
 import Short from "./pages/ott/Short";
 
 import InMyBag from "./pages/ott/InMyBag";
+import OttDetail from "./pages/ott/OttDetail";
+import Talk from "./pages/ott/Talk";
+import StyleZip from "./pages/ott/StyleZip";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -118,6 +122,10 @@ export const router = createBrowserRouter([
             path: "user-address",
             element: <UserAddress />,
           },
+          {
+            path: "FavoriteArtist",
+            element: <FavoriteArtist />,
+          },
         ],
       },
     ],
@@ -145,6 +153,18 @@ export const router = createBrowserRouter([
       {
         path: "bagzip",
         element: <InMyBag />,
+      },
+      {
+        path: "stylezip",
+        element: <StyleZip />,
+      },
+      {
+        path: "talkzip",
+        element: <Talk />,
+      },
+      {
+        path: "detail",
+        element: <OttDetail />,
       },
     ],
   },
