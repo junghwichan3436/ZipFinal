@@ -219,6 +219,7 @@ const VideoCon = styled.div`
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+  cursor: pointer;
   img {
     width: 100%;
     aspect-ratio: 16 / 9;
