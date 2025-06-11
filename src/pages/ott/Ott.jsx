@@ -183,22 +183,12 @@ const Ott = () => {
         >
           <SwiperSlide>
             <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
+              <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
+              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
             </VideoCon>
             <VideoText>
               <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
+                <img src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6" alt="" />
               </div>
               <div>
                 <p>에스파 닝닝의 애장템은?</p>
@@ -208,22 +198,12 @@ const Ott = () => {
           </SwiperSlide>
           <SwiperSlide>
             <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
+              <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
+              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
             </VideoCon>
             <VideoText>
               <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
+                <img src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6" alt="" />
               </div>
               <div>
                 <p>에스파 닝닝의 애장템은?</p>
@@ -233,22 +213,12 @@ const Ott = () => {
           </SwiperSlide>
           <SwiperSlide>
             <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
+              <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
+              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
             </VideoCon>
             <VideoText>
               <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
+                <img src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6" alt="" />
               </div>
               <div>
                 <p>에스파 닝닝의 애장템은?</p>
@@ -258,22 +228,12 @@ const Ott = () => {
           </SwiperSlide>
           <SwiperSlide>
             <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
+              <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
+              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
             </VideoCon>
             <VideoText>
               <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
+                <img src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6" alt="" />
               </div>
               <div>
                 <p>에스파 닝닝의 애장템은?</p>
@@ -283,22 +243,12 @@ const Ott = () => {
           </SwiperSlide>
           <SwiperSlide>
             <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-              <img
-                src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg"
-                alt=""
-              />
-              <YouTube
-                videoId="5BRaRTjCPT0"
-                opts={opts}
-                onReady={handleReady}
-              />
+              <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
+              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
             </VideoCon>
             <VideoText>
               <div>
-                <img
-                  src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6"
-                  alt=""
-                />
+                <img src="https://i.scdn.co/image/ab67616100005174d57cec71915fe90346a37df6" alt="" />
               </div>
               <div>
                 <p>에스파 닝닝의 애장템은?</p>
