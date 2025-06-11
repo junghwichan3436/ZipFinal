@@ -46,6 +46,18 @@ const TitleSection = styled.section`
       letter-spacing: -1px;
     }
   }
+  @media screen and (max-width: 1024px) {
+    .allZips {
+      gap: 10px;
+      margin: 20px 0 20px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .allZips {
+      /* gap: 10px; */
+      /* margin: 10px 0 0; */
+    }
+  }
 `;
 const MainTitle = styled.div`
   display: flex;
@@ -70,8 +82,52 @@ const MainTitle = styled.div`
       font-family: "EHNormalTrial";
     }
   }
-`;
 
+  @media screen and (max-width: 1094px) {
+    padding-top: 180px;
+    padding-bottom: 30px;
+    gap: 30px;
+    h4 {
+      font-size: 6rem;
+    }
+    p {
+      font-size: 1.6rem;
+      /* line-height: 1.4; */
+      b {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  @media screen and (max-width: 978px) {
+    gap: 20px;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    h4 {
+      /* font-size: 7rem; */
+      letter-spacing: -2px;
+    }
+    p {
+      font-size: 1.3rem;
+      line-height: 1.4;
+      b {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    gap: 20px;
+    h4 {
+      font-size: 3.4rem;
+    }
+    p {
+      font-size: 1.2rem;
+      /* line-height: 1.4; */
+      b {
+        font-size: 1.2rem;
+      }
+    }
+  }
+`;
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -80,6 +136,9 @@ const ZipList = styled.ul`
   letter-spacing: -0.2px;
   padding-bottom: 100px;
   /* gap: 40px; */
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 /*--- 출력 ---*/
@@ -116,6 +175,7 @@ const Original = () => {
               key={index}
               onClick={() => navigate(`/ott/originalDetail/${item.id}`)}
               thumbnail={item.thumbnail}
+              staticThumbnail={item.staticThumbnail}
               subTitle={item.subTitle}
               mainTitle={item.mainTitle}
               bagThumbnail={item.bagThumbnail}
