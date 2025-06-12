@@ -666,7 +666,7 @@ const Ott = () => {
               spaceBetween: 20,
             },
             0: {
-              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+              slidesPerView: 2, // 모바일용 설정 추가 (예: 1개 보여줌)
               spaceBetween: 20,
             },
           }}
