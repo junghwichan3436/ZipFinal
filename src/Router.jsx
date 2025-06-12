@@ -163,7 +163,7 @@ export const router = createBrowserRouter([
         element: <Talk />,
       },
       {
-        path: "detail",
+        path: "detail/:title",
         element: <OttDetail />,
       },
     ],
