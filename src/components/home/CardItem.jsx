@@ -38,7 +38,6 @@ const CardItemInfo = styled.div`
     font-size: 3.6rem;
     line-height: 4.5rem;
     margin: 18px 0 30px;
-
     font-weight: 600;
     cursor: pointer;
   }

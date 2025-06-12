@@ -30,7 +30,7 @@ const TitleSection = styled.section`
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 20px 0 40px;
+    margin: 20px 0 20px;
     .redDot {
       width: 8px;
       height: 8px;
@@ -61,40 +61,50 @@ const TitleSection = styled.section`
 `;
 const MainTitle = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 30px;
   align-items: end;
-  padding-top: 180px;
-  padding-bottom: 50px;
+  padding-top: 160px;
+  padding-bottom: 30px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
-    font-size: 10rem;
+    font-size: 7.6rem;
     font-family: "EHNormalTrial";
     font-weight: 500;
     letter-spacing: -6px;
   }
   p {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    line-height: 1.4;
+    color: #ababab;
+    font-weight: 400;
+    line-height: 2rem;
     b {
-      font-size: 1.7rem;
-      font-weight: 300;
+      font-size: 1.8rem;
+      font-weight: 400;
       font-family: "EHNormalTrial";
     }
   }
 
   @media screen and (max-width: 1094px) {
-    padding-top: 180px;
-    padding-bottom: 30px;
-    gap: 30px;
+    padding-top: 140px;
+    padding-bottom: 20px;
+    gap: 20px;
+    flex-direction: column-reverse;
+    flex-direction: column;
+    align-items: start;
     h4 {
-      font-size: 6rem;
+      /* font-size: 7rem; */
+      letter-spacing: -2px;
+    }
+    br {
+      display: none;
     }
     p {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
+
       /* line-height: 1.4; */
       b {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
       }
     }
   }
@@ -107,23 +117,35 @@ const MainTitle = styled.div`
       letter-spacing: -2px;
     }
     p {
-      font-size: 1.3rem;
-      line-height: 1.4;
+      /* font-size: 1.3rem; */
+      /* line-height: 1.4; */
       b {
-        font-size: 1.4rem;
+        /* font-size: 1.4rem; */
       }
     }
   }
   @media screen and (max-width: 767px) {
-    gap: 20px;
+    gap: 18px;
     h4 {
-      font-size: 3.4rem;
+      font-size: 5rem;
     }
     p {
-      font-size: 1.2rem;
-      /* line-height: 1.4; */
+      font-weight: 400;
+      font-size: 1.6rem;
       b {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+      }
+    }
+  }
+  @media screen and (max-width: 520px) {
+    h4 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.4rem;
+      b {
+        font-size: 1.4rem;
       }
     }
   }
@@ -159,7 +181,7 @@ const Original = () => {
           <p>
             당신이 사랑한 캐릭터, 그들이 고를 법한 아이템
             <br />
-            <b>zip original</b>에서
+            <b> zip original</b>에서
           </p>
         </MainTitle>
         <div className="allZips">
