@@ -397,6 +397,7 @@ const Header = () => {
   const starDetailMatch = useMatch("/star/:starName");
   const ottMatch = useMatch("/ott");
   const ottMatch02 = useMatch("/ott/:params");
+  const ottMatch03 = useMatch("/ott/:params/:params");
 
   const handleCategory = (e) => {
     const category = e.target.innerText;
@@ -580,7 +581,7 @@ const Header = () => {
         <HeaderLeft>
           <Logo className="logo">
             <Link
-              to={ottMatch || ottMatch02 ? "/ott" : "/"}
+              to={ottMatch || ottMatch02 || ottMatch03 ? "/ott" : "/"}
               onClick={() => {
                 setMenuClick(false);
                 setToggleClick(false);
@@ -629,7 +630,7 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb className={menuClick ? "active" : ""}>
-              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag" >
+              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag">
                 <span>Bag</span>
               </li>
               <li onClick={() => navigate("/ott/stylezip")} data-li="Style">
@@ -744,7 +745,7 @@ const Header = () => {
           </MenuBars>
         </HeaderRight>
       </Wrapper>
-      {ottMatch || ottMatch02 ? (
+      {ottMatch || ottMatch02 || ottMatch03 ? (
         <OttSearchWrap
           ottSearchClick={ottSearchClick}
           setOttSearchClick={setOttSearchClick}

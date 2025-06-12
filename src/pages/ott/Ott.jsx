@@ -7,7 +7,7 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
-import { StarData } from "../../StarData";
+import { StarData, bagData, interviewData } from "../../StarData";
 
 const Container = styled.div`
   display: flex;
@@ -148,7 +148,7 @@ const UserLike = styled.div`
   .swiper-slide {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
   .swiper-button-prev,
   .swiper-button-next {
@@ -260,16 +260,26 @@ const VideoText = styled.div`
       flex-direction: column;
       justify-content: space-between;
       p {
-        &:nth-child(2) {
+        &:first-child {
           font-size: 1.4rem;
+          line-height: 1.8rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        &:nth-child(2) {
+          font-size: 1.2rem;
           color: var(--subTitle);
+          text-transform: uppercase;
         }
       }
     }
   }
   img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -301,13 +311,16 @@ const ZipShorts = styled(UserLike)`
     div {
       img,
       iframe {
-        aspect-ratio: 4/ 6;
+        aspect-ratio: 4 / 6;
       }
     }
   }
 `;
 
 const Ott = () => {
+  const { isLoading, data } = StarData();
+  const { isLoading: loading02, data: data02 } = bagData();
+  const { isLoading: loading03, data: data03 } = interviewData();
   const [activeIndex, setActiveIndex] = useState(0);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
@@ -332,7 +345,6 @@ const Ott = () => {
     }
   };
 
-  const { isLoading, data } = StarData();
   const orgData = data?.artists.map((artist) => artist);
   const bagInsideVid = orgData?.slice(0, 8);
   const bagInsideVid02 = orgData?.slice(8, 16);
@@ -457,7 +469,11 @@ const Ott = () => {
         >
           {bagInsideVid02?.map((video) => (
             <SwiperSlide key={video.artistName}>
-              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+              <VideoCon
+                onMouseEnter={VideoPlay}
+                onMouseLeave={VideoStop}
+                onClick={() => navigate(`/ott/detail/${video.artistName}`)}
+              >
                 <img
                   src={`https://i.ytimg.com/vi/${video.videoURL}/maxresdefault.jpg`}
                   alt=""
@@ -596,30 +612,42 @@ const Ott = () => {
             },
           }}
         >
-          {bagInsideVid?.map((video) => (
-            <SwiperSlide key={video.artistName}>
-              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-                <img
-                  src={`https://i.ytimg.com/vi/${video.videoURL}/maxresdefault.jpg`}
-                  alt=""
-                />
-                <YouTube
-                  videoId={video.videoURL}
-                  opts={opts}
-                  onReady={handleReady}
-                />
-              </VideoCon>
-              <VideoText>
-                <div onClick={() => navigate(`/star/${video.artistName}`)}>
-                  <img src={video.artistImg} alt="" />
-                </div>
-                <div>
-                  <p>{video.artistName}의 애장템은?</p>
-                  <p>W 코리아</p>
-                </div>
-              </VideoText>
-            </SwiperSlide>
-          ))}
+          {data02?.items?.map((video) => {
+            const inmybag = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
+            return inmybag ? (
+              <SwiperSlide key={video.snippet.position}>
+                <VideoCon
+                  onMouseEnter={VideoPlay}
+                  onMouseLeave={VideoStop}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
+                >
+                  <img src={video.snippet.thumbnails.high.url} alt="" />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
+                </VideoCon>
+                <VideoText>
+                  <div onClick={() => navigate(`/star/${inmybag.artistName}`)}>
+                    <img src={inmybag?.artistImg} alt="" />
+                  </div>
+                  <div>
+                    <p>{video.snippet.title}</p>
+                    <p>{video.snippet.videoOwnerChannelTitle}</p>
+                  </div>
+                </VideoText>
+              </SwiperSlide>
+            ) : (
+              <div></div>
+            );
+          })}
         </Swiper>
       </BagInside>
       <Interview>
@@ -643,32 +671,47 @@ const Ott = () => {
             },
           }}
         >
-          {bagInsideVid04?.map((video) => (
-            <SwiperSlide key={video.artistName}>
-              <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-                <img
-                  src={`https://i.ytimg.com/vi/${video.videoURL}/maxresdefault.jpg`}
-                  alt=""
-                />
-                <YouTube
-                  videoId={video.videoURL}
-                  opts={opts}
-                  onReady={handleReady}
-                />
-              </VideoCon>
-              <VideoText>
-                <div onClick={() => navigate(`/star/${video.artistName}`)}>
-                  <img src={video.artistImg} alt="" />
-                </div>
-                <div>
-                  <p>{video.artistName}의 애장템은?</p>
-                  <p>W 코리아</p>
-                </div>
-              </VideoText>
-            </SwiperSlide>
-          ))}
+          {data03?.items?.map((video) => {
+            const interview = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
+            return interview ? (
+              <SwiperSlide key={video.snippet.position}>
+                <VideoCon
+                  onMouseEnter={VideoPlay}
+                  onMouseLeave={VideoStop}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
+                >
+                  <img src={video.snippet.thumbnails.high.url} alt="" />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
+                </VideoCon>
+                <VideoText>
+                  <div
+                    onClick={() => navigate(`/star/${interview.artistName}`)}
+                  >
+                    <img src={interview?.artistImg} alt="" />
+                  </div>
+                  <div>
+                    <p>{video.snippet.title}</p>
+                    <p>{video.snippet.videoOwnerChannelTitle}</p>
+                  </div>
+                </VideoText>
+              </SwiperSlide>
+            ) : (
+              <div></div>
+            );
+          })}
         </Swiper>
       </Interview>
+
       <ZipShorts>
         <SlideTitle>ZIP. SHORTS</SlideTitle>
         <Swiper
