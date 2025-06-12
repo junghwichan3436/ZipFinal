@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import SearchComp from "./SearchComp";
-import OttSearch from "./OttSearch";
+import OttSearchWrap from "./OttSearchWrap";
 import { Link, useMatch, useNavigate, useParams } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -46,6 +46,7 @@ const HeaderLeft = styled.div`
   gap: 20px;
   align-items: center;
 `;
+
 const Logo = styled.div`
   position: relative;
   display: flex;
@@ -95,7 +96,6 @@ const HeaderRight = styled.nav`
   font-weight: 300;
   font-family: "EHNormalTrial";
   font-size: 1.2rem;
-
   @media screen and (max-width: 1024px) {
     gap: 20px;
   }
@@ -261,8 +261,11 @@ const HeaderEtc = styled.ul`
     }
   }
 `;
+
 const HeaderEtcLi = styled.li``;
+
 const HeaderEtcText = styled.span``;
+
 const HeaderBars = styled.span`
   @media screen and (max-width: 1024px) {
     opacity: 0;
@@ -364,10 +367,12 @@ const TopBtn = styled.div`
     opacity: 1;
   }
 `;
+
 const Header = () => {
   const [filterCheck, setFilterCheck] = useState(false);
   const [menuClick, setMenuClick] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
+  const [ottSearchClick, setOttSearchClick] = useState(false);
   const [toggleClick, setToggleClick] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [topBtnScroll, setTopBtnScroll] = useState(false);
@@ -392,6 +397,8 @@ const Header = () => {
   const starDetailMatch = useMatch("/star/:starName");
   const ottMatch = useMatch("/ott");
   const ottMatch02 = useMatch("/ott/:params");
+  const ottMatch03 = useMatch("/ott/:params/:params");
+
   const handleCategory = (e) => {
     const category = e.target.innerText;
     navigate(`/filtercategory/${category}`.toLowerCase());
@@ -410,6 +417,7 @@ const Header = () => {
     setMenuClick(false);
     setToggleClick(false);
   };
+
   const filterFunc = () => {
     if (
       commerceMatch ||
@@ -434,6 +442,8 @@ const Header = () => {
 
   useEffect(() => {
     filterFunc();
+    setOttSearchClick(false);
+    setSearchClick(false);
   }, [
     commerceMatch,
     detailMatch,
@@ -469,17 +479,21 @@ const Header = () => {
   const handleMenuClick = () => {
     setMenuClick((prev) => !prev);
   };
+
   window.addEventListener("resize", () => {
     if (window.innerWidth > 1024) {
       setMenuClick(false);
       setToggleClick(false);
     }
   });
+
   const searchToggle = () => {
     setToggleClick(false);
     setMenuClick(false);
     setSearchClick(true);
+    setOttSearchClick(true);
   };
+
   const ToggleMenu = () => {
     setToggleClick((prev) => !prev);
   };
@@ -567,7 +581,7 @@ const Header = () => {
         <HeaderLeft>
           <Logo className="logo">
             <Link
-              to={ottMatch || ottMatch02 ? "/ott" : "/"}
+              to={ottMatch || ottMatch02 || ottMatch03 ? "/ott" : "/"}
               onClick={() => {
                 setMenuClick(false);
                 setToggleClick(false);
@@ -577,7 +591,9 @@ const Header = () => {
             </Link>
           </Logo>
           <HeaderSelect>
-            {filterCheck ? (
+            {loginMatch || starMatch || starDetailMatch ? (
+              <></>
+            ) : filterCheck ? (
               <div>
                 <p>COMMERCE</p>
                 <span>|</span>
@@ -614,7 +630,7 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb className={menuClick ? "active" : ""}>
-              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag" >
+              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag">
                 <span>Bag</span>
               </li>
               <li onClick={() => navigate("/ott/stylezip")} data-li="Style">
@@ -729,10 +745,18 @@ const Header = () => {
           </MenuBars>
         </HeaderRight>
       </Wrapper>
-      {ottMatch ? (
-        <></>
+      {ottMatch || ottMatch02 || ottMatch03 ? (
+        <OttSearchWrap
+          ottSearchClick={ottSearchClick}
+          setOttSearchClick={setOttSearchClick}
+          setSearchClick={setSearchClick}
+        />
       ) : (
-        <SearchComp searchClick={searchClick} setSearchClick={setSearchClick} />
+        <SearchComp
+          searchClick={searchClick}
+          setSearchClick={setSearchClick}
+          setOttSearchClick={setOttSearchClick}
+        />
       )}
       <TopBtn onClick={scrollToTop} className={topBtnScroll ? "active" : ""}>
         ZIP

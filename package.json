@@ -35,8 +35,7 @@
     "styled-components": "^6.1.17",
     "styled-reset": "^4.5.2",
     "swiper": "^11.2.8",
-    "youtube": "^0.1.0",
-    "zustand": "^5.0.5"
+    "youtube": "^0.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
