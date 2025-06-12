@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import YouTube from "react-youtube";
 import styled from "styled-components";
 
 const ZipItems = styled.li`
   width: 49%;
+  grid-column-gap: 1.042vw;
+  /* grid-row-gap: 6.25vw; */
+  display: flex;
+  flex-direction: column;
   margin-bottom: 50px;
   overflow: hidden;
   position: relative;
@@ -12,32 +15,78 @@ const ZipItems = styled.li`
     width: 100%;
     height: 1px;
     background: #313131;
-    margin: 20px 12px 0;
+    /* margin: 20px 12px 0; */
   }
   .img_container {
+    position: relative;
     width: 100%;
-    height: 480px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    /* aspect-ratio: 16 / 9; */
-    img {
-      cursor: pointer;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  }
+  .img_container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+  .img_container img.static {
+    z-index: 1;
+    opacity: 1;
+  }
+  .img_container img.hover {
+    z-index: 2;
+    opacity: 0;
+  }
+  .img_container:hover img.hover {
+    opacity: 1;
+  }
+  .img_container:hover img.static {
+    opacity: 0;
   }
   p {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 600;
-    margin-top: 30px;
+    margin-top: 24px;
   }
   span {
     display: inline-block;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    margin: 20px 0 40px;
+    margin: 14px 0 22px;
     color: #a9a9a9;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    padding: 0 3%;
+    /* align-items: center; */
+    /* background: #d00; */
+    .img_container {
+      /* width: 80%; */
+      /* height: 360px; */
+    }
+    p {
+      font-size: 2.8rem;
+      margin-top: 20px;
+    }
+    span {
+      display: inline-block;
+      font-size: 1.6rem;
+      margin: 14px 0 20px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    p {
+      font-size: 2rem;
+      margin-top: 14px;
+    }
+    span {
+      font-size: 1.4rem;
+      margin: 8px 0 20px;
+    }
   }
 `;
 const OverlayTop = styled.div`
@@ -52,9 +101,9 @@ const OverlayTop = styled.div`
   font-family: "EHNormalTrial";
   transition: all 0.3s;
   color: var(--light-color);
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   height: 100%;
   transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
@@ -70,6 +119,12 @@ const OverlayTop = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media screen and (max-width: 1024px) {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 1.4rem;
+  }
 `;
 const KeywordList = styled.ul`
   display: flex;
@@ -84,10 +139,12 @@ const KeywordList = styled.ul`
   }
 `;
 
-const ZipItem = ({ id, thumbnail, mainTitle, subTitle, starName, keyword }) => {
+const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword }) => {
   const navigate = useNavigate();
 
   const [sildeData, setSlideData] = useState([]);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     fetch("/API/homeData.json")
@@ -99,63 +156,31 @@ const ZipItem = ({ id, thumbnail, mainTitle, subTitle, starName, keyword }) => {
     navigate(`/ott/originalDetail/${id}`);
   };
 
-  //
-  const VideoRef = useRef(null);
-
-  // const handleReady = (event) => {
-  //   // event.target은 YT.Player 인스턴스
-  //   VideoRef.current = event.target;
-  // };
-  // const VideoPlay = (e) => {
-  //   if (VideoRef.current) {
-  //     e.target.style.opacity = 0;
-  //     VideoRef.current.stopVideo();
-  //     VideoRef.current.playVideo();
-  //   }
-  // };
-  // const VideoStop = (e) => {
-  //   if (VideoRef.current) {
-  //     e.target.style.opacity = 1;
-  //     VideoRef.current.stopVideo();
-  //   }
-  // };
-  // const [mouseEnter, SetMouseEnter] = useState(false);
-  // const opts = {
-  //   width: "100%",
-  //   height: "100%",
-  //   playerVars: {
-  //     mute: 1,
-  //     loop: 1,
-  //     controls: 0, // 컨트롤 바 숨기기
-  //     modestbranding: 1, // 유튜브 로고 최소화
-  //     rel: 0, // 관련 영상 숨기기
-  //     fs: 0, // 전체화면 버튼 숨기기
-  //     disablekb: 1, // 키보드 제어 비활성화
-  //     showinfo: 0, // 제목 숨기기 시도 (현재는 거의 안 먹힘)
-  //     autoplay: 1, // 자동재생
-  //     enablejsapi: 1, // JS API 활성화
-  //   },
-  // };
-  // onMouseEnter={gifPlay} onMouseLeave={gifStop}
   return (
     <ZipItems onClick={onClickItem}>
-      <OverlayTop>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-        <div>view</div>
-      </OverlayTop>
-      <div className="img_container">
-        <img src={thumbnail} alt={starName} />
+      <div className="img_container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <OverlayTop>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+          <div>view</div>
+        </OverlayTop>
+        <img className="static" src={staticThumbnail} alt="static" />
+        <img className="hover" src={thumbnail} alt="hover" />
       </div>
+
+      {/* <div className="img_container">
+        <img className="before-img" src={staticThumbnail} alt={starName} />
+        <img src={thumbnail} alt={starName} />
+      </div> */}
       <p>{mainTitle}</p>
       <span>{subTitle}</span>
       <div className="line"></div>
@@ -164,10 +189,6 @@ const ZipItem = ({ id, thumbnail, mainTitle, subTitle, starName, keyword }) => {
           <li key={index}>#{item}</li>
         ))}
       </KeywordList>
-      {/* <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-        <img src="https://i.pinimg.com/736x/f3/f7/5a/f3f75a650e00c2f5f7bdc424563bb617.jpg" alt="" />
-        <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
-      </VideoCon> */}
     </ZipItems>
   );
 };
