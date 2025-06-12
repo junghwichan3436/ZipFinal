@@ -59,6 +59,7 @@ const TitleSection = styled.section`
       justify-content: center;
       align-items: center;
       gap: 10px;
+
       li {
         padding: 12px 24px;
         border-radius: 50px;
@@ -223,19 +224,28 @@ const CharaterSection = styled.section`
     }
     @media screen and (max-width: 767px) {
       padding: 40px 3%;
+      width: 100%;
+
       aside {
+        /* background: #f00; */
+        width: 100%;
+        flex-direction: column;
         & > h4 {
+          width: 100%;
           font-size: 3rem;
+          margin-bottom: 20px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #424242;
         }
         & > div {
-          width: 60%;
+          width: 100%;
           padding-top: 2px;
           & > h5 {
             font-size: 2rem;
             margin-bottom: 14px;
           }
           & > p {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-bottom: 10px;
           }
           & > ul {
@@ -278,17 +288,18 @@ const RealStarSection = styled.div`
     justify-content: space-between;
     margin: 120px 0;
     & > h4 {
+      width: 100%;
       font-size: 6rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
     & > .video-container {
-      width: 60%;
-      aspect-ratio: 16 / 9;
+      /* width: 600px; */
       .VideoImg {
         width: 100%;
         height: 100%;
         /* background: #323240; */
+        aspect-ratio: 16 / 9;
         overflow: hidden;
         img {
           width: 100%;
@@ -319,12 +330,17 @@ const RealStarSection = styled.div`
       font-size: 3rem;
     }
     & > .contents-container {
+      flex-direction: column;
       margin: 40px 0;
       & > h4 {
         font-size: 3rem;
+        margin-bottom: 30px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #424242;
       }
       & > .video-container {
-        width: 60%;
+        width: 100%;
+        height: 300px;
       }
     }
   }
@@ -333,7 +349,8 @@ const ShortSection = styled.div`
   width: 100%;
   height: 100%;
   & > h4 {
-    width: 50%;
+    /* width: 50%; */
+    width: 100%;
     font-size: 6rem;
     letter-spacing: -2px;
     font-family: "EHNormalTrial";
@@ -346,14 +363,16 @@ const ShortSection = styled.div`
       width: 100%;
       height: 100%;
       display: flex;
-      gap: 60px;
+      justify-content: space-between;
+      gap: 40px;
       li {
-        height: 50%;
-        flex: 1;
+        /* display: flex; */
+        width: 50%;
+        /* flex: 1; */
         .thumbnail-info {
           width: 100%;
           height: 100%;
-          aspect-ratio: 9 / 16;
+          aspect-ratio: 4/ 6;
           overflow: hidden;
           border-radius: 8px;
           cursor: pointer;
@@ -362,14 +381,13 @@ const ShortSection = styled.div`
             height: 100%;
             object-fit: cover;
             border: none;
-            /* background: #868686; */
           }
         }
         .short-info {
           margin-top: 20px;
           p {
             width: 100%;
-            font-size: 2.8rem;
+            font-size: 2rem;
             font-weight: 500;
             /* margin-bottom: 14px; */
             cursor: pointer;
@@ -377,11 +395,11 @@ const ShortSection = styled.div`
           div {
             width: 100%;
             height: 1px;
-            /* background: #393939; */
-            margin: 24px 0 12px;
+            background: #393939;
+            margin: 12px 0;
           }
           span {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: #888888;
             letter-spacing: 0;
           }
@@ -390,23 +408,28 @@ const ShortSection = styled.div`
     }
   }
   @media screen and (max-width: 1024px) {
+    width: 100%;
     & > h4 {
-      width: 50%;
+      width: 100%;
+      /* width: 50%; */
+
       font-size: 4rem;
       margin-bottom: 30px;
     }
     & > .shorts-container {
       ul {
         gap: 20px;
-        display: flex;
+        /* display: flex; */
         /* flex-direction: column; */
         flex-wrap: wrap;
+        justify-content: center;
         li {
+          width: 48%;
           height: 100%;
           .short-info {
             margin-top: 14px;
             p {
-              font-size: 1.8rem;
+              font-size: 2rem;
               line-height: 1.5;
             }
             div {
@@ -423,18 +446,24 @@ const ShortSection = styled.div`
   }
   @media screen and (max-width: 767px) {
     & > h4 {
+      width: 100%;
       font-size: 3rem;
       margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #424242;
     }
     & > .shorts-container {
       ul {
         gap: 10px;
+        /* flex-direction: column; */
         li {
+          flex-wrap: wrap;
+          /* width: 50%; */
           .short-info {
             margin-top: 10px;
             p {
               font-size: 1.6rem;
-              line-height: 1.4;
+              /* line-height: 1.4; */
             }
             div {
               width: 100%;

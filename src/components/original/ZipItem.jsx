@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import YouTube from "react-youtube";
 import styled from "styled-components";
 
 const ZipItems = styled.li`
   width: 49%;
-  display: flex;
   grid-column-gap: 1.042vw;
   /* grid-row-gap: 6.25vw; */
-  flex-flow: wrap;
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
@@ -50,20 +47,27 @@ const ZipItems = styled.li`
     opacity: 0;
   }
   p {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 600;
-    margin-top: 30px;
+    margin-top: 24px;
   }
   span {
     display: inline-block;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    margin: 20px 0 40px;
+    margin: 14px 0 22px;
     color: #a9a9a9;
   }
 
   @media screen and (max-width: 1024px) {
     width: 100%;
+    padding: 0 3%;
+    /* align-items: center; */
+    /* background: #d00; */
+    .img_container {
+      /* width: 80%; */
+      /* height: 360px; */
+    }
     p {
       font-size: 2.8rem;
       margin-top: 20px;
@@ -97,7 +101,7 @@ const OverlayTop = styled.div`
   font-family: "EHNormalTrial";
   transition: all 0.3s;
   color: var(--light-color);
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
   z-index: 3;
   width: 100%;

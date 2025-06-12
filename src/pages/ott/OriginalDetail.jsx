@@ -24,7 +24,7 @@ const Container = styled.main`
 
 const OriginalDetail = () => {
   const { id } = useParams(); // URL 파라미터 가져오기
-  const [originalData, setOriginalData] = useState([]);
+  // const [originalData, setOriginalData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
