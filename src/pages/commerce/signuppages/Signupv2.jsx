@@ -80,7 +80,7 @@ const Overlay = styled.div`
   left: 0;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
   transition: opacity 0.3s;
   pointer-events: none;
 `;
@@ -93,7 +93,8 @@ const StyledIcon = styled(FontAwesomeIcon)`
   z-index: 3;
   color: var(--light-color);
   font-size: 2.6rem;
-  opacity: 0;
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+  transition: opacity 0.3s;
 `;
 
 const Skip = styled.p`
@@ -130,6 +131,7 @@ const Btn = styled(Button)`
 const Signupv2 = () => {
   const [starData, setStarData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedArtist, setSelectedArtist] = useState(null);
 
   useEffect(() => {
     fetch("/API/index.json")
@@ -144,7 +146,9 @@ const Signupv2 = () => {
       });
   }, []);
 
-  const onClick = () => {};
+  const handleonClick = (id) => {
+    setSelectedArtist(id === selectedArtist ? null : id);
+  };
 
   return (
     <Container>
@@ -160,10 +164,18 @@ const Signupv2 = () => {
         <Contents>
           {starData.map((artist) => (
             <Star key={artist.id}>
-              <ImgWrap onClick={onClick}>
+              <ImgWrap onClick={() => handleonClick(artist.id)}>
                 <Img src={artist.artistImg} alt={artist.artistName} />
-                <Overlay className="overlay" />
-                <StyledIcon icon={faCheck} />
+                <Overlay
+                  className="overlay"
+                  $isVisible={selectedArtist === artist.id}
+                />
+                {selectedArtist === artist.id && (
+                  <StyledIcon
+                    icon={faCheck}
+                    $isVisible={selectedArtist === artist.id}
+                  />
+                )}
               </ImgWrap>
               <p>{artist.artistName}</p>
             </Star>
