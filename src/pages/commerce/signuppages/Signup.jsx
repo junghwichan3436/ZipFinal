@@ -144,7 +144,7 @@ const Signup = () => {
 
       console.log("회원가입 성공:", credential.user);
       alert("회원가입이 완료되었습니다!");
-      navigate("/");
+      navigate("/signupv2");
     } catch (error) {
       console.error("회원가입 에러:", error.message);
       alert(error.message);

@@ -26,6 +26,9 @@ const Group = styled.div`
     input {
       margin: 0;
     }
+    .allAgree {
+      font-weight: bold;
+    }
   }
 `;
 
@@ -104,7 +107,7 @@ const Agreement = ({ setIsAgreed }) => {
             checked={allChecked}
             onChange={handleAllChecked}
           />
-          <span> 아래 약관에 모두 동의합니다.</span>
+          <span className="allAgree"> 아래 약관에 모두 동의합니다.</span>
         </label>
         <CheckboxGroup>
           <AgreementGroup>
