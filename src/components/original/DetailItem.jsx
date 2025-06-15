@@ -149,14 +149,13 @@ const CharaterSection = styled.section`
   width: 100%;
   height: 100%;
   padding: 100px 3%;
-
   aside {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     & > h4 {
       /* width: 50%; */
-      font-size: 6rem;
+      font-size: 5rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
@@ -225,9 +224,7 @@ const CharaterSection = styled.section`
     @media screen and (max-width: 767px) {
       padding: 40px 3%;
       width: 100%;
-
       aside {
-        /* background: #f00; */
         width: 100%;
         flex-direction: column;
         & > h4 {
@@ -288,8 +285,8 @@ const RealStarSection = styled.div`
     justify-content: space-between;
     margin: 120px 0;
     & > h4 {
-      width: 100%;
-      font-size: 6rem;
+      /* width: 100%; */
+      font-size: 5rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
@@ -351,7 +348,7 @@ const ShortSection = styled.div`
   & > h4 {
     /* width: 50%; */
     width: 100%;
-    font-size: 6rem;
+    font-size: 5rem;
     letter-spacing: -2px;
     font-family: "EHNormalTrial";
     margin-bottom: 50px;

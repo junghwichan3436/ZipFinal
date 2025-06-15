@@ -139,7 +139,7 @@ const KeywordList = styled.ul`
   }
 `;
 
-const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword }) => {
+const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword, characterName }) => {
   const navigate = useNavigate();
 
   const [sildeData, setSlideData] = useState([]);

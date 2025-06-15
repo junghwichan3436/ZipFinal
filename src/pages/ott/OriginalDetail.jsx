@@ -7,6 +7,9 @@ const Container = styled.main`
   width: 100%;
   height: 100%;
   color: #fff;
+  img {
+    object-fit: cover;
+  }
   &::before {
     content: "";
     padding: 0;
