@@ -5,6 +5,7 @@ const url = "https://www.googleapis.com/youtube/v3/";
 const inmybag = "PL_T0ZWGcXPuNqXJvUFzCbIGqL_ohQJ-YV";
 const interview = "PL_T0ZWGcXPuNQXkWWz7hHDaKDcGykNPqJ";
 const working = "PL_T0ZWGcXPuNocJRthQ6lKcU3vd3H_lAb";
+const shorts = "PLCdNVwNbrnIDRK350ybQn1V3V8tadp_fx";
 
 export function StarData() {
   return useQuery({
@@ -29,6 +30,26 @@ export function interviewData() {
     queryFn: () =>
       fetch(
         `${url}playlistItems?part=snippet&playlistId=${interview}&maxResults=50&key=${apiKey}`
+      ).then((response) => response.json()),
+  });
+}
+
+export function workingData() {
+  return useQuery({
+    queryKey: ["workingData"],
+    queryFn: () =>
+      fetch(
+        `${url}playlistItems?part=snippet&playlistId=${working}&maxResults=10&key=${apiKey}`
+      ).then((response) => response.json()),
+  });
+}
+
+export function shortsData() {
+  return useQuery({
+    queryKey: ["shortsData"],
+    queryFn: () =>
+      fetch(
+        `${url}playlistItems?part=snippet&playlistId=${shorts}&maxResults=10&key=${apiKey}`
       ).then((response) => response.json()),
   });
 }
