@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import ZipItem from "../../components/original/ZipItem";
 // import { Link } from "react-router-dom";
-
+// import styled, { keyframes } from "styled-components";
+const rec = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+`;
 // 스타일 정의
 const Container = styled.div`
   width: 100%;
@@ -19,7 +27,7 @@ const Container = styled.div`
     width: 100%;
     height: 100vh;
     filter: brightness(0.2) contrast(1.1);
-    z-index: -1;
+    z-index: -2;
   }
 `;
 const TitleSection = styled.section`
@@ -29,16 +37,19 @@ const TitleSection = styled.section`
     width: 100%;
     display: flex;
     align-items: center;
+
     gap: 10px;
     margin: 20px 0 20px;
     .redDot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       background: #f00;
       border-radius: 50%;
+      animation: ${rec} 2s infinite;
     }
     span {
       display: inline-block;
+      display: flex;
       font-size: 2rem;
       font-family: "EHNormalTrial";
       font-weight: 500;
@@ -48,8 +59,9 @@ const TitleSection = styled.section`
   }
   @media screen and (max-width: 1024px) {
     .allZips {
+      /* display: block; */
       gap: 10px;
-      margin: 20px 0 20px;
+      margin: 12px 0 30px;
     }
   }
   @media screen and (max-width: 767px) {
@@ -85,7 +97,7 @@ const MainTitle = styled.div`
     }
   }
 
-  @media screen and (max-width: 1094px) {
+  @media screen and (max-width: 1024px) {
     padding-top: 140px;
     padding-bottom: 20px;
     gap: 20px;
@@ -108,7 +120,7 @@ const MainTitle = styled.div`
       }
     }
   }
-  @media screen and (max-width: 978px) {
+  @media screen and (max-width: 767px) {
     gap: 20px;
     padding-top: 120px;
     padding-bottom: 20px;
@@ -138,7 +150,7 @@ const MainTitle = styled.div`
       }
     }
   }
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 767px) {
     h4 {
       font-size: 4rem;
     }
@@ -157,9 +169,17 @@ const ZipList = styled.ul`
   padding: 0 3%;
   letter-spacing: -0.2px;
   padding-bottom: 100px;
+  /* background: #f00; */
+  li {
+    width: 49%;
+  }
+
   /* gap: 40px; */
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 767px) {
     flex-direction: column;
+    li {
+      width: 100%;
+    }
   }
 `;
 
@@ -175,7 +195,7 @@ const Original = () => {
 
   return (
     <Container>
-      <TitleSection>
+      <TitleSection animate={true}>
         <MainTitle>
           <h4>zip originals</h4>
           <p>

@@ -8,21 +8,18 @@ const ZipItems = styled.li`
   /* grid-row-gap: 6.25vw; */
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   overflow: hidden;
   position: relative;
-  .line {
-    width: 100%;
-    height: 1px;
-    background: #313131;
-    /* margin: 20px 12px 0; */
-  }
+  /* background: #d00; */
   .img_container {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    border-radius: 4px;
   }
+
   .img_container img {
     position: absolute;
     top: 0;
@@ -47,13 +44,13 @@ const ZipItems = styled.li`
     opacity: 0;
   }
   p {
-    font-size: 3rem;
+    font-size: 2.6rem;
     font-weight: 600;
-    margin-top: 24px;
+    margin-top: 20px;
   }
   span {
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
     margin: 14px 0 22px;
     color: #a9a9a9;
@@ -61,31 +58,37 @@ const ZipItems = styled.li`
 
   @media screen and (max-width: 1024px) {
     width: 100%;
-    padding: 0 3%;
     /* align-items: center; */
-    /* background: #d00; */
     .img_container {
       /* width: 80%; */
       /* height: 360px; */
     }
     p {
-      font-size: 2.8rem;
-      margin-top: 20px;
+      /* font-size: 2.3rem; */
+      /* margin-top: 18px; */
     }
     span {
       display: inline-block;
-      font-size: 1.6rem;
+      /* font-size: 1.3rem; */
       margin: 14px 0 20px;
     }
   }
   @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 100%;
+    padding: 0 3%;
+    margin-bottom: 12px;
+    .img_container {
+      /* width: 100%; */
+      /* height: 360px; */
+    }
     p {
-      font-size: 2rem;
-      margin-top: 14px;
+      /* font-size: 2rem; */
+      /* margin-top: 14px; */
     }
     span {
-      font-size: 1.4rem;
-      margin: 8px 0 20px;
+      /* font-size: 1.4rem; */
+      /* margin: 8px 0 20px; */
     }
   }
 `;
@@ -101,7 +104,7 @@ const OverlayTop = styled.div`
   font-family: "EHNormalTrial";
   transition: all 0.3s;
   color: var(--light-color);
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   z-index: 3;
   width: 100%;
@@ -120,10 +123,12 @@ const OverlayTop = styled.div`
     height: 100%;
   }
   @media screen and (max-width: 1024px) {
-    font-size: 2rem;
+    font-size: 1.4rem;
+    gap: 40px;
   }
   @media screen and (max-width: 767px) {
-    font-size: 1.4rem;
+    /* font-size: 1.6rem; */
+    gap: 40px;
   }
 `;
 const KeywordList = styled.ul`
@@ -183,7 +188,6 @@ const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName
       </div> */}
       <p>{mainTitle}</p>
       <span>{subTitle}</span>
-      <div className="line"></div>
       <KeywordList>
         {keyword?.map((item, index) => (
           <li key={index}>#{item}</li>

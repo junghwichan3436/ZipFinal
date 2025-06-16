@@ -18,7 +18,7 @@ export function bagData() {
     queryKey: ["bagData"],
     queryFn: () =>
       fetch(
-        `${url}playlistItems?part=snippet&playlistId=${inmybag}&maxResults=10&key=${apiKey}`
+        `${url}playlistItems?part=snippet&playlistId=${inmybag}&maxResults=50&key=${apiKey}`
       ).then((response) => response.json()),
   });
 }
@@ -28,7 +28,7 @@ export function interviewData() {
     queryKey: ["interviewData"],
     queryFn: () =>
       fetch(
-        `${url}playlistItems?part=snippet&playlistId=${interview}&maxResults=10&key=${apiKey}`
+        `${url}playlistItems?part=snippet&playlistId=${interview}&maxResults=50&key=${apiKey}`
       ).then((response) => response.json()),
   });
 }

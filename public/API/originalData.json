@@ -2,164 +2,156 @@
   "originalData": [
     {
       "id": 1,
-      "characterName": "로제",
+      "characterName": "로제가",
       "starName": "로제",
       "jobCategory": "musician",
       "thumbnail": "https://64.media.tumblr.com/27d3f315997fcc04df3309307d1c9901/0dda17077632b77d-03/s540x810/9db198e10ad5b0c458b92a8162c90fd32f97f517.gif",
       "staticThumbnail": "/public/img/로제.jpg",
       "detailImg": "https://64.media.tumblr.com/3c8942ebb3c2b4c2ba2a7f6309c7c4a2/0dda17077632b77d-4f/s540x810/595fd00358c8f7bcbd6a1acb34e91553337b84c5.gifv",
       "episode": "APT 뮤비 속 Rosé",
-      "mainTitle": "ROSÉ의 APT 속 리얼템",
+      "mainTitle": "[APT MV]\n로제의 APT 속 리얼템",
       "subTitle": "그녀가 살아가는 곳, 그리고 들고 다니는 것들",
       "keyword": ["APT", "블랙핑크", "로제"],
       "characterKeyword": ["레트로", "편안함", "따뜻한 조명"],
-      "description": "수많은 조명, 끝없는 무대. 하지만 그녀가 진짜 숨을 쉬는 곳은 조용한 아파트, 무대 아래 자신의 감각을 숨기지 않아도 되는 공간이었다. “더 이상 벽지와 천장에 숨지 않아.침대, 창문, 조명, 그리고 음악. 여기가 내 집이고, 나답게 숨 쉴 수 있는 곳이야.”",
+      "description": "로제는 이 도시 속 수많은 감정들 위에서 살아간다. 감정의 소용돌이 안에서 흘러가는 듯 보이지만, 실은 그 어느 때보다 단단하고 명확하다. APT 속의 그녀는 ‘지금 여기’에 존재하며, 누군가에게 보여지기 위한 사람이 아닌, 그저 ‘로제’로 살아가는 법을 배운다. 그녀는 감정을 말로 설명하기보단 공간에 스며들게 만든다. 조명이 따뜻한 이유, 브라운 톤의 옷을 고른 이유, 그 모든 선택은 그녀를 표현하는 방식이다. APT는 단순한 장소가 아니다. 이건 그녀가 가장 자신다운 순간을 마주하는 내밀한 공간이며, 그 안에서 우린 그녀의 진짜 모습을 엿볼 수 있다.",
       "bagThumbnail": "https://i.ytimg.com/vi/Fd_En3y2amo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAuTCV-ZIaxOKdn6mklucG01V15VQ",
-      "videoUrl": "YkW0M05ayGdfphbJ",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "SAINTLAURENT",
+          "title": "혼자 있는 감정의 무게\n 그녀의 가방 속",
+          "img": "https://saint-laurent.dam.kering.com/m/266410570f17f21b/eCom-777399AACYT1000_A.jpg?v=3",
+          "detailURL": "그레이 램스킨 CALYPSO 라지백"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "diptyque",
+          "title": "향은 은은하게\n비누에 로즈 한 방울",
+          "img": "https://cf.bysuco.net/220513bd45e9a64f54e328f80d3669bb.jpg?w=600",
+          "detailURL": "34번가 생제르망 오 드 뚜왈렛"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/d49209f2-b0ff-4c2e-abe9-ca9273e46fbf/11004000_D_45.jpg",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
+          "shortVideo": "QXKlTPkU2t4",
+          "shortTitle": "촉감 궁금한 로제의 스트레스 볼🟡",
           "viewRated": 4000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "4TUqMij0b8M",
+          "shortTitle": "로제의 베스트 소비템은?",
+          "viewRated": 380000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "12wAQTdQp98",
+          "shortTitle": "로제가 최근 꽂힌 핫소스",
+          "viewRated": 560400
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "IOszmbvNnE8",
+          "shortTitle": "로제와 행크의 첫 만남🐶🐾",
+          "viewRated": 12570000
         }
       ]
     },
     {
       "id": 2,
-      "characterName": "나희도",
+      "characterName": "나희도가",
       "starName": "김태리",
       "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/Fa45V/btrs72DGDoY/zwHPdyk0x9yrvKEFU0VyM1/img.gif",
+      "thumbnail": "/public/img/나희도.gif",
       "staticThumbnail": "/public/img/김태리.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
+      "detailImg": "https://i.namu.wiki/i/kcuBuVm4FYKytAMnTbbWMuLCWfpdBJ-wI-yL3EBhbv3NnFWPdSqacfLfrbEM75En2hAp55-k1NMB5pmM1bQTPA.gif",
       "episode": "스물다섯 스물하나 나희도",
-      "mainTitle": "강새벽의 생존 가방",
+      "mainTitle": "[스물다섯 스물하나]\n나희도의 도장 가방",
       "subTitle": "펜싱보다 더 날카로운 건, 그 아이의 열정이었다.",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
+      "keyword": ["스물다섯스물하나", "김태리", "나희도"],
+      "characterKeyword": ["청춘", "레트로", "불완전한 아름다움"],
+      "description": "1998년, 세상이 IMF라는 단어로 흔들리던 시절.고등학생 나희도는 세상에 맞서는 법을 아주 단순하게 배웠다.“넘어지면 일어난다.”펜싱 검 끝에 담긴 그녀의 마음은 누구보다 단단했다.아버지를 잃고, 친구와 멀어지고, 사랑마저도 언젠가 사라질지 모른다는 불안 속에서도 희도는 믿었다. 자기 자신을. 그녀는 세상을 증명하려 하지 않았다. 그저, 좋아서 검을 들었고, 좋아서 누군가를 사랑했다. 일기장에 쓴 문장은 늘 삐뚤빼뚤했지만 마음만은 정직했다. 희도는 우리 모두의 열아홉이었다. 아프고, 혼란스럽고, 눈부셨던 시절의 상징",
       "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
           "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
+          "shortVideo": "81aq-y06RrY",
           "bagVideo": "JbfUqhBO77I",
           "shortTitle": "없는게 없는 정호연의 파우치",
           "viewRated": 4000
@@ -190,65 +182,64 @@
         }
       ]
     },
-
     {
       "id": 3,
-      "characterName": "차준환",
-      "starName": "차준환",
-      "jobCategory": "sports",
-      "thumbnail": "https://blog.kakaocdn.net/dn/4BUwp/btrsRPwtO7T/KS1YgnvUTTlkkVWGG2Z6oK/img.gif?s=09][img=https://blog.kakaocdn.net/dn/nWnlQ/btrsNwYJ3Oe/W6EYYfZg6bum89rQIJgTJk/img.gif?s=09]",
-      "staticThumbnail": "/public/img/차준환.jpg",
-      "detailImg": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQ9kb%2Fbtrs7lQiCa1%2Fm2Dv0hpMWQpUqi2daYCYlK%2Fimg.gif&type=sc960_832_gif",
+      "characterName": "비비",
+      "starName": "비비",
+      "jobCategory": "musician",
+      "thumbnail": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTAxMjZfMTAw%2FMDAxNzM3ODc2MDQ0NTA4._70cwUEzC-GeYJ4Tt-UbhYgeV3RAgEey6dlEmeorUGUg.f_ZMHj1aFPjMLiHKgJ9_Y9JVgnmIGMjA6pf5HR3Uc3gg.GIF%2FIMG_3533.GIF&type=sc960_832_gif",
+      "staticThumbnail": "/public/img/비비.jpg",
+      "detailImg": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDExMThfNjUg%2FMDAxNzMxODYyNjM4MDU0.0fjJZRgxTAypGax5HqSyrhNiH-0_mMx72xFNrRbsr7Ig.rfDC28EonoJPDKfqMS173r5qka8h7Q_F3q5d6ObSluUg.GIF%2FIMG_3106.GIF&type=sc960_832_gif",
       "episode": "오징어게임 강새벽",
       "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "무대 위의 고독, 얼음 위의 시인",
+      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
       "keyword": ["오징어게임", "강새벽", "정호연"],
       "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "이름을 부르기 전, 우리는 그를 봤다. 빙판 위를 가르며, 음악을 입고, 감정을 돌려냈던 사람. 무대 위의 시인, 그는 매번 다른 캐릭터가 되어 돌아왔다. 우리는 그를 차준환이라 부른다. 그는 하나의 캐릭터였다가, 다시 본연의 자신으로 돌아온다. 우리는 매 무대에서, 매 계절에서 또 다른 그를 사랑하게 된다. 당신이 사랑한 캐릭터, 그가 고를 법한 아이템.",
+      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
       "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "SAINTLAURENT",
+          "title": "혼자 있는 감정의 무게\n 그녀의 가방 속",
+          "img": "https://saint-laurent.dam.kering.com/m/266410570f17f21b/eCom-777399AACYT1000_A.jpg?v=3",
+          "detailURL": "그레이 램스킨 CALYPSO 라지백"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "diptyque",
+          "title": "향은 은은하게\n비누에 로즈 한 방울",
+          "img": "https://cf.bysuco.net/220513bd45e9a64f54e328f80d3669bb.jpg?w=600",
+          "detailURL": "34번가 생제르망 오 드 뚜왈렛"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/d49209f2-b0ff-4c2e-abe9-ca9273e46fbf/11004000_D_45.jpg",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         }
       ],
       "shorts": [
@@ -288,21 +279,21 @@
     },
     {
       "id": 4,
-      "characterName": "강새벽",
-      "starName": "정호연",
+      "characterName": "김봉석",
+      "starName": "이정하",
       "jobCategory": "actor",
-      "thumbnail": "https://64.media.tumblr.com/5a345598cdbe67564c58e805219bd74f/9901598383c456c9-41/s500x750/26a88360659a74511394187d4e3dc69a53c0bd82.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "오징어게임 강새벽",
-      "mainTitle": "강새벽의 생존 가방",
+      "thumbnail": "https://file3.instiz.net/data/cached_img/upload/2023/09/03/23/30afb9c0e3f4fd10b28ac01b30cd5277.gif",
+      "staticThumbnail": "/public/img/김봉석.jpg",
+      "detailImg": "https://file3.instiz.net/data/cached_img/upload/2023/09/03/23/26d986f93d73db17b1993a0b00419485.gif",
+      "episode": "무빙 김봉석",
+      "mainTitle": "무빙 봉석의 생존 가방",
       "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
       "keyword": ["오징어게임", "강새벽", "정호연"],
       "characterKeyword": ["무채색", "실용성", "생존본능"],
       "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
       "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
           "itemBrand": "AcneStudios",
@@ -381,13 +372,12 @@
         }
       ]
     },
-
     {
       "id": 5,
       "characterName": "강새벽",
       "starName": "정호연",
       "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
+      "thumbnail": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjNfMjMz%2FMDAxNjMyMzQ0OTc0MTIx.AmmfxGsvAZQLz_ZOhblxpX0RQ3uCHkX61XvwbqDKVDUg.clga4AiuOdtTTQwISavQtcduyrKCfp1knmz4nQEQ5DYg.GIF.hinokenz%2F%25BB%25F5%25BA%25AE%25C1%25F6%25BF%25B5_4.gif&type=sc960_832_gif",
       "staticThumbnail": "/public/img/강새벽.jpg",
       "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
       "episode": "오징어게임 강새벽",
@@ -397,49 +387,49 @@
       "characterKeyword": ["무채색", "실용성", "생존본능"],
       "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
       "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         }
       ],
       "shorts": [
@@ -479,62 +469,62 @@
     },
     {
       "id": 6,
-      "characterName": "강새벽",
-      "starName": "정호연",
-      "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
+      "characterName": "차준환",
+      "starName": "차준환",
+      "jobCategory": "sports",
+      "thumbnail": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcQXv0I%2FbtrzAVDu0QF%2FlcFsDB7Ykpg4dm8bZ4ntf0%2Fimg.gif&type=sc960_832_gif",
+      "staticThumbnail": "/public/img/차준환.jpg",
+      "detailImg": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQ9kb%2Fbtrs7lQiCa1%2Fm2Dv0hpMWQpUqi2daYCYlK%2Fimg.gif&type=sc960_832_gif",
       "episode": "오징어게임 강새벽",
       "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
+      "subTitle": "무대 위의 고독, 얼음 위의 시인",
       "keyword": ["오징어게임", "강새벽", "정호연"],
       "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
+      "description": "이름을 부르기 전, 우리는 그를 봤다. 빙판 위를 가르며, 음악을 입고, 감정을 돌려냈던 사람. 무대 위의 시인, 그는 매번 다른 캐릭터가 되어 돌아왔다. 우리는 그를 차준환이라 부른다. 그는 하나의 캐릭터였다가, 다시 본연의 자신으로 돌아온다. 우리는 매 무대에서, 매 계절에서 또 다른 그를 사랑하게 된다. 당신이 사랑한 캐릭터, 그가 고를 법한 아이템.",
       "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "Gentle Monster",
+          "title": "집에서도 로제의 눈은\n소중하니까!",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "MM205 01 선글라스"
         }
       ],
       "shorts": [

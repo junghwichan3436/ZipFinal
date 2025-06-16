@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import YouTube from "react-youtube";
+import { bagData, StarData } from "../../StarData";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +25,6 @@ const Title = styled.div`
   h4 {
     font-size: 7rem;
     font-family: "EHNormalTrial";
-    font-weight: bold;
   }
   p {
     line-height: 1.2;
@@ -146,31 +145,47 @@ const VideoText = styled.div`
     &:nth-child(1) {
       font-weight: bold;
       margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &:nth-child(2) {
       font-size: 1.4rem;
       color: var(--border-color);
     }
   }
+  @media screen and (max-width: 767px) {
+    p {
+      &:nth-child(1) {
+        font-size: 1.4rem;
+      }
+      &:nth-child(2) {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
 const InMyBag = () => {
-  const [artists, setArtists] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const { data, isLoading, error } = bagData();
+  const {
+    data: starData,
+    isLoading: starLoading,
+    error: starError,
+  } = StarData();
 
-  useEffect(() => {
-    fetch("/API/index.json")
-      .then((res) => res.json())
-      .then((data) => setArtists(data.artists))
-      .catch((err) => console.error("데이터 에러", err));
-  });
-
-  const filteredArtists =
+  const filteredItems =
     selectedCategory === "ALL"
-      ? artists
-      : artists.filter(
-          (artist) => artist.jobCategory.toUpperCase() === selectedCategory
+      ? data?.items
+      : data?.items.filter((item) =>
+          item.snippet.videoOwnerChannelTitle
+            ?.toUpperCase()
+            .includes(selectedCategory.toUpperCase())
         );
+
   // const opts = {
   //   width: "100%",
   //   height: "100%",
@@ -195,7 +210,7 @@ const InMyBag = () => {
       </Title>
       <FilterGroup>
         <Category>
-          {["ALL", "ACTOR", "MUSICIAN", "SPORTS"].map((data) => (
+          {["ALL", "ALLURE", "ELLE", "GQ", "VOGUE", "W"].map((data) => (
             <li
               className={selectedCategory === data ? "active" : ""}
               key={data}
@@ -211,25 +226,37 @@ const InMyBag = () => {
           <option value="">조회순</option>
         </select>
       </FilterGroup>
+
       <Contents>
-        {filteredArtists.map((artist) => (
-          <Video>
-            {/* <YouTube videoId="5BRaRTjCPT0" opts={opts} /> */}
-            <img
-              src={`https://img.youtube.com/vi/${artist.videoURL}/maxresdefault.jpg`}
-              alt=""
-            />
-            <VideoText>
-              <div>
-                <img src={artist.artistImg} alt="" />
-              </div>
-              <div>
-                <p>{artist.artistName}의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </Video>
-        ))}
+        {filteredItems?.map((item) => {
+          const { snippet } = item;
+          const videoId = snippet.resourceId?.videoId;
+          const thumbnail = snippet.thumbnails?.maxres?.url;
+          const title = snippet.title;
+          const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
+
+          const matchedArtist = starData?.artists?.find((artist) =>
+            title.includes(artist.artistName)
+          );
+
+          return (
+            <Video key={videoId}>
+              <img src={thumbnail} alt={title} />
+              <VideoText>
+                <div>
+                  <img
+                    src={matchedArtist ? matchedArtist.artistImg : ""}
+                    alt={matchedArtist?.artistName || "artist"}
+                  />
+                </div>
+                <div>
+                  <p>{title}</p>
+                  <p>{videoOwnerChannelTitle}</p>
+                </div>
+              </VideoText>
+            </Video>
+          );
+        })}
       </Contents>
     </Container>
   );

@@ -6,8 +6,11 @@ import RollingBanner from "../home/RollingBanner";
 import YouTube from "react-youtube";
 /*--- 스와이퍼 ---*/
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
 
 const Container = styled.div`
   width: 100%;
@@ -148,6 +151,7 @@ const ImgSection = styled.section`
 const CharaterSection = styled.section`
   width: 100%;
   height: 100%;
+  /* padding: 100px 0 3% 3%; */
   padding: 100px 3%;
   aside {
     display: flex;
@@ -246,9 +250,9 @@ const CharaterSection = styled.section`
             margin-bottom: 10px;
           }
           & > ul {
-            gap: 4px;
+            gap: 6px;
             li {
-              padding: 8px 12px;
+              padding: 8px 14px;
               font-size: 1rem;
             }
           }
@@ -261,9 +265,17 @@ const CharaterSection = styled.section`
   }
 `;
 const CardList = styled.div`
-  width: 1100px;
+  width: 100%;
   height: 600px;
+  /* padding: 0 !important; */
+  /* display: flex; */
+  /* gap: 100px; */
+  /* justify-content: space-between; */
+  /* gap: 10px; */
+  /* margin: 0; */
   overflow: hidden;
+  background: #474747;
+
   @media screen and (max-width: 1024px) {
     height: 500px;
   }
@@ -285,23 +297,44 @@ const RealStarSection = styled.div`
     justify-content: space-between;
     margin: 120px 0;
     & > h4 {
-      /* width: 100%; */
+      width: 60%;
       font-size: 5rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
     & > .video-container {
       /* width: 600px; */
-      .VideoImg {
+      width: 100%;
+      /* aspect-ratio: 16 / 9; */
+      cursor: pointer;
+      overflow: hidden;
+      /* position: relative; */
+      border-radius: 6px;
+      .videoImg {
         width: 100%;
         height: 100%;
         /* background: #323240; */
         aspect-ratio: 16 / 9;
         overflow: hidden;
+        position: relative;
         img {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: opacity 0.3s ease;
+          z-index: 2;
+        }
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          /* pointer-events: none; */
         }
       }
     }
@@ -315,9 +348,11 @@ const RealStarSection = styled.div`
       margin: 60px 0;
       & > h4 {
         font-size: 4rem;
+        width: 54%;
       }
       & > .video-container {
-        width: 65%;
+        background: #00f;
+        /* width: 65%; */
       }
     }
   }
@@ -330,6 +365,7 @@ const RealStarSection = styled.div`
       flex-direction: column;
       margin: 40px 0;
       & > h4 {
+        width: 100%;
         font-size: 3rem;
         margin-bottom: 30px;
         padding-bottom: 18px;
@@ -337,7 +373,6 @@ const RealStarSection = styled.div`
       }
       & > .video-container {
         width: 100%;
-        height: 300px;
       }
     }
   }
@@ -370,14 +405,27 @@ const ShortSection = styled.div`
           width: 100%;
           height: 100%;
           aspect-ratio: 4/ 6;
+          aspect-ratio: 9/ 16;
           overflow: hidden;
           border-radius: 8px;
           cursor: pointer;
-          img {
+          position: relative;
+          /* img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border: none;
+            pointer-events: none;
+            } */
+          iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* z-index: 1; */
+            width: 100%;
+            height: 100%;
+
+            /* pointer-events: none; */
           }
         }
         .short-info {
@@ -409,19 +457,19 @@ const ShortSection = styled.div`
     & > h4 {
       width: 100%;
       /* width: 50%; */
-
       font-size: 4rem;
       margin-bottom: 30px;
     }
     & > .shorts-container {
       ul {
-        gap: 20px;
+        gap: 14px;
         /* display: flex; */
         /* flex-direction: column; */
         flex-wrap: wrap;
         justify-content: center;
+        justify-content: space-around;
         li {
-          width: 48%;
+          width: 40%;
           height: 100%;
           .short-info {
             margin-top: 14px;
@@ -451,12 +499,11 @@ const ShortSection = styled.div`
     }
     & > .shorts-container {
       ul {
-        gap: 10px;
         /* flex-direction: column; */
         li {
-          flex-wrap: wrap;
-          /* width: 50%; */
+          width: 46%;
           .short-info {
+            width: 100%;
             margin-top: 10px;
             p {
               font-size: 1.6rem;
@@ -475,7 +522,6 @@ const ShortSection = styled.div`
     }
   }
 `;
-
 const DetailItem = ({
   mainTitle,
   subTitle,
@@ -486,15 +532,16 @@ const DetailItem = ({
   keyword,
   characterKeyword,
   characterName,
-  bagThumbnail,
   shorts,
+  items,
+  videoUrl,
 }) => {
   const navigate = useNavigate();
 
   const [sildeData, setSlideData] = useState([]);
 
   useEffect(() => {
-    fetch("/API/homeData.json")
+    fetch("/API/originalData.json")
       .then((response) => response.json())
       .then((data) => setSlideData(data.slideData));
   }, []);
@@ -511,7 +558,7 @@ const DetailItem = ({
       fs: 0, // 전체화면 버튼 숨기기
       disablekb: 1, // 키보드 제어 비활성화
       showinfo: 0, // 제목 숨기기 시도 (현재는 거의 안 먹힘)
-      autoplay: 1, // 자동재생
+      autoplay: 0, // 자동재생
       enablejsapi: 1, // JS API 활성화
     },
   };
@@ -524,7 +571,7 @@ const DetailItem = ({
   };
   const VideoPlay = (e) => {
     if (VideoRef.current) {
-      e.target.style.opacity = 0;
+      e.target.style.opacity = 1;
       VideoRef.current.stopVideo();
       VideoRef.current.playVideo();
     }
@@ -535,7 +582,7 @@ const DetailItem = ({
       VideoRef.current.stopVideo();
     }
   };
-
+  console.log(videoUrl);
   return (
     <Container>
       <TitleSection>
@@ -567,7 +614,9 @@ const DetailItem = ({
             <p>{description}</p>
             <ul>
               {characterKeyword.map((item, index) => (
-                <li key={index}># {item}</li>
+                <li className="hashtag" key={index}>
+                  # {item}
+                </li>
               ))}
             </ul>
           </div>
@@ -575,18 +624,18 @@ const DetailItem = ({
         <aside className="item-zip">
           <h4>item ZIP</h4>
           <div>
-            <h5>당신도 궁금했던, {characterName}의 리얼템</h5>
+            <h5>당신도 궁금했던, {episode}의 리얼템</h5>
             <CardList>
               <Swiper
+                className="swiper"
                 slidesPerView={3}
-                spaceBetween={200}
+                // spaceBetween={300}
                 loop={true}
-                loopedSlides={8}
+                loopedSlides={6}
                 modules={[]}
                 style={{ overflow: "visible" }}
-                className="swiper"
               >
-                {sildeData?.map((item, index) => (
+                {items?.map((item, index) => (
                   <SwiperSlide key={index}>
                     <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
                   </SwiperSlide>
@@ -599,15 +648,14 @@ const DetailItem = ({
       <RollingBanner />
       <RealStarSection>
         <p className="real-title">
-          {characterName}이 아닌, 본체 {starName}의 취향은?
+          {characterName}아닌, 본체 {starName}의 취향은?
         </p>
         <div className="contents-container">
           <h4>bag ZIP</h4>
-          <div className="video-container">
-            {/* <div className="VideoImg" onMouseEnter={VideoPlay} onMouseLeave={VideoStop}> */}
-            <div className="VideoImg">
-              <img src={bagThumbnail} alt={starName} />
-              <YouTube videoId="5BRaRTjCPT0" opts={opts} onReady={handleReady} />
+          <div className="video-container" onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+            <div className="videoImg">
+              {/* <img src={bagThumbnail} alt={starName} /> */}
+              <YouTube videoId={videoUrl} opts={opts} onReady={handleReady} />
             </div>
           </div>
         </div>
@@ -618,7 +666,7 @@ const DetailItem = ({
               {shorts?.map((item, index) => (
                 <li key={index}>
                   <div className="thumbnail-info">
-                    <img src={item.shortThumbnail} alt={starName} />
+                    <YouTube videoId={item.shortVideo} />
                   </div>
                   <div className="short-info">
                     <p>{item.shortTitle}</p>

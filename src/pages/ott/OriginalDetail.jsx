@@ -60,7 +60,9 @@ const OriginalDetail = () => {
             characterKeyword={selectedItem.characterKeyword}
             characterName={selectedItem.characterName}
             bagThumbnail={selectedItem.bagThumbnail}
+            items={selectedItem.items}
             shorts={selectedItem.shorts}
+            videoUrl={selectedItem.videoUrl}
           />
         )}
       </section>
