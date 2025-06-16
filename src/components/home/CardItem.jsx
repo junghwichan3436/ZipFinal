@@ -6,18 +6,21 @@ import styled from "styled-components";
 const Container = styled.li`
   width: 380px;
   height: 500px;
+
   background: var(--light-color);
   color: var(--dark-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  /* background: #f00; */
+
   @media screen and (max-width: 1024px) {
     width: 330px;
     height: 400px;
   }
   @media screen and (max-width: 767px) {
-    width: 290px;
+    width: 260px;
     height: 350px;
   }
 `;
@@ -117,7 +120,7 @@ const CardItem = ({ subtitle, title, img, detailURL }) => {
       <CardItemInfo>
         <span>{subtitle}</span>
         <p>
-          {title.split("\n").map((line, index) => (
+          {title?.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
@@ -127,7 +130,7 @@ const CardItem = ({ subtitle, title, img, detailURL }) => {
         <button onClick={() => navigate(`/detail/${detailURL}`)}>→</button>
       </CardItemInfo>
       <CardImg>
-        <img onClick={() => navigate(`/detail/${detailURL}`)} src={img} alt={`${title} 이미지`} />
+        <img onClick={() => navigate(`/detail/${detailURL}`)} src={img} alt={`${detailURL} 이미지`} />
       </CardImg>
     </Container>
   );
