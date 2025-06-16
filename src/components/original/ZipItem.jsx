@@ -11,7 +11,6 @@ const ZipItems = styled.li`
   margin-bottom: 30px;
   overflow: hidden;
   position: relative;
-  /* background: #d00; */
   .img_container {
     position: relative;
     width: 100%;
@@ -49,7 +48,7 @@ const ZipItems = styled.li`
   }
   span {
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 300;
     margin: 14px 0 22px;
     color: #a9a9a9;
