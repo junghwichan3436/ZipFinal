@@ -15,10 +15,12 @@ const Container = styled.div`
   top: 0;
   z-index: -1;
   background: var(--ott-bg-color);
-
   &.active {
     z-index: 3;
     opacity: 1;
+  }
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
   }
 `;
 const CloseBtn = styled.button`
