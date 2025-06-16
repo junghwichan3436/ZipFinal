@@ -124,31 +124,9 @@ const Signup = () => {
       alert("필수 약관에 동의해주세요.");
       return;
     }
-    const { email, password, username, name } = data;
 
-    try {
-      const credential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = credential.user;
-
-      await setDoc(doc(db, "users", user.uid), {
-        email,
-        username,
-        name,
-        address: data.address,
-        createdAt: new Date(),
-      });
-
-      console.log("회원가입 성공:", credential.user);
-      alert("회원가입이 완료되었습니다!");
-      navigate("/signupv2");
-    } catch (error) {
-      console.error("회원가입 에러:", error.message);
-      alert(error.message);
-    }
+    // 아티스트 선택 페이지로 이동 및 데이터 전달
+    navigate("/signupv2", { state: data });
   };
 
   return (
