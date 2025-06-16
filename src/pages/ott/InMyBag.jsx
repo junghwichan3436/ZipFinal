@@ -171,11 +171,14 @@ const VideoText = styled.div`
 const InMyBag = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const { data, isLoading, error } = bagData();
+
+  
   const {
     data: starData,
     isLoading: starLoading,
     error: starError,
   } = StarData();
+  
 
   const filteredItems =
     selectedCategory === "ALL"
@@ -229,12 +232,14 @@ const InMyBag = () => {
 
       <Contents>
         {filteredItems?.map((item) => {
+          
           const { snippet } = item;
+          console.log(snippet);
+          
           const videoId = snippet.resourceId?.videoId;
           const thumbnail = snippet.thumbnails?.maxres?.url;
           const title = snippet.title;
           const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
-
           const matchedArtist = starData?.artists?.find((artist) =>
             title.includes(artist.artistName)
           );

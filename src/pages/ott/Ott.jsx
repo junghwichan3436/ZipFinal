@@ -321,6 +321,7 @@ const Ott = () => {
   const { isLoading, data } = StarData();
   const { isLoading: loading02, data: data02 } = bagData();
   const { isLoading: loading03, data: data03 } = interviewData();
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
@@ -346,6 +347,8 @@ const Ott = () => {
   };
 
   const orgData = data?.artists.map((artist) => artist);
+  console.log(orgData);
+  
   const bagInsideVid = orgData?.slice(0, 8);
   const bagInsideVid02 = orgData?.slice(8, 16);
   const bagInsideVid03 = orgData?.slice(16, 24);
