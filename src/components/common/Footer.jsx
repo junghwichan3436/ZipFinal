@@ -87,8 +87,6 @@ const Footer = () => {
       searchMatch ||
       mypageMatch ||
       mypageMatch02 ||
-      starMatch ||
-      starDetailMatch ||
       promotionMatch
     ) {
       setFilterCheck(true);

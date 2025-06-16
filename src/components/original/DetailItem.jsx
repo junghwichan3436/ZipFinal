@@ -153,6 +153,7 @@ const CharaterSection = styled.section`
   height: 100%;
   /* padding: 100px 0 3% 3%; */
   padding: 100px 3%;
+
   aside {
     display: flex;
     justify-content: space-between;

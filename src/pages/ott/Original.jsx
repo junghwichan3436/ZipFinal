@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import ZipItem from "../../components/original/ZipItem";
 // import { Link } from "react-router-dom";
 // import styled, { keyframes } from "styled-components";
+
 const rec = keyframes`
   0%, 100% {
     opacity: 1;

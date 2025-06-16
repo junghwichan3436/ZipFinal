@@ -19,7 +19,6 @@ const ZipItems = styled.li`
     overflow: hidden;
     border-radius: 4px;
   }
-
   .img_container img {
     position: absolute;
     top: 0;
@@ -58,6 +57,7 @@ const ZipItems = styled.li`
 
   @media screen and (max-width: 1024px) {
     width: 100%;
+    margin-bottom: 20px;
     /* align-items: center; */
     .img_container {
       /* width: 80%; */
