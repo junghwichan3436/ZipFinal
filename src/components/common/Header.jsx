@@ -430,8 +430,6 @@ const Header = () => {
       searchMatch ||
       mypageMatch ||
       mypageMatch02 ||
-      starMatch ||
-      starDetailMatch ||
       promotionMatch
     ) {
       setFilterCheck(true);
@@ -474,6 +472,7 @@ const Header = () => {
       });
     }
   };
+
   headerLogo();
 
   const handleMenuClick = () => {
@@ -581,7 +580,15 @@ const Header = () => {
         <HeaderLeft>
           <Logo className="logo">
             <Link
-              to={ottMatch || ottMatch02 || ottMatch03 ? "/ott" : "/"}
+              to={
+                ottMatch ||
+                ottMatch02 ||
+                ottMatch03 ||
+                starMatch ||
+                starDetailMatch
+                  ? "/ott"
+                  : "/"
+              }
               onClick={() => {
                 setMenuClick(false);
                 setToggleClick(false);
@@ -591,7 +598,7 @@ const Header = () => {
             </Link>
           </Logo>
           <HeaderSelect>
-            {loginMatch || starMatch || starDetailMatch ? (
+            {loginMatch ? (
               <></>
             ) : filterCheck ? (
               <div>
@@ -620,9 +627,6 @@ const Header = () => {
               </li>
               <li onClick={handleCategory} data-li="Beauty">
                 <span>Beauty</span>
-              </li>
-              <li onClick={toStar} data-li="Star">
-                <span>Star</span>
               </li>
               <li onClick={toEvent} data-li="Promotion">
                 <span>Promotion</span>

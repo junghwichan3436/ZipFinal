@@ -31,6 +31,7 @@ import InMyBag from "./pages/ott/InMyBag";
 import OttDetail from "./pages/ott/OttDetail";
 import Talk from "./pages/ott/Talk";
 import StyleZip from "./pages/ott/StyleZip";
+import OttSearchComp from "./components/common/OttSearchComp";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -165,6 +166,10 @@ export const router = createBrowserRouter([
       {
         path: "detail/:title",
         element: <OttDetail />,
+      },
+      {
+        path: "search/:query",
+        element: <OttSearchComp />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import OttSearch from "./OttSearch";
 import OttSearchComp from "./OttSearchComp";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   opacity: 0;
+  justify-content: space-between;
   transition: all 0.3s ease-in-out;
   position: fixed;
   width: 100%;
@@ -14,17 +15,10 @@ const Container = styled.div`
   top: 0;
   z-index: -1;
   background: var(--ott-bg-color);
+
   &.active {
     z-index: 3;
     opacity: 1;
-  }
-  div {
-    &:first-child {
-      flex: 2;
-    }
-    &:nth-child(2) {
-      flex: 6;
-    }
   }
 `;
 const CloseBtn = styled.button`
@@ -36,7 +30,8 @@ const CloseBtn = styled.button`
   border: none;
   cursor: pointer;
   top: 20px;
-  right: 20px;
+  right: 3%;
+  z-index: 2;
   span {
     display: block;
     position: absolute;
@@ -61,16 +56,21 @@ const OttSearchWrap = ({
   setOttSearchClick,
   setSearchClick,
 }) => {
+  const [inputValue, setInputValue] = useState("");
   const closeBtnClick = (e) => {
     e.preventDefault();
     setOttSearchClick(false);
     setSearchClick(false);
   };
 
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <Container className={ottSearchClick ? "active" : ""}>
-      <OttSearch />
-      <OttSearchComp />
+      <OttSearch value={inputValue} onChange={handleInputChange} />
+      <OttSearchComp inputValue={inputValue} />
       <CloseBtn onClick={closeBtnClick}>
         <span></span>
         <span></span>

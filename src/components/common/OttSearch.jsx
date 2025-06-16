@@ -1,15 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-  width: 100%;
-`;
-const Form = styled.form`
+const Container = styled.form`
+  width: 20%;
   width: 100%;
   height: 100vh;
-  padding: 100px 20px 0 20px;
+  padding: 3% 20px 0 20px;
 `;
+
 const Search = styled.div`
   position: relative;
   input {
@@ -18,6 +17,7 @@ const Search = styled.div`
     border: none;
     border-bottom: 1px solid var(--light-color);
     padding-bottom: 16px;
+    color: var(--light-color);
     &::placeholder {
       opacity: 1;
       transition: all 0.3s;
@@ -59,74 +59,61 @@ const Keyword = styled.div`
   }
 `;
 
-const OttSearch = ({ ottSearchClick, setOttSearchClick }) => {
-  console.log(ottSearchClick, setOttSearchClick);
+const OttSearch = ({ ottSearchClick, setOttSearchClick, value, onChange }) => {
+  const [inputValue, setInputValue] = useState("");
 
-  const navigate = useNavigate();
-  const inputRef = useRef();
-
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputRef.current.value !== "") {
-      navigate(`/search/${inputRef.current.value}`);
-      setOttSearchClick(false);
-      inputRef.current.value = "";
-    }
+    onSubmit(inputValue); // 검색어 전달
   };
   return (
-    <Container>
-      <Form
-        name="shopping-form"
-        action="./search.html"
-        method="get"
-        onSubmit={onSubmit}
-      >
-        <Search>
-          <input
-            className="searchBar"
-            type="text"
-            name="search"
-            placeholder="검색"
-            ref={inputRef}
+    <Container onSubmit={handleSubmit}>
+      <Search>
+        <input
+          className="searchBar"
+          type="text"
+          name="search"
+          placeholder="검색"
+          value={value}
+          onChange={onChange}
+        />
+        <button type="submit">
+          <img
+            src="https://ecimg.cafe24img.com/pg326b45779995089/oiad/web/oiad_renewal/img/oiad-icon-search-mo.svg"
+            alt="search"
           />
-          <button type="submit">
-            <img
-              src="https://ecimg.cafe24img.com/pg326b45779995089/oiad/web/oiad_renewal/img/oiad-icon-search-mo.svg"
-              alt="search"
-            />
-          </button>
-        </Search>
-        <Keyword>
-          <ul>
-            <li>POPULAR KEYWORDS</li>
-            <li>
-              <Link to="/search/하니" onClick={() => setSearchClick(false)}>
-                하니
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/신시아" onClick={() => setSearchClick(false)}>
-                신시아
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/선미" onClick={() => setSearchClick(false)}>
-                선미
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/고준희" onClick={() => setSearchClick(false)}>
-                고준희
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/슈화" onClick={() => setSearchClick(false)}>
-                슈화
-              </Link>
-            </li>
-          </ul>
-        </Keyword>
-      </Form>
+        </button>
+      </Search>
+      <Keyword>
+        <ul>
+          <li>POPULAR KEYWORDS</li>
+          <li>
+            <Link to="/search/하니" onClick={() => setSearchClick(false)}>
+              하니
+            </Link>
+          </li>
+          <li>
+            <Link to="/search/신시아" onClick={() => setSearchClick(false)}>
+              신시아
+            </Link>
+          </li>
+          <li>
+            <Link to="/search/선미" onClick={() => setSearchClick(false)}>
+              선미
+            </Link>
+          </li>
+          <li>
+            <Link to="/search/고준희" onClick={() => setSearchClick(false)}>
+              고준희
+            </Link>
+          </li>
+          <li>
+            <Link to="/search/슈화" onClick={() => setSearchClick(false)}>
+              슈화
+            </Link>
+          </li>
+        </ul>
+      </Keyword>
     </Container>
   );
 };
