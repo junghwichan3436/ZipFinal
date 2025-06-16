@@ -47,12 +47,12 @@ async function fetchFromAllPlaylistsWithViews(playlistIds) {
   // 2. 영상 ID만 추출
   const videoIds = allItems.map((item) => item.contentDetails.videoId);
 
-  // 3. videos API 호출해서 조회수 포함 상세정보 받기
+  // 3. videos API 호출해서 상세정보 받기 (조회수, 좋아요수, 업로드 날짜)
   let videoDetails = [];
   for (let i = 0; i < videoIds.length; i += 50) {
     const chunk = videoIds.slice(i, i + 50);
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${chunk.join(
+      `https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${chunk.join(
         ","
       )}&key=${apiKey}`
     );
@@ -60,21 +60,29 @@ async function fetchFromAllPlaylistsWithViews(playlistIds) {
     videoDetails.push(...(data.items || []));
   }
 
-  // 4. videoId -> 조회수 맵 만들기
-  const viewsMap = {};
+  // 4. videoId -> 상세 정보 맵 만들기
+  const detailsMap = {};
   videoDetails.forEach((video) => {
-    viewsMap[video.id] = Number(video.statistics.viewCount || 0);
+    detailsMap[video.id] = {
+      viewCount: Number(video.statistics.viewCount || 0),
+      likeCount: Number(video.statistics.likeCount || 0),
+      publishedAt: video.snippet.publishedAt || null, // 영상 업로드 날짜
+    };
   });
 
-  // 5. 각 영상에 조회수 붙이고 인기순(내림차순) 정렬
-  const merged = allItems.map((item) => ({
-    ...item.snippet,
-    viewCount: viewsMap[item.contentDetails.videoId] || 0,
-  }));
+  // 5. 각 영상에 필요한 정보 추가
+  const merged = allItems.map((item) => {
+    const videoId = item.contentDetails.videoId;
+    const details = detailsMap[videoId] || {};
+    return {
+      ...item.snippet,
+      viewCount: details.viewCount,
+      likeCount: details.likeCount,
+      publishedAt: details.publishedAt, // 여기서 영상 자체의 업로드 날짜로 대체
+    };
+  });
 
-  merged.sort((a, b) => b.viewCount - a.viewCount);
-
-  return merged; // 조회수 많은 순으로 정렬된 배열 반환
+  return merged;
 }
 
 export function StarData() {

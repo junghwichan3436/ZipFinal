@@ -347,6 +347,7 @@ const Ott = () => {
   const allDataViewSlice = data05
     ?.sort((a, b) => b.viewCount - a.viewCount)
     .slice(0, 8);
+  console.log(allDataViewSlice);
   const BannerSlice = data05
     ?.sort((a, b) => b.viewCount - a.viewCount)
     .slice(0, 4);
