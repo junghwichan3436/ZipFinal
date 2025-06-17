@@ -36,52 +36,93 @@ const TitleSection = styled.section`
 
 const MainTitle = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 30px;
   align-items: end;
-  padding-top: 200px;
-  padding-bottom: 50px;
+  padding-top: 177px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #3c3c3c;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    padding-top: 100px;
-  }
-
   h4 {
-    font-size: 11rem;
-    font-family: "EHNormalTrial", sans-serif;
+    font-size: 7rem;
+    font-family: "EHNormalTrial";
     font-weight: 500;
-    letter-spacing: -5px;
-
-    @media screen and (max-width: 768px) {
-      font-size: 6rem;
-    }
+    letter-spacing: -3px;
   }
-
   p {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    line-height: 1.4;
-
-    @media screen and (max-width: 768px) {
-      font-size: 1.6rem;
-    }
-
+    color: #ababab;
+    font-weight: 400;
+    line-height: 2rem;
     b {
-      font-weight: 300;
-      font-family: "EHNormalTrial", sans-serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      font-family: "EHNormalTrial";
     }
   }
-`;
 
-const Title = styled.h4`
-  font-size: 11rem;
-  text-transform: uppercase;
-  font-family: "EHNormalTrial", sans-serif;
-  font-weight: 500;
-  letter-spacing: -5px;
+  @media screen and (max-width: 1024px) {
+    padding-bottom: 20px;
+    gap: 20px;
+    flex-direction: column-reverse;
+    flex-direction: column;
+    align-items: start;
+    h4 {
+      font-size: 6rem;
+      letter-spacing: -2px;
+    }
+    br {
+      display: none;
+    }
+    p {
+      font-size: 1.8rem;
+
+      /* line-height: 1.4; */
+      b {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    gap: 20px;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    h4 {
+      /* font-size: 7rem; */
+      letter-spacing: -2px;
+    }
+    p {
+      /* font-size: 1.3rem; */
+      /* line-height: 1.4; */
+      b {
+        /* font-size: 1.4rem; */
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    gap: 18px;
+    h4 {
+      font-size: 5rem;
+    }
+    p {
+      font-weight: 400;
+      font-size: 1.6rem;
+      b {
+        font-size: 1.6rem;
+        font-weight: 400;
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    h4 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.4rem;
+      b {
+        font-size: 1.4rem;
+      }
+    }
+  }
 `;
 
 const ContentSection = styled.section`
@@ -126,9 +167,9 @@ const CarouselContainer = styled.div`
 
   .mySwiper {
     width: 100%;
-    max-width: 3200px;
     padding-top: 50px;
     padding-bottom: 50px;
+    overflow: hidden;
   }
 
   .swiper-slide {
@@ -144,6 +185,70 @@ const CarouselContainer = styled.div`
     opacity: 1 !important;
     filter: brightness(1) !important;
     transform: scale(1.05);
+  }
+
+  /* 데스크톱에서 정확히 5개만 보이도록 강제 제한 */
+  @media screen and (min-width: 1025px) {
+    .mySwiper {
+      max-width: 2400px;
+      margin: 0 auto;
+    }
+
+    .swiper-wrapper {
+      max-width: 2300px;
+      margin: 0 auto;
+    }
+
+    .swiper-slide {
+      width: 458px !important;
+      flex-shrink: 0;
+    }
+
+    /* 6번째 이후 슬라이드 숨김 */
+    .swiper-slide:nth-child(n + 7) {
+      display: none !important;
+    }
+  }
+
+  /* 태블릿에서 정확히 3개만 보이도록 강제 제한 */
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .mySwiper {
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .swiper-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .swiper-slide {
+      width: 458px !important;
+      flex-shrink: 0;
+    }
+
+    /* 4번째 이후 슬라이드 숨김 */
+    .swiper-slide:nth-child(n + 5) {
+      display: none !important;
+    }
+  }
+
+  /* 모바일에서 1개만 보이도록 제한 */
+  @media screen and (max-width: 768px) {
+    .mySwiper {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .swiper-slide {
+      width: 280px !important;
+      flex-shrink: 0;
+    }
+
+    /* 2번째 이후 슬라이드 숨김 */
+    .swiper-slide:nth-child(n + 3) {
+      display: none !important;
+    }
   }
 `;
 
@@ -164,8 +269,56 @@ const Short = () => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [selectedCommentVideo, setSelectedCommentVideo] = useState(null);
 
+  // 🎨 반응형 Coverflow 효과 상태
+  const [coverflowConfig, setCoverflowConfig] = useState({
+    rotate: 18,
+    stretch: 0,
+    depth: 180,
+    modifier: 1,
+    slideShadows: false,
+  });
+
   const swiperRef = useRef(null);
   const playerRefs = useRef({});
+
+  // 🎨 화면 크기에 따른 Coverflow 효과 조정
+  useEffect(() => {
+    const updateCoverflowEffect = () => {
+      const width = window.innerWidth;
+      if (width <= 1024 && width > 768) {
+        // 태블릿에서는 효과를 약간 줄임
+        setCoverflowConfig({
+          rotate: 12,
+          stretch: 0,
+          depth: 120,
+          modifier: 1,
+          slideShadows: false,
+        });
+      } else if (width <= 768) {
+        // 모바일에서는 효과를 더 줄임
+        setCoverflowConfig({
+          rotate: 8,
+          stretch: 0,
+          depth: 80,
+          modifier: 1,
+          slideShadows: false,
+        });
+      } else {
+        // 데스크톱에서는 원래 효과 (1025px 이상)
+        setCoverflowConfig({
+          rotate: 18,
+          stretch: 0,
+          depth: 180,
+          modifier: 1,
+          slideShadows: false,
+        });
+      }
+    };
+
+    updateCoverflowEffect();
+    window.addEventListener("resize", updateCoverflowEffect);
+    return () => window.removeEventListener("resize", updateCoverflowEffect);
+  }, []);
 
   // 🔗 YouTube URL에서 video ID 추출하는 함수
   const extractVideoId = useCallback((url) => {
@@ -415,11 +568,11 @@ const Short = () => {
       <Wrapper>
         <TitleSection>
           <MainTitle>
-            <Title>zip. shorts</Title>
+            <h4>zip shorts</h4>
             <p>
               "스타들의 IT템, 지금 클로즈업!"
               <br />
-              <b>ZIP. SHORT</b>에서
+              <b>zip shorts</b>에서
             </p>
           </MainTitle>
         </TitleSection>
@@ -431,28 +584,29 @@ const Short = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={5}
+              slidesPerView={"auto"}
               spaceBetween={40}
-              coverflowEffect={{
-                rotate: 18,
-                stretch: 0,
-                depth: 180,
-                modifier: 1,
-                slideShadows: false,
-              }}
+              coverflowEffect={coverflowConfig}
               modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               onSlideChange={handleSlideChange}
               loop={true}
               initialSlide={2}
               breakpoints={{
-                768: {
-                  slidesPerView: 3,
-                  spaceBetween: 20,
+                1025: {
+                  slidesPerView: 5,
+                  spaceBetween: 40,
+                  centeredSlides: true,
                 },
-                480: {
+                769: {
+                  slidesPerView: 3,
+                  spaceBetween: 25,
+                  centeredSlides: true,
+                },
+                0: {
                   slidesPerView: 1,
                   spaceBetween: 10,
+                  centeredSlides: true,
                 },
               }}
             >
