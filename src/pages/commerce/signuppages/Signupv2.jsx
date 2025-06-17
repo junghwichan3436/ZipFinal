@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const Container = styled.div`
   /* width: 600px; */
@@ -80,7 +84,7 @@ const Overlay = styled.div`
   left: 0;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
   transition: opacity 0.3s;
   pointer-events: none;
 `;
@@ -93,7 +97,8 @@ const StyledIcon = styled(FontAwesomeIcon)`
   z-index: 3;
   color: var(--light-color);
   font-size: 2.6rem;
-  opacity: 0;
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+  transition: opacity 0.3s;
 `;
 
 const Skip = styled.p`
@@ -130,6 +135,11 @@ const Btn = styled(Button)`
 const Signupv2 = () => {
   const [starData, setStarData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedArtist, setSelectedArtist] = useState(null);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userData = location.state;
 
   useEffect(() => {
     fetch("/API/index.json")
@@ -144,7 +154,41 @@ const Signupv2 = () => {
       });
   }, []);
 
-  const onClick = () => {};
+  const handleonClick = (id) => {
+    setSelectedArtist(id === selectedArtist ? null : id);
+  };
+
+  const handleSignup = async () => {
+    const artist = starData.find((item) => item.id === selectedArtist);
+    const artistName = artist?.artistName || "";
+
+    const { email, password, username, name } = userData;
+
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = credential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email,
+        username,
+        name,
+        address: userData.address,
+        createdAt: new Date(),
+        favoriteArtist: artistName,
+      });
+
+      console.log("회원가입 성공:", credential.user);
+      alert("회원가입이 완료되었습니다!");
+      navigate("/");
+    } catch (error) {
+      console.error("회원가입 에러:", error.message);
+      alert(error.message);
+    }
+  };
 
   return (
     <Container>
@@ -160,10 +204,18 @@ const Signupv2 = () => {
         <Contents>
           {starData.map((artist) => (
             <Star key={artist.id}>
-              <ImgWrap onClick={onClick}>
+              <ImgWrap onClick={() => handleonClick(artist.id)}>
                 <Img src={artist.artistImg} alt={artist.artistName} />
-                <Overlay className="overlay" />
-                <StyledIcon icon={faCheck} />
+                <Overlay
+                  className="overlay"
+                  $isVisible={selectedArtist === artist.id}
+                />
+                {selectedArtist === artist.id && (
+                  <StyledIcon
+                    icon={faCheck}
+                    $isVisible={selectedArtist === artist.id}
+                  />
+                )}
               </ImgWrap>
               <p>{artist.artistName}</p>
             </Star>
@@ -173,8 +225,8 @@ const Signupv2 = () => {
       <div>
         <Skip>건너뛰기</Skip>
         <ButtonWrap>
-          <Button>이전</Button>
-          <Btn>회원가입 하기</Btn>
+          <Button onClick={() => navigate(-1)}>이전</Button>
+          <Btn onClick={handleSignup}>회원가입 하기</Btn>
         </ButtonWrap>
       </div>
     </Container>

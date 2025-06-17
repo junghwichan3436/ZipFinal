@@ -84,7 +84,7 @@ const BeautyPick = () => {
       .then((response) => response.json())
       .then((data) => setProductData(data.productData));
   }, []);
-
+  console.log(productData);
   return (
     <Container>
       <MainTitle>

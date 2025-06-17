@@ -2,381 +2,346 @@
   "originalData": [
     {
       "id": 1,
-      "characterName": "강새벽",
-      "starName": "정호연",
-      "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "오징어게임 강새벽",
-      "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "characterName": "APT 로제",
+      "starName": "로제",
+      "jobCategory": "musician",
+      "thumbnail": "https://64.media.tumblr.com/27d3f315997fcc04df3309307d1c9901/0dda17077632b77d-03/s540x810/9db198e10ad5b0c458b92a8162c90fd32f97f517.gif",
+      "staticThumbnail": "/public/img/로제.jpg",
+      "detailImg": "https://64.media.tumblr.com/3c8942ebb3c2b4c2ba2a7f6309c7c4a2/0dda17077632b77d-4f/s540x810/595fd00358c8f7bcbd6a1acb34e91553337b84c5.gifv",
+      "episode": "APT MV 로제",
+      "mainTitle": "그녀의 APT에는 어떤 리얼템이?",
+      "subTitle": "그녀가 살아가는 곳, 그리고 들고 다니는 것들",
+      "keyword": ["APT", "블랙핑크", "로제"],
+      "characterKeyword": ["레트로", "편안함", "따뜻한 조명"],
+      "description": "로제는 이 도시 속 수많은 감정들 위에서 살아간다. 감정의 소용돌이 안에서 흘러가는 듯 보이지만, 실은 그 어느 때보다 단단하고 명확하다. APT 속의 그녀는 ‘지금 여기’에 존재하며, 누군가에게 보여지기 위한 사람이 아닌, 그저 ‘로제’로 살아가는 법을 배운다. 그녀는 감정을 말로 설명하기보단 공간에 스며들게 만든다. 조명이 따뜻한 이유, 브라운 톤의 옷을 고른 이유, 그 모든 선택은 그녀를 표현하는 방식이다. APT는 단순한 장소가 아니다. 이건 그녀가 가장 자신다운 순간을 마주하는 내밀한 공간이며, 그 안에서 우린 그녀의 진짜 모습을 엿볼 수 있다.",
+      "bagThumbnail": "https://i.ytimg.com/vi/Fd_En3y2amo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAuTCV-ZIaxOKdn6mklucG01V15VQ",
+      "videoUrl": "Fd_En3y2amo",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "peaceminusone",
+          "title": "귀여운 아이템과 함께\n편안한 일상",
+          "img": "https://i.ibb.co/Pzcv4Qdn/44.png",
+          "detailURL": "모남희 x 피스마이너스원 데희 플러시 키링"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "SAINTLAURENT",
+          "title": "혼자 있는 감정의 무게\n 그녀의 가방 속",
+          "img": "https://i.ibb.co/rf3KygzQ/11.png",
+          "detailURL": "그레이 램스킨 CALYPSO 라지백"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "GLOWNY",
+          "title": "집에서는\n옷차림도 가볍게",
+          "img": "https://i.ibb.co/1Jnk1qR8/4.png",
+          "detailURL": "TANKINI SWIM TOP(BLACK)"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "wildMoor",
+          "title": "\n위스키",
+          "img": "https://i.ibb.co/ycMp7184/10.png",
+          "detailURL": "와일드 무어 30년산 위스키"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "jenny house",
+          "title": "제니하우스\n",
+          "img": "https://i.ibb.co/DP7xqk5Y/9.png",
+          "detailURL": "제니하우스 스타일 컬링에센스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "GLOWNY",
+          "title": "집에서는\n옷차림도 가볍게",
+          "img": "https://i.ibb.co/1Jnk1qR8/4.png",
+          "detailURL": "TANKINI SWIM TOP(BLACK)"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
+          "shortVideo": "QXKlTPkU2t4",
+          "shortTitle": "촉감 궁금한 로제의 스트레스 볼🟡",
           "viewRated": 4000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "4TUqMij0b8M",
+          "shortTitle": "로제의 베스트 소비템은?",
+          "viewRated": 380000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "12wAQTdQp98",
+          "shortTitle": "로제가 최근 꽂힌 핫소스",
+          "viewRated": 560400
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "IOszmbvNnE8",
+          "shortTitle": "로제와 행크의 첫 만남🐶🐾",
+          "viewRated": 12570000
         }
       ]
     },
     {
       "id": 2,
-      "characterName": "강새벽",
-      "starName": "로제",
-      "jobCategory": "musician",
-      "thumbnail": "https://64.media.tumblr.com/27d3f315997fcc04df3309307d1c9901/0dda17077632b77d-03/s540x810/9db198e10ad5b0c458b92a8162c90fd32f97f517.gif",
-      "staticThumbnail": "/public/img/로제.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "APT Rosé",
-      "mainTitle": "ROSÉ의 APT 속 리얼템",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "characterName": "김봉석",
+      "starName": "이정하",
+      "jobCategory": "actor",
+      "thumbnail": "https://64.media.tumblr.com/1d599190e72bf652b45b250ff89797a0/33e24cc57554d4ab-76/s540x810/00ead1878907b91d4cca0fb4ee884b790f000773.gif",
+      "staticThumbnail": "/public/img/김봉석.jpg",
+      "detailImg": "https://file3.instiz.net/data/cached_img/upload/2023/09/03/23/26d986f93d73db17b1993a0b00419485.gif",
+      "episode": "무빙 김봉석",
+      "mainTitle": "늘 무거운 봉석이의 비밀 가방",
+      "subTitle": "비행 금지, 무거운 가방 경고 발령",
+      "keyword": ["무빙", "김봉석", "이정하"],
+      "characterKeyword": ["초능력", "귀여움", "노랑색"],
+      "description": "김봉석은 알고 있었다. 자신이 다른 아이들과 다르다는 것을. 그러나 그 ‘다름’이 드러나는 순간, 평온한 일상은 깨질 수 있다는 것도. 그래서 그는 달렸다. 무대가 아닌 운동장에서. 선풍기가 돌아가는 교실에서 친구들과 어울리고, 도시락을 먹고, 숙제를 했다. 그리고 그 모든 평범한 일상이 얼마나 소중한지 그 누구보다 잘 알고 있었다. 그는 초능력을 숨기기 위해 더 인간적으로 살았다. 어쩌면 그건 ‘강함’이 아닌 ‘약함’에서 온 선택일지도 모른다. 그의 가방 속에는 슈퍼히어로의 흔적 대신, 아버지의 시계, 친구들과 나눈 문구, 낡은 운동화가 있다.",
+      "videoUrl": "6Ma0pvLZbhI",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "ADIDAS",
+          "title": "뛰고, 날고, 숨기 위한\n최적의 보호색",
+          "img": "https://i.ibb.co/jvpcsc31/12.png",
+          "detailURL": "아디다스 x 아이언스테인 D4T HOODIE"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "HOOD HOOD",
+          "title": "귀여운 걸 좋아하는\n평범한 고등학생",
+          "img": "https://i.ibb.co/ycG1Mb6c/8.png",
+          "detailURL": "에일리언 키링"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "adidas",
+          "title": "아무 흔적도 없는\n가벼운 움직임",
+          "img": "https://i.ibb.co/N20RqZvh/7.png",
+          "detailURL": "게임코트 2.0 올코트 테니스화 인도어화"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "ADIDAS",
+          "title": "뛰고, 날고, 숨기 위한\n최적의 보호색",
+          "img": "https://i.ibb.co/jvpcsc31/12.png",
+          "detailURL": "아디다스 x 아이언스테인 D4T HOODIE"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "HOOD HOOD",
+          "title": "귀여운 걸 좋아하는\n평범한 고등학생",
+          "img": "https://i.ibb.co/ycG1Mb6c/8.png",
+          "detailURL": "에일리언 키링"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "adidas",
+          "title": "아무 흔적도 없는\n가벼운 움직임",
+          "img": "https://i.ibb.co/N20RqZvh/7.png",
+          "detailURL": "게임코트 2.0 올코트 테니스화 인도어화"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "tle_edPKfXI",
+          "shortTitle": "누가 봉석이고 누가 정하야?👀",
+          "viewRated": 432000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "2uvwPons2us",
+          "shortTitle": "가방은 뺏겨도 이건 절대 안 돼💥",
+          "viewRated": 27000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "94Yo7_kdVs0",
+          "shortTitle": "정하는 순간 #무빙",
+          "viewRated": 400
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "5O01PG0Pl-A",
+          "shortTitle": "빈폴X이정하, 익숙하게 다시 새롭게",
+          "viewRated": 1570000
         }
       ]
     },
     {
       "id": 3,
-      "characterName": "강새벽",
-      "starName": "정호연",
+      "characterName": "윤세리",
+      "starName": "손예진",
       "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "오징어게임 강새벽",
-      "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "thumbnail": "/public/img/윤세리.gif",
+      "staticThumbnail": "/public/img/손예진.jpg",
+      "detailImg": "https://blog.kakaocdn.net/dn/cpROOa/btrTigbOxLg/Hn9g4BTjHXYxHuPYYpAkSk/img.gif",
+      "episode": "사랑의 불시착 윤세리",
+      "mainTitle": "국경도 막지 못한 윤세리의 뷰티템",
+      "subTitle": "북한에 불시착은 했지만, 립밤은 디올",
+      "keyword": ["사랑의불시착", "윤세리", "손예진"],
+      "characterKeyword": ["불시착", "러블리", "낯선 곳에서의 적응"],
+      "description": "윤세리는 세상의 모든 것을 가진 사람이었다. 성공한 재벌 2세, 럭셔리한 패션 브랜드의 CEO, 자기 힘으로 무엇이든 이룰 수 있는 능력과 자존감. 그녀는 냉철했고, 계산적이었으며, 외로움쯤은 감추는 데 익숙한 여자였다. 그러나 한 순간, 뜻하지 않게 다른 세계로 떨어진다. 군사분계선을 넘어, 규칙도 시스템도 낯선 북한이라는 세상으로.",
+      "videoUrl": "U81bfvtPGvY",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "dior",
+          "title": "불시착했지만\n림밤은 디올",
+          "img": "https://i.ibb.co/nswjdZt0/2.png",
+          "detailURL": "루즈 디올 밤"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "santamarianovella",
+          "title": "낯선 땅에서\n그녀가 선택한 위로",
+          "img": "https://i.ibb.co/hR7Ph6qH/3.png",
+          "detailURL": "로사 노벨라 오드코롱"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "LAURA MERCIER",
+          "title": "북에서도\n피부는 포기 못해",
+          "img": "https://i.ibb.co/d4YRfFXK/4.png",
+          "detailURL": "Ambre Vanille Serum Body Cream"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "dior",
+          "title": "불시착했지만\n림밤은 디올",
+          "img": "https://i.ibb.co/hFT43Bwh/3.png",
+          "detailURL": "루즈 디올 밤"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "santamarianovella",
+          "title": "낯선 땅에서\n그녀가 선택한 위로",
+          "img": "https://i.ibb.co/gMH5Y7pR/4.png",
+          "detailURL": "로사 노벨라 오드코롱"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "LAURA MERCIER",
+          "title": "북에서도\n피부는 포기 못해",
+          "img": "https://i.ibb.co/CZk33FT/5.png",
+          "detailURL": "Ambre Vanille Serum Body Cream"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "78DpMSi6o44",
+          "shortTitle": "손예진이 매일 먹는 것",
+          "viewRated": 24000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "rmrbtiryayM",
+          "shortTitle": "손예진이 먹는 레몬수🍋",
+          "viewRated": 1200000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "vbN0GV8_-hY",
+          "shortTitle": "손예진이 10년 쓴 향수🍊",
+          "viewRated": 32000
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "UTevWOUQCZI",
+          "shortTitle": "마이보그 인생 향수 정보",
+          "viewRated": 78000
         }
       ]
     },
     {
       "id": 4,
-      "characterName": "강새벽",
-      "starName": "정호연",
-      "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "오징어게임 강새벽",
-      "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "characterName": "비비",
+      "starName": "비비",
+      "jobCategory": "musician",
+      "thumbnail": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTAxMjZfMTAw%2FMDAxNzM3ODc2MDQ0NTA4._70cwUEzC-GeYJ4Tt-UbhYgeV3RAgEey6dlEmeorUGUg.f_ZMHj1aFPjMLiHKgJ9_Y9JVgnmIGMjA6pf5HR3Uc3gg.GIF%2FIMG_3533.GIF&type=sc960_832_gif",
+      "staticThumbnail": "/public/img/비비.jpg",
+      "detailImg": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDExMThfNjUg%2FMDAxNzMxODYyNjM4MDU0.0fjJZRgxTAypGax5HqSyrhNiH-0_mMx72xFNrRbsr7Ig.rfDC28EonoJPDKfqMS173r5qka8h7Q_F3q5d6ObSluUg.GIF%2FIMG_3106.GIF&type=sc960_832_gif",
+      "episode": "데레 MV 비비",
+      "mainTitle": "당하지 않는 여자의 책가방",
+      "subTitle": "무너진 세상 위에 복수를 꿰맨, 그녀가 들었을 법한 가방",
+      "keyword": ["데레", "BIBI", "비비"],
+      "characterKeyword": ["복수", "독립성", "짝사랑"],
+      "description": "세상은 그녀를 무시했고, 사랑은 그녀를 찢었다. 처음엔 당했다. 하지만 끝에는 웃었다. 빨간 립스틱처럼 선명하게, 핏빛 복수처럼 강렬하게. 비비가 뮤직비디오 '데레'에서 보여준 인물은 단순한 희생자가 아니다. 사랑을 복수로 승화시키며 스스로 주체가 된 여자. 미쳐버릴 듯한 감정도, 휘청이는 정체성도 모두 껴안고 자기만의 방식으로 끝장을 낸 여자. 그녀의 가방 속엔, 상처를 무기로 바꾼 사람만이 가질 수 있는 것들이 있다.",
+      "videoUrl": "EArJq8X70rs",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "GUCCI",
+          "title": "복수는 말보다\n강렬한 색으로 입는 것",
+          "img": "https://i.ibb.co/qYhmTCnD/5.png",
+          "detailURL": "208 데이 멧 인 아르헨티나, 루즈 아 레브르 브왈 립스틱"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "Gentle Monster",
+          "title": "감정을 숨기고\n타인을 지우는 방패",
+          "img": "https://i.ibb.co/qYDBfxvh/12.png",
+          "detailURL": "메종 마르지엘라 x 젠틀 몬스터 선글라스"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "tamburins",
+          "title": "사랑을 기억나게 하는\n달콤한 향",
+          "img": "https://i.ibb.co/kgphzMFK/6.png",
+          "detailURL": "에그 립밤 로즈우디"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "GUCCI",
+          "title": "복수는 말보다\n강렬한 색으로 입는 것",
+          "img": "https://i.ibb.co/Z1TJPc3y/6.png",
+          "detailURL": "208 데이 멧 인 아르헨티나, 루즈 아 레브르 브왈 립스틱"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Gentle Monster",
+          "title": "감정을 숨기고\n타인을 지우는 방패",
+          "img": "https://i.ibb.co/DPy7Q5ph/7.png",
+          "detailURL": "메종 마르지엘라 x 젠틀 몬스터 선글라스"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "tamburins",
+          "title": "사랑을 기억나게 하는\n달콤한 향",
+          "img": "https://i.ibb.co/wh0PqF1P/8.png",
+          "detailURL": "에그 립밤 로즈우디"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "CVe69NMy8pc",
+          "shortTitle": "비비가 N번째 재구매한 가방 속 아이템",
+          "viewRated": 98000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "6Yal0VSI_mM",
+          "shortTitle": "비비의 최애 아이템을 소개합니다🧸",
+          "viewRated": 9000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "xJeGDDFhUpA",
+          "shortTitle": "빠져든다... 빠져든다... 빠져든다",
+          "viewRated": 30000
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "VMS5F0xkmqU",
+          "shortTitle": "달디달고 달디단 비비 밤양갱🌰",
+          "viewRated": 478000
         }
       ]
     },
@@ -385,188 +350,170 @@
       "characterName": "강새벽",
       "starName": "정호연",
       "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
+      "thumbnail": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fdata.whicdn.com%2Fimages%2F358742201%2Foriginal.gif&type=sc960_832_gif",
       "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
+      "detailImg": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjNfMjMz%2FMDAxNjMyMzQ0OTc0MTIx.AmmfxGsvAZQLz_ZOhblxpX0RQ3uCHkX61XvwbqDKVDUg.clga4AiuOdtTTQwISavQtcduyrKCfp1knmz4nQEQ5DYg.GIF.hinokenz%2F%25BB%25F5%25BA%25AE%25C1%25F6%25BF%25B5_4.gif&type=sc960_832_gif",
       "episode": "오징어게임 강새벽",
       "mainTitle": "강새벽의 생존 가방",
       "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
       "keyword": ["오징어게임", "강새벽", "정호연"],
       "characterKeyword": ["무채색", "실용성", "생존본능"],
       "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "videoUrl": "JbfUqhBO77I",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "AcneStudios",
+          "title": "어디든 떠날 수 있는\n단 하나의 짐",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "마이크로 멀티 포켓 미니 백"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "Converse",
+          "title": "언제든 뛰어야 했고\n어디든 숨어야 해",
+          "img": "https://i.ibb.co/cKcDSHgs/11.png",
+          "detailURL": "컨버스 척70 클래식 블랙"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "case a lot",
+          "title": "이 세상에서\n눈에 띄지 않는 법",
+          "img": "https://i.ibb.co/zHhWK8wT/2.png",
+          "detailURL": "슬로건 로고 볼 캡 블루"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "AcneStudios",
+          "title": "어디든 떠날 수 있는\n단 하나의 짐",
+          "img": "https://i.ibb.co/YTqWGzHq/4.png",
+          "detailURL": "마이크로 멀티 포켓 미니 백"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "Converse",
+          "title": "언제든 뛰어야 했고\n어디든 숨어야 해",
+          "img": "https://i.ibb.co/cKcDSHgs/11.png",
+          "detailURL": "컨버스 척70 클래식 블랙"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "case a lot",
+          "title": "이 세상에서\n눈에 띄지 않는 법",
+          "img": "https://i.ibb.co/zHhWK8wT/2.png",
+          "detailURL": "슬로건 로고 볼 캡 블루"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
+          "shortVideo": "9Mvt9lk1agk",
+          "shortTitle": "정호연이 강추하는 국내 여행지",
           "viewRated": 4000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "q12o6lLGnxY",
+          "shortTitle": "없는 게 없는 정호연의 파우치",
+          "viewRated": 90000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "81aq-y06RrY",
+          "shortTitle": "정호연 추천 해외 여행지! 메모메모...📝",
+          "viewRated": 28000
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "LK9m1MeSJ6Y",
+          "shortTitle": "정호연의 READ MY LIPS",
+          "viewRated": 120000
         }
       ]
     },
     {
       "id": 6,
-      "characterName": "강새벽",
-      "starName": "정호연",
-      "jobCategory": "actor",
-      "thumbnail": "https://blog.kakaocdn.net/dn/bNJWv9/btrfqDKbKNY/1YgBIWy4Mmwc7RAsBYQ2h1/img.gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
-      "detailImg": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjUBuo%2FbtrfuOdDpa0%2FbkM2D1ShIDtzSwvpfRR3K1%2Fimg.gif",
-      "episode": "오징어게임 강새벽",
-      "mainTitle": "강새벽의 생존 가방",
-      "subTitle": "말은 없어도, 필요한 건 다 챙기는 사람",
-      "keyword": ["오징어게임", "강새벽", "정호연"],
-      "characterKeyword": ["무채색", "실용성", "생존본능"],
-      "description": "그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람.우리는 그를 강새벽이라 불렀다. 그녀는 말이 없었다. 대신 눈빛이 말을 했다. 세상에 상처받고도, 누군가를 지켜내기 위해 다시 나아간 사람. 우리는 그를 강새벽이라 불렀다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/JbfUqhBO77I/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCLR0peOkA0syfRK_o_NBUVXY_tnw",
-      "videoUrl": "dALf-Yt4lSU",
-      "item": [
+      "characterName": "피겨 왕자 차준환",
+      "starName": "차준환",
+      "jobCategory": "sports",
+      "thumbnail": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWZHxt%2FbtrsVJq91UR%2Feuk4T5EQAolTzfMa7d8Tx0%2Fimg.gif&type=sc960_832_gif",
+      "staticThumbnail": "/public/img/차준환.jpg",
+      "detailImg": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQ9kb%2Fbtrs7lQiCa1%2Fm2Dv0hpMWQpUqi2daYCYlK%2Fimg.gif&type=sc960_832_gif",
+      "episode": "무대 위의 고독, 얼음 위의 시인",
+      "mainTitle": "얼음왕자의 아이템",
+      "subTitle": "무대 위의 고독, 얼음 위의 시인",
+      "keyword": ["얼음 왕자", "차준환", "피겨"],
+      "characterKeyword": ["시원함", "날카로움", "푸른색"],
+      "description": "이름을 부르기 전, 우리는 그를 봤다. 빙판 위를 가르며, 음악을 입고, 감정을 돌려냈던 사람. 무대 위의 시인, 그는 매번 다른 캐릭터가 되어 돌아왔다. 우리는 그를 차준환이라 부른다. 그는 하나의 캐릭터였다가, 다시 본연의 자신으로 돌아온다. 우리는 매 무대에서, 매 계절에서 또 다른 그를 사랑하게 된다. 당신이 사랑한 캐릭터, 그가 고를 법한 아이템.",
+      "videoUrl": "uZKcvsHGcXc",
+      "items": [
         {
           "itemId": 1,
-          "itemBrand": "AcneStudios",
-          "itemName": "멀티 포켓 마이크로 백 다크브라운",
-          "itemImg": "https://i.ibb.co/YTqWGzHq/4.png",
-          "itemUrl": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "TAMBURINS",
+          "title": "얼음 왕자가 선택한\n시원한 향",
+          "img": "https://i.ibb.co/QvL4cfSy/21.png",
+          "detailURL": "퍼퓸 카모"
         },
         {
           "itemId": 2,
-          "itemBrand": "case A lot",
-          "itemName": "오래 함께 할,\n슬로건 로고 볼 캡",
-          "itemImg": "https://i.ibb.co/zHhWK8wT/2.png",
-          "itemUrl": "슬로건 로고 볼 캡 블루"
+          "subtitle": "bottega veneta",
+          "title": "깔끔한 그와 어울리는\n심플 지갑",
+          "img": "https://i.ibb.co/LDXv1Xxx/1.png",
+          "detailURL": "23FW 여성 카드지갑 인트레치아토 블랙"
         },
         {
           "itemId": 3,
-          "itemBrand": "Converse",
-          "itemName": "영원한 클래식,\n컨버스 척70 클래식",
-          "itemImg": "https://i.ibb.co/cKcDSHgs/11.png",
-          "itemUrl": "컨버스 척70 클래식 블랙"
+          "subtitle": "bvlgari",
+          "title": "바쁜 훈련 속\n시계는 필수탬",
+          "img": "https://media.bulgari.com/image/upload/c_pad,h_1874,w_2400/q_auto/f_auto/1488363.png",
+          "detailURL": "불가리 알루미늄 워치"
         },
         {
           "itemId": 4,
-          "itemBrand": "bottega veneta",
-          "itemName": "23FW 카드지갑\n인트레치아토 블랙",
-          "itemImg": "https://i.ibb.co/mVP0tJHn/3.png",
-          "itemUrl": "23FW 여성 카드지갑 인트레치아토 블랙"
+          "subtitle": "TAMBURINS",
+          "title": "얼음 왕자가 선택한\n시원한 향",
+          "img": "https://i.ibb.co/QvL4cfSy/21.png",
+          "detailURL": "퍼퓸 카모"
         },
         {
           "itemId": 5,
-          "itemBrand": "ADIDAS",
-          "itemName": "아이언스테인\nD4T HOODIE",
-          "itemImg": "https://i.ibb.co/jvpcsc31/12.png",
-          "itemUrl": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "bottega veneta",
+          "title": "깔끔한 그와 어울리는\n심플 지갑",
+          "img": "https://i.ibb.co/mVP0tJHn/3.png",
+          "detailURL": "23FW 여성 카드지갑 인트레치아토 블랙"
         },
         {
           "itemId": 6,
-          "itemBrand": "burberry",
-          "itemName": "올림피아 캔버스\n레더 크로스 바디백",
-          "itemImg": "https://i.ibb.co/j9G74pQJ/1.png",
-          "itemUrl": "올림피아 캔버스 레더 크로스 바디백"
+          "subtitle": "bvlgari",
+          "title": "바쁜 훈련 속\n시계는 필수탬",
+          "img": "https://media.bulgari.com/image/upload/c_pad,h_1874,w_2400/q_auto/f_auto/1488363.png",
+          "detailURL": "불가리 알루미늄 워치"
         }
       ],
       "shorts": [
         {
           "shortId": 1,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
+          "shortVideo": "oC_LaJbEk6M",
+          "shortTitle": "준환이는 파우치까지 잘생기면 어떡하냐",
           "viewRated": 4000
         },
         {
           "shortId": 2,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "UCyaPeb3Pco",
+          "shortTitle": "차준환의 스케이트 여정은 자유롭다",
+          "viewRated": 290000
         },
         {
           "shortId": 3,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "dn1hlL39v5w",
+          "shortTitle": "전설의 핫도그 짤 재현하는 차준환",
+          "viewRated": 80000
         },
         {
           "shortId": 4,
-          "shortThumbnail": "https://i.ytimg.com/vi/81aq-y06RrY/oardefault.jpg?sqp=-oaymwEoCJUDENAFSFqQAgHyq4qpAxcIARUAAIhC2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLDuuMnsP3nzJoj7HiOkbhD6nyYKoA",
-          "shortVideo": "",
-          "bagVideo": "JbfUqhBO77I",
-          "shortTitle": "없는게 없는 정호연의 파우치",
-          "viewRated": 4000
+          "shortVideo": "_KXR1i3HCKg",
+          "shortTitle": "차준환 지큐랑 화보 한 번만 더 찍자",
+          "viewRated": 34000
         }
       ]
     }

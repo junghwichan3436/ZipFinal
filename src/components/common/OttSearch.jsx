@@ -1,15 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-  width: 100%;
-`;
-const Form = styled.form`
-  width: 100%;
+const Container = styled.form`
+  min-width: 20%;
   height: 100vh;
-  padding: 100px 20px 0 20px;
+  padding: 3% 20px 0 20px;
+  position: sticky;
+  top: 0;
+  align-content: flex-start;
+  @media screen and (max-width: 1400px) {
+    min-width: 25%;
+  }
+  @media screen and (max-width: 1024px) {
+    position: relative;
+    height: auto;
+  }
 `;
+
 const Search = styled.div`
   position: relative;
   input {
@@ -18,6 +25,7 @@ const Search = styled.div`
     border: none;
     border-bottom: 1px solid var(--light-color);
     padding-bottom: 16px;
+    color: var(--light-color);
     &::placeholder {
       opacity: 1;
       transition: all 0.3s;
@@ -30,20 +38,22 @@ const Search = styled.div`
       }
     }
   }
-  button {
-    background: none;
-    border: none;
+
+  img {
     position: absolute;
-    cursor: pointer;
     right: 0px;
-    font-size: 1.6rem;
-    img {
-      filter: invert(1);
-    }
+    cursor: pointer;
+    filter: invert(1);
   }
 `;
 
 const Keyword = styled.div`
+  padding-top: 20px;
+  p {
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--light-color);
+  }
   ul {
     margin-top: 20px;
     display: flex;
@@ -51,82 +61,42 @@ const Keyword = styled.div`
     flex-direction: column;
     li {
       color: var(--light-color);
-      &:first-child {
-        font-weight: bold;
-        font-size: 2rem;
-      }
+      cursor: pointer;
     }
+  }
+  @media screen and (max-width: 1024px) {
+    display: none;
+    position: absolute;
   }
 `;
 
-const OttSearch = ({ ottSearchClick, setOttSearchClick }) => {
-  console.log(ottSearchClick, setOttSearchClick);
-
-  const navigate = useNavigate();
-  const inputRef = useRef();
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (inputRef.current.value !== "") {
-      navigate(`/search/${inputRef.current.value}`);
-      setOttSearchClick(false);
-      inputRef.current.value = "";
-    }
-  };
+const OttSearch = ({ setInputValue, value, onChange }) => {
   return (
     <Container>
-      <Form
-        name="shopping-form"
-        action="./search.html"
-        method="get"
-        onSubmit={onSubmit}
-      >
-        <Search>
-          <input
-            className="searchBar"
-            type="text"
-            name="search"
-            placeholder="검색"
-            ref={inputRef}
-          />
-          <button type="submit">
-            <img
-              src="https://ecimg.cafe24img.com/pg326b45779995089/oiad/web/oiad_renewal/img/oiad-icon-search-mo.svg"
-              alt="search"
-            />
-          </button>
-        </Search>
-        <Keyword>
-          <ul>
-            <li>POPULAR KEYWORDS</li>
-            <li>
-              <Link to="/search/하니" onClick={() => setSearchClick(false)}>
-                하니
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/신시아" onClick={() => setSearchClick(false)}>
-                신시아
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/선미" onClick={() => setSearchClick(false)}>
-                선미
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/고준희" onClick={() => setSearchClick(false)}>
-                고준희
-              </Link>
-            </li>
-            <li>
-              <Link to="/search/슈화" onClick={() => setSearchClick(false)}>
-                슈화
-              </Link>
-            </li>
-          </ul>
-        </Keyword>
-      </Form>
+      <Search>
+        <input
+          className="searchBar"
+          type="text"
+          name="search"
+          placeholder="검색"
+          value={value}
+          onChange={onChange}
+        />
+        <img
+          src="https://ecimg.cafe24img.com/pg326b45779995089/oiad/web/oiad_renewal/img/oiad-icon-search-mo.svg"
+          alt="search"
+        />
+      </Search>
+      <Keyword>
+        <p>POPULAR KEYWORDS</p>
+        <ul>
+          <li onClick={() => setInputValue("하니")}>하니</li>
+          <li onClick={() => setInputValue("신시아")}>신시아</li>
+          <li onClick={() => setInputValue("선미")}>선미</li>
+          <li onClick={() => setInputValue("고준희")}>고준희</li>
+          <li onClick={() => setInputValue("슈화")}>슈화</li>
+        </ul>
+      </Keyword>
     </Container>
   );
 };

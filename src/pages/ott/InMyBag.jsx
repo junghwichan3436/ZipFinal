@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import YouTube from "react-youtube";
+import { bagData, StarData, bagDataWithViews } from "../../StarData";
+import { useNavigate } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +27,6 @@ const Title = styled.div`
   h4 {
     font-size: 7rem;
     font-family: "EHNormalTrial";
-    font-weight: bold;
   }
   p {
     line-height: 1.2;
@@ -42,10 +43,16 @@ const Title = styled.div`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: start;
     gap: 20px;
-    h4 {
+    /* h4 {
       font-size: 3rem;
+    } */
+    p {
+      display: flex;
+      /* letter-spacing: 0.1rem; */
     }
   }
 `;
@@ -62,9 +69,9 @@ const FilterGroup = styled.div`
     outline: none;
     cursor: pointer;
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     select {
-      padding: 0 16px 0 8px;
+      padding: 0 14px 0 8px;
     }
   }
 `;
@@ -92,9 +99,9 @@ const Category = styled.ul`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     li {
-      padding: 10px 16px;
+      padding: 10px 14px;
       font-size: 1.4rem;
     }
   }
@@ -144,33 +151,82 @@ const VideoText = styled.div`
   }
   p {
     &:nth-child(1) {
-      font-weight: bold;
+      /* font-weight: bold; */
       margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &:nth-child(2) {
       font-size: 1.4rem;
       color: var(--border-color);
     }
   }
+  @media screen and (max-width: 767px) {
+    p {
+      &:nth-child(1) {
+        font-size: 1.4rem;
+      }
+      &:nth-child(2) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+`;
+
+const PaginationWrap = styled.div`
+  width: 100%;
+  ul {
+    display: flex;
+    justify-content: center;
+    li {
+      width: 30px;
+      height: 30px;
+    }
+  }
 `;
 
 const InMyBag = () => {
-  const [artists, setArtists] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const [sortOrder, setSortOrder] = useState("latest");
+  // const { data, isLoading, error } = bagData();
+  const { data, isLoading, error } = bagDataWithViews();
+  const {
+    data: starData,
+    isLoading: starLoading,
+    error: starError,
+  } = StarData();
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1); //현재 페이지
+  const itemsPerPage = 12;
+  const changePageHandler = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
-  useEffect(() => {
-    fetch("/API/index.json")
-      .then((res) => res.json())
-      .then((data) => setArtists(data.artists))
-      .catch((err) => console.error("데이터 에러", err));
+  const categoryFiltered =
+    selectedCategory === "ALL"
+      ? data
+      : data?.filter((item) =>
+          item.videoOwnerChannelTitle
+            ?.toUpperCase()
+            .includes(selectedCategory.toUpperCase())
+        );
+
+  const filteredItems = categoryFiltered?.slice().sort((a, b) => {
+    if (sortOrder === "latest") {
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    } else if (sortOrder === "popular") {
+      return (b.viewCount || 0) - (a.viewCount || 0);
+    }
+    return 0;
   });
 
-  const filteredArtists =
-    selectedCategory === "ALL"
-      ? artists
-      : artists.filter(
-          (artist) => artist.jobCategory.toUpperCase() === selectedCategory
-        );
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = filteredItems?.slice(startIndex, endIndex);
+
   // const opts = {
   //   width: "100%",
   //   height: "100%",
@@ -195,7 +251,7 @@ const InMyBag = () => {
       </Title>
       <FilterGroup>
         <Category>
-          {["ALL", "ACTOR", "MUSICIAN", "SPORTS"].map((data) => (
+          {["ALL", "ALLURE", "ELLE", "GQ", "VOGUE", "W"].map((data) => (
             <li
               className={selectedCategory === data ? "active" : ""}
               key={data}
@@ -205,32 +261,75 @@ const InMyBag = () => {
             </li>
           ))}
         </Category>
-        <select name="filter" id="">
-          <option value="">최신순</option>
-          <option value="">인기순</option>
-          <option value="">조회순</option>
+        <select
+          name="filter"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="latest">최신순</option>
+          <option value="popular">인기순</option>
+          {/* <option value="">조회순</option> */}
         </select>
       </FilterGroup>
+
       <Contents>
-        {filteredArtists.map((artist) => (
-          <Video>
-            {/* <YouTube videoId="5BRaRTjCPT0" opts={opts} /> */}
-            <img
-              src={`https://img.youtube.com/vi/${artist.videoURL}/maxresdefault.jpg`}
-              alt=""
-            />
-            <VideoText>
-              <div>
-                <img src={artist.artistImg} alt="" />
-              </div>
-              <div>
-                <p>{artist.artistName}의 애장템은?</p>
-                <p>W 코리아</p>
-              </div>
-            </VideoText>
-          </Video>
-        ))}
+        {paginatedItems?.map((item) => {
+          // const { snippet } = item;
+          // const videoId = snippet.resourceId?.videoId;
+          // const thumbnail = snippet.thumbnails?.maxres?.url;
+          // const title = snippet.title;
+          // const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
+
+          const title = item.title || item.snippet?.title;
+          const videoId = item.resourceId?.videoId || item.videoId || item.id;
+          const thumbnail =
+            item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
+          const videoOwnerChannelTitle =
+            item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
+
+          console.log(filteredItems);
+
+          const matchedArtist = starData?.artists?.find((artist) =>
+            title.includes(artist.artistName)
+          );
+          // console.log(snippet);
+          return (
+            <Video key={videoId}>
+              <img
+                src={thumbnail}
+                alt={title}
+                onClick={() =>
+                  navigate(`/ott/detail/${encodeURIComponent(title)}`)
+                }
+              />
+              <VideoText>
+                <div>
+                  <img
+                    src={matchedArtist ? matchedArtist.artistImg : ""}
+                    alt={matchedArtist?.artistName || "artist"}
+                  />
+                </div>
+                <div>
+                  <p>{title}</p>
+                  <p>{videoOwnerChannelTitle}</p>
+                </div>
+              </VideoText>
+            </Video>
+          );
+        })}
       </Contents>
+      <PaginationWrap>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={filteredItems?.length}
+          pageRangeDisplayed={5}
+          prevPageText={"‹"}
+          nextPageText={"›"}
+          hideFirstLastPages={true}
+          onChange={changePageHandler}
+        />
+      </PaginationWrap>
     </Container>
   );
 };

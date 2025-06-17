@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import OttSearch from "./OttSearch";
 import OttSearchComp from "./OttSearchComp";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
+  pointer-events: auto !important;
   display: flex;
   opacity: 0;
+  justify-content: space-between;
   transition: all 0.3s ease-in-out;
   position: fixed;
   width: 100%;
   height: 100vh;
-  left: 0;
   top: 0;
+  left: 0;
   z-index: -1;
   background: var(--ott-bg-color);
+  flex: 1;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -webkit-overflow-scrolling: touch;
   &.active {
-    z-index: 3;
+    z-index: 10;
     opacity: 1;
   }
-  div {
-    &:first-child {
-      flex: 2;
-    }
-    &:nth-child(2) {
-      flex: 6;
-    }
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding-top: 60px;
   }
 `;
 const CloseBtn = styled.button`
@@ -36,7 +41,8 @@ const CloseBtn = styled.button`
   border: none;
   cursor: pointer;
   top: 20px;
-  right: 20px;
+  right: 3%;
+  z-index: 2;
   span {
     display: block;
     position: absolute;
@@ -56,21 +62,60 @@ const CloseBtn = styled.button`
     }
   }
 `;
+
 const OttSearchWrap = ({
   ottSearchClick,
   setOttSearchClick,
   setSearchClick,
 }) => {
+  const [inputValue, setInputValue] = useState("");
+  const scrollAreaRef = useRef(null);
+  const params = useParams();
+
   const closeBtnClick = (e) => {
     e.preventDefault();
     setOttSearchClick(false);
     setSearchClick(false);
+    setInputValue("");
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (ottSearchClick) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [ottSearchClick]);
+
+  useEffect(() => {
+    setOttSearchClick(false);
+    setInputValue("");
+  }, [params]);
+  // 억지 휠 이벤트 처리
+  const handleWheel = (e) => {
+    e.preventDefault(); // 기본 스크롤 막기
+    if (scrollAreaRef.current) {
+      // 수직 휠 delta 만큼 스크롤 위치 강제 이동
+      scrollAreaRef.current.scrollTop += e.deltaY;
+    }
   };
 
   return (
-    <Container className={ottSearchClick ? "active" : ""}>
-      <OttSearch />
-      <OttSearchComp />
+    <Container
+      ref={scrollAreaRef}
+      className={ottSearchClick ? "active" : ""}
+      onWheel={handleWheel}
+    >
+      <OttSearch
+        value={inputValue}
+        onChange={handleInputChange}
+        setInputValue={setInputValue}
+      />
+      <OttSearchComp inputValue={inputValue} />
       <CloseBtn onClick={closeBtnClick}>
         <span></span>
         <span></span>
