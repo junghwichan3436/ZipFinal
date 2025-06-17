@@ -45,7 +45,7 @@ const OriginalDetail = () => {
     <Container>
       <section>
         {!selectedItem ? (
-          <div>로딩 중이요</div>
+          <div></div>
         ) : (
           <DetailItem
             id={selectedItem.id}

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import ZipItem from "../../components/original/ZipItem";
-// import { Link } from "react-router-dom";
-// import styled, { keyframes } from "styled-components";
 
 const rec = keyframes`
   0%, 100% {
@@ -33,14 +31,13 @@ const Container = styled.div`
 `;
 const TitleSection = styled.section`
   text-transform: uppercase;
-  padding: 0 3%;
+  padding: 3%;
   .allZips {
     width: 100%;
     display: flex;
     align-items: center;
-
     gap: 10px;
-    margin: 20px 0 20px;
+    margin: 20px 0 0px;
     .redDot {
       width: 10px;
       height: 10px;
@@ -59,10 +56,17 @@ const TitleSection = styled.section`
     }
   }
   @media screen and (max-width: 1024px) {
+    padding: 0 3%;
     .allZips {
-      /* display: block; */
+      .redDot {
+        width: 8px;
+        height: 8px;
+      }
       gap: 10px;
       margin: 12px 0 30px;
+      span {
+        font-size: 1.4rem;
+      }
     }
   }
   @media screen and (max-width: 767px) {
@@ -76,14 +80,14 @@ const MainTitle = styled.div`
   display: flex;
   gap: 30px;
   align-items: end;
-  padding-top: 160px;
-  padding-bottom: 30px;
+  padding-top: 120px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
-    font-size: 7.6rem;
+    font-size: 7rem;
     font-family: "EHNormalTrial";
     font-weight: 500;
-    letter-spacing: -6px;
+    letter-spacing: -3px;
   }
   p {
     font-size: 1.6rem;
@@ -92,21 +96,20 @@ const MainTitle = styled.div`
     font-weight: 400;
     line-height: 2rem;
     b {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 400;
       font-family: "EHNormalTrial";
     }
   }
 
   @media screen and (max-width: 1024px) {
-    padding-top: 140px;
     padding-bottom: 20px;
     gap: 20px;
     flex-direction: column-reverse;
     flex-direction: column;
     align-items: start;
     h4 {
-      /* font-size: 7rem; */
+      font-size: 6rem;
       letter-spacing: -2px;
     }
     br {
@@ -123,7 +126,7 @@ const MainTitle = styled.div`
   }
   @media screen and (max-width: 767px) {
     gap: 20px;
-    padding-top: 120px;
+    padding-top: 100px;
     padding-bottom: 20px;
     h4 {
       /* font-size: 7rem; */
@@ -169,8 +172,8 @@ const ZipList = styled.ul`
   flex-wrap: wrap;
   padding: 0 3%;
   letter-spacing: -0.2px;
-  padding-bottom: 100px;
-  /* background: #f00; */
+  padding-bottom: 30px;
+
   li {
     width: 49%;
   }
@@ -178,8 +181,10 @@ const ZipList = styled.ul`
   /* gap: 40px; */
   @media screen and (max-width: 767px) {
     flex-direction: column;
+    padding: 0 6%;
     li {
       width: 100%;
+      margin-bottom: 40px;
     }
   }
 `;
@@ -223,6 +228,7 @@ const Original = () => {
               mainTitle={item.mainTitle}
               bagThumbnail={item.bagThumbnail}
               shorts={item.shorts}
+              starName={item.starName}
             />
           ))}
         </ZipList>
