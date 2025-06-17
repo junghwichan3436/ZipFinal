@@ -80,13 +80,9 @@ const Footer = () => {
       commerceMatch ||
       detailMatch ||
       filterCategoryMatch ||
-      loginMatch ||
-      signUpMatch ||
       eventMatch ||
       cartMatch ||
       searchMatch ||
-      mypageMatch ||
-      mypageMatch02 ||
       promotionMatch
     ) {
       setFilterCheck(true);
@@ -100,14 +96,9 @@ const Footer = () => {
     commerceMatch,
     detailMatch,
     filterCategoryMatch,
-    loginMatch,
-    signUpMatch,
     eventMatch,
-    mypageMatch,
-    mypageMatch02,
+    cartMatch,
     searchMatch,
-    starMatch,
-    starDetailMatch,
     promotionMatch,
   ]);
 
@@ -119,7 +110,6 @@ const Footer = () => {
             <FooterFnb>
               <li onClick={() => navigate("/filtercategory/style")}>Style</li>
               <li onClick={() => navigate("/filtercategory/beauty")}>Beauty</li>
-              <li onClick={() => navigate("/filtercategory/artist")}>Artist</li>
               <li onClick={() => navigate("/event")}>Promotion</li>
             </FooterFnb>
           ) : (
