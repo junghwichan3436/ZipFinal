@@ -13,17 +13,42 @@ const Container = styled.div`
   height: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .videoWrapper {
     display: flex;
     width: 100%;
   }
 `;
 
+const Artist = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+`;
+
+const ArtistWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ArtistBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Category = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
   .swiper-slide {
     display: flex;
     flex-direction: column;
@@ -174,14 +199,56 @@ const VideoText = styled.div`
   }
 `;
 
-const Filter = styled.div``;
+const FilterWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const Filter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  gap: 20px;
+  div {
+    position: relative;
+    width: 100%;
+    img {
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
+      position: relative;
+      filter: brightness(70%);
+      transition: all 0.3s;
+    }
+    p {
+      position: absolute;
+      left: 3%;
+      bottom: 3%;
+      text-transform: uppercase;
+      font-family: "EHNormalTrial";
+      transition: all 0.3s;
+    }
+    &:hover {
+      img {
+        filter: brightness(100%);
+      }
+      p {
+        color: var(--dark-color);
+      }
+    }
+  }
+`;
 
 const OttSearchResult = () => {
   const { isLoading, data } = useAllDataViews(playlistIds);
   const { isLoading: loading02, data: data02 } = StarData();
   const VideoRef = useRef(null);
   const navigate = useNavigate();
-  const topRatedData = data?.slice(0, 8);
+  const topRatedData = data?.slice(0, 12);
+  const artist = data02?.artists?.filter((artist) =>
+    topRatedData?.find((item) => item.title.includes(artist.artistName))
+  );
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;
@@ -218,8 +285,21 @@ const OttSearchResult = () => {
   };
   return (
     <Container>
+      <Artist>
+        <SlideTitle>POPULAR STAR</SlideTitle>
+        <ArtistWrap>
+          {artist?.map((artist) => (
+            <ArtistBox>
+              <div>
+                <img src={artist.artistImg} alt={artist.artistName} />
+              </div>
+              <p>{artist.artistName}</p>
+            </ArtistBox>
+          ))}
+        </ArtistWrap>
+      </Artist>
       <Category>
-        <SlideTitle>YOU ALSO LIKE</SlideTitle>
+        <SlideTitle>POPULAR VIDEO</SlideTitle>
         <Swiper
           className="videoWrapper"
           modules={[Navigation]}
@@ -240,7 +320,7 @@ const OttSearchResult = () => {
           }}
         >
           {topRatedData?.map((video) => {
-            const working = data02?.artists.find((artist) =>
+            const working = data02?.artists?.find((artist) =>
               video.title.includes(artist.artistName)
             );
             return working ? (
@@ -272,11 +352,6 @@ const OttSearchResult = () => {
                     </div>
                   </VideoText>
                 </SwiperSlide>
-                <Filter>
-                  <div>
-                    <img src="" alt="" />
-                  </div>
-                </Filter>
               </>
             ) : (
               <div></div>
@@ -284,6 +359,65 @@ const OttSearchResult = () => {
           })}
         </Swiper>
       </Category>
+      <FilterWrap>
+        <SlideTitle>BROWSE ALL</SlideTitle>
+        <Filter>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/cf88bc1e-e18e-436f-06ee-89ba28dabd00/w=1024,h=1024,fit=crop"
+                alt=""
+              />
+              <p>Bag</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                alt=""
+              />
+              <p>Style</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                alt=""
+              />
+              <p>Talk</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                alt=""
+              />
+              <p>Shorts</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                alt=""
+              />
+            </div>
+            <p>Star</p>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                alt=""
+              />
+              <p>Orginal</p>
+            </div>
+          </div>
+        </Filter>
+      </FilterWrap>
     </Container>
   );
 };
