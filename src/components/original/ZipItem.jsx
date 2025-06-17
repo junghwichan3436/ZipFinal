@@ -4,13 +4,15 @@ import styled from "styled-components";
 
 const ZipItems = styled.li`
   width: 49%;
-  grid-column-gap: 1.042vw;
+  /* grid-column-gap: 1.042vw; */
+  /* grid-column-gap: 2vw; */
   /* grid-row-gap: 6.25vw; */
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   overflow: hidden;
   position: relative;
+
   .img_container {
     position: relative;
     width: 100%;
@@ -42,47 +44,47 @@ const ZipItems = styled.li`
     opacity: 0;
   }
   p {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 600;
     margin-top: 20px;
   }
   span {
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
-    margin: 14px 0 22px;
+    margin: 12px 0 0px;
     color: #a9a9a9;
   }
 
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     /* align-items: center; */
     .img_container {
       /* width: 80%; */
       /* height: 360px; */
     }
     p {
-      /* font-size: 2.3rem; */
+      font-size: 1.6rem;
       /* margin-top: 18px; */
     }
     span {
       display: inline-block;
-      /* font-size: 1.3rem; */
-      margin: 14px 0 20px;
+      font-size: 1.2rem;
+      margin: 10px 0 0px;
     }
   }
   @media screen and (max-width: 767px) {
     width: 100%;
     height: 100%;
-    padding: 0 3%;
-    margin-bottom: 12px;
+    /* padding: 0 3%; */
+    /* margin-bottom: 12px; */
     .img_container {
       /* width: 100%; */
       /* height: 360px; */
     }
     p {
-      /* font-size: 2rem; */
+      font-size: 1.6rem;
       /* margin-top: 14px; */
     }
     span {
@@ -117,6 +119,21 @@ const OverlayTop = styled.div`
     will-change: transform;
     /* overflow: hidden; */
   }
+  .scrolling-text {
+    display: flex;
+    gap: 50px;
+    white-space: nowrap;
+    animation: scrollLeft 8s linear infinite;
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      /* transform: translateX(100%); */
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
   div {
     width: 100%;
     height: 100%;
@@ -143,7 +160,17 @@ const KeywordList = styled.ul`
   }
 `;
 
-const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword, characterName }) => {
+const ZipItem = ({
+  id,
+  thumbnail,
+  staticThumbnail,
+  mainTitle,
+  subTitle,
+  starName,
+  keyword,
+  characterName,
+  episode,
+}) => {
   const navigate = useNavigate();
 
   const [sildeData, setSlideData] = useState([]);
@@ -164,28 +191,27 @@ const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName
     <ZipItems onClick={onClickItem}>
       <div className="img_container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
         <OverlayTop>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
-          <div>view</div>
+          <div className="scrolling-text">
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+            <div>view</div>
+          </div>
         </OverlayTop>
         <img className="static" src={staticThumbnail} alt="static" />
         <img className="hover" src={thumbnail} alt="hover" />
       </div>
-
-      {/* <div className="img_container">
-        <img className="before-img" src={staticThumbnail} alt={starName} />
-        <img src={thumbnail} alt={starName} />
-      </div> */}
-      <p>{mainTitle}</p>
+      <p>
+        [{starName}] {mainTitle}
+      </p>
       <span>{subTitle}</span>
       <KeywordList>
         {keyword?.map((item, index) => (

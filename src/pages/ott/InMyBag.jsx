@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { bagData, StarData } from "../../StarData";
+import { useNavigate } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -41,10 +43,16 @@ const Title = styled.div`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: start;
     gap: 20px;
-    h4 {
+    /* h4 {
       font-size: 3rem;
+    } */
+    p {
+      display: flex;
+      /* letter-spacing: 0.1rem; */
     }
   }
 `;
@@ -61,9 +69,9 @@ const FilterGroup = styled.div`
     outline: none;
     cursor: pointer;
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     select {
-      padding: 0 16px 0 8px;
+      padding: 0 14px 0 8px;
     }
   }
 `;
@@ -91,9 +99,9 @@ const Category = styled.ul`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     li {
-      padding: 10px 16px;
+      padding: 10px 14px;
       font-size: 1.4rem;
     }
   }
@@ -176,11 +184,17 @@ const InMyBag = () => {
     isLoading: starLoading,
     error: starError,
   } = StarData();
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1); //현재 페이지
+  const itemsPerPage = 12;
+  const changePageHandler = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
   const filteredItems =
     selectedCategory === "ALL"
-      ? data?.items
-      : data?.items.filter((item) =>
+      ? data
+      : data?.filter((item) =>
           item.snippet.videoOwnerChannelTitle
             ?.toUpperCase()
             .includes(selectedCategory.toUpperCase())
@@ -238,10 +252,16 @@ const InMyBag = () => {
           const matchedArtist = starData?.artists?.find((artist) =>
             title.includes(artist.artistName)
           );
-
+          console.log(snippet);
           return (
             <Video key={videoId}>
-              <img src={thumbnail} alt={title} />
+              <img
+                src={thumbnail}
+                alt={title}
+                onClick={() =>
+                  navigate(`/ott/detail/${encodeURIComponent(title)}`)
+                }
+              />
               <VideoText>
                 <div>
                   <img
@@ -258,6 +278,15 @@ const InMyBag = () => {
           );
         })}
       </Contents>
+      {/* <Pagination
+        activePage={page}
+        itemsCountPerPage={itemsPerPage}
+        totalItemsCount={filteredItems.length}
+        pageRangeDisplayed={5}
+        prevPageText={"‹"}
+        nextPageText={"›"}
+        onChange={changePageHandler}
+      /> */}
     </Container>
   );
 };
