@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { bagData, StarData } from "../../StarData";
+import { bagData, StarData, bagDataWithViews } from "../../StarData";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
@@ -151,7 +151,7 @@ const VideoText = styled.div`
   }
   p {
     &:nth-child(1) {
-      font-weight: bold;
+      /* font-weight: bold; */
       margin-bottom: 10px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -176,9 +176,23 @@ const VideoText = styled.div`
   }
 `;
 
+const PaginationWrap = styled.div`
+  width: 100%;
+  ul {
+    display: flex;
+    justify-content: center;
+    li {
+      width: 30px;
+      height: 30px;
+    }
+  }
+`;
+
 const InMyBag = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const { data, isLoading, error } = bagData();
+  const [sortOrder, setSortOrder] = useState("latest");
+  // const { data, isLoading, error } = bagData();
+  const { data, isLoading, error } = bagDataWithViews();
   const {
     data: starData,
     isLoading: starLoading,
@@ -191,14 +205,27 @@ const InMyBag = () => {
     setPage(pageNumber);
   };
 
-  const filteredItems =
+  const categoryFiltered =
     selectedCategory === "ALL"
       ? data
       : data?.filter((item) =>
-          item.snippet.videoOwnerChannelTitle
+          item.videoOwnerChannelTitle
             ?.toUpperCase()
             .includes(selectedCategory.toUpperCase())
         );
+
+  const filteredItems = categoryFiltered?.slice().sort((a, b) => {
+    if (sortOrder === "latest") {
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    } else if (sortOrder === "popular") {
+      return (b.viewCount || 0) - (a.viewCount || 0);
+    }
+    return 0;
+  });
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = filteredItems?.slice(startIndex, endIndex);
 
   // const opts = {
   //   width: "100%",
@@ -234,25 +261,38 @@ const InMyBag = () => {
             </li>
           ))}
         </Category>
-        <select name="filter" id="">
-          <option value="">최신순</option>
-          <option value="">인기순</option>
-          <option value="">조회순</option>
+        <select
+          name="filter"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="latest">최신순</option>
+          <option value="popular">인기순</option>
+          {/* <option value="">조회순</option> */}
         </select>
       </FilterGroup>
 
       <Contents>
-        {filteredItems?.map((item) => {
-          const { snippet } = item;
-          const videoId = snippet.resourceId?.videoId;
-          const thumbnail = snippet.thumbnails?.maxres?.url;
-          const title = snippet.title;
-          const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
+        {paginatedItems?.map((item) => {
+          // const { snippet } = item;
+          // const videoId = snippet.resourceId?.videoId;
+          // const thumbnail = snippet.thumbnails?.maxres?.url;
+          // const title = snippet.title;
+          // const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
+
+          const title = item.title || item.snippet?.title;
+          const videoId = item.resourceId?.videoId || item.videoId || item.id;
+          const thumbnail =
+            item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
+          const videoOwnerChannelTitle =
+            item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
+
+          console.log(filteredItems);
 
           const matchedArtist = starData?.artists?.find((artist) =>
             title.includes(artist.artistName)
           );
-          console.log(snippet);
+          // console.log(snippet);
           return (
             <Video key={videoId}>
               <img
@@ -278,15 +318,18 @@ const InMyBag = () => {
           );
         })}
       </Contents>
-      {/* <Pagination
-        activePage={page}
-        itemsCountPerPage={itemsPerPage}
-        totalItemsCount={filteredItems.length}
-        pageRangeDisplayed={5}
-        prevPageText={"‹"}
-        nextPageText={"›"}
-        onChange={changePageHandler}
-      /> */}
+      <PaginationWrap>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={filteredItems?.length}
+          pageRangeDisplayed={5}
+          prevPageText={"‹"}
+          nextPageText={"›"}
+          hideFirstLastPages={true}
+          onChange={changePageHandler}
+        />
+      </PaginationWrap>
     </Container>
   );
 };
