@@ -7,6 +7,9 @@ const Container = styled.main`
   width: 100%;
   height: 100%;
   color: #fff;
+  img {
+    object-fit: cover;
+  }
   &::before {
     content: "";
     padding: 0;
@@ -42,7 +45,7 @@ const OriginalDetail = () => {
     <Container>
       <section>
         {!selectedItem ? (
-          <div>로딩 중이요</div>
+          <div></div>
         ) : (
           <DetailItem
             id={selectedItem.id}
@@ -57,7 +60,9 @@ const OriginalDetail = () => {
             characterKeyword={selectedItem.characterKeyword}
             characterName={selectedItem.characterName}
             bagThumbnail={selectedItem.bagThumbnail}
+            items={selectedItem.items}
             shorts={selectedItem.shorts}
+            videoUrl={selectedItem.videoUrl}
           />
         )}
       </section>

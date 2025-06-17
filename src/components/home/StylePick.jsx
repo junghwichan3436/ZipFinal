@@ -17,7 +17,7 @@ const Container = styled.div`
   position: relative;
   .swiper {
     width: 100%;
-    margin: 120px 0 180px 0;
+    margin: 100px 0 180px 0;
     .swiper-wrapper {
       width: 100%;
       height: 100%;
