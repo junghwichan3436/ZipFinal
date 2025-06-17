@@ -1,30 +1,29 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import styled from "styled-components";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
+import styled, { css } from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faComment,
-  faStar,
-  faShare,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faHeart as faHeartRegular,
-  faStar as faStarRegular,
-} from "@fortawesome/free-regular-svg-icons";
+import VideoCard from "../../components/shorts/VideoCard";
+import KakaoShare from "../../components/shorts/KakaoShare";
+import Comment from "../../components/shorts/comment";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
+// 📱 스타일 컴포넌트들 (기존과 동일)
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   color: #fff;
   background: var(--ott-bg-color, #000);
   font-family: "Pretendard", sans-serif;
+  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -88,6 +87,28 @@ const Title = styled.h4`
 const ContentSection = styled.section`
   padding: 40px 3% 60px;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @media screen and (min-width: 1025px) {
+    display: ${(props) => (props.$commentOpen ? "flex" : "block")};
+    gap: ${(props) => (props.$commentOpen ? "20px" : "0")};
+    align-items: flex-start;
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    transform: ${(props) => (props.$commentOpen ? "scale(0.8)" : "scale(1)")};
+    transform-origin: center left;
+  }
+
+  @media screen and (max-width: 768px) {
+    ${(props) =>
+      props.$commentOpen &&
+      css`
+        transform: scale(0.7);
+        transform-origin: center top;
+        margin-bottom: -80px;
+      `}
+  }
 `;
 
 const CarouselContainer = styled.div`
@@ -96,6 +117,12 @@ const CarouselContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @media screen and (min-width: 1025px) {
+    flex: ${(props) => (props.$commentOpen ? "1" : "none")};
+    min-width: 0;
+  }
 
   .mySwiper {
     width: 100%;
@@ -120,285 +147,86 @@ const CarouselContainer = styled.div`
   }
 `;
 
-const VideoCard = styled.div`
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  cursor: pointer;
-  width: 458px;
-  height: 814px;
-  position: relative;
-  border: 2px solid transparent;
-  margin: 0 auto;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  .swiper-slide-active & {
-    box-shadow: 0 0 40px rgba(172, 224, 255, 0.4),
-      0 0 80px rgba(172, 224, 255, 0.2), 0 0 120px rgba(172, 224, 255, 0.1);
-    border: 2px solid rgba(172, 224, 255, 0.3);
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 498px;
-
-    .swiper-slide-active & {
-      box-shadow: 0 0 30px rgba(172, 224, 255, 0.4),
-        0 0 60px rgba(172, 224, 255, 0.2);
-    }
-  }
-`;
-
-const VideoThumbnail = styled.div`
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
-  }
-
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  &.playing img {
-    opacity: 0;
-  }
-
-  &.loading {
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top: 3px solid #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 4;
-    }
-  }
-
-  @keyframes spin {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-`;
-
-const VideoOverlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  padding: 30px 20px 20px;
-  color: white;
-  z-index: 2;
-`;
-
-const VideoInfo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  gap: 10px;
-  width: 60%;
-  background-color: rgba(217, 217, 217, 0.3);
-  border-radius: 40px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-`;
-
-const VideoMeta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 1.2rem;
-  color: #ccc;
-`;
-
-const ChannelInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const ChannelAvatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #eee;
-`;
-
-const PlayButton = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 3;
-
-  &:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-
-  &::after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 25px solid #000;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    margin-left: 5px;
-  }
-
-  &.playing {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &.loading {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-`;
-
-// VideoInteractions 스타일 수정
-const VideoInteractions = styled.div`
-  position: absolute;
-  right: 15px;
-  bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px; // 간격 약간 증가
-  z-index: 10;
-
-  @media screen and (max-width: 768px) {
-    right: 10px;
-    bottom: 60px;
-    gap: 15px;
-  }
-`;
-
-// InteractionButton 스타일 수정
-const InteractionButton = styled.button`
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  color: ${(props) => {
-    if (props.active && props.type === "like") return "#ff3040";
-    if (props.active && props.type === "bookmark") return "#ffd700";
-    if (props.active && props.type === "share") return "#00d4ff";
-    return "#fff";
-  }};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  position: relative;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: scale(1.1);
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-`;
-
-// InteractionCount 스타일을 버튼 안으로 수정
-const InteractionCount = styled.span`
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 10px;
-  color: #fff;
-  white-space: nowrap;
-  font-weight: 600;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 2px 8px;
-  border-radius: 12px;
-  min-width: 24px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  @media screen and (max-width: 768px) {
-    font-size: 9px;
-    padding: 1px 6px;
-    bottom: -6px;
-  }
-`;
-
-const LiteVideoContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-
-  .yt-lite {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 10px;
-  }
-
-  .yt-lite > iframe {
-    border-radius: 10px;
-  }
-`;
-
+// 🚀 메인 Short 컴포넌트
 const Short = () => {
+  // 📱 상태 관리
   const [activeIndex, setActiveIndex] = useState(2);
   const [playingVideo, setPlayingVideo] = useState(null);
   const [loadingVideo, setLoadingVideo] = useState(null);
   const [loadedVideos, setLoadedVideos] = useState(new Set());
   const [shortVideos, setShortVideos] = useState({ originalData: [] });
-  // 각 비디오별 인터랙션 상태 관리
   const [videoInteractions, setVideoInteractions] = useState({});
-  const [useLiteEmbed, setUseLiteEmbed] = useState(true);
+  const [useLiteEmbed] = useState(true);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  // 🎭 댓글 모달 상태 (간소화됨)
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [selectedCommentVideo, setSelectedCommentVideo] = useState(null);
+
   const swiperRef = useRef(null);
   const playerRefs = useRef({});
 
-  // API 데이터 로드
+  // 🔗 YouTube URL에서 video ID 추출하는 함수
+  const extractVideoId = useCallback((url) => {
+    if (!url) return "";
+    if (url.length === 11 && !url.includes("/")) return url;
+
+    const regex =
+      /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : url;
+  }, []);
+
+  // 📊 메모이제이션된 비디오 데이터 변환
+  const shortsVideos = useMemo(() => {
+    return shortVideos.originalData.map((video) => ({
+      id: video.id,
+      videoId: extractVideoId(video.shortUrl),
+      title: video.mainTitle,
+      keyword: video.keyword,
+      itemInfo:
+        video.item[0]?.itemImg ||
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
+      itemUrl: video.item[0]?.itemUrl || "#",
+      likes: video.shorts[0]?.like
+        ? `${(video.shorts[0].like / 1000).toFixed(1)}만`
+        : "2.5만",
+      views: `${Math.floor(Math.random() * 500 + 100)}만`,
+      description: video.description,
+    }));
+  }, [shortVideos.originalData, extractVideoId]);
+
+  // 🎯 현재 선택된 비디오 데이터
+  const currentVideoData = useMemo(() => {
+    if (selectedCommentVideo) {
+      return shortVideos.originalData.find(
+        (data) => data.id === selectedCommentVideo.id
+      );
+    }
+    return null;
+  }, [selectedCommentVideo, shortVideos.originalData]);
+
+  // 🔧 카카오 SDK 초기화
+  useEffect(() => {
+    if (!window.Kakao) {
+      const script = document.createElement("script");
+      script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.Kakao && !window.Kakao.isInitialized()) {
+          window.Kakao.init("788c9afcb57d04021e2f0c6df11eb2b1");
+          console.log("카카오 SDK 로드 및 초기화 완료");
+        }
+      };
+      document.head.appendChild(script);
+    } else if (!window.Kakao.isInitialized()) {
+      window.Kakao.init("788c9afcb57d04021e2f0c6df11eb2b1");
+      console.log("카카오 SDK 초기화 완료");
+    }
+  }, []);
+
+  // 📂 API 데이터 로드
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -406,13 +234,12 @@ const Short = () => {
         const data = await response.json();
         setShortVideos(data);
 
-        // 각 비디오의 초기 인터랙션 상태 설정
         const initialInteractions = {};
         data.originalData.forEach((video) => {
           initialInteractions[video.id] = {
             liked: false,
             commented: false,
-            bookmarked: false,
+            itemInfo: false,
             shared: false,
           };
         });
@@ -425,36 +252,7 @@ const Short = () => {
     loadData();
   }, []);
 
-  // YouTube URL에서 video ID 추출하는 함수
-  const extractVideoId = (url) => {
-    if (!url) return "";
-
-    if (url.length === 11 && !url.includes("/")) {
-      return url;
-    }
-
-    const regex =
-      /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/;
-    const match = url.match(regex);
-    return match ? match[1] : url;
-  };
-
-  // API 데이터를 사용하여 YouTube 쇼츠 데이터 생성
-  const shortsVideos = shortVideos.originalData.map((video) => ({
-    id: video.id,
-    videoId: extractVideoId(video.shortUrl),
-    title: video.mainTitle,
-    keyword: video.keyword,
-    itemInfo:
-      video.item[0]?.itemImg ||
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
-    likes: video.shorts[0]?.like
-      ? `${(video.shorts[0].like / 1000).toFixed(1)}만`
-      : "2.5만",
-    views: `${Math.floor(Math.random() * 500 + 100)}만`,
-    description: video.description,
-  }));
-
+  // 🎞️ 슬라이드 변경 핸들러
   const handleSlideChange = useCallback((swiper) => {
     setActiveIndex(swiper.activeIndex);
     Object.values(playerRefs.current).forEach((player) => {
@@ -466,40 +264,37 @@ const Short = () => {
     setLoadingVideo(null);
   }, []);
 
+  // 📹 비디오 준비 핸들러
   const handleVideoReady = useCallback((event, videoId) => {
     playerRefs.current[videoId] = event.target;
     setLoadedVideos((prev) => new Set([...prev, videoId]));
     setLoadingVideo(null);
-    console.log(`Video ${videoId} is ready to play`);
   }, []);
 
-  const handlePlayVideo = useCallback(
-    (videoId) => {
-      console.log(`Attempting to play video: ${videoId}`);
-      setLoadingVideo(videoId);
+  // ▶️ 비디오 재생 핸들러
+  const handlePlayVideo = useCallback((videoId) => {
+    setLoadingVideo(videoId);
 
-      Object.entries(playerRefs.current).forEach(([id, player]) => {
-        if (id !== videoId.toString() && player && player.stopVideo) {
-          player.stopVideo();
-        }
-      });
-
-      const player = playerRefs.current[videoId];
-      if (player && player.playVideo) {
-        try {
-          player.playVideo();
-          setPlayingVideo(videoId);
-          setLoadingVideo(null);
-        } catch (error) {
-          console.error(`Error playing video ${videoId}:`, error);
-          setLoadingVideo(null);
-        }
+    Object.entries(playerRefs.current).forEach(([id, player]) => {
+      if (id !== videoId.toString() && player && player.stopVideo) {
+        player.stopVideo();
       }
-    },
-    [loadingVideo]
-  );
+    });
 
-  // 비디오별 인터랙션 처리
+    const player = playerRefs.current[videoId];
+    if (player && player.playVideo) {
+      try {
+        player.playVideo();
+        setPlayingVideo(videoId);
+        setLoadingVideo(null);
+      } catch (error) {
+        console.error(`Error playing video ${videoId}:`, error);
+        setLoadingVideo(null);
+      }
+    }
+  }, []);
+
+  // 🎛️ 비디오 인터랙션 핸들러
   const handleVideoInteraction = useCallback((videoId, type) => {
     setVideoInteractions((prev) => ({
       ...prev,
@@ -510,6 +305,81 @@ const Short = () => {
     }));
   }, []);
 
+  // 🛍️ 아이템 정보 링크 클릭 핸들러
+  const handleItemInfoClick = useCallback((e, videoId, itemUrl) => {
+    setVideoInteractions((prev) => ({
+      ...prev,
+      [videoId]: {
+        ...prev[videoId],
+        itemInfo: !prev[videoId]?.itemInfo,
+      },
+    }));
+  }, []);
+
+  // 💬 댓글 클릭 핸들러 (간소화됨)
+  const handleCommentClick = useCallback(
+    (e, video) => {
+      e.stopPropagation();
+
+      if (commentOpen && selectedCommentVideo?.id === video.id) {
+        setCommentOpen(false);
+        setSelectedCommentVideo(null);
+        setVideoInteractions((prev) => ({
+          ...prev,
+          [video.id]: {
+            ...prev[video.id],
+            commented: false,
+          },
+        }));
+      } else {
+        setSelectedCommentVideo(video);
+        setCommentOpen(true);
+        setVideoInteractions((prev) => ({
+          ...prev,
+          [video.id]: {
+            ...prev[video.id],
+            commented: true,
+          },
+        }));
+      }
+    },
+    [commentOpen, selectedCommentVideo]
+  );
+
+  // ❌ 댓글 모달 닫기 핸들러 (간소화됨)
+  const closeCommentModal = useCallback(() => {
+    if (selectedCommentVideo) {
+      setVideoInteractions((prev) => ({
+        ...prev,
+        [selectedCommentVideo.id]: {
+          ...prev[selectedCommentVideo.id],
+          commented: false,
+        },
+      }));
+    }
+
+    setCommentOpen(false);
+    setSelectedCommentVideo(null);
+  }, [selectedCommentVideo]);
+
+  // 📤 공유 모달 열기 핸들러
+  const handleShareClick = useCallback(
+    (e, video) => {
+      e.stopPropagation();
+      setSelectedVideo(video);
+      setShareModalOpen(true);
+      handleVideoInteraction(video.id, "shared");
+    },
+    [handleVideoInteraction]
+  );
+
+  // ❌ 공유 모달 닫기 핸들러
+  const closeShareModal = useCallback(() => {
+    setShareModalOpen(false);
+    setSelectedVideo(null);
+  }, []);
+
+  // 🎬 비디오 로드 여부 결정
   const shouldLoadVideo = useCallback(
     (index, videoId) => {
       if (useLiteEmbed) return true;
@@ -519,22 +389,27 @@ const Short = () => {
     [activeIndex, useLiteEmbed]
   );
 
-  const youtubeOpts = {
-    width: "100%",
-    height: "100%",
-    playerVars: {
-      autoplay: 0,
-      controls: 1,
-      modestbranding: 1,
-      rel: 0,
-      showinfo: 0,
-      mute: 0,
-      loop: 1,
-      enablejsapi: 1,
-      origin: window.location.origin,
-    },
-  };
+  // ⚙️ YouTube 옵션
+  const youtubeOpts = useMemo(
+    () => ({
+      width: "100%",
+      height: "100%",
+      playerVars: {
+        autoplay: 0,
+        controls: 1,
+        modestbranding: 1,
+        rel: 0,
+        showinfo: 0,
+        mute: 0,
+        loop: 1,
+        enablejsapi: 1,
+        origin: window.location.origin,
+      },
+    }),
+    []
+  );
 
+  // 🎨 렌더링
   return (
     <Container>
       <Wrapper>
@@ -549,8 +424,8 @@ const Short = () => {
           </MainTitle>
         </TitleSection>
 
-        <ContentSection>
-          <CarouselContainer>
+        <ContentSection $commentOpen={commentOpen}>
+          <CarouselContainer $commentOpen={commentOpen}>
             <Swiper
               ref={swiperRef}
               effect={"coverflow"}
@@ -583,129 +458,45 @@ const Short = () => {
             >
               {shortsVideos.map((video, index) => (
                 <SwiperSlide key={video.id}>
-                  <VideoCard className={activeIndex === index ? "active" : ""}>
-                    {useLiteEmbed ? (
-                      <LiteVideoContainer>
-                        <LiteYouTubeEmbed
-                          id={video.videoId}
-                          title={video.title}
-                          poster="hqdefault"
-                          noCookie={true}
-                          activatedClass="activated"
-                          iframeClass="yt-lite-iframe"
-                          playerClass="yt-lite-player"
-                        />
-                      </LiteVideoContainer>
-                    ) : (
-                      <VideoThumbnail>
-                        <img
-                          src={`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`}
-                          alt={video.title}
-                        />
-                        {shouldLoadVideo(index, video.id) && (
-                          <YouTube
-                            videoId={video.videoId}
-                            opts={youtubeOpts}
-                            onReady={(event) =>
-                              handleVideoReady(event, video.id)
-                            }
-                          />
-                        )}
-                        <PlayButton onClick={() => handlePlayVideo(video.id)} />
-                      </VideoThumbnail>
-                    )}
-
-                    <VideoOverlay>
-                      <VideoInfo>
-                        <VideoMeta>
-                          <ChannelInfo>
-                            <ChannelAvatar
-                              src={video.itemInfo}
-                              alt={video.channel}
-                            />
-                            <span>{video.keyword.join(", ")}</span>
-                          </ChannelInfo>
-                        </VideoMeta>
-                      </VideoInfo>
-                    </VideoOverlay>
-
-                    {/* 각 비디오의 인터랙션 버튼들 */}
-                    <VideoInteractions>
-                      <InteractionButton
-                        type="like"
-                        active={videoInteractions[video.id]?.liked}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleVideoInteraction(video.id, "liked");
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          icon={
-                            videoInteractions[video.id]?.liked
-                              ? faHeart
-                              : faHeartRegular
-                          }
-                        />
-                        {videoInteractions[video.id]?.liked && (
-                          <InteractionCount>2.5만</InteractionCount>
-                        )}
-                      </InteractionButton>
-
-                      <InteractionButton
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleVideoInteraction(video.id, "commented");
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faComment} />
-                        {videoInteractions[video.id]?.commented && (
-                          <InteractionCount>174</InteractionCount>
-                        )}
-                      </InteractionButton>
-
-                      <InteractionButton
-                        type="bookmark"
-                        active={videoInteractions[video.id]?.bookmarked}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleVideoInteraction(video.id, "bookmarked");
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          icon={
-                            videoInteractions[video.id]?.bookmarked
-                              ? faStar
-                              : faStarRegular
-                          }
-                        />
-                        {videoInteractions[video.id]?.bookmarked && (
-                          <InteractionCount>저장</InteractionCount>
-                        )}
-                      </InteractionButton>
-
-                      <InteractionButton
-                        type="share"
-                        active={videoInteractions[video.id]?.shared}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleVideoInteraction(video.id, "shared");
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faShare} />
-                        {videoInteractions[video.id]?.shared && (
-                          <InteractionCount>공유</InteractionCount>
-                        )}
-                      </InteractionButton>
-                    </VideoInteractions>
-                  </VideoCard>
+                  <VideoCard
+                    video={video}
+                    index={index}
+                    activeIndex={activeIndex}
+                    useLiteEmbed={useLiteEmbed}
+                    shouldLoadVideo={shouldLoadVideo}
+                    youtubeOpts={youtubeOpts}
+                    videoInteractions={videoInteractions}
+                    handleVideoReady={handleVideoReady}
+                    handlePlayVideo={handlePlayVideo}
+                    handleVideoInteraction={handleVideoInteraction}
+                    handleItemInfoClick={handleItemInfoClick}
+                    handleCommentClick={handleCommentClick}
+                    handleShareClick={handleShareClick}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
           </CarouselContainer>
+
+          {/* 💬 새로운 댓글 컴포넌트 */}
+          <Comment
+            isOpen={commentOpen}
+            onClose={closeCommentModal}
+            video={selectedCommentVideo}
+            videoData={currentVideoData}
+            commentCount={currentVideoData?.comments?.length || 0}
+          />
         </ContentSection>
       </Wrapper>
+
+      {/* 📤 공유 모달 컴포넌트 */}
+      <KakaoShare
+        isOpen={shareModalOpen}
+        onClose={closeShareModal}
+        video={selectedVideo}
+      />
     </Container>
   );
 };
 
-export default Short;
+export default React.memo(Short);
