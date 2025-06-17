@@ -167,6 +167,7 @@ const MainTitle = styled.div`
     }
   }
 `;
+
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
