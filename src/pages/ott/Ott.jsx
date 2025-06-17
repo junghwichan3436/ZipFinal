@@ -7,7 +7,15 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
-import { StarData, bagData, interviewData, workingData, allData, useAllDataViews, playlistIds } from "../../StarData";
+import {
+  StarData,
+  bagData,
+  interviewData,
+  workingData,
+  allData,
+  useAllDataViews,
+  playlistIds,
+} from "../../StarData";
 
 const Container = styled.div`
   display: flex;
@@ -331,11 +339,18 @@ const Ott = () => {
   const interviewDataSlice = data03?.slice(0, 8);
   const workingDataSlice = data04?.slice(0, 8);
   const allDataSlice = data06
-    ?.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt))
+    ?.sort(
+      (a, b) =>
+        new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
+    )
     .slice(0, 8);
-  const allDataViewSlice = data05?.sort((a, b) => b.viewCount - a.viewCount).slice(0, 8);
+  const allDataViewSlice = data05
+    ?.sort((a, b) => b.viewCount - a.viewCount)
+    .slice(0, 8);
   console.log(allDataViewSlice);
-  const BannerSlice = data05?.sort((a, b) => b.viewCount - a.viewCount).slice(0, 4);
+  const BannerSlice = data05
+    ?.sort((a, b) => b.viewCount - a.viewCount)
+    .slice(0, 4);
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;
@@ -423,16 +438,21 @@ const Ott = () => {
           <SwiperSlide>
             <MainSlide>
               <SlideImg>
-                <img src="https://i.ytimg.com/vi/XOwGv4MFFto/maxresdefault.jpg" alt="" />
+                <img
+                  src="https://i.ytimg.com/vi/XOwGv4MFFto/maxresdefault.jpg"
+                  alt=""
+                />
               </SlideImg>
               <SlideInfo>
                 <SlideText className={activeIndex === 0 ? "active" : ""}>
                   <p>INFP의 여왕 김지원 👑</p>
                 </SlideText>
                 <SlideDesc className={activeIndex === 0 ? "active" : ""}>
-                  인프피의 여왕에게 주7회 약속이란? ❤️‍🩹 배우 #김지원 이 불가리 퍼퓸과 함께 엘르 카메라 앞에 섰습니다.
-                  침대와 음악만 있으면 어디든 갈 수 있는 만렙 집순이의 루틴부터 환상의 궁합을 자랑하는 MBTI, 지하철에서
-                  나도 모르게 뒤돌아보게 되는 향까지! 이모지로 파헤친 여왕님의 모든 것을 지금 바로 확인해 보세요.
+                  인프피의 여왕에게 주7회 약속이란? ❤️‍🩹 배우 #김지원 이 불가리
+                  퍼퓸과 함께 엘르 카메라 앞에 섰습니다. 침대와 음악만 있으면
+                  어디든 갈 수 있는 만렙 집순이의 루틴부터 환상의 궁합을
+                  자랑하는 MBTI, 지하철에서 나도 모르게 뒤돌아보게 되는 향까지!
+                  이모지로 파헤친 여왕님의 모든 것을 지금 바로 확인해 보세요.
                 </SlideDesc>
                 <SlideBtn className={activeIndex === 0 ? "active" : ""}>
                   <button onClick={() => navigate("/ott/detail")}>Play</button>
@@ -444,16 +464,21 @@ const Ott = () => {
           <SwiperSlide>
             <MainSlide>
               <SlideImg>
-                <img src="https://i.ytimg.com/vi/yHYMYCwR1p8/maxresdefault.jpg" alt="" />
+                <img
+                  src="https://i.ytimg.com/vi/yHYMYCwR1p8/maxresdefault.jpg"
+                  alt=""
+                />
               </SlideImg>
               <SlideInfo>
                 <SlideText className={activeIndex === 1 ? "active" : ""}>
                   <p>친해지면 이상해지는 설윤의 이모지 인터뷰💓</p>
                 </SlideText>
                 <SlideDesc className={activeIndex === 1 ? "active" : ""}>
-                  최애를 처음 만났을 때 설레는 그 감정… 설윤도 느껴봤대요 💗 낯을 가리지만 친해지면 이상(?)해지는 반전
-                  매력과 멀미 따위 모르는 FPS 게임 숨은 고수 설장군 모멘트, 데뷔 무대 직전 자신에게 해주고 싶은 말도
-                  솔직하게 털어놓은 #엔믹스 설윤의 찐 매력을 엘르가 담았습니다.
+                  최애를 처음 만났을 때 설레는 그 감정… 설윤도 느껴봤대요 💗
+                  낯을 가리지만 친해지면 이상(?)해지는 반전 매력과 멀미 따위
+                  모르는 FPS 게임 숨은 고수 설장군 모멘트, 데뷔 무대 직전
+                  자신에게 해주고 싶은 말도 솔직하게 털어놓은 #엔믹스 설윤의 찐
+                  매력을 엘르가 담았습니다.
                 </SlideDesc>
                 <SlideBtn className={activeIndex === 1 ? "active" : ""}>
                   <button onClick={() => navigate("/ott/detail")}>Play</button>
@@ -486,16 +511,24 @@ const Ott = () => {
           }}
         >
           {allDataViewSlice?.map((video) => {
-            const working = data?.artists.find((artist) => video.title.includes(artist.artistName));
+            const working = data?.artists.find((artist) =>
+              video.title.includes(artist.artistName)
+            );
             return working ? (
               <SwiperSlide key={video.position}>
                 <VideoCon
                   onMouseEnter={VideoPlay}
                   onMouseLeave={VideoStop}
-                  onClick={() => navigate(`/ott/detail/${encodeURIComponent(video.title)}`)}
+                  onClick={() =>
+                    navigate(`/ott/detail/${encodeURIComponent(video.title)}`)
+                  }
                 >
                   <img src={video.thumbnails.high.url} alt="" />
-                  <YouTube videoId={video.resourceId.videoId} opts={opts} onReady={handleReady} />
+                  <YouTube
+                    videoId={video.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
                 </VideoCon>
                 <VideoText>
                   <div onClick={() => navigate(`/star/${working.artistName}`)}>
@@ -535,16 +568,26 @@ const Ott = () => {
           }}
         >
           {allDataSlice?.map((video) => {
-            const inmybag = data?.artists.find((artist) => video?.snippet?.title.includes(artist.artistName));
+            const inmybag = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
             return inmybag ? (
               <SwiperSlide key={video.snippet.position}>
                 <VideoCon
                   onMouseEnter={VideoPlay}
                   onMouseLeave={VideoStop}
-                  onClick={() => navigate(`/ott/detail/${encodeURIComponent(video.snippet.title)}`)}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
                 >
                   <img src={video.snippet.thumbnails.high.url} alt="" />
-                  <YouTube videoId={video.snippet.resourceId.videoId} opts={opts} onReady={handleReady} />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
                 </VideoCon>
                 <VideoText>
                   <div onClick={() => navigate(`/star/${inmybag.artistName}`)}>
@@ -584,16 +627,26 @@ const Ott = () => {
           }}
         >
           {workingDataSlice?.map((video) => {
-            const working = data?.artists.find((artist) => video?.snippet?.title.includes(artist.artistName));
+            const working = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
             return working ? (
               <SwiperSlide key={video.snippet.position}>
                 <VideoCon
                   onMouseEnter={VideoPlay}
                   onMouseLeave={VideoStop}
-                  onClick={() => navigate(`/ott/detail/${encodeURIComponent(video.snippet.title)}`)}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
                 >
                   <img src={video.snippet.thumbnails.high.url} alt="" />
-                  <YouTube videoId={video.snippet.resourceId.videoId} opts={opts} onReady={handleReady} />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
                 </VideoCon>
                 <VideoText>
                   <div onClick={() => navigate(`/star/${working.artistName}`)}>
@@ -633,16 +686,26 @@ const Ott = () => {
           }}
         >
           {inmybagData?.map((video) => {
-            const inmybag = data?.artists.find((artist) => video?.snippet?.title.includes(artist.artistName));
+            const inmybag = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
             return inmybag ? (
               <SwiperSlide key={video.snippet.position}>
                 <VideoCon
                   onMouseEnter={VideoPlay}
                   onMouseLeave={VideoStop}
-                  onClick={() => navigate(`/ott/detail/${encodeURIComponent(video.snippet.title)}`)}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
                 >
                   <img src={video.snippet.thumbnails.high.url} alt="" />
-                  <YouTube videoId={video.snippet.resourceId.videoId} opts={opts} onReady={handleReady} />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
                 </VideoCon>
                 <VideoText>
                   <div onClick={() => navigate(`/star/${inmybag.artistName}`)}>
@@ -682,19 +745,31 @@ const Ott = () => {
           }}
         >
           {interviewDataSlice?.map((video) => {
-            const interview = data?.artists.find((artist) => video?.snippet?.title.includes(artist.artistName));
+            const interview = data?.artists.find((artist) =>
+              video?.snippet?.title.includes(artist.artistName)
+            );
             return interview ? (
               <SwiperSlide>
                 <VideoCon
                   onMouseEnter={VideoPlay}
                   onMouseLeave={VideoStop}
-                  onClick={() => navigate(`/ott/detail/${encodeURIComponent(video.snippet.title)}`)}
+                  onClick={() =>
+                    navigate(
+                      `/ott/detail/${encodeURIComponent(video.snippet.title)}`
+                    )
+                  }
                 >
                   <img src={video.snippet.thumbnails.high.url} alt="" />
-                  <YouTube videoId={video.snippet.resourceId.videoId} opts={opts} onReady={handleReady} />
+                  <YouTube
+                    videoId={video.snippet.resourceId.videoId}
+                    opts={opts}
+                    onReady={handleReady}
+                  />
                 </VideoCon>
                 <VideoText>
-                  <div onClick={() => navigate(`/star/${interview.artistName}`)}>
+                  <div
+                    onClick={() => navigate(`/star/${interview.artistName}`)}
+                  >
                     <img src={interview?.artistImg} alt="" />
                   </div>
                   <div>

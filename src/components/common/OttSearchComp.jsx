@@ -1,23 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { StarData } from "../../StarData";
 import OttSearchResult from "./OttSearchResult";
+import OttSearchUpdate from "./OttSearchUpdate";
 
 const Container = styled.div`
   color: var(--light-color);
   min-width: 80%;
-  height: 100%;
-  padding: 3% 3%;
+  padding: 30px 3%;
+  flex: 1;
+  @media screen and (max-width: 1400px) {
+    min-width: 75%;
+  }
 `;
-const OttSearchComp = ({ inputValue }) => {
-  const { isLoading, data } = StarData();
-  console.log(data);
+const OttSearchComp = ({
+  ottSearchClick,
+  setOttSearchClick,
+  setSearchClick,
+  inputValue,
+}) => {
   return (
     <Container>
       {inputValue === "" ? (
         <OttSearchResult />
       ) : (
-        <div>{inputValue}에 대한 검색결과입니다.</div>
+        <OttSearchUpdate
+          setOttSearchClick={setOttSearchClick}
+          inputValue={inputValue}
+        />
       )}
     </Container>
   );

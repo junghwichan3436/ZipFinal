@@ -672,7 +672,12 @@ const DetailItem = ({
           >
             {items?.map((item, index) => (
               <SwiperSlide key={index}>
-                <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
+                <CardItem
+                  subtitle={item.subtitle}
+                  title={item.title}
+                  img={item.img}
+                  detailURL={item.detailURL}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -683,7 +688,11 @@ const DetailItem = ({
         <p className="real-title">캐릭터가 아닌, 진짜 {starName}의 취향은?</p>
         <div className="contents-container">
           <h4>bag ZIP</h4>
-          <div className="video-container" onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+          <div
+            className="video-container"
+            onMouseEnter={VideoPlay}
+            onMouseLeave={VideoStop}
+          >
             <div className="videoImg">
               <YouTube videoId={videoUrl} opts={opts} onReady={handleReady} />
             </div>
@@ -700,7 +709,11 @@ const DetailItem = ({
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={() => handleMouseLeave(index)}
                   >
-                    <YouTube videoId={item.shortVideo} opts={opts} onReady={(e) => handleVideoReady(e, index)} />
+                    <YouTube
+                      videoId={item.shortVideo}
+                      opts={opts}
+                      onReady={(e) => handleVideoReady(e, index)}
+                    />
                   </div>
                   {/* <div className="short-info">
                     <p>{item.shortTitle}</p>

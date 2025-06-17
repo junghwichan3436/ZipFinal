@@ -101,7 +101,9 @@ export default function StylePick() {
     <Container>
       <MainTitle>
         <Title>Style ZIP</Title>
-        <Button onClick={() => navigate("/filtercategory/style")}>More Zip</Button>
+        <Button onClick={() => navigate("/filtercategory/style")}>
+          More Zip
+        </Button>
       </MainTitle>
       <Swiper
         slidesPerView={4}
@@ -114,7 +116,12 @@ export default function StylePick() {
       >
         {sildeData?.map((item, index) => (
           <SwiperSlide key={index}>
-            <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
+            <CardItem
+              subtitle={item.subtitle}
+              title={item.title}
+              img={item.img}
+              detailURL={item.detailURL}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

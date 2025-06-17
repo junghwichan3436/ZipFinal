@@ -34,16 +34,6 @@ const Artist = styled.div`
   }
 `;
 
-const ArtistWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ArtistBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Category = styled.div`
   display: flex;
   width: 100%;
@@ -85,7 +75,7 @@ const Category = styled.div`
     content: ">";
   }
   @media screen and (max-width: 767px) {
-    padding: 10% 3%;
+    padding: 0% 3%;
     .swiper-button-prev,
     .swiper-button-next {
       display: flex;
@@ -103,6 +93,15 @@ const Category = styled.div`
         font-size: 2rem;
       }
     }
+  }
+`;
+
+const ArtistWrap = styled(Category)`
+  display: flex;
+  justify-content: space-between;
+  .artistBox {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -213,9 +212,10 @@ const Filter = styled.div`
   div {
     position: relative;
     width: 100%;
+    height: 100%;
     img {
       width: 100%;
-      max-height: 230px;
+      height: 100%;
       object-fit: cover;
       position: relative;
       filter: brightness(70%);
@@ -288,14 +288,34 @@ const OttSearchResult = () => {
       <Artist>
         <SlideTitle>POPULAR STAR</SlideTitle>
         <ArtistWrap>
-          {artist?.map((artist) => (
-            <ArtistBox>
-              <div>
-                <img src={artist.artistImg} alt={artist.artistName} />
-              </div>
-              <p>{artist.artistName}</p>
-            </ArtistBox>
-          ))}
+          <Swiper
+            className="videoWrapper"
+            modules={[Navigation]}
+            navigation={true}
+            breakpoints={{
+              1920: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              0: {
+                slidesPerView: 3, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+                spaceBetween: 20,
+              },
+            }}
+          >
+            {artist?.map((artist) => (
+              <SwiperSlide className="artistBox">
+                <div>
+                  <img src={artist.artistImg} alt={artist.artistName} />
+                </div>
+                <p>{artist.artistName}</p>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </ArtistWrap>
       </Artist>
       <Category>
@@ -374,10 +394,10 @@ const OttSearchResult = () => {
           <div>
             <div>
               <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/8665c12f-5a09-4a35-084c-5df2169e5900/w=1024,h=1280"
                 alt=""
               />
-              <p>Style</p>
+              <p>Bornup</p>
             </div>
           </div>
           <div>

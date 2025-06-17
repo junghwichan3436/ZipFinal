@@ -26,6 +26,7 @@ a{
   --lightGray: #D3D3D3;
   --event-color: #ACE0FF;
   --ott-bg-color: #0E100F;
+  --video-text: #aaaaaa;
 }
 
 html {
