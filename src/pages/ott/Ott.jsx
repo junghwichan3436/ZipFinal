@@ -372,7 +372,12 @@ const Ott = () => {
   };
 
   const orgData = data?.artists.map((artist) => artist);
-
+  const bagInsideVid = orgData?.slice(0, 8);
+  const bagInsideVid02 = orgData?.slice(8, 16);
+  const bagInsideVid03 = orgData?.slice(16, 24);
+  const bagInsideVid04 = orgData?.slice(24, 32);
+  const bagInsideVid05 = orgData?.slice(32, 40);
+  const bagInsideVid06 = orgData?.slice(40, 48);
   const opts = {
     width: "100%",
     height: "100%",
