@@ -126,3 +126,10 @@ export function useAllDataViews(playlistIds) {
     queryFn: () => fetchFromAllPlaylistsWithViews(playlistIds),
   });
 }
+
+export function bagDataWithViews() {
+  return useQuery({
+    queryKey: ["bagDataWithViews"],
+    queryFn: () => fetchFromAllPlaylistsWithViews([inmybag]),
+  });
+}

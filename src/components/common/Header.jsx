@@ -423,13 +423,9 @@ const Header = () => {
       commerceMatch ||
       detailMatch ||
       filterCategoryMatch ||
-      loginMatch ||
-      signUpMatch ||
       eventMatch ||
       cartMatch ||
       searchMatch ||
-      mypageMatch ||
-      mypageMatch02 ||
       promotionMatch
     ) {
       setFilterCheck(true);
@@ -446,14 +442,8 @@ const Header = () => {
     commerceMatch,
     detailMatch,
     filterCategoryMatch,
-    loginMatch,
-    signUpMatch,
     eventMatch,
     searchMatch,
-    mypageMatch,
-    mypageMatch02,
-    starMatch,
-    starDetailMatch,
     promotionMatch,
   ]);
 
@@ -585,7 +575,9 @@ const Header = () => {
                 ottMatch02 ||
                 ottMatch03 ||
                 starMatch ||
-                starDetailMatch
+                starDetailMatch ||
+                loginMatch ||
+                signUpMatch
                   ? "/ott"
                   : "/"
               }
@@ -749,7 +741,12 @@ const Header = () => {
           </MenuBars>
         </HeaderRight>
       </Wrapper>
-      {ottMatch || ottMatch02 || ottMatch03 ? (
+      {ottMatch ||
+      ottMatch02 ||
+      ottMatch03 ||
+      starMatch ||
+      starDetailMatch ||
+      loginMatch ? (
         <OttSearchWrap
           ottSearchClick={ottSearchClick}
           setOttSearchClick={setOttSearchClick}

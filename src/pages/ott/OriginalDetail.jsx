@@ -7,11 +7,15 @@ const Container = styled.main`
   width: 100%;
   height: 100%;
   color: #fff;
+  img {
+    object-fit: cover;
+  }
   &::before {
     content: "";
     padding: 0;
     background: #0e100f
-      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png")
+      center;
     position: fixed;
     top: 0;
     left: 0;
@@ -42,7 +46,7 @@ const OriginalDetail = () => {
     <Container>
       <section>
         {!selectedItem ? (
-          <div>로딩 중이요</div>
+          <div></div>
         ) : (
           <DetailItem
             id={selectedItem.id}
@@ -57,7 +61,9 @@ const OriginalDetail = () => {
             characterKeyword={selectedItem.characterKeyword}
             characterName={selectedItem.characterName}
             bagThumbnail={selectedItem.bagThumbnail}
+            items={selectedItem.items}
             shorts={selectedItem.shorts}
+            videoUrl={selectedItem.videoUrl}
           />
         )}
       </section>

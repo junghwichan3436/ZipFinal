@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import ZipItem from "../../components/original/ZipItem";
-// import { Link } from "react-router-dom";
 
+const rec = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+`;
 // 스타일 정의
 const Container = styled.div`
   width: 100%;
@@ -12,33 +19,36 @@ const Container = styled.div`
     content: "";
     padding: 0;
     background: #0e100f
-      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png")
+      center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     filter: brightness(0.2) contrast(1.1);
-    z-index: -1;
+    z-index: -2;
   }
 `;
 const TitleSection = styled.section`
   text-transform: uppercase;
-  padding: 0 3%;
+  padding: 3%;
   .allZips {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 20px 0 20px;
+    margin: 20px 0 0px;
     .redDot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       background: #f00;
       border-radius: 50%;
+      animation: ${rec} 2s infinite;
     }
     span {
       display: inline-block;
+      display: flex;
       font-size: 2rem;
       font-family: "EHNormalTrial";
       font-weight: 500;
@@ -47,9 +57,17 @@ const TitleSection = styled.section`
     }
   }
   @media screen and (max-width: 1024px) {
+    padding: 0 3%;
     .allZips {
+      .redDot {
+        width: 8px;
+        height: 8px;
+      }
       gap: 10px;
-      margin: 20px 0 20px;
+      margin: 12px 0 30px;
+      span {
+        font-size: 1.4rem;
+      }
     }
   }
   @media screen and (max-width: 767px) {
@@ -63,14 +81,14 @@ const MainTitle = styled.div`
   display: flex;
   gap: 30px;
   align-items: end;
-  padding-top: 160px;
-  padding-bottom: 30px;
+  padding-top: 120px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
-    font-size: 7.6rem;
+    font-size: 7rem;
     font-family: "EHNormalTrial";
     font-weight: 500;
-    letter-spacing: -6px;
+    letter-spacing: -3px;
   }
   p {
     font-size: 1.6rem;
@@ -79,21 +97,20 @@ const MainTitle = styled.div`
     font-weight: 400;
     line-height: 2rem;
     b {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 400;
       font-family: "EHNormalTrial";
     }
   }
 
-  @media screen and (max-width: 1094px) {
-    padding-top: 140px;
+  @media screen and (max-width: 1024px) {
     padding-bottom: 20px;
     gap: 20px;
     flex-direction: column-reverse;
     flex-direction: column;
     align-items: start;
     h4 {
-      /* font-size: 7rem; */
+      font-size: 6rem;
       letter-spacing: -2px;
     }
     br {
@@ -108,9 +125,9 @@ const MainTitle = styled.div`
       }
     }
   }
-  @media screen and (max-width: 978px) {
+  @media screen and (max-width: 767px) {
     gap: 20px;
-    padding-top: 120px;
+    padding-top: 100px;
     padding-bottom: 20px;
     h4 {
       /* font-size: 7rem; */
@@ -138,7 +155,7 @@ const MainTitle = styled.div`
       }
     }
   }
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 767px) {
     h4 {
       font-size: 4rem;
     }
@@ -150,16 +167,27 @@ const MainTitle = styled.div`
     }
   }
 `;
+
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 3%;
   letter-spacing: -0.2px;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
+
+  li {
+    width: 49%;
+  }
+
   /* gap: 40px; */
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 767px) {
     flex-direction: column;
+    padding: 0 6%;
+    li {
+      width: 100%;
+      margin-bottom: 40px;
+    }
   }
 `;
 
@@ -175,7 +203,7 @@ const Original = () => {
 
   return (
     <Container>
-      <TitleSection>
+      <TitleSection animate={true}>
         <MainTitle>
           <h4>zip originals</h4>
           <p>
@@ -202,6 +230,7 @@ const Original = () => {
               mainTitle={item.mainTitle}
               bagThumbnail={item.bagThumbnail}
               shorts={item.shorts}
+              starName={item.starName}
             />
           ))}
         </ZipList>
