@@ -27,6 +27,7 @@ a{
   --event-color: #ACE0FF;
   --ott-bg-color: #0E100F;
   --video-text: #aaaaaa;
+  --border-bottom: #3c3c3c;
 }
 
 html {

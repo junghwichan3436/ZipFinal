@@ -114,7 +114,7 @@ const ButtonWrap = styled.div`
   /* width: 100%; */
   width: 600px;
   display: flex;
-  gap: 40px;
+  gap: 20px;
 `;
 
 const Button = styled.button`
