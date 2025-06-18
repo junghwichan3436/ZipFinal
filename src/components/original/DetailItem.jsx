@@ -7,9 +7,6 @@ import YouTube from "react-youtube";
 /*--- 스와이퍼 ---*/
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/effect-fade";
-// import "swiper/css/navigation";
 
 const Container = styled.div`
   width: 100%;

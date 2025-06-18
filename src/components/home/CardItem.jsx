@@ -14,16 +14,16 @@ const Container = styled.li`
   position: relative;
 
   @media screen and (max-width: 1200px) {
-    width: 300px;
-    height: 370px;
+    width: 260px;
+    height: 340px;
   }
   @media screen and (max-width: 767px) {
-    width: 260px;
-    height: 320px;
+    width: 240px;
+    height: 300px;
   }
   @media screen and (max-width: 600px) {
-    width: 220px;
-    height: 280px;
+    width: 200px;
+    height: 260px;
   }
 `;
 const CardItemInfo = styled.div`
@@ -148,11 +148,7 @@ const CardItem = ({ subtitle, title, img, detailURL }) => {
         <button onClick={() => navigate(`/detail/${detailURL}`)}>→</button>
       </CardItemInfo>
       <CardImg>
-        <img
-          onClick={() => navigate(`/detail/${detailURL}`)}
-          src={img}
-          alt={`${detailURL} 이미지`}
-        />
+        <img onClick={() => navigate(`/detail/${detailURL}`)} src={img} alt={`${detailURL} 이미지`} />
       </CardImg>
     </Container>
   );
