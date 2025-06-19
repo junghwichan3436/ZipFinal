@@ -1,8 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { StarData, bagDataWithViews } from "../../StarData";
 import { useNavigate } from "react-router-dom";
-import Pagination from "react-js-pagination";
+import { StarData, workingDataWithViews } from "../../StarData";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
@@ -204,138 +203,32 @@ const PaginationWrap = styled.div`
   }
 `;
 
-const InMyBag = () => {
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
+const Work = () => {
   const [sortOrder, setSortOrder] = useState("latest");
-  // const { data, isLoading, error } = bagData();
-  const { data, isLoading, error } = bagDataWithViews();
+  const { data, isLoading, error } = workingDataWithViews();
   const {
     data: starData,
     isLoading: starLoading,
     error: starError,
   } = StarData();
   const navigate = useNavigate();
-  const [page, setPage] = useState(1); //현재 페이지
-  const itemsPerPage = 12;
-  const changePageHandler = (pageNumber) => {
-    setPage(pageNumber);
-  };
-
-  const categoryFiltered =
-    selectedCategory === "ALL"
-      ? data
-      : data?.filter((item) =>
-          item.videoOwnerChannelTitle
-            ?.toUpperCase()
-            .includes(selectedCategory.toUpperCase())
-        );
-
-  const filteredItems = categoryFiltered?.slice().sort((a, b) => {
-    if (sortOrder === "latest") {
-      return new Date(b.publishedAt) - new Date(a.publishedAt);
-    } else if (sortOrder === "popular") {
-      return (b.viewCount || 0) - (a.viewCount || 0);
-    }
-    return 0;
-  });
-
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedItems = filteredItems?.slice(startIndex, endIndex);
-
   return (
     <Container>
       <Title>
-        <h4>BAG ZIP</h4>
+        <h4>WORK ZIP</h4>
         <p>
-          당신이 좋아하는 연예인의 취향을 인마이백으로,
+          스타의 프로페셔널한 모습,
           <br />
-          <b>BAG ZIP</b>에서
+          한눈에 <b>ZIP</b>
         </p>
       </Title>
       <FilterGroup>
         <Category>
-          {["ALL", "ALLURE", "ELLE", "GQ", "VOGUE", "W"].map((data) => (
-            <li
-              className={selectedCategory === data ? "active" : ""}
-              key={data}
-              onClick={() => setSelectedCategory(data)}
-            >
-              {data}
-            </li>
-          ))}
+          <li>ALL</li>
         </Category>
-        <select
-          name="filter"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="latest">최신순</option>
-          <option value="popular">인기순</option>
-          {/* <option value="">조회순</option> */}
-        </select>
       </FilterGroup>
-
-      <Contents>
-        {paginatedItems?.map((item) => {
-          // const { snippet } = item;
-          // const videoId = snippet.resourceId?.videoId;
-          // const thumbnail = snippet.thumbnails?.maxres?.url;
-          // const title = snippet.title;
-          // const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
-
-          const title = item.title || item.snippet?.title;
-          const videoId = item.resourceId?.videoId || item.videoId || item.id;
-          const thumbnail =
-            item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
-          const videoOwnerChannelTitle =
-            item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
-
-          console.log(filteredItems);
-
-          const matchedArtist = starData?.artists?.find((artist) =>
-            title.includes(artist.artistName)
-          );
-          // console.log(snippet);
-          return (
-            <Video key={videoId}>
-              <img
-                src={thumbnail}
-                alt={title}
-                onClick={() =>
-                  navigate(`/ott/detail/${encodeURIComponent(title)}`)
-                }
-              />
-              <VideoText>
-                <div>
-                  <img
-                    src={matchedArtist ? matchedArtist.artistImg : ""}
-                    alt={matchedArtist?.artistName || "artist"}
-                  />
-                </div>
-                <div>
-                  <p>{title}</p>
-                  <p>{videoOwnerChannelTitle}</p>
-                </div>
-              </VideoText>
-            </Video>
-          );
-        })}
-      </Contents>
-      <PaginationWrap>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={itemsPerPage}
-          totalItemsCount={filteredItems?.length}
-          pageRangeDisplayed={5}
-          // prevPageText={"‹"}
-          // nextPageText={"›"}
-          hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
-          onChange={changePageHandler} // 페이지 바뀔때 함수
-        />
-      </PaginationWrap>
     </Container>
   );
 };
 
-export default InMyBag;
+export default Work;
