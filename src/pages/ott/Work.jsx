@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StarData, workingDataWithViews } from "../../StarData";
 import styled from "styled-components";
+import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -81,19 +82,11 @@ const Category = styled.ul`
   width: 100%;
   display: flex;
   li {
+    background: var(--light-color);
+    color: var(--dark-color);
     font-family: "EHNormalTrial";
     padding: 14px 20px;
-    /* border: 1px solid var(--light-color); */
-    transition: all 0.3s;
     cursor: pointer;
-    &:hover {
-      background: var(--light-color);
-      color: var(--dark-color);
-    }
-    &.active {
-      background: var(--light-color);
-      color: var(--dark-color);
-    }
   }
   @media (max-width: 1024px) {
     li {
@@ -135,9 +128,10 @@ const Video = styled.div`
   img {
     width: 100%;
     object-fit: cover;
-    cursor: pointer;
+    aspect-ratio: 16 / 9;
     transition: scale 0.3s;
     border-radius: 4px;
+    cursor: pointer;
     &:hover {
       scale: 1.04;
       /* transform: translateY(-10%); */
@@ -150,8 +144,8 @@ const VideoText = styled.div`
   align-items: center;
   gap: 10px;
   img {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
   }
@@ -205,6 +199,8 @@ const PaginationWrap = styled.div`
 
 const Work = () => {
   const [sortOrder, setSortOrder] = useState("latest");
+  const [page, setPage] = useState(1); //현재 페이지
+
   const { data, isLoading, error } = workingDataWithViews();
   const {
     data: starData,
@@ -212,6 +208,25 @@ const Work = () => {
     error: starError,
   } = StarData();
   const navigate = useNavigate();
+
+  const filteredItems = data?.slice().sort((a, b) => {
+    if (sortOrder === "latest") {
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    } else if (sortOrder === "popular") {
+      return (b.viewCount || 0) - (a.viewCount || 0);
+    }
+    return 0;
+  });
+
+  //pagenation
+  const itemsPerPage = 12;
+  const changePageHandler = (pageNumber) => {
+    setPage(pageNumber);
+  };
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = filteredItems?.slice(startIndex, endIndex);
+
   return (
     <Container>
       <Title>
@@ -226,7 +241,64 @@ const Work = () => {
         <Category>
           <li>ALL</li>
         </Category>
+        <select
+          name="filter"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="latest">최신순</option>
+          <option value="popular">인기순</option>
+          {/* <option value="">조회순</option> */}
+        </select>
       </FilterGroup>
+      <Contents>
+        {paginatedItems?.map((item) => {
+          const title = item.title || item.snippet?.title;
+          const videoId = item.resourceId?.videoId || item.videoId || item.id;
+          const thumbnail =
+            item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
+          const videoOwnerChannelTitle =
+            item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
+
+          const matchedArtist = starData?.artists?.find((artist) =>
+            title.includes(artist.artistName)
+          );
+
+          return (
+            <Video key={videoId}>
+              <img
+                src={thumbnail}
+                alt={title}
+                onClick={() =>
+                  navigate(`/ott/detail/${encodeURIComponent(title)}`)
+                }
+              />
+              <VideoText>
+                <div>
+                  <img
+                    src={matchedArtist ? matchedArtist.artistImg : ""}
+                    alt={matchedArtist?.artistName || "artist"}
+                  />
+                </div>
+                <div>
+                  <p>{title}</p>
+                  <p>{videoOwnerChannelTitle}</p>
+                </div>
+              </VideoText>
+            </Video>
+          );
+        })}
+      </Contents>
+      <PaginationWrap>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={filteredItems?.length}
+          pageRangeDisplayed={5}
+          hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
+          onChange={changePageHandler} // 페이지 바뀔때 함수
+        />
+      </PaginationWrap>
     </Container>
   );
 };
