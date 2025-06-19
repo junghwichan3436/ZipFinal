@@ -133,3 +133,10 @@ export function bagDataWithViews() {
     queryFn: () => fetchFromAllPlaylistsWithViews([inmybag]),
   });
 }
+
+export function workingDataWithViews() {
+  return useQuery({
+    queryKey: ["workingDataWithViews"],
+    queryFn: () => fetchFromAllPlaylistsWithViews([working]),
+  });
+}
