@@ -151,14 +151,13 @@ const VideoText = styled.div`
   align-items: center;
   gap: 10px;
   img {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
   }
   p {
     &:nth-child(1) {
-      /* font-weight: bold; */
       line-height: 1.2;
       margin-bottom: 10px;
       display: -webkit-box;
@@ -207,7 +206,6 @@ const PaginationWrap = styled.div`
 const InMyBag = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [sortOrder, setSortOrder] = useState("latest");
-  // const { data, isLoading, error } = bagData();
   const { data, isLoading, error } = bagDataWithViews();
   const {
     data: starData,
@@ -215,6 +213,7 @@ const InMyBag = () => {
     error: starError,
   } = StarData();
   const navigate = useNavigate();
+
   const [page, setPage] = useState(1); //현재 페이지
   const itemsPerPage = 12;
   const changePageHandler = (pageNumber) => {
@@ -328,8 +327,6 @@ const InMyBag = () => {
           itemsCountPerPage={itemsPerPage}
           totalItemsCount={filteredItems?.length}
           pageRangeDisplayed={5}
-          // prevPageText={"‹"}
-          // nextPageText={"›"}
           hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
           onChange={changePageHandler} // 페이지 바뀔때 함수
         />

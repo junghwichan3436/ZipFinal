@@ -140,3 +140,10 @@ export function workingDataWithViews() {
     queryFn: () => fetchFromAllPlaylistsWithViews([working]),
   });
 }
+
+export function interviewDataWithViews() {
+  return useQuery({
+    queryKey: ["interviewDataWithViews"],
+    queryFn: () => fetchFromAllPlaylistsWithViews([interview]),
+  });
+}
