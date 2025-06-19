@@ -11,9 +11,7 @@ const Container = styled.section`
   color: var(--light-color);
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-
   @media screen and (max-width: 1024px) {
-    height: 100%;
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -24,13 +22,14 @@ const Container = styled.section`
 `;
 const Title = styled.article`
   padding: 6%;
-  font-size: 6rem;
-  line-height: 7rem;
   grid-column: 1 / span 5;
   display: flex;
   flex-direction: column;
   h2 {
+    font-size: 4.6rem;
+    line-height: 1.2;
     font-family: "EHNormalTrial";
+    margin-bottom: 40px;
   }
   p {
     font-size: 2rem;
@@ -40,19 +39,18 @@ const Title = styled.article`
   @media screen and (max-width: 1024px) {
     padding: 6% 3% 0;
     margin-top: 0%;
-    font-size: 5rem;
-    line-height: 6rem;
+    h2 {
+      font-size: 3.2rem;
+      margin-bottom: 18px;
+    }
+    p {
+      font-size: 1.6rem;
+    }
     br {
       display: none;
     }
   }
   @media screen and (max-width: 767px) {
-    font-size: 3.6rem;
-    line-height: 6rem;
-    p {
-      font-size: 1.6rem;
-      color: var(--subTitle);
-    }
   }
 `;
 const CardWrapper = styled.ul`

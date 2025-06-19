@@ -27,8 +27,8 @@ const Container = styled.main`
 `;
 
 const OriginalDetail = () => {
-  const { id } = useParams(); // URL 파라미터 가져오기
-  // const [originalData, setOriginalData] = useState([]);
+  const { id } = useParams();
+
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const OriginalDetail = () => {
       .then((response) => response.json())
       .then((data) => {
         const item = data.originalData.find(
-          (item) => String(item.id) === id // id는 문자열이므로 형 변환 필요
+          (item) => String(item.id) === id
         );
         setSelectedItem(item);
       });
