@@ -15,7 +15,6 @@ const Container = styled.div`
   font-family: "EHNormalTrial";
   font-weight: 500;
   letter-spacing: 0.2px;
-
   @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
@@ -28,8 +27,9 @@ const Container = styled.div`
 const CategotyImg = styled.ul`
   border-top: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  height: 900px;
+  height: 760px;
   overflow: hidden;
+
   li {
     width: 100%;
     height: 100%;
@@ -60,10 +60,9 @@ const Info = styled.section`
 
 const MainTitle = styled.div`
   display: flex;
-  padding: 60px;
+  padding: 60px 30px;
   justify-content: space-between;
   align-items: center;
-
   @media screen and (max-width: 1024px) {
     padding: 50px 5%;
   }
@@ -74,11 +73,11 @@ const MainTitle = styled.div`
 
 const Title = styled.h2`
   color: var(--dark-color);
-  font-size: 10rem;
+  font-size: 8rem;
   letter-spacing: -4px;
 
   @media screen and (max-width: 1024px) {
-    font-size: 7rem;
+    font-size: 6rem;
   }
   @media screen and (max-width: 767px) {
     letter-spacing: -2px;
@@ -90,7 +89,7 @@ const CategoryItem = styled.ul`
   li {
     font-size: 5rem;
     letter-spacing: -1px;
-    padding: 50px 60px;
+    padding: 40px 40px;
     border-top: 1px solid var(--border-color);
     transition: all 0.7s;
     cursor: pointer;

@@ -19,8 +19,7 @@ const Container = styled.div`
     content: "";
     padding: 0;
     background: #0e100f
-      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png")
-      center;
+      url("https://cdn.prod.website-files.com/66830a26921cfac79c4c2c9c/668fa5303a4db2a0e1253a6f_bg.png") center;
     position: fixed;
     top: 0;
     left: 0;
@@ -71,17 +70,13 @@ const TitleSection = styled.section`
     }
   }
   @media screen and (max-width: 767px) {
-    .allZips {
-      /* gap: 10px; */
-      /* margin: 10px 0 0; */
-    }
   }
 `;
 const MainTitle = styled.div`
   display: flex;
   gap: 30px;
   align-items: end;
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 20px;
   border-bottom: 1px solid #3c3c3c;
   h4 {
@@ -110,35 +105,25 @@ const MainTitle = styled.div`
     flex-direction: column;
     align-items: start;
     h4 {
-      font-size: 6rem;
+      font-size: 5rem;
       letter-spacing: -2px;
     }
     br {
       display: none;
     }
     p {
-      font-size: 1.8rem;
-
-      /* line-height: 1.4; */
+      font-size: 1.6rem;
       b {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
       }
     }
   }
   @media screen and (max-width: 767px) {
     gap: 20px;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-bottom: 20px;
     h4 {
-      /* font-size: 7rem; */
       letter-spacing: -2px;
-    }
-    p {
-      /* font-size: 1.3rem; */
-      /* line-height: 1.4; */
-      b {
-        /* font-size: 1.4rem; */
-      }
     }
   }
   @media screen and (max-width: 767px) {
@@ -175,12 +160,9 @@ const ZipList = styled.ul`
   padding: 0 3%;
   letter-spacing: -0.2px;
   padding-bottom: 30px;
-
   li {
     width: 49%;
   }
-
-  /* gap: 40px; */
   @media screen and (max-width: 767px) {
     flex-direction: column;
     padding: 0 6%;
@@ -225,7 +207,7 @@ const Original = () => {
               key={index}
               onClick={() => navigate(`/ott/originalDetail/${item.id}`)}
               thumbnail={item.thumbnail}
-              staticThumbnail={item.staticThumbnail}
+              staticThumbnail={item?.staticThumbnail}
               subTitle={item.subTitle}
               mainTitle={item.mainTitle}
               bagThumbnail={item.bagThumbnail}
