@@ -22,7 +22,7 @@ const Title = styled.div`
   gap: 40px;
   padding-top: 120px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #3c3c3c;
+  border-bottom: 1px solid var(--border-bottom);
   h4 {
     font-size: 7rem;
     font-family: "EHNormalTrial";
@@ -42,10 +42,16 @@ const Title = styled.div`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: start;
     gap: 20px;
-    h4 {
+    /* h4 {
       font-size: 3rem;
+    } */
+    p {
+      display: flex;
+      /* letter-spacing: 0.1rem; */
     }
   }
 `;
@@ -53,18 +59,19 @@ const Title = styled.div`
 const FilterGroup = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: right;
   select {
-    padding: 0 30px 0 10px;
-    border: 1px solid #3c3c3c;
+    /* border: none; */
+    padding: 14px 30px 14px 10px;
+    border: 1px solid var(--border-bottom);
     background: var(--ott-bg-color);
     color: var(--light-color);
     outline: none;
     cursor: pointer;
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     select {
-      padding: 0 16px 0 8px;
+      padding: 0 14px 0 8px;
     }
   }
 `;
@@ -92,9 +99,9 @@ const Category = styled.ul`
       font-size: 1.4rem;
     }
   }
-  @media (max-width: 428px) {
+  @media (max-width: 767px) {
     li {
-      padding: 10px 16px;
+      padding: 10px 14px;
       font-size: 1.4rem;
     }
   }
@@ -122,8 +129,8 @@ const Video = styled.div`
   } */
   img {
     width: 100%;
-    aspect-ratio: 16/9;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
     cursor: pointer;
     transition: scale 0.3s;
     &:hover {
@@ -145,7 +152,7 @@ const VideoText = styled.div`
   }
   p {
     &:nth-child(1) {
-      font-weight: bold;
+      /* font-weight: bold; */
       margin-bottom: 10px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -165,6 +172,26 @@ const VideoText = styled.div`
       }
       &:nth-child(2) {
         font-size: 1.2rem;
+      }
+    }
+  }
+`;
+
+const PaginationWrap = styled.div`
+  width: 100%;
+  margin-bottom: 40px;
+  ul {
+    display: flex;
+    justify-content: center;
+    li {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--border-color);
+      &.active {
+        color: var(--light-color);
       }
     }
   }
@@ -209,7 +236,7 @@ const Talk = () => {
         <select name="filter" id="">
           <option value="">최신순</option>
           <option value="">인기순</option>
-          <option value="">조회순</option>
+          {/* <option value="">조회순</option> */}
         </select>
       </FilterGroup>
       <Contents>
