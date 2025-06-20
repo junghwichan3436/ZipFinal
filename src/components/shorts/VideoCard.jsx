@@ -15,18 +15,20 @@ import {
   faPaperPlane as faPaperPlaneRegular,
 } from "@fortawesome/free-regular-svg-icons";
 
-// 📱 스타일 컴포넌트들
+// 📱 스타일 컴포넌트들 - 원래 크기 복원
 const VideoCardContainer = styled.div`
   background: #111;
   border-radius: 10px;
   overflow: hidden;
   transition: all 0.5s ease;
   cursor: pointer;
-  width: 458px;
-  height: 814px;
   position: relative;
   border: 2px solid transparent;
   margin: 0 auto;
+
+  /* 원래 크기로 복원 */
+  width: 458px;
+  height: 814px;
 
   &:hover {
     transform: scale(1.03);
@@ -38,6 +40,21 @@ const VideoCardContainer = styled.div`
     transform: scale(1.02);
   }
 
+  /* 태블릿 크기 */
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 380px;
+    height: 676px;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    .swiper-slide-active & {
+      transform: scale(1.01);
+    }
+  }
+
+  /* 모바일 크기 */
   @media screen and (max-width: 768px) {
     width: 280px;
     height: 498px;

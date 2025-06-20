@@ -75,8 +75,6 @@ const MainTitle = styled.div`
     }
     p {
       font-size: 1.8rem;
-
-      /* line-height: 1.4; */
       b {
         font-size: 1.7rem;
       }
@@ -87,15 +85,9 @@ const MainTitle = styled.div`
     padding-top: 100px;
     padding-bottom: 20px;
     h4 {
-      /* font-size: 7rem; */
       letter-spacing: -2px;
     }
     p {
-      /* font-size: 1.3rem; */
-      /* line-height: 1.4; */
-      b {
-        /* font-size: 1.4rem; */
-      }
     }
   }
   @media screen and (max-width: 767px) {
@@ -168,8 +160,8 @@ const CarouselContainer = styled.div`
   .mySwiper {
     width: 100%;
     padding-top: 50px;
-    padding-bottom: 50px;
-    overflow: hidden;
+    padding-bottom: 100px; /* 페이지네이션을 위한 여백 증가 */
+    overflow: visible;
   }
 
   .swiper-slide {
@@ -179,6 +171,9 @@ const CarouselContainer = styled.div`
     transition: all 0.5s ease;
     opacity: 0.4;
     filter: brightness(0.6);
+    /* Swiper가 자동으로 너비를 계산하도록 설정 */
+    width: auto !important;
+    flex-shrink: 0;
   }
 
   .swiper-slide-active {
@@ -187,67 +182,125 @@ const CarouselContainer = styled.div`
     transform: scale(1.05);
   }
 
-  /* 데스크톱에서 정확히 5개만 보이도록 강제 제한 */
+  /* 페이지네이션 스타일 개선 */
+  .swiper-pagination {
+    bottom: 20px !important;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #fff;
+    transform: scale(1.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .swiper-pagination-bullet:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* 데스크톱: 페이지네이션 캐러셀 (5개씩 그룹) */
   @media screen and (min-width: 1025px) {
     .mySwiper {
-      max-width: 2400px;
+      max-width: 2500px; /* 5개 카드가 들어갈 수 있는 충분한 너비 */
       margin: 0 auto;
     }
 
     .swiper-wrapper {
-      max-width: 2300px;
-      margin: 0 auto;
+      align-items: center;
     }
 
     .swiper-slide {
-      width: 458px !important;
+      width: 458px !important; /* 원래 카드 크기 고정 */
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-shrink: 0;
+      /* 데스크톱에서도 Coverflow 효과 유지 */
+      opacity: 0.4;
+      filter: brightness(0.6);
+      transition: all 0.5s ease;
     }
 
-    /* 6번째 이후 슬라이드 숨김 */
-    .swiper-slide:nth-child(n + 7) {
-      display: none !important;
+    /* 데스크톱에서도 가운데 활성 슬라이드 강조 */
+    .swiper-slide-active {
+      opacity: 1 !important;
+      filter: brightness(1) !important;
+      transform: scale(1.05) !important;
+    }
+
+    /* 페이지네이션 위치 조정 */
+    .swiper-pagination {
+      position: relative;
+      margin-top: 30px;
     }
   }
 
-  /* 태블릿에서 정확히 3개만 보이도록 강제 제한 */
+  /* 태블릿: 무한 슬라이드 방식 (3개씩) */
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     .mySwiper {
-      max-width: 1500px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .swiper-wrapper {
-      max-width: 1400px;
-      margin: 0 auto;
+      align-items: center;
     }
 
     .swiper-slide {
-      width: 458px !important;
+      width: 380px !important;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-shrink: 0;
     }
 
-    /* 4번째 이후 슬라이드 숨김 */
-    .swiper-slide:nth-child(n + 5) {
-      display: none !important;
+    /* 태블릿에서는 페이지네이션 숨김 */
+    .swiper-pagination {
+      display: none;
     }
   }
 
-  /* 모바일에서 1개만 보이도록 제한 */
+  /* 모바일: 무한 슬라이드 방식 (1개씩) */
   @media screen and (max-width: 768px) {
     .mySwiper {
       max-width: 320px;
       margin: 0 auto;
     }
 
+    .swiper-wrapper {
+      align-items: center;
+    }
+
     .swiper-slide {
       width: 280px !important;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-shrink: 0;
     }
 
-    /* 2번째 이후 슬라이드 숨김 */
-    .swiper-slide:nth-child(n + 3) {
-      display: none !important;
+    /* 모바일에서는 페이지네이션 숨김 */
+    .swiper-pagination {
+      display: none;
     }
   }
 `;
@@ -255,7 +308,7 @@ const CarouselContainer = styled.div`
 // 🚀 메인 Short 컴포넌트
 const Short = () => {
   // 📱 상태 관리
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(0); // 초기값을 0으로 변경
   const [playingVideo, setPlayingVideo] = useState(null);
   const [loadingVideo, setLoadingVideo] = useState(null);
   const [loadedVideos, setLoadedVideos] = useState(new Set());
@@ -286,7 +339,6 @@ const Short = () => {
     const updateCoverflowEffect = () => {
       const width = window.innerWidth;
       if (width <= 1024 && width > 768) {
-        // 태블릿에서는 효과를 약간 줄임
         setCoverflowConfig({
           rotate: 12,
           stretch: 0,
@@ -295,7 +347,6 @@ const Short = () => {
           slideShadows: false,
         });
       } else if (width <= 768) {
-        // 모바일에서는 효과를 더 줄임
         setCoverflowConfig({
           rotate: 8,
           stretch: 0,
@@ -304,7 +355,6 @@ const Short = () => {
           slideShadows: false,
         });
       } else {
-        // 데스크톱에서는 원래 효과 (1025px 이상)
         setCoverflowConfig({
           rotate: 18,
           stretch: 0,
@@ -405,9 +455,12 @@ const Short = () => {
     loadData();
   }, []);
 
-  // 🎞️ 슬라이드 변경 핸들러
+  // 🎞️ 슬라이드 변경 핸들러 (개선됨)
   const handleSlideChange = useCallback((swiper) => {
-    setActiveIndex(swiper.activeIndex);
+    const realIndex = swiper.realIndex; // loop 모드에서 실제 인덱스 사용
+    setActiveIndex(realIndex);
+
+    // 모든 비디오 정지
     Object.values(playerRefs.current).forEach((player) => {
       if (player && player.stopVideo) {
         player.stopVideo();
@@ -584,29 +637,56 @@ const Short = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={"auto"}
+              slidesPerView={5} // 데스크톱 기본값
               spaceBetween={40}
               coverflowEffect={coverflowConfig}
               modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               onSlideChange={handleSlideChange}
-              loop={true}
-              initialSlide={2}
+              // 데스크톱에서는 페이지네이션, 모바일/태블릿에서는 무한 루프
+              loop={window.innerWidth <= 1024} // 1024px 이하에서만 무한 루프
+              loopAdditionalSlides={window.innerWidth <= 1024 ? 3 : 0}
+              slidesPerGroup={window.innerWidth >= 1025 ? 5 : 1} // 데스크톱에서는 5개씩 그룹
+              pagination={
+                window.innerWidth >= 1025
+                  ? {
+                      clickable: true,
+                      dynamicBullets: true,
+                    }
+                  : false
+              } // 데스크톱에서만 페이지네이션
+              initialSlide={0}
+              speed={600}
+              resistance={true}
+              resistanceRatio={0.85}
+              watchSlidesProgress={true}
               breakpoints={{
                 1025: {
                   slidesPerView: 5,
                   spaceBetween: 40,
-                  centeredSlides: true,
+                  centeredSlides: true, // 가운데 정렬로 변경
+                  slidesPerGroup: 5, // 5개씩 그룹
+                  loop: false, // 무한 루프 비활성화
+                  pagination: {
+                    clickable: true,
+                    dynamicBullets: true,
+                  },
                 },
                 769: {
                   slidesPerView: 3,
                   spaceBetween: 25,
                   centeredSlides: true,
+                  slidesPerGroup: 1, // 1개씩 이동
+                  loop: true, // 무한 루프
+                  pagination: false, // 페이지네이션 비활성화
                 },
                 0: {
                   slidesPerView: 1,
                   spaceBetween: 10,
                   centeredSlides: true,
+                  slidesPerGroup: 1, // 1개씩 이동
+                  loop: true, // 무한 루프
+                  pagination: false, // 페이지네이션 비활성화
                 },
               }}
             >
