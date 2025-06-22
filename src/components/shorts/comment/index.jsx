@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import useCommentStore from "../stores/commentStore";
@@ -18,6 +18,7 @@ const Comment = React.memo(
     const { getAllComments, setApiComments, clearReplyingTo } =
       useCommentStore();
 
+    const commentListRef = useRef(null);
     const allComments = getAllComments();
 
     // API 데이터로 댓글 초기화
@@ -34,8 +35,21 @@ const Comment = React.memo(
       }
     }, [isOpen, clearReplyingTo]);
 
+    // 새 댓글이 추가될 때마다 스크롤을 맨 아래로 이동
+    useEffect(() => {
+      if (commentListRef.current && allComments.length > 0) {
+        // 약간의 지연을 두고 스크롤 (DOM 업데이트 후)
+        setTimeout(() => {
+          commentListRef.current.scrollTop =
+            commentListRef.current.scrollHeight;
+        }, 100);
+      }
+    }, [allComments.length]);
+
     // 댓글창이 닫혀있으면 렌더링하지 않음
     if (!isOpen) return null;
+
+    // store에서 이미 올바른 순서로 정렬되어 있으므로 그대로 사용
 
     return (
       <>
@@ -48,7 +62,7 @@ const Comment = React.memo(
             </CloseButton>
           </CommentHeader>
 
-          <CommentList>
+          <CommentList ref={commentListRef}>
             {allComments.length > 0 ? (
               allComments.map((comment) => (
                 <CommentItem key={comment.id} comment={comment} />
