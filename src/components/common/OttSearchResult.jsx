@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { useAllDataViews, playlistIds, StarData } from "../../StarData";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import "swiper/css/navigation";
 import YouTube from "react-youtube";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+
+const Wrapper = styled.div`
+  height: 100%;
+`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -17,91 +19,56 @@ const Container = styled.div`
   justify-content: space-between;
   .videoWrapper {
     display: flex;
+    justify-content: space-between;
     width: 100%;
+  }
+  @media screen and (max-width: 1024px) {
+    gap: 40px;
   }
 `;
 
 const Artist = styled.div`
   display: flex;
-  flex-direction: column;
   width: 100%;
-  gap: 20px;
-  img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
+  gap: 50px;
+  text-align: center;
+  .artistBox {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.6rem;
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  @media screen and (max-width: 1300px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media screen and (max-width: 767px) {
+    .artistBox {
+      font-size: 1.4rem;
+    }
   }
 `;
 
 const Category = styled.div`
   display: flex;
   width: 100%;
-  flex-direction: column;
-  gap: 20px;
+  gap: 50px;
   .swiper-slide {
     display: flex;
+    cursor: pointer;
     flex-direction: column;
     gap: 16px;
   }
-  .swiper-button-prev,
-  .swiper-button-next {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none; /* 안 보일 때 클릭 안 되게 */
-    background: var(--light-color);
-    border-radius: 50%;
-    color: var(--dark-color);
-    width: 40px;
-    height: 40px;
-    &::after {
-      font-size: 3rem;
-    }
-  }
-  &:hover {
-    .swiper-button-prev,
-    .swiper-button-next {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-  .swiper-button-prev::after {
-    content: "<";
-  }
-  .swiper-button-next::after {
-    content: ">";
-  }
-  @media screen and (max-width: 767px) {
-    padding: 0% 3%;
-    .swiper-button-prev,
-    .swiper-button-next {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none; /* 안 보일 때 클릭 안 되게 */
-      background: var(--light-color);
-      border-radius: 50%;
-      color: var(--dark-color);
-      width: 32px;
-      height: 32px;
-      &::after {
-        font-size: 2rem;
-      }
-    }
-  }
-`;
-
-const ArtistWrap = styled(Category)`
-  display: flex;
-  justify-content: space-between;
-  .artistBox {
-    display: flex;
+  @media screen and (max-width: 1300px) {
     flex-direction: column;
+    gap: 20px;
   }
 `;
 
@@ -110,7 +77,11 @@ const SlideTitle = styled.h3`
   font-weight: bold;
   font-family: "EHNormalTrial";
   z-index: 1;
-
+  width: 10%;
+  text-align: left;
+  @media screen and (max-width: 1300px) {
+    width: 100%;
+  }
   @media screen and (max-width: 1024px) {
     font-size: 2.4rem;
   }
@@ -151,35 +122,19 @@ const VideoCon = styled.div`
 const VideoText = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 100px;
   div {
-    &:nth-child(1) {
-      flex: 1;
-      cursor: pointer;
-    }
-    &:nth-child(2) {
-      flex: 9;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      p {
-        &:first-child {
-          font-size: 1.4rem;
-          line-height: 1.8rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        &:nth-child(2) {
-          font-size: 1.2rem;
-          color: var(--subTitle);
-          text-transform: uppercase;
-        }
-      }
+    p {
+      font-size: 1.4rem;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
+
   img {
     width: 40px;
     height: 40px;
@@ -200,19 +155,23 @@ const VideoText = styled.div`
 
 const FilterWrap = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 50px;
+  @media screen and (max-width: 1300px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 const Filter = styled.div`
-  display: flex;
-  justify-content: space-between;
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
   div {
     position: relative;
     width: 100%;
     height: 100%;
+    cursor: pointer;
     img {
       width: 100%;
       height: 100%;
@@ -238,17 +197,32 @@ const Filter = styled.div`
       }
     }
   }
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const OttSearchResult = () => {
   const { isLoading, data } = useAllDataViews(playlistIds);
   const { isLoading: loading02, data: data02 } = StarData();
+  const allLoading = isLoading || loading02;
+
+  const topRatedData = useMemo(() => {
+    if (allLoading || !data) return [];
+    return data.sort((a, b) => b.viewCount - a.viewCount).slice(0, 12);
+  }, [allLoading, data]);
+
+  const artist = useMemo(() => {
+    if (allLoading || !topRatedData || !data02?.artists) return [];
+    return data02?.artists?.filter((artist) =>
+      topRatedData?.find((item) => item.title.includes(artist.artistName))
+    );
+  }, [topRatedData, data02?.artists]);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
-  const topRatedData = data?.slice(0, 12);
-  const artist = data02?.artists?.filter((artist) =>
-    topRatedData?.find((item) => item.title.includes(artist.artistName))
-  );
+
+  console.log(artist);
+
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;
@@ -268,6 +242,7 @@ const OttSearchResult = () => {
       VideoRef.current.stopVideo();
     }
   };
+
   const opts = {
     width: "100%",
     height: "100%",
@@ -284,161 +259,165 @@ const OttSearchResult = () => {
     },
   };
   return (
-    <Container>
-      <Artist>
-        <SlideTitle>POPULAR STAR</SlideTitle>
-        <ArtistWrap>
-          <Swiper
-            className="videoWrapper"
-            modules={[Navigation]}
-            navigation={true}
-            breakpoints={{
-              1920: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-              },
-              0: {
-                slidesPerView: 3, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
-                spaceBetween: 20,
-              },
-            }}
-          >
-            {artist?.map((artist) => (
-              <SwiperSlide className="artistBox">
-                <div>
-                  <img src={artist.artistImg} alt={artist.artistName} />
-                </div>
-                <p>{artist.artistName}</p>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </ArtistWrap>
-      </Artist>
-      <Category>
-        <SlideTitle>POPULAR VIDEO</SlideTitle>
-        <Swiper
-          className="videoWrapper"
-          modules={[Navigation]}
-          navigation={true}
-          breakpoints={{
-            1920: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            0: {
-              slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
-              spaceBetween: 20,
-            },
-          }}
-        >
-          {topRatedData?.map((video) => {
-            const working = data02?.artists?.find((artist) =>
-              video.title.includes(artist.artistName)
-            );
-            return working ? (
-              <>
-                <SwiperSlide key={video.position}>
-                  <VideoCon
-                    onMouseEnter={VideoPlay}
-                    onMouseLeave={VideoStop}
+    <Wrapper>
+      {!allLoading ? (
+        <Container>
+          <Artist>
+            <SlideTitle>POPULAR STAR</SlideTitle>
+            <Swiper
+              className="videoWrapper"
+              breakpoints={{
+                1920: {
+                  slidesPerView: 6,
+                  spaceBetween: 20,
+                },
+                1440: {
+                  slidesPerView: 5,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 20,
+                },
+                767: {
+                  slidesPerView: 5,
+                  spaceBetween: 20,
+                },
+                0: {
+                  slidesPerView: 4, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {artist?.map((artist) => (
+                <SwiperSlide
+                  className="artistBox"
+                  onClick={() => {
+                    navigate(`/star/${encodeURIComponent(artist.artistName)}`);
+                  }}
+                >
+                  <div>
+                    <img src={artist.artistImg} alt={artist.artistName} />
+                  </div>
+                  <p>{artist.artistName}</p>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Artist>
+          <Category>
+            <SlideTitle>POPULAR VIDEO</SlideTitle>
+            <Swiper
+              className="videoWrapper"
+              breakpoints={{
+                1920: {
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                0: {
+                  slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {topRatedData.map((video) => {
+                const working = () =>
+                  data02?.artists?.find((artist) =>
+                    video.title.includes(artist.artistName)
+                  );
+                if (!working) return [];
+                return (
+                  <SwiperSlide
+                    key={video.position}
                     onClick={() =>
                       navigate(`/ott/detail/${encodeURIComponent(video.title)}`)
                     }
                   >
-                    <img src={video.thumbnails.high.url} alt="" />
-                    <YouTube
-                      videoId={video.resourceId.videoId}
-                      opts={opts}
-                      onReady={handleReady}
-                    />
-                  </VideoCon>
-                  <VideoText>
-                    <div
-                      onClick={() => navigate(`/star/${working.artistName}`)}
-                    >
-                      <img src={working?.artistImg} alt="" />
-                    </div>
-                    <div>
-                      <p>{video.title}</p>
-                      <p>{video.videoOwnerChannelTitle}</p>
-                    </div>
-                  </VideoText>
-                </SwiperSlide>
-              </>
-            ) : (
-              <div></div>
-            );
-          })}
-        </Swiper>
-      </Category>
-      <FilterWrap>
-        <SlideTitle>BROWSE ALL</SlideTitle>
-        <Filter>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/cf88bc1e-e18e-436f-06ee-89ba28dabd00/w=1024,h=1024,fit=crop"
-                alt=""
-              />
-              <p>Bag</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/8665c12f-5a09-4a35-084c-5df2169e5900/w=1024,h=1280"
-                alt=""
-              />
-              <p>Bornup</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
-                alt=""
-              />
-              <p>Talk</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
-                alt=""
-              />
-              <p>Shorts</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
-                alt=""
-              />
-            </div>
-            <p>Star</p>
-          </div>
-          <div>
-            <div>
-              <img
-                src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
-                alt=""
-              />
-              <p>Orginal</p>
-            </div>
-          </div>
-        </Filter>
-      </FilterWrap>
-    </Container>
+                    <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
+                      <img src={video.thumbnails.high.url} alt="" />
+                      <YouTube
+                        videoId={video.resourceId.videoId}
+                        opts={opts}
+                        onReady={handleReady}
+                      />
+                    </VideoCon>
+                    <VideoText>
+                      <div>
+                        <p>{video.title}</p>
+                      </div>
+                    </VideoText>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </Category>
+          <FilterWrap>
+            <SlideTitle>BROWSE ALL</SlideTitle>
+            <Filter>
+              <div onClick={() => navigate(`/ott/bagzip`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/cf88bc1e-e18e-436f-06ee-89ba28dabd00/w=1024,h=1024,fit=crop"
+                    alt=""
+                  />
+                  <p>Bag</p>
+                </div>
+              </div>
+              <div onClick={() => navigate(`/ott/stylezip`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/8665c12f-5a09-4a35-084c-5df2169e5900/w=1024,h=1280"
+                    alt=""
+                  />
+                  <p>WORK</p>
+                </div>
+              </div>
+              <div onClick={() => navigate(`/ott/talkzip`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/57bf338a-e313-4b3f-8b8c-319643327900/w=1024,h=1280"
+                    alt=""
+                  />
+                  <p>Talk</p>
+                </div>
+              </div>
+              <div onClick={() => navigate(`/ott/short`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/7590d225-7bb5-48e8-d0ec-40d7fd569d00/w=1024,h=1280"
+                    alt=""
+                  />
+                  <p>Shorts</p>
+                </div>
+              </div>
+              <div onClick={() => navigate(`/star`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
+                    alt=""
+                  />
+                </div>
+                <p>Star</p>
+              </div>
+              <div onClick={() => navigate(`/ott/original`)}>
+                <div>
+                  <img
+                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/a44fb309-73a5-4d88-a58a-2b3bd7f3a900/w=1024,h=1024,fit=crop"
+                    alt=""
+                  />
+                  <p>Orginal</p>
+                </div>
+              </div>
+            </Filter>
+          </FilterWrap>
+        </Container>
+      ) : (
+        <div>넵</div>
+      )}
+    </Wrapper>
   );
 };
 
