@@ -6,7 +6,7 @@
       "starName": "로제",
       "jobCategory": "musician",
       "thumbnail": "https://64.media.tumblr.com/27d3f315997fcc04df3309307d1c9901/0dda17077632b77d-03/s540x810/9db198e10ad5b0c458b92a8162c90fd32f97f517.gif",
-      "staticThumbnail": "/public/img/로제.jpg",
+      "staticThumbnail": "/img/rose.jpg",
       "detailImg": "https://64.media.tumblr.com/3c8942ebb3c2b4c2ba2a7f6309c7c4a2/0dda17077632b77d-4f/s540x810/595fd00358c8f7bcbd6a1acb34e91553337b84c5.gifv",
       "episode": "APT MV 로제",
       "mainTitle": "그녀의 APT에는 어떤 리얼템이?",
@@ -14,48 +14,47 @@
       "keyword": ["APT", "블랙핑크", "로제"],
       "characterKeyword": ["레트로", "편안함", "따뜻한 조명"],
       "description": "로제는 이 도시 속 수많은 감정들 위에서 살아간다. 감정의 소용돌이 안에서 흘러가는 듯 보이지만, 실은 그 어느 때보다 단단하고 명확하다. APT 속의 그녀는 ‘지금 여기’에 존재하며, 누군가에게 보여지기 위한 사람이 아닌, 그저 ‘로제’로 살아가는 법을 배운다. 그녀는 감정을 말로 설명하기보단 공간에 스며들게 만든다. 조명이 따뜻한 이유, 브라운 톤의 옷을 고른 이유, 그 모든 선택은 그녀를 표현하는 방식이다. APT는 단순한 장소가 아니다. 이건 그녀가 가장 자신다운 순간을 마주하는 내밀한 공간이며, 그 안에서 우린 그녀의 진짜 모습을 엿볼 수 있다.",
-      "bagThumbnail": "https://i.ytimg.com/vi/Fd_En3y2amo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAuTCV-ZIaxOKdn6mklucG01V15VQ",
       "videoUrl": "Fd_En3y2amo",
       "items": [
         {
           "itemId": 1,
-          "subtitle": "peaceminusone",
-          "title": "귀여운 아이템과 함께\n편안한 일상",
-          "img": "https://i.ibb.co/Pzcv4Qdn/44.png",
-          "detailURL": "모남희 x 피스마이너스원 데희 플러시 키링"
-        },
-        {
-          "itemId": 2,
           "subtitle": "SAINTLAURENT",
-          "title": "혼자 있는 감정의 무게\n 그녀의 가방 속",
+          "title": "생로랑이 선택한 로제,\n그녀의 가방",
           "img": "https://i.ibb.co/rf3KygzQ/11.png",
           "detailURL": "그레이 램스킨 CALYPSO 라지백"
         },
         {
-          "itemId": 3,
-          "subtitle": "GLOWNY",
-          "title": "집에서는\n옷차림도 가볍게",
-          "img": "https://i.ibb.co/1Jnk1qR8/4.png",
-          "detailURL": "TANKINI SWIM TOP(BLACK)"
-        },
-        {
-          "itemId": 4,
+          "itemId": 2,
           "subtitle": "wildMoor",
-          "title": "\n위스키",
+          "title": " 잔잔하게 스며드는\n한 잔의 위스키",
           "img": "https://i.ibb.co/ycMp7184/10.png",
           "detailURL": "와일드 무어 30년산 위스키"
         },
         {
-          "itemId": 5,
+          "itemId": 3,
           "subtitle": "jenny house",
-          "title": "제니하우스\n",
+          "title": "향기와 결로 완성!\n로제의 무드",
           "img": "https://i.ibb.co/DP7xqk5Y/9.png",
           "detailURL": "제니하우스 스타일 컬링에센스"
         },
         {
+          "itemId": 4,
+          "subtitle": "GLOWNY",
+          "title": "하루의 끝,\n나를 감싸는 온기",
+          "img": "https://i.ibb.co/1Jnk1qR8/4.png",
+          "detailURL": "TANKINI SWIM TOP(BLACK)"
+        },
+        {
+          "itemId": 5,
+          "subtitle": "peaceminusone",
+          "title": "가방에 매달린,\n내 작은 위로",
+          "img": "https://i.ibb.co/Pzcv4Qdn/44.png",
+          "detailURL": "모남희 x 피스마이너스원 데희 플러시 키링"
+        },
+        {
           "itemId": 6,
           "subtitle": "GLOWNY",
-          "title": "집에서는\n옷차림도 가볍게",
+          "title": "하루의 끝,\n나를 감싸는 온기",
           "img": "https://i.ibb.co/1Jnk1qR8/4.png",
           "detailURL": "TANKINI SWIM TOP(BLACK)"
         }
@@ -93,57 +92,58 @@
       "starName": "이정하",
       "jobCategory": "actor",
       "thumbnail": "https://64.media.tumblr.com/1d599190e72bf652b45b250ff89797a0/33e24cc57554d4ab-76/s540x810/00ead1878907b91d4cca0fb4ee884b790f000773.gif",
-      "staticThumbnail": "/public/img/김봉석.jpg",
+      "staticThumbnail": "/img/jungha.jpg",
       "detailImg": "https://file3.instiz.net/data/cached_img/upload/2023/09/03/23/26d986f93d73db17b1993a0b00419485.gif",
       "episode": "무빙 김봉석",
       "mainTitle": "늘 무거운 봉석이의 비밀 가방",
       "subTitle": "비행 금지, 무거운 가방 경고 발령",
       "keyword": ["무빙", "김봉석", "이정하"],
       "characterKeyword": ["초능력", "귀여움", "노랑색"],
-      "description": "김봉석은 알고 있었다. 자신이 다른 아이들과 다르다는 것을. 그러나 그 ‘다름’이 드러나는 순간, 평온한 일상은 깨질 수 있다는 것도. 그래서 그는 달렸다. 무대가 아닌 운동장에서. 선풍기가 돌아가는 교실에서 친구들과 어울리고, 도시락을 먹고, 숙제를 했다. 그리고 그 모든 평범한 일상이 얼마나 소중한지 그 누구보다 잘 알고 있었다. 그는 초능력을 숨기기 위해 더 인간적으로 살았다. 어쩌면 그건 ‘강함’이 아닌 ‘약함’에서 온 선택일지도 모른다. 그의 가방 속에는 슈퍼히어로의 흔적 대신, 아버지의 시계, 친구들과 나눈 문구, 낡은 운동화가 있다.",
+      "description": "김봉석은 알고 있었다. 자신이 다른 아이들과 다르다는 것을. 그러나 그 다름이 드러나는 순간, 평온한 일상은 깨질 수 있다는 것도. 그래서 그는 달렸다. 무대가 아닌 운동장에서. 선풍기가 돌아가는 교실에서 친구들과 어울리고, 도시락을 먹고, 숙제를 했다. 그리고 그 모든 평범한 일상이 얼마나 소중한지 그 누구보다 잘 알고 있었다. 그는 초능력을 숨기기 위해 더 인간적으로 살았다. 어쩌면 그건 강함이 아닌 약함에서 온 선택일지도 모른다. 그의 가방 속에는 슈퍼히어로의 흔적 대신, 아버지의 시계, 친구들과 나눈 문구, 낡은 운동화가 있다.",
       "videoUrl": "6Ma0pvLZbhI",
       "items": [
         {
           "itemId": 1,
-          "subtitle": "ADIDAS",
-          "title": "뛰고, 날고, 숨기 위한\n최적의 보호색",
-          "img": "https://i.ibb.co/jvpcsc31/12.png",
-          "detailURL": "아디다스 x 아이언스테인 D4T HOODIE"
+          "subtitle": "wiggle wiggle",
+          "title": "초능력자도 손톱은\n잘라야 하니까",
+          "img": "https://i.ibb.co/wr81y6M8/4.png",
+          "detailURL": "손톱깎이 세트"
         },
         {
           "itemId": 2,
+          "subtitle": "ADIDAS",
+          "title": "하늘을 날아도,\n옷은 평범하게",
+          "img": "https://i.ibb.co/jvpcsc31/12.png",
+          "detailURL": "아디다스 x 아이언스테인 D4T HOODIE"
+        },
+
+        {
+          "itemId": 3,
           "subtitle": "HOOD HOOD",
-          "title": "귀여운 걸 좋아하는\n평범한 고등학생",
+          "title": "비밀이 많은 나도,\n귀여운 건 못참아",
           "img": "https://i.ibb.co/ycG1Mb6c/8.png",
           "detailURL": "에일리언 키링"
         },
         {
-          "itemId": 3,
+          "itemId": 4,
           "subtitle": "adidas",
-          "title": "아무 흔적도 없는\n가벼운 움직임",
+          "title": "착지 소음 없이,\n날아다니는 법",
           "img": "https://i.ibb.co/N20RqZvh/7.png",
           "detailURL": "게임코트 2.0 올코트 테니스화 인도어화"
         },
         {
-          "itemId": 4,
+          "itemId": 5,
           "subtitle": "ADIDAS",
-          "title": "뛰고, 날고, 숨기 위한\n최적의 보호색",
+          "title": "하늘을 날아도,\n옷은 평범하게",
           "img": "https://i.ibb.co/jvpcsc31/12.png",
           "detailURL": "아디다스 x 아이언스테인 D4T HOODIE"
         },
         {
-          "itemId": 5,
+          "itemId": 6,
           "subtitle": "HOOD HOOD",
-          "title": "귀여운 걸 좋아하는\n평범한 고등학생",
+          "title": "비밀이 많은 나도,\n귀여운 건 못참아",
           "img": "https://i.ibb.co/ycG1Mb6c/8.png",
           "detailURL": "에일리언 키링"
-        },
-        {
-          "itemId": 6,
-          "subtitle": "adidas",
-          "title": "아무 흔적도 없는\n가벼운 움직임",
-          "img": "https://i.ibb.co/N20RqZvh/7.png",
-          "detailURL": "게임코트 2.0 올코트 테니스화 인도어화"
         }
       ],
       "shorts": [
@@ -178,8 +178,8 @@
       "characterName": "윤세리",
       "starName": "손예진",
       "jobCategory": "actor",
-      "thumbnail": "/public/img/윤세리.gif",
-      "staticThumbnail": "/public/img/손예진.jpg",
+      "thumbnail": "/img/yoonseri.gif",
+      "staticThumbnail": "/img/sonyejin.jpg",
       "detailImg": "https://blog.kakaocdn.net/dn/cpROOa/btrTigbOxLg/Hn9g4BTjHXYxHuPYYpAkSk/img.gif",
       "episode": "사랑의 불시착 윤세리",
       "mainTitle": "국경도 막지 못한 윤세리의 뷰티템",
@@ -192,7 +192,7 @@
         {
           "itemId": 1,
           "subtitle": "dior",
-          "title": "불시착했지만\n림밤은 디올",
+          "title": "낙하산보다 먼저 챙긴\n디올 립밤",
           "img": "https://i.ibb.co/nswjdZt0/2.png",
           "detailURL": "루즈 디올 밤"
         },
@@ -206,29 +206,29 @@
         {
           "itemId": 3,
           "subtitle": "LAURA MERCIER",
-          "title": "북에서도\n피부는 포기 못해",
+          "title": "북한에서도\n피부는 부드럽게",
           "img": "https://i.ibb.co/d4YRfFXK/4.png",
           "detailURL": "Ambre Vanille Serum Body Cream"
         },
         {
           "itemId": 4,
-          "subtitle": "dior",
-          "title": "불시착했지만\n림밤은 디올",
-          "img": "https://i.ibb.co/hFT43Bwh/3.png",
-          "detailURL": "루즈 디올 밤"
+          "subtitle": "Sandy Liang",
+          "title": "세상 끝에서도\n귓불은 우아하게",
+          "img": "https://i.ibb.co/bRCbncFp/3.png",
+          "detailURL": "실버 & 골드 발레리나 이어링"
         },
         {
           "itemId": 5,
           "subtitle": "santamarianovella",
           "title": "낯선 땅에서\n그녀가 선택한 위로",
-          "img": "https://i.ibb.co/gMH5Y7pR/4.png",
+          "img": "https://i.ibb.co/hR7Ph6qH/3.png",
           "detailURL": "로사 노벨라 오드코롱"
         },
         {
           "itemId": 6,
           "subtitle": "LAURA MERCIER",
-          "title": "북에서도\n피부는 포기 못해",
-          "img": "https://i.ibb.co/CZk33FT/5.png",
+          "title": "북한에서도\n피부는 부드럽게",
+          "img": "https://i.ibb.co/d4YRfFXK/4.png",
           "detailURL": "Ambre Vanille Serum Body Cream"
         }
       ],
@@ -265,7 +265,7 @@
       "starName": "비비",
       "jobCategory": "musician",
       "thumbnail": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTAxMjZfMTAw%2FMDAxNzM3ODc2MDQ0NTA4._70cwUEzC-GeYJ4Tt-UbhYgeV3RAgEey6dlEmeorUGUg.f_ZMHj1aFPjMLiHKgJ9_Y9JVgnmIGMjA6pf5HR3Uc3gg.GIF%2FIMG_3533.GIF&type=sc960_832_gif",
-      "staticThumbnail": "/public/img/비비.jpg",
+      "staticThumbnail": "/img/bibi.jpg",
       "detailImg": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDExMThfNjUg%2FMDAxNzMxODYyNjM4MDU0.0fjJZRgxTAypGax5HqSyrhNiH-0_mMx72xFNrRbsr7Ig.rfDC28EonoJPDKfqMS173r5qka8h7Q_F3q5d6ObSluUg.GIF%2FIMG_3106.GIF&type=sc960_832_gif",
       "episode": "데레 MV 비비",
       "mainTitle": "당하지 않는 여자의 책가방",
@@ -284,38 +284,38 @@
         },
         {
           "itemId": 2,
-          "subtitle": "Gentle Monster",
-          "title": "감정을 숨기고\n타인을 지우는 방패",
-          "img": "https://i.ibb.co/qYDBfxvh/12.png",
-          "detailURL": "메종 마르지엘라 x 젠틀 몬스터 선글라스"
-        },
-        {
-          "itemId": 3,
           "subtitle": "tamburins",
           "title": "사랑을 기억나게 하는\n달콤한 향",
           "img": "https://i.ibb.co/kgphzMFK/6.png",
           "detailURL": "에그 립밤 로즈우디"
         },
         {
-          "itemId": 4,
-          "subtitle": "GUCCI",
-          "title": "복수는 말보다\n강렬한 색으로 입는 것",
-          "img": "https://i.ibb.co/Z1TJPc3y/6.png",
-          "detailURL": "208 데이 멧 인 아르헨티나, 루즈 아 레브르 브왈 립스틱"
+          "itemId": 3,
+          "subtitle": "laneige",
+          "title": "잠들기 전,\n나만 아는 치유",
+          "img": "https://i.ibb.co/mVtMmWS2/2.png",
+          "detailURL": "립 슬리핑 마스크 EX"
         },
         {
-          "itemId": 5,
+          "itemId": 4,
           "subtitle": "Gentle Monster",
-          "title": "감정을 숨기고\n타인을 지우는 방패",
-          "img": "https://i.ibb.co/DPy7Q5ph/7.png",
+          "title": "눈빛은 가리고,\n진심은 숨겨",
+          "img": "https://i.ibb.co/qYDBfxvh/12.png",
           "detailURL": "메종 마르지엘라 x 젠틀 몬스터 선글라스"
         },
         {
-          "itemId": 6,
+          "itemId": 5,
           "subtitle": "tamburins",
           "title": "사랑을 기억나게 하는\n달콤한 향",
-          "img": "https://i.ibb.co/wh0PqF1P/8.png",
+          "img": "https://i.ibb.co/kgphzMFK/6.png",
           "detailURL": "에그 립밤 로즈우디"
+        },
+        {
+          "itemId": 6,
+          "subtitle": "laneige",
+          "title": "잠들기 전,\n나만 아는 치유",
+          "img": "https://i.ibb.co/mVtMmWS2/2.png",
+          "detailURL": "립 슬리핑 마스크 EX"
         }
       ],
       "shorts": [
@@ -351,7 +351,7 @@
       "starName": "정호연",
       "jobCategory": "actor",
       "thumbnail": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fdata.whicdn.com%2Fimages%2F358742201%2Foriginal.gif&type=sc960_832_gif",
-      "staticThumbnail": "/public/img/강새벽.jpg",
+      "staticThumbnail": "/img/gang.jpg",
       "detailImg": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjNfMjMz%2FMDAxNjMyMzQ0OTc0MTIx.AmmfxGsvAZQLz_ZOhblxpX0RQ3uCHkX61XvwbqDKVDUg.clga4AiuOdtTTQwISavQtcduyrKCfp1knmz4nQEQ5DYg.GIF.hinokenz%2F%25BB%25F5%25BA%25AE%25C1%25F6%25BF%25B5_4.gif&type=sc960_832_gif",
       "episode": "오징어게임 강새벽",
       "mainTitle": "강새벽의 생존 가방",
@@ -364,7 +364,7 @@
         {
           "itemId": 1,
           "subtitle": "AcneStudios",
-          "title": "어디든 떠날 수 있는\n단 하나의 짐",
+          "title": "도망도, 시작도\n가능한 유일한 짐",
           "img": "https://i.ibb.co/YTqWGzHq/4.png",
           "detailURL": "마이크로 멀티 포켓 미니 백"
         },
@@ -378,16 +378,16 @@
         {
           "itemId": 3,
           "subtitle": "case a lot",
-          "title": "이 세상에서\n눈에 띄지 않는 법",
+          "title": "눈빛만 남기고 감췄던\n그녀의 하루",
           "img": "https://i.ibb.co/zHhWK8wT/2.png",
           "detailURL": "슬로건 로고 볼 캡 블루"
         },
         {
           "itemId": 4,
-          "subtitle": "AcneStudios",
-          "title": "어디든 떠날 수 있는\n단 하나의 짐",
-          "img": "https://i.ibb.co/YTqWGzHq/4.png",
-          "detailURL": "마이크로 멀티 포켓 미니 백"
+          "subtitle": "orthomol",
+          "title": "사랑받지 못했어도,\n살아남아야 하니까",
+          "img": "https://i.ibb.co/jv4yDVrw/5.png",
+          "detailURL": "이뮨 멀티 비타민 15정"
         },
         {
           "itemId": 5,
@@ -399,7 +399,7 @@
         {
           "itemId": 6,
           "subtitle": "case a lot",
-          "title": "이 세상에서\n눈에 띄지 않는 법",
+          "title": "눈빛만 남기고 감췄던\n그녀의 하루",
           "img": "https://i.ibb.co/zHhWK8wT/2.png",
           "detailURL": "슬로건 로고 볼 캡 블루"
         }
@@ -437,7 +437,7 @@
       "starName": "차준환",
       "jobCategory": "sports",
       "thumbnail": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWZHxt%2FbtrsVJq91UR%2Feuk4T5EQAolTzfMa7d8Tx0%2Fimg.gif&type=sc960_832_gif",
-      "staticThumbnail": "/public/img/차준환.jpg",
+      "staticThumbnail": "/img/chajunhwan.jpg",
       "detailImg": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQ9kb%2Fbtrs7lQiCa1%2Fm2Dv0hpMWQpUqi2daYCYlK%2Fimg.gif&type=sc960_832_gif",
       "episode": "무대 위의 고독, 얼음 위의 시인",
       "mainTitle": "얼음왕자의 아이템",
@@ -450,42 +450,42 @@
         {
           "itemId": 1,
           "subtitle": "TAMBURINS",
-          "title": "얼음 왕자가 선택한\n시원한 향",
+          "title": "지나가면 남는 건\n얼음 위의 잔향",
           "img": "https://i.ibb.co/QvL4cfSy/21.png",
           "detailURL": "퍼퓸 카모"
         },
         {
           "itemId": 2,
           "subtitle": "bottega veneta",
-          "title": "깔끔한 그와 어울리는\n심플 지갑",
+          "title": "섬세한 손끝이 고른\n간결한 선택",
           "img": "https://i.ibb.co/LDXv1Xxx/1.png",
           "detailURL": "23FW 여성 카드지갑 인트레치아토 블랙"
         },
         {
           "itemId": 3,
           "subtitle": "bvlgari",
-          "title": "바쁜 훈련 속\n시계는 필수탬",
+          "title": "바쁜 훈련 속\n시계는 필수템",
           "img": "https://media.bulgari.com/image/upload/c_pad,h_1874,w_2400/q_auto/f_auto/1488363.png",
           "detailURL": "불가리 알루미늄 워치"
         },
         {
           "itemId": 4,
-          "subtitle": "TAMBURINS",
-          "title": "얼음 왕자가 선택한\n시원한 향",
-          "img": "https://i.ibb.co/QvL4cfSy/21.png",
-          "detailURL": "퍼퓸 카모"
+          "subtitle": "givenchy",
+          "title": "차가운 얼음에도\n녹아드는 케어",
+          "img": "https://i.ibb.co/LXKMHN1S/1.png",
+          "detailURL": "루즈 안텔디 립밤"
         },
         {
           "itemId": 5,
           "subtitle": "bottega veneta",
-          "title": "깔끔한 그와 어울리는\n심플 지갑",
-          "img": "https://i.ibb.co/mVP0tJHn/3.png",
+          "title": "섬세한 손끝이 고른\n간결한 선택",
+          "img": "https://i.ibb.co/LDXv1Xxx/1.png",
           "detailURL": "23FW 여성 카드지갑 인트레치아토 블랙"
         },
         {
           "itemId": 6,
           "subtitle": "bvlgari",
-          "title": "바쁜 훈련 속\n시계는 필수탬",
+          "title": "바쁜 훈련 속\n시계는 필수템",
           "img": "https://media.bulgari.com/image/upload/c_pad,h_1874,w_2400/q_auto/f_auto/1488363.png",
           "detailURL": "불가리 알루미늄 워치"
         }

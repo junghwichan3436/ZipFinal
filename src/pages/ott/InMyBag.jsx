@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { bagData, StarData, bagDataWithViews } from "../../StarData";
+import { StarData, bagDataWithViews } from "../../StarData";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
@@ -23,7 +23,7 @@ const Title = styled.div`
   gap: 40px;
   padding-top: 120px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #3c3c3c;
+  /* border-bottom: 1px solid #3c3c3c; */
   h4 {
     font-size: 7rem;
     font-family: "EHNormalTrial";
@@ -61,9 +61,11 @@ const FilterGroup = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-around;
+  border: 1px solid var(--border-bottom);
   select {
+    border: none;
     padding: 0 30px 0 10px;
-    border: 1px solid #3c3c3c;
+    border-left: 1px solid var(--border-bottom);
     background: var(--ott-bg-color);
     color: var(--light-color);
     outline: none;
@@ -116,6 +118,9 @@ const Contents = styled.div`
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
   }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const Video = styled.div`
@@ -123,6 +128,7 @@ const Video = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: hidden;
   /* iframe {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -132,8 +138,9 @@ const Video = styled.div`
     object-fit: cover;
     cursor: pointer;
     transition: scale 0.3s;
+    border-radius: 4px;
     &:hover {
-      scale: 1.1;
+      scale: 1.04;
       /* transform: translateY(-10%); */
     }
   }
@@ -144,14 +151,14 @@ const VideoText = styled.div`
   align-items: center;
   gap: 10px;
   img {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
   }
   p {
     &:nth-child(1) {
-      /* font-weight: bold; */
+      line-height: 1.2;
       margin-bottom: 10px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -161,7 +168,7 @@ const VideoText = styled.div`
     }
     &:nth-child(2) {
       font-size: 1.4rem;
-      color: var(--border-color);
+      color: var(--subTitle);
     }
   }
   @media screen and (max-width: 767px) {
@@ -178,12 +185,20 @@ const VideoText = styled.div`
 
 const PaginationWrap = styled.div`
   width: 100%;
+  margin-bottom: 40px;
   ul {
     display: flex;
     justify-content: center;
     li {
       width: 30px;
       height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--border-color);
+      &.active {
+        color: var(--light-color);
+      }
     }
   }
 `;
@@ -191,7 +206,6 @@ const PaginationWrap = styled.div`
 const InMyBag = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [sortOrder, setSortOrder] = useState("latest");
-  // const { data, isLoading, error } = bagData();
   const { data, isLoading, error } = bagDataWithViews();
   const {
     data: starData,
@@ -199,6 +213,7 @@ const InMyBag = () => {
     error: starError,
   } = StarData();
   const navigate = useNavigate();
+
   const [page, setPage] = useState(1); //현재 페이지
   const itemsPerPage = 12;
   const changePageHandler = (pageNumber) => {
@@ -227,18 +242,6 @@ const InMyBag = () => {
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = filteredItems?.slice(startIndex, endIndex);
 
-  // const opts = {
-  //   width: "100%",
-  //   height: "100%",
-  //   playerVars: {
-  //     mute: 1,
-  //     rel: 0, //관련 동영상 표시하지 않음
-  //     modestbranding: 1, // 유튜브 로고 최소화
-  //     controls: 0, // 컨트롤 바 숨기기
-  //     fs: 0, // 전체화면 버튼 숨기기
-  //     disablekb: 1, // 키보드 제어 비활성화
-  //   },
-  // };
   return (
     <Container>
       <Title>
@@ -324,10 +327,8 @@ const InMyBag = () => {
           itemsCountPerPage={itemsPerPage}
           totalItemsCount={filteredItems?.length}
           pageRangeDisplayed={5}
-          prevPageText={"‹"}
-          nextPageText={"›"}
-          hideFirstLastPages={true}
-          onChange={changePageHandler}
+          hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
+          onChange={changePageHandler} // 페이지 바뀔때 함수
         />
       </PaginationWrap>
     </Container>

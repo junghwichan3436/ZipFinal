@@ -259,7 +259,6 @@ const Ott = () => {
   console.log(allDataViewSlice);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
-
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
     VideoRef.current = event.target;

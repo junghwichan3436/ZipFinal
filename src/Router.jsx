@@ -30,7 +30,7 @@ import Short from "./pages/ott/Short";
 import InMyBag from "./pages/ott/InMyBag";
 import OttDetail from "./pages/ott/OttDetail";
 import Talk from "./pages/ott/Talk";
-import StyleZip from "./pages/ott/StyleZip";
+import Work from "./pages/ott/Work";
 import OttSearchComp from "./components/common/OttSearchComp";
 export const router = createBrowserRouter([
   {
@@ -156,8 +156,8 @@ export const router = createBrowserRouter([
         element: <InMyBag />,
       },
       {
-        path: "stylezip",
-        element: <StyleZip />,
+        path: "workzip",
+        element: <Work />,
       },
       {
         path: "talkzip",
