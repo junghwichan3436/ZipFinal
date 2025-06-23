@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import CardItem from "../home/CardItem";
 import RollingBanner from "../home/RollingBanner";
@@ -8,6 +7,7 @@ import YouTube from "react-youtube";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
+/*--- 스타일 ---*/
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -477,6 +477,8 @@ const ShortSection = styled.div`
     }
   }
 `;
+
+/*--- 출력 ---*/
 const DetailItem = ({
   mainTitle,
   subTitle,
@@ -490,16 +492,13 @@ const DetailItem = ({
   items,
   videoUrl,
 }) => {
-  const navigate = useNavigate();
-
-  const [sildeData, setSlideData] = useState([]);
+  const VideoRef = useRef([]);
 
   useEffect(() => {
-    fetch("/API/originalData.json")
-      .then((response) => response.json())
-      .then((data) => setSlideData(data.slideData));
+    window.scrollTo({ top: 0 });
   }, []);
 
+  // 유튜브 재생 옵션
   const opts = {
     width: "100%",
     height: "100%",
@@ -516,8 +515,6 @@ const DetailItem = ({
       enablejsapi: 1, // JS API 활성화
     },
   };
-
-  const VideoRef = useRef([]);
 
   const handleReady = (event) => {
     VideoRef.current = event.target;
@@ -552,6 +549,42 @@ const DetailItem = ({
     }
   };
 
+  const keywordList = useMemo(() => keyword?.map((item, index) => <li key={index}>{item}</li>), [keyword]);
+
+  const characterKeywordList = useMemo(
+    () =>
+      characterKeyword?.map((item, index) => (
+        <li className="hashtag" key={index}>
+          # {item}
+        </li>
+      )),
+    [characterKeyword]
+  );
+  const swiperItems = useMemo(
+    () =>
+      items?.map((item, index) => (
+        <SwiperSlide key={index}>
+          <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
+        </SwiperSlide>
+      )),
+    [items]
+  );
+  const shortsList = useMemo(
+    () =>
+      shorts?.map((item, index) => (
+        <li key={index}>
+          <div
+            className="thumbnail-info"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <YouTube videoId={item.shortVideo} opts={opts} onReady={(e) => handleVideoReady(e, index)} />
+          </div>
+        </li>
+      )),
+    [shorts]
+  );
+
   return (
     <Container>
       <TitleSection>
@@ -564,11 +597,7 @@ const DetailItem = ({
             {subTitle} <br />
             {starName}의 가방을 열다
           </p>
-          <ul>
-            {keyword.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+          <ul>{keywordList}</ul>
         </div>
       </TitleSection>
       <ImgSection>
@@ -577,19 +606,14 @@ const DetailItem = ({
       </ImgSection>
       <CharaterSection>
         <aside>
-          <h4 className="">ZIP scene</h4>
+          <h4>ZIP scene</h4>
           <div>
             <h5>{episode}</h5>
             <p>{description}</p>
-            <ul>
-              {characterKeyword.map((item, index) => (
-                <li className="hashtag" key={index}>
-                  # {item}
-                </li>
-              ))}
-            </ul>
+            <ul>{characterKeywordList}</ul>
           </div>
         </aside>
+
         <aside className="item-zip">
           <h4>item ZIP</h4>
           <div>
@@ -602,28 +626,14 @@ const DetailItem = ({
             loop={true}
             style={{ overflow: "visible" }}
             breakpoints={{
-              1920: {
-                slidesPerView: 4,
-              },
-              1000: {
-                slidesPerView: 4,
-              },
-              980: {
-                slidesPerView: 3,
-              },
-              510: {
-                slidesPerView: 3,
-              },
-              0: {
-                slidesPerView: 2,
-              },
+              1920: { slidesPerView: 4 },
+              1000: { slidesPerView: 4 },
+              980: { slidesPerView: 3 },
+              510: { slidesPerView: 3 },
+              0: { slidesPerView: 2 },
             }}
           >
-            {items?.map((item, index) => (
-              <SwiperSlide key={index}>
-                <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
-              </SwiperSlide>
-            ))}
+            {swiperItems}
           </Swiper>
         </CardList>
       </CharaterSection>
@@ -638,22 +648,11 @@ const DetailItem = ({
             </div>
           </div>
         </div>
+
         <ShortSection>
           <h4>short ZIP</h4>
           <div className="shorts-container">
-            <ul>
-              {shorts?.map((item, index) => (
-                <li key={index}>
-                  <div
-                    className="thumbnail-info"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                  >
-                    <YouTube videoId={item.shortVideo} opts={opts} onReady={(e) => handleVideoReady(e, index)} />
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <ul>{shortsList}</ul>
           </div>
         </ShortSection>
       </RealStarSection>
