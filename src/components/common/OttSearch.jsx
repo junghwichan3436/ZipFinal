@@ -70,6 +70,53 @@ const Keyword = styled.div`
   }
 `;
 
+const CloseBtn = styled.button`
+  transition: all 0.3s;
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  top: 5%;
+  right: 12%;
+  z-index: 2;
+  background: var(--light-color);
+  width: 14px;
+  height: 14px;
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.3s;
+  span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-bottom: 1px solid var(--dark-color);
+    width: 50%;
+    height: 2px;
+    transition: all 0.3s;
+    &:first-child {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &:last-child {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    right: 4%;
+  }
+  @media screen and (max-width: 560px) {
+    right: 6%;
+  }
+  &.active {
+    opacity: 1;
+    pointer-events: fill;
+    visibility: visible;
+  }
+`;
 const OttSearch = ({ setInputValue, value, onChange }) => {
   return (
     <Container>
@@ -86,6 +133,14 @@ const OttSearch = ({ setInputValue, value, onChange }) => {
           src="https://ecimg.cafe24img.com/pg326b45779995089/oiad/web/oiad_renewal/img/oiad-icon-search-mo.svg"
           alt="search"
         />
+        <CloseBtn
+          type="button"
+          onClick={() => setInputValue("")}
+          className={value ? "active" : ""}
+        >
+          <span></span>
+          <span></span>
+        </CloseBtn>
       </Search>
       <Keyword>
         <p>POPULAR KEYWORDS</p>

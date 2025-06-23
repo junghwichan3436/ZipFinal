@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { StarData } from "../../StarData";
+import { StarData, useAllDataViews, playlistIds } from "../../StarData";
 import YouTube from "react-youtube";
 
 const Container = styled.div`
@@ -233,13 +233,13 @@ const StarDetail = () => {
   const VideoRef = useRef(null);
   const { starName } = useParams();
   const { isLoading, data } = StarData();
-  const filterData =
-    data?.artists?.filter((artist) => artist.artistName === starName) || [];
-  const filterProducts = filterData[0]?.products;
-
-  const mockUp = data?.artists?.map((artist) => artist).slice(0, 8);
-  console.log(mockUp);
-  // const mockUpData = mockUp.slice(0, 8);
+  const { isLoading: loading02, data: data02 } = useAllDataViews(playlistIds);
+  const artistVideo = data02?.filter((item) => item.title.includes(starName));
+  console.log(artistVideo);
+  const filterData = data?.artists?.find(
+    (artist) => artist.artistName === starName
+  );
+  const filterProducts = filterData?.products;
 
   useEffect(() => {
     if (!data) return;
@@ -255,44 +255,15 @@ const StarDetail = () => {
     VideoRef.current = event.target;
   };
 
-  const VideoPlay = (e) => {
-    if (VideoRef.current) {
-      e.target.style.opacity = 0;
-      VideoRef.current.stopVideo();
-      VideoRef.current.playVideo();
-    }
-  };
-
-  const VideoStop = (e) => {
-    if (VideoRef.current) {
-      e.target.style.opacity = 1;
-      VideoRef.current.stopVideo();
-    }
-  };
-
-  const opts = {
-    width: "100%",
-    height: "100%",
-    playerVars: {
-      mute: 1,
-      loop: 1,
-      controls: 0, // 컨트롤 바 숨기기
-      modestbranding: 1, // 유튜브 로고 최소화
-      rel: 0, // 관련 영상 숨기기
-      fs: 0, // 전체화면 버튼 숨기기
-      disablekb: 1, // 키보드 제어 비활성화
-      showinfo: 0, // 제목 숨기기 시도 (현재는 거의 안 먹힘)
-      autoplay: 1, // 자동재생
-      enablejsapi: 1, // JS API 활성화
-    },
-  };
-
   return (
     <Container>
       <ArtistBg
         style={{
-          background: `linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent), url("https://img.wkorea.com/w/2025/04/style_68102c75d65d5-1400x875.jpg") center/cover no-repeat`,
-          backgroundAttachment: "fixed",
+          background: `linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent), url(${
+            filterData?.artistBanner
+              ? filterData.artistBanner
+              : filterData.artistImg
+          }) center/cover no-repeat`,
         }}
       >
         <p>{starName}</p>
@@ -320,23 +291,15 @@ const StarDetail = () => {
                 },
               }}
             >
-              {mockUp.map((video) => (
-                <SwiperSlide key={video.artistName}>
-                  <VideoCon onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
-                    <img
-                      src={`https://i.ytimg.com/vi/${video.videoURL}/maxresdefault.jpg`}
-                      alt=""
-                    />
-                    <YouTube
-                      videoId={video.videoURL}
-                      opts={opts}
-                      onReady={handleReady}
-                    />
+              {artistVideo?.map((video) => (
+                <SwiperSlide key={video.title}>
+                  <VideoCon>
+                    <img src={video.thumbnails.high.url} alt="" />
                   </VideoCon>
                   <VideoText>
                     <div>
-                      <p>{video.artistName}의 애장템은?</p>
-                      <p>W 코리아</p>
+                      <p>{video.title}</p>
+                      <p>{video.videoOwnerChannelTitle}</p>
                     </div>
                   </VideoText>
                 </SwiperSlide>

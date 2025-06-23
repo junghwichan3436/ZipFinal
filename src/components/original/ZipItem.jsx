@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+/*--- 스타일 ---*/
 const ZipItems = styled.li`
   width: 49%;
   display: flex;
@@ -135,18 +136,9 @@ const KeywordList = styled.ul`
   }
 `;
 
+/*--- 출력 ---*/
 const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword }) => {
   const navigate = useNavigate();
-
-  const [sildeData, setSlideData] = useState([]);
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    fetch("/API/homeData.json")
-      .then((response) => response.json())
-      .then((data) => setSlideData(data.sildeData));
-  }, []);
 
   const onClickItem = () => {
     navigate(`/ott/originalDetail/${id}`);
@@ -154,45 +146,14 @@ const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName
 
   return (
     <ZipItems onClick={onClickItem}>
-      <div className="img_container" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <div className="img_container">
         <OverlayTop>
           <div className="scrolling-text">
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
+            {Array(20)
+              .fill("view")
+              .map((text, i) => (
+                <div key={i}>{text}</div>
+              ))}
           </div>
         </OverlayTop>
         <img className="static" src={staticThumbnail} alt="static" />
@@ -211,4 +172,4 @@ const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName
   );
 };
 
-export default ZipItem;
+export default React.memo(ZipItem);

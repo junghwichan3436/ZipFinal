@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import OttSearch from "./OttSearch";
 import OttSearchComp from "./OttSearchComp";
 import styled from "styled-components";
@@ -30,6 +30,7 @@ const Container = styled.div`
   @media screen and (max-width: 1024px) {
     flex-direction: column;
     padding-top: 60px;
+    height: 100%;
   }
 `;
 const CloseBtn = styled.button`
@@ -96,31 +97,39 @@ const OttSearchWrap = ({
     setInputValue("");
   }, [params]);
   // 억지 휠 이벤트 처리
-  const handleWheel = (e) => {
-    e.preventDefault(); // 기본 스크롤 막기
+
+  const handleWheel = useCallback((e) => {
     if (scrollAreaRef.current) {
-      // 수직 휠 delta 만큼 스크롤 위치 강제 이동
       scrollAreaRef.current.scrollTop += e.deltaY;
     }
-  };
+  }, []);
 
   return (
-    <Container
-      ref={scrollAreaRef}
-      className={ottSearchClick ? "active" : ""}
-      onWheel={handleWheel}
-    >
-      <OttSearch
-        value={inputValue}
-        onChange={handleInputChange}
-        setInputValue={setInputValue}
-      />
-      <OttSearchComp inputValue={inputValue} />
-      <CloseBtn onClick={closeBtnClick}>
-        <span></span>
-        <span></span>
-      </CloseBtn>
-    </Container>
+    <div>
+      {ottSearchClick ? (
+        <Container
+          ref={scrollAreaRef}
+          className={ottSearchClick ? "active" : ""}
+          onWheel={handleWheel}
+        >
+          <OttSearch
+            value={inputValue}
+            onChange={handleInputChange}
+            setInputValue={setInputValue}
+          />
+          <OttSearchComp
+            inputValue={inputValue}
+            scrollAreaRef={scrollAreaRef}
+          />
+          <CloseBtn onClick={closeBtnClick}>
+            <span></span>
+            <span></span>
+          </CloseBtn>
+        </Container>
+      ) : (
+        <div></div>
+      )}
+    </div>
   );
 };
 

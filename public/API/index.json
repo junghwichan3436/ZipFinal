@@ -4,6 +4,7 @@
       "id": 1,
       "artistName": "조보아",
       "artistImg": "https://img.wkorea.com/w/2025/04/style_68102c5a1e1b2-1120x1400.jpg",
+      "artistBanner": "https://img.allurekorea.com/allure/2025/05/style_682c5bec52bd1-1920x1080.jpg?x=1280&y=720",
       "jobCategory": "actor",
       "videoURL": "dALf-Yt4lSU",
       "products": [
@@ -64,6 +65,7 @@
       "id": 2,
       "artistName": "신시아",
       "artistImg": "https://img.wkorea.com/w/2025/04/style_6801c58d81676-1120x1400.jpg",
+      "artistBanner": "https://www.esquirekorea.co.kr/resources_old/online/org_online_image/eq/f47337c7-a19a-4d2a-91db-b8262945d02c.jpg",
       "jobCategory": "actor",
       "videoURL": "XFFABjGG864",
       "products": [
@@ -192,6 +194,7 @@
       "id": 3,
       "artistName": "영케이",
       "artistImg": "https://img.wkorea.com/w/2025/02/style_67bbd1c1a0a96-1084x1400.png",
+      "artistBanner": "https://img.gqkorea.co.kr/gq/2024/07/style_66a353edac668.jpg",
       "jobCategory": "musician",
       "videoURL": "L2ke45l7kts",
       "products": [
@@ -286,6 +289,7 @@
       "id": 4,
       "artistName": "디노",
       "artistImg": "https://img.wkorea.com/w/2024/09/style_66f0f4132120a-744x930.jpg",
+      "artistBanner": "https://www.kstarfashion.com/news/photo/202409/219119_139655_4529.jpg",
       "jobCategory": "musician",
       "videoURL": "VejGDRLLAG4",
       "products": [
@@ -346,6 +350,7 @@
       "id": 5,
       "artistName": "에스쿱스",
       "artistImg": "https://img.wkorea.com/w/2024/09/style_66f0fed0821d5-744x930.jpg",
+      "artistBanner": "https://cdn.gpkorea.com/news/photo/202403/111866_238970_315.jpg",
       "jobCategory": "musician",
       "videoURL": "VejGDRLLAG4",
       "products": [
@@ -1046,7 +1051,7 @@
     },
     {
       "id": 15,
-      "artistName": "하니",
+      "artistName": "뉴진스 하니",
       "artistImg": "https://cdn.newsculture.press/news/photo/202410/556348_704752_3811.jpg",
       "jobCategory": "musician",
       "videoURL": "ugKpt-vCTu4",
