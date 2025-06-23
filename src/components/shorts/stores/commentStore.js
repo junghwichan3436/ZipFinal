@@ -75,7 +75,7 @@ const useCommentStore = create((set, get) => ({
     };
 
     set((state) => ({
-      userComments: [newComment, ...state.userComments],
+      userComments: [...state.userComments, newComment],
     }));
   },
 
@@ -154,10 +154,11 @@ const useCommentStore = create((set, get) => ({
     });
   },
 
-  // 계산된 값들
+  // 계산된 값들 - 여기가 핵심 수정 부분!
   getAllComments: () => {
     const { userComments, comments } = get();
-    return [...userComments, ...comments];
+    // 순서 변경: 기존(API) 댓글들 먼저, 그 다음 사용자 댓글들
+    return [...comments, ...userComments];
   },
 
   getCommentReaction: (commentId) => {

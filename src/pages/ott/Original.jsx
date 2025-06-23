@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import ZipItem from "../../components/original/ZipItem";
 
+/*--- 애니메이션 ---*/
 const rec = keyframes`
   0%, 100% {
     opacity: 1;
@@ -10,12 +12,13 @@ const rec = keyframes`
     opacity: 0.2;
   }
 `;
-// 스타일 정의
+
+/*--- 스타일 ---*/
 const Container = styled.div`
   width: 100%;
   height: 100%;
   color: #fff;
-  background: #000;
+  /* background: #000; */
   &::before {
     content: "";
     padding: 0;
@@ -47,7 +50,6 @@ const TitleSection = styled.section`
       animation: ${rec} 2s infinite;
     }
     span {
-      display: inline-block;
       display: flex;
       font-size: 2rem;
       font-family: "EHNormalTrial";
@@ -88,7 +90,6 @@ const MainTitle = styled.div`
   }
   p {
     font-size: 1.6rem;
-    font-weight: 300;
     color: #ababab;
     font-weight: 400;
     line-height: 2rem;
@@ -120,28 +121,6 @@ const MainTitle = styled.div`
     }
   }
   @media screen and (max-width: 767px) {
-    gap: 20px;
-    padding-top: 80px;
-    padding-bottom: 20px;
-    h4 {
-      letter-spacing: -2px;
-    }
-  }
-  @media screen and (max-width: 767px) {
-    gap: 18px;
-    h4 {
-      font-size: 5rem;
-    }
-    p {
-      font-weight: 400;
-      font-size: 1.6rem;
-      b {
-        font-size: 1.6rem;
-        font-weight: 400;
-      }
-    }
-  }
-  @media screen and (max-width: 767px) {
     h4 {
       font-size: 4rem;
     }
@@ -153,7 +132,6 @@ const MainTitle = styled.div`
     }
   }
 `;
-
 const ZipList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -176,6 +154,8 @@ const ZipList = styled.ul`
 
 /*--- 출력 ---*/
 const Original = () => {
+  const navigate = useNavigate();
+
   const [originalData, setOriginaldata] = useState([]);
 
   useEffect(() => {
@@ -186,9 +166,9 @@ const Original = () => {
 
   return (
     <Container>
-      <TitleSection animate={true}>
+      <TitleSection>
         <MainTitle>
-          <h4>zip originals</h4>
+          <h4>zip original</h4>
           <p>
             당신이 사랑한 캐릭터, 그들이 고를 법한 아이템
             <br />

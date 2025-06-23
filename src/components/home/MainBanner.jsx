@@ -161,7 +161,6 @@ const InfoSection = styled.div`
     grid-column: span 0;
     h4 {
       font-size: 5rem;
-      /* line-height: 8rem; */
       b {
         font-size: 5rem;
       }

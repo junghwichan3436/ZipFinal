@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { StarData, bagDataWithViews } from "../../StarData";
 import { useNavigate } from "react-router-dom";
+import { StarData, workingDataWithViews } from "../../StarData";
+import styled from "styled-components";
 import Pagination from "react-js-pagination";
 
 const Container = styled.div`
@@ -82,19 +82,11 @@ const Category = styled.ul`
   width: 100%;
   display: flex;
   li {
+    background: var(--light-color);
+    color: var(--dark-color);
     font-family: "EHNormalTrial";
     padding: 14px 20px;
-    /* border: 1px solid var(--light-color); */
-    transition: all 0.3s;
     cursor: pointer;
-    &:hover {
-      background: var(--light-color);
-      color: var(--dark-color);
-    }
-    &.active {
-      background: var(--light-color);
-      color: var(--dark-color);
-    }
   }
   @media (max-width: 1024px) {
     li {
@@ -136,9 +128,10 @@ const Video = styled.div`
   img {
     width: 100%;
     object-fit: cover;
-    cursor: pointer;
+    aspect-ratio: 16 / 9;
     transition: scale 0.3s;
     border-radius: 4px;
+    cursor: pointer;
     &:hover {
       scale: 1.04;
       /* transform: translateY(-10%); */
@@ -158,6 +151,7 @@ const VideoText = styled.div`
   }
   p {
     &:nth-child(1) {
+      /* font-weight: bold; */
       line-height: 1.2;
       margin-bottom: 10px;
       display: -webkit-box;
@@ -203,10 +197,11 @@ const PaginationWrap = styled.div`
   }
 `;
 
-const InMyBag = () => {
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
+const Work = () => {
   const [sortOrder, setSortOrder] = useState("latest");
-  const { data, isLoading, error } = bagDataWithViews();
+  const [page, setPage] = useState(1); //현재 페이지
+
+  const { data, isLoading, error } = workingDataWithViews();
   const {
     data: starData,
     isLoading: starLoading,
@@ -214,22 +209,7 @@ const InMyBag = () => {
   } = StarData();
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(1); //현재 페이지
-  const itemsPerPage = 12;
-  const changePageHandler = (pageNumber) => {
-    setPage(pageNumber);
-  };
-
-  const categoryFiltered =
-    selectedCategory === "ALL"
-      ? data
-      : data?.filter((item) =>
-          item.videoOwnerChannelTitle
-            ?.toUpperCase()
-            .includes(selectedCategory.toUpperCase())
-        );
-
-  const filteredItems = categoryFiltered?.slice().sort((a, b) => {
+  const filteredItems = data?.slice().sort((a, b) => {
     if (sortOrder === "latest") {
       return new Date(b.publishedAt) - new Date(a.publishedAt);
     } else if (sortOrder === "popular") {
@@ -238,6 +218,11 @@ const InMyBag = () => {
     return 0;
   });
 
+  //pagenation
+  const itemsPerPage = 12;
+  const changePageHandler = (pageNumber) => {
+    setPage(pageNumber);
+  };
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = filteredItems?.slice(startIndex, endIndex);
@@ -245,24 +230,16 @@ const InMyBag = () => {
   return (
     <Container>
       <Title>
-        <h4>BAG ZIP</h4>
+        <h4>WORK ZIP</h4>
         <p>
-          당신이 좋아하는 연예인의 취향을 인마이백으로,
+          스타의 프로페셔널한 모습,
           <br />
-          <b>BAG ZIP</b>에서
+          한눈에 <b>ZIP</b>
         </p>
       </Title>
       <FilterGroup>
         <Category>
-          {["ALL", "ALLURE", "ELLE", "GQ", "VOGUE", "W"].map((data) => (
-            <li
-              className={selectedCategory === data ? "active" : ""}
-              key={data}
-              onClick={() => setSelectedCategory(data)}
-            >
-              {data}
-            </li>
-          ))}
+          <li>ALL</li>
         </Category>
         <select
           name="filter"
@@ -274,15 +251,8 @@ const InMyBag = () => {
           {/* <option value="">조회순</option> */}
         </select>
       </FilterGroup>
-
       <Contents>
         {paginatedItems?.map((item) => {
-          // const { snippet } = item;
-          // const videoId = snippet.resourceId?.videoId;
-          // const thumbnail = snippet.thumbnails?.maxres?.url;
-          // const title = snippet.title;
-          // const videoOwnerChannelTitle = snippet.videoOwnerChannelTitle;
-
           const title = item.title || item.snippet?.title;
           const videoId = item.resourceId?.videoId || item.videoId || item.id;
           const thumbnail =
@@ -290,12 +260,10 @@ const InMyBag = () => {
           const videoOwnerChannelTitle =
             item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
 
-          console.log(filteredItems);
-
           const matchedArtist = starData?.artists?.find((artist) =>
             title.includes(artist.artistName)
           );
-          // console.log(snippet);
+
           return (
             <Video key={videoId}>
               <img
@@ -335,4 +303,4 @@ const InMyBag = () => {
   );
 };
 
-export default InMyBag;
+export default Work;
