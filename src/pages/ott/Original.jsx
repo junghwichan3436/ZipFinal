@@ -15,6 +15,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   color: #fff;
+  background: #000;
   &::before {
     content: "";
     padding: 0;
