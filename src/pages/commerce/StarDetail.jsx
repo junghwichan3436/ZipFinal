@@ -236,9 +236,10 @@ const StarDetail = () => {
   const { isLoading: loading02, data: data02 } = useAllDataViews(playlistIds);
   const artistVideo = data02?.filter((item) => item.title.includes(starName));
   console.log(artistVideo);
-  const filterData =
-    data?.artists?.filter((artist) => artist.artistName === starName) || [];
-  const filterProducts = filterData[0]?.products;
+  const filterData = data?.artists?.find(
+    (artist) => artist.artistName === starName
+  );
+  const filterProducts = filterData?.products;
 
   useEffect(() => {
     if (!data) return;
@@ -258,8 +259,11 @@ const StarDetail = () => {
     <Container>
       <ArtistBg
         style={{
-          background: `linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent), url("https://img.wkorea.com/w/2025/04/style_68102c75d65d5-1400x875.jpg") center/cover no-repeat`,
-          backgroundAttachment: "fixed",
+          background: `linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent), url(${
+            filterData?.artistBanner
+              ? filterData.artistBanner
+              : filterData.artistImg
+          }) center/cover no-repeat`,
         }}
       >
         <p>{starName}</p>
