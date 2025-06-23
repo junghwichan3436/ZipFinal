@@ -17,7 +17,7 @@ import {
   faPaperPlane as faPaperPlaneRegular,
 } from "@fortawesome/free-regular-svg-icons";
 
-// 기존 스타일 컴포넌트들...
+// 스타일 컴포넌트들
 const VideoCardContainer = styled.div`
   background: transparent;
   border-radius: 10px;
@@ -42,7 +42,31 @@ const VideoCardContainer = styled.div`
   `}
 `;
 
-// 🎵 볼륨 컨트롤 스타일 (VideoCard 내부에 추가)
+const FullYouTubeContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+
+  .yt-lite {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 10px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .yt-lite > iframe {
+    border-radius: 10px !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+`;
+
 const VolumeContainer = styled.div`
   position: absolute;
   top: 15px;
@@ -59,12 +83,6 @@ const VolumeContainer = styled.div`
   transition: all 0.3s ease;
   opacity: ${(props) => (props.$visible ? 1 : 0)};
   transform: translateX(${(props) => (props.$visible ? 0 : "20px")});
-
-  @media screen and (max-width: 768px) {
-    top: 10px;
-    right: 10px;
-    padding: 6px 10px;
-  }
 `;
 
 const VolumeButton = styled.button`
@@ -115,7 +133,6 @@ const VolumeText = styled.span`
   text-align: center;
 `;
 
-// 기존 스타일들... (VideoOverlay, VideoInfo, VideoInteractions 등)
 const VideoOverlay = styled.div`
   position: absolute;
   bottom: 0;
@@ -213,6 +230,30 @@ const ItemInfoLink = styled.a`
 
   &:hover {
     transform: scale(1.1);
+    background: #fff !important;
+    color: #000 !important;
+  }
+`;
+
+const ShareButton = styled.button`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: ${(props) => (props.$active ? "#fff" : "rgba(0, 0, 0, 0.6)")};
+  backdrop-filter: blur(10px);
+  color: ${(props) => (props.$active ? "#000" : "#fff")};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+
+  &:hover {
+    transform: scale(1.1);
+    background: #fff !important;
+    color: #000 !important;
   }
 `;
 
@@ -233,31 +274,6 @@ const InteractionCount = styled.span`
   border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
-const FullYouTubeContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000;
-  border-radius: 10px;
-  overflow: hidden;
-
-  .yt-lite {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 10px !important;
-    background-size: cover !important;
-    background-position: center !important;
-  }
-
-  .yt-lite > iframe {
-    border-radius: 10px !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-`;
-
 const VideoCard = React.memo(
   ({
     video,
@@ -270,231 +286,245 @@ const VideoCard = React.memo(
     handleCommentClick,
     handleShareClick,
     registerVideoRef,
+    globalVolume,
+    globalMuted,
+    onVolumeChange,
+    onMuteToggle,
+    onVideoReady,
   }) => {
     const containerRef = useRef(null);
-
-    // 🎵 볼륨 관련 상태들
-    const [volume, setVolume] = useState(50);
-    const [isMuted, setIsMuted] = useState(false);
+    const playerRef = useRef(null);
     const [showVolumeControl, setShowVolumeControl] = useState(false);
+    const [isPlayerReady, setIsPlayerReady] = useState(false);
+    const [isDestroyed, setIsDestroyed] = useState(false);
 
-    // cardIsActive 정의를 먼저 해줍니다
     const cardIsActive = activeIndex === index || isActive;
 
-    // YouTube Player 참조
-    const [player, setPlayer] = useState(null);
-    const [isPlayerReady, setIsPlayerReady] = useState(false);
-
-    // YouTube API 명령 전송 (postMessage 방식)
-    const sendYouTubeCommand = useCallback((command, args = []) => {
-      const iframe = containerRef.current?.querySelector(
-        'iframe[src*="youtube.com/embed"]'
-      );
-      if (iframe && iframe.contentWindow) {
-        try {
-          const message = JSON.stringify({
-            event: "command",
-            func: command,
-            args: args,
-          });
-          iframe.contentWindow.postMessage(message, "*");
-          console.log(`🎬 YouTube command sent: ${command}`, args);
-        } catch (error) {
-          console.error("YouTube command failed:", error);
-        }
-      }
-    }, []);
-
-    // YouTube Player API가 로드된 후 플레이어 인스턴스 생성
-    const initializePlayer = useCallback(() => {
-      if (
-        typeof window.YT !== "undefined" &&
-        window.YT.Player &&
-        containerRef.current
-      ) {
-        const iframe = containerRef.current.querySelector(
-          'iframe[src*="youtube.com/embed"]'
-        );
-        if (iframe && !player) {
-          try {
-            const newPlayer = new window.YT.Player(iframe, {
-              events: {
-                onReady: (event) => {
-                  console.log(`🎬 Player ready: ${video.videoId}`);
-                  setPlayer(event.target);
-                  setIsPlayerReady(true);
-                  // 초기 볼륨 설정
-                  event.target.setVolume(volume);
-                  if (isMuted) {
-                    event.target.mute();
-                  }
-                },
-                onStateChange: (event) => {
-                  console.log(
-                    `🎬 Player state changed: ${video.videoId}`,
-                    event.data
-                  );
-                },
-              },
-            });
-          } catch (error) {
-            console.error("Player initialization failed:", error);
-          }
-        }
-      }
-    }, [player, video.videoId, volume, isMuted]);
+    // 🎵 볼륨 아이콘 선택
+    const getVolumeIcon = () => {
+      if (globalMuted || globalVolume === 0) return faVolumeXmark;
+      if (globalVolume < 50) return faVolumeLow;
+      return faVolumeHigh;
+    };
 
     // 🎵 볼륨 변경 핸들러
     const handleVolumeChange = useCallback(
       (e) => {
         const newVolume = parseInt(e.target.value);
-        setVolume(newVolume);
-        setIsMuted(newVolume === 0);
+        onVolumeChange(newVolume);
 
-        // Player API 사용
-        if (player && isPlayerReady) {
+        if (playerRef.current && isPlayerReady) {
           try {
-            player.setVolume(newVolume);
+            playerRef.current.setVolume(newVolume);
             if (newVolume === 0) {
-              player.mute();
-            } else if (isMuted) {
-              player.unMute();
+              playerRef.current.mute();
+            } else if (globalMuted) {
+              playerRef.current.unMute();
             }
-            console.log(`🔊 Volume set to: ${newVolume}% for ${video.videoId}`);
           } catch (error) {
-            console.error("Volume control failed:", error);
+            // Silent error handling for production
           }
         }
-
-        // Fallback: postMessage 방식
-        sendYouTubeCommand("setVolume", [newVolume]);
       },
-      [player, isPlayerReady, isMuted, sendYouTubeCommand, video.videoId]
+      [onVolumeChange, isPlayerReady, globalMuted]
     );
 
     // 🎵 음소거 토글
     const handleMuteToggle = useCallback(
       (e) => {
         e.stopPropagation();
+        onMuteToggle();
 
-        const newMutedState = !isMuted;
-        setIsMuted(newMutedState);
-
-        // Player API 사용
-        if (player && isPlayerReady) {
+        if (playerRef.current && isPlayerReady) {
           try {
-            if (newMutedState) {
-              player.mute();
-              console.log(`🔇 Muted: ${video.videoId}`);
+            if (!globalMuted) {
+              playerRef.current.mute();
             } else {
-              player.unMute();
-              player.setVolume(volume);
-              console.log(`🔊 Unmuted: ${video.videoId}, volume: ${volume}%`);
+              playerRef.current.unMute();
+              playerRef.current.setVolume(globalVolume);
             }
           } catch (error) {
-            console.error("Mute toggle failed:", error);
+            // Silent error handling for production
           }
         }
-
-        // Fallback: postMessage 방식
-        if (newMutedState) {
-          sendYouTubeCommand("mute");
-        } else {
-          sendYouTubeCommand("unMute");
-          sendYouTubeCommand("setVolume", [volume]);
-        }
       },
-      [
-        isMuted,
-        player,
-        isPlayerReady,
-        volume,
-        sendYouTubeCommand,
-        video.videoId,
-      ]
+      [onMuteToggle, isPlayerReady, globalMuted, globalVolume]
     );
 
-    // 🎵 볼륨 아이콘 선택
-    const getVolumeIcon = () => {
-      if (isMuted || volume === 0) return faVolumeXmark;
-      if (volume < 50) return faVolumeLow;
-      return faVolumeHigh;
-    };
-
-    // 마우스 이벤트로 볼륨 컨트롤 표시
-    const handleMouseEnter = useCallback(() => {
-      if (cardIsActive) setShowVolumeControl(true);
-    }, [cardIsActive]);
-
-    const handleMouseLeave = useCallback(() => {
-      setShowVolumeControl(false);
-    }, []);
-
-    // 🎬 비디오 정지 함수 개선
-    const stopAndResetVideo = useCallback(() => {
-      console.log(`🛑 Stopping video: ${video.videoId}`);
-
-      // Player API 사용 (더 안정적)
-      if (player && isPlayerReady) {
-        try {
-          player.stopVideo();
-          player.seekTo(0, true);
-          console.log(`✅ Video stopped via Player API: ${video.videoId}`);
-          return;
-        } catch (error) {
-          console.error("Player API stop failed:", error);
+    // 🛑 강력한 비디오 정지 함수
+    const forceStopVideo = useCallback(() => {
+      try {
+        // 1. Player API 정지
+        if (playerRef.current) {
+          playerRef.current.pauseVideo();
+          playerRef.current.stopVideo();
+          playerRef.current.seekTo(0, true);
         }
-      }
 
-      // Fallback: postMessage 방식
+        // 2. iframe postMessage 정지
+        const iframe = containerRef.current?.querySelector(
+          'iframe[src*="youtube.com/embed"]'
+        );
+        if (iframe?.contentWindow) {
+          iframe.contentWindow.postMessage(
+            '{"event":"command","func":"pauseVideo","args":""}',
+            "*"
+          );
+          iframe.contentWindow.postMessage(
+            '{"event":"command","func":"stopVideo","args":""}',
+            "*"
+          );
+        }
+
+        // 3. HTML5 video 정지
+        const allVideos = containerRef.current?.querySelectorAll("video");
+        allVideos?.forEach((videoEl) => {
+          videoEl.pause();
+          videoEl.currentTime = 0;
+          videoEl.removeAttribute("autoplay");
+        });
+
+        // 4. LiteYouTube 재초기화 로직
+        const liteYoutubeElement =
+          containerRef.current?.querySelector(".yt-lite");
+        if (liteYoutubeElement?.classList.contains("lty-activated")) {
+          // iframe 제거
+          const existingIframe = liteYoutubeElement.querySelector("iframe");
+          if (existingIframe) {
+            existingIframe.remove();
+          }
+
+          // video 요소 제거
+          const videoElements = liteYoutubeElement.querySelectorAll("video");
+          videoElements.forEach((videoEl) => {
+            videoEl.pause();
+            videoEl.remove();
+          });
+
+          // 클래스 및 스타일 초기화
+          liteYoutubeElement.classList.remove("lty-activated");
+          liteYoutubeElement.style.cursor = "pointer";
+
+          // 썸네일 복원
+          const thumbnail = liteYoutubeElement.querySelector(
+            '.lty-thumbnail, [style*="background-image"]'
+          );
+          if (thumbnail) {
+            thumbnail.style.display = "block";
+          }
+
+          // 플레이 버튼 복원
+          const playBtn = liteYoutubeElement.querySelector(".lty-playbtn");
+          if (playBtn) {
+            playBtn.style.display = "block";
+            playBtn.style.opacity = "1";
+          }
+        }
+      } catch (error) {
+        // Silent error handling for production
+      }
+    }, [video.videoId]);
+
+    // 🎬 YouTube Player 초기화
+    const initializePlayer = useCallback(() => {
+      if (!cardIsActive || isDestroyed) return;
+
       const iframe = containerRef.current?.querySelector(
         'iframe[src*="youtube.com/embed"]'
       );
-      if (iframe && iframe.contentWindow) {
-        try {
-          const commands = [
-            { func: "pauseVideo", args: [] },
-            { func: "stopVideo", args: [] },
-            { func: "seekTo", args: [0, true] },
-          ];
+      if (!iframe || playerRef.current) return;
 
-          commands.forEach((cmd, index) => {
-            setTimeout(() => {
-              try {
-                const message = JSON.stringify({
-                  event: "command",
-                  func: cmd.func,
-                  args: cmd.args,
-                });
-                iframe.contentWindow.postMessage(message, "*");
-                console.log(`📤 Sent command: ${cmd.func} to ${video.videoId}`);
-              } catch (e) {
-                console.error(`❌ PostMessage failed for ${cmd.func}:`, e);
-              }
-            }, index * 100);
-          });
-        } catch (error) {
-          console.error(`❌ Video control failed for ${video.videoId}:`, error);
+      const createPlayer = () => {
+        if (
+          typeof window.YT !== "undefined" &&
+          window.YT.Player &&
+          !isDestroyed
+        ) {
+          try {
+            const player = new window.YT.Player(iframe, {
+              events: {
+                onReady: (event) => {
+                  if (isDestroyed || activeIndex !== index) {
+                    event.target.destroy();
+                    return;
+                  }
+
+                  playerRef.current = event.target;
+                  setIsPlayerReady(true);
+
+                  try {
+                    event.target.setVolume(globalVolume);
+                    if (globalMuted) {
+                      event.target.mute();
+                    }
+                  } catch (e) {
+                    // Silent error handling for production
+                  }
+
+                  onVideoReady && onVideoReady(video.videoId, event.target);
+                },
+                onStateChange: (event) => {
+                  // 비활성 카드에서 재생 시작되면 즉시 정지
+                  if (event.data === 1 && activeIndex !== index) {
+                    try {
+                      event.target.pauseVideo();
+                      event.target.seekTo(0, true);
+                    } catch (e) {
+                      // Silent error handling for production
+                    }
+                  }
+                },
+                onError: (event) => {
+                  // Silent error handling for production
+                },
+              },
+            });
+          } catch (error) {
+            // Silent error handling for production
+          }
+        } else {
+          setTimeout(createPlayer, 500);
         }
-      }
-    }, [video.videoId, player, isPlayerReady]);
+      };
 
-    // 🎯 카드가 비활성화될 때 비디오 정지
+      createPlayer();
+    }, [
+      cardIsActive,
+      video.videoId,
+      globalVolume,
+      globalMuted,
+      onVideoReady,
+      activeIndex,
+      index,
+      isDestroyed,
+    ]);
+
+    // 🚨 핵심! activeIndex 변경 시 강력한 정지 처리
     useEffect(() => {
-      if (!cardIsActive) {
-        console.log(
-          `🔄 Card became inactive, stopping video: ${video.videoId}`
-        );
-        stopAndResetVideo();
-        // 플레이어 상태 초기화
+      const isCurrentlyActive = activeIndex === index;
+
+      if (!isCurrentlyActive && !isDestroyed) {
+        // 강력한 정지 실행
+        forceStopVideo();
+
+        // 플레이어 정리
+        if (playerRef.current) {
+          try {
+            playerRef.current.destroy();
+          } catch (e) {
+            // Silent error handling for production
+          }
+          playerRef.current = null;
+        }
+
         setIsPlayerReady(false);
       }
-    }, [cardIsActive, stopAndResetVideo, video.videoId]);
+    }, [activeIndex, index, video.videoId, isDestroyed, forceStopVideo]);
 
-    // YouTube Player API 초기화
+    // 🎬 카드 활성화 시 초기화
     useEffect(() => {
-      if (cardIsActive) {
-        // YouTube API 스크립트 로드
+      if (cardIsActive && !isDestroyed) {
+        // YouTube API 로드
         if (!window.YT) {
           const script = document.createElement("script");
           script.src = "https://www.youtube.com/iframe_api";
@@ -502,16 +532,70 @@ const VideoCard = React.memo(
           document.head.appendChild(script);
 
           window.onYouTubeIframeAPIReady = () => {
-            console.log("🎬 YouTube API loaded");
-            setTimeout(initializePlayer, 1000);
+            // YouTube API loaded
           };
-        } else {
-          setTimeout(initializePlayer, 1000);
+        }
+
+        // 이벤트 리스너 재등록
+        const liteYoutubeElement =
+          containerRef.current?.querySelector(".yt-lite");
+        if (liteYoutubeElement) {
+          const handleClick = () => {
+            setTimeout(() => {
+              if (cardIsActive && !isDestroyed) {
+                initializePlayer();
+              }
+            }, 1000);
+          };
+
+          // 기존 이벤트 리스너 제거 후 새로 추가
+          liteYoutubeElement.removeEventListener("click", handleClick);
+          liteYoutubeElement.addEventListener("click", handleClick);
+
+          // MutationObserver로 iframe 생성 감지
+          const observer = new MutationObserver(() => {
+            const iframe = containerRef.current?.querySelector(
+              'iframe[src*="youtube.com/embed"]'
+            );
+            if (iframe && !playerRef.current && cardIsActive && !isDestroyed) {
+              setTimeout(() => {
+                if (cardIsActive && !isDestroyed) {
+                  initializePlayer();
+                }
+              }, 500);
+              observer.disconnect();
+            }
+          });
+
+          observer.observe(liteYoutubeElement, {
+            childList: true,
+            subtree: true,
+          });
+
+          return () => {
+            liteYoutubeElement.removeEventListener("click", handleClick);
+            observer.disconnect();
+          };
         }
       }
-    }, [cardIsActive, initializePlayer]);
+    }, [cardIsActive, initializePlayer, video.videoId, isDestroyed]);
 
-    // 기존 iframe 등록 로직...
+    // 🧹 컴포넌트 언마운트 시 정리
+    useEffect(() => {
+      return () => {
+        setIsDestroyed(true);
+        forceStopVideo();
+        if (playerRef.current) {
+          try {
+            playerRef.current.destroy();
+          } catch (e) {
+            // Silent error handling for production
+          }
+        }
+      };
+    }, [forceStopVideo]);
+
+    // 🔗 iframe 등록
     useEffect(() => {
       if (!registerVideoRef || !video.videoId || !containerRef.current) return;
 
@@ -546,7 +630,16 @@ const VideoCard = React.memo(
       };
     }, [registerVideoRef, video.videoId]);
 
-    // 기존 핸들러들...
+    // 🎭 마우스 이벤트
+    const handleMouseEnter = useCallback(() => {
+      if (cardIsActive) setShowVolumeControl(true);
+    }, [cardIsActive]);
+
+    const handleMouseLeave = useCallback(() => {
+      setShowVolumeControl(false);
+    }, []);
+
+    // 🎛️ 인터랙션 핸들러들
     const onLikeClick = useCallback(
       (e) => {
         e.stopPropagation();
@@ -591,11 +684,11 @@ const VideoCard = React.memo(
             title={video.title || "YouTube Video"}
             poster="maxresdefault"
             noCookie={true}
-            params="enablejsapi=1&rel=0&showinfo=0&modestbranding=1&controls=1&iv_load_policy=3"
+            params="enablejsapi=1&rel=0&showinfo=0&modestbranding=1&controls=1&iv_load_policy=3&autoplay=0"
           />
         </FullYouTubeContainer>
 
-        {/* 🎵 볼륨 컨트롤 - 마우스 호버시에만 표시 */}
+        {/* 볼륨 컨트롤 */}
         <VolumeContainer $visible={showVolumeControl && cardIsActive}>
           <VolumeButton onClick={handleMuteToggle}>
             <FontAwesomeIcon icon={getVolumeIcon()} />
@@ -604,14 +697,14 @@ const VideoCard = React.memo(
             type="range"
             min="0"
             max="100"
-            value={volume}
+            value={globalVolume}
             onChange={handleVolumeChange}
             onClick={(e) => e.stopPropagation()}
           />
-          <VolumeText>{volume}%</VolumeText>
+          <VolumeText>{globalVolume}%</VolumeText>
         </VolumeContainer>
 
-        {/* 기존 오버레이 */}
+        {/* 비디오 오버레이 */}
         <VideoOverlay>
           <VideoInfo>
             <VideoMeta>
@@ -630,7 +723,7 @@ const VideoCard = React.memo(
           </VideoInfo>
         </VideoOverlay>
 
-        {/* 기존 인터랙션 버튼들 */}
+        {/* 인터랙션 버튼들 */}
         <VideoInteractions>
           <InteractionButton
             $active={videoInteractions[video.id]?.liked}
@@ -675,7 +768,7 @@ const VideoCard = React.memo(
             )}
           </ItemInfoLink>
 
-          <InteractionButton
+          <ShareButton
             $active={videoInteractions[video.id]?.shared}
             onClick={onShareClick}
           >
@@ -689,7 +782,7 @@ const VideoCard = React.memo(
             {videoInteractions[video.id]?.shared && (
               <InteractionCount>공유</InteractionCount>
             )}
-          </InteractionButton>
+          </ShareButton>
         </VideoInteractions>
       </VideoCardContainer>
     );
