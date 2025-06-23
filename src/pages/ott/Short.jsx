@@ -10,7 +10,7 @@ import VideoCard from "../../components/shorts/VideoCard";
 import KakaoShare from "../../components/shorts/KakaoShare";
 import Comment from "../../components/shorts/comment";
 
-// 📱 스타일 컴포넌트들 (기존과 동일)
+// 📱 스타일 컴포넌트들
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -18,6 +18,7 @@ const Container = styled.div`
   background: var(--ott-bg-color, #000);
   font-family: "Pretendard", sans-serif;
   position: relative;
+  overflow-x: hidden;
 `;
 
 const Wrapper = styled.div`
@@ -353,8 +354,13 @@ const Short = () => {
   // 🎭 댓글 모달 상태
   const [commentOpen, setCommentOpen] = useState(false);
 
-  // 🎬 비디오 참조를 위한 ref
+  // 🎵 전역 볼륨 상태 (모든 비디오에 공통 적용)
+  const [globalVolume, setGlobalVolume] = useState(50);
+  const [globalMuted, setGlobalMuted] = useState(false);
+
+  // 🎬 비디오 플레이어 관리 - 간소화
   const videoRefs = useRef({});
+  const playerRefs = useRef({});
 
   // 🔗 YouTube URL에서 video ID 추출하는 함수
   const extractVideoId = useCallback((url) => {
@@ -386,7 +392,7 @@ const Short = () => {
     }));
   }, [shortVideos.originalData, extractVideoId]);
 
-  // 🎯 현재 선택된 비디오 데이터 - 항상 현재 활성화된 비디오
+  // 🎯 현재 선택된 비디오 데이터
   const currentVideoData = useMemo(() => {
     if (commentOpen && shortsVideos[activeIndex]) {
       return shortVideos.originalData.find(
@@ -396,109 +402,70 @@ const Short = () => {
     return null;
   }, [commentOpen, activeIndex, shortsVideos, shortVideos.originalData]);
 
-  // 🔄 LiteYouTubeEmbed 컨테이너 리셋 함수
-  const resetVideoContainer = useCallback((videoId) => {
-    const container = document.querySelector(`[data-video-id="${videoId}"]`);
-    if (container) {
-      const liteYoutube = container.querySelector(".yt-lite");
-      if (liteYoutube && liteYoutube.classList.contains("lty-activated")) {
-        // 활성화된 YouTube embed를 비활성화 상태로 되돌림
-        liteYoutube.classList.remove("lty-activated");
-        const iframe = liteYoutube.querySelector("iframe");
-        if (iframe) {
-          iframe.remove();
-        }
-        console.log(`🔄 Reset LiteYouTube container for: ${videoId}`);
-      }
-    }
-  }, []);
+  // 🎵 전역 볼륨 변경 핸들러
+  const handleGlobalVolumeChange = useCallback(
+    (newVolume) => {
+      setGlobalVolume(newVolume);
+      setGlobalMuted(newVolume === 0);
 
-  // 🎬 비디오 정지 및 초기화 함수 (개선됨)
-  const stopAndResetVideo = useCallback((videoId) => {
-    const videoElement = videoRefs.current[videoId];
-    if (!videoElement) {
-      console.log(`❌ No video element found for: ${videoId}`);
-      return;
-    }
-
-    try {
-      console.log(`⏹️ Stopping video: ${videoId}`);
-
-      // 1. YouTube iframe API 명령어 시도
-      if (videoElement.contentWindow) {
-        const commands = [
-          '{"event":"command","func":"pauseVideo","args":""}',
-          '{"event":"command","func":"stopVideo","args":""}',
-          '{"event":"command","func":"seekTo","args":[0, true]}',
-        ];
-
-        commands.forEach((command, index) => {
-          setTimeout(() => {
-            try {
-              videoElement.contentWindow.postMessage(command, "*");
-              console.log(`📤 Sent command ${index + 1} to ${videoId}`);
-            } catch (e) {
-              console.log(`❌ PostMessage failed for ${videoId}:`, e.message);
+      // 모든 활성화된 플레이어에 적용
+      Object.values(playerRefs.current).forEach((player) => {
+        if (player) {
+          try {
+            player.setVolume(newVolume);
+            if (newVolume === 0) {
+              player.mute();
+            } else if (globalMuted) {
+              player.unMute();
             }
-          }, index * 100); // 명령어 간 100ms 간격
-        });
-      }
-
-      // 2. HTML5 video API 시도 (fallback)
-      if (videoElement.pause && typeof videoElement.pause === "function") {
-        videoElement.pause();
-        videoElement.currentTime = 0;
-        console.log(`✅ HTML5 video stopped: ${videoId}`);
-      }
-
-      // 3. 마지막 수단: iframe 숨기기 (src 변경 대신)
-      setTimeout(() => {
-        if (videoElement.style) {
-          videoElement.style.opacity = "0";
-          setTimeout(() => {
-            if (videoElement.style) {
-              videoElement.style.opacity = "1";
-            }
-          }, 200);
-        }
-      }, 300);
-    } catch (error) {
-      console.error(`❌ Video control failed for ${videoId}:`, error);
-    }
-  }, []);
-
-  // 🎬 모든 비디오 정지 함수 (강화됨)
-  const stopAllVideos = useCallback(() => {
-    console.log("🛑 Stopping all videos...");
-
-    Object.keys(videoRefs.current).forEach((videoId) => {
-      stopAndResetVideo(videoId);
-      // 추가로 컨테이너도 리셋
-      setTimeout(() => resetVideoContainer(videoId), 500);
-    });
-
-    // 브라우저 차원에서 모든 미디어 정지 시도
-    document.querySelectorAll("video, audio").forEach((media) => {
-      if (!media.paused) {
-        media.pause();
-        media.currentTime = 0;
-      }
-    });
-
-    // 모든 iframe에 정지 명령 브로드캐스트
-    document
-      .querySelectorAll('iframe[src*="youtube.com"]')
-      .forEach((iframe) => {
-        try {
-          iframe.contentWindow?.postMessage(
-            '{"event":"command","func":"pauseVideo","args":""}',
-            "*"
-          );
-        } catch (e) {
-          // 무시
+          } catch (error) {
+            // Silent error handling for production
+          }
         }
       });
-  }, [stopAndResetVideo, resetVideoContainer]);
+    },
+    [globalMuted]
+  );
+
+  // 🎵 전역 음소거 토글
+  const handleGlobalMuteToggle = useCallback(() => {
+    const newMutedState = !globalMuted;
+    setGlobalMuted(newMutedState);
+
+    // 모든 활성화된 플레이어에 적용
+    Object.values(playerRefs.current).forEach((player) => {
+      if (player) {
+        try {
+          if (newMutedState) {
+            player.mute();
+          } else {
+            player.unMute();
+            player.setVolume(globalVolume);
+          }
+        } catch (error) {
+          // Silent error handling for production
+        }
+      }
+    });
+  }, [globalMuted, globalVolume]);
+
+  // 🎬 비디오 플레이어 등록
+  const handleVideoReady = useCallback(
+    (videoId, player) => {
+      playerRefs.current[videoId] = player;
+
+      // 전역 볼륨 설정 적용
+      try {
+        player.setVolume(globalVolume);
+        if (globalMuted) {
+          player.mute();
+        }
+      } catch (error) {
+        // Silent error handling for production
+      }
+    },
+    [globalVolume, globalMuted]
+  );
 
   // 🔧 카카오 SDK 초기화
   useEffect(() => {
@@ -509,13 +476,11 @@ const Short = () => {
       script.onload = () => {
         if (window.Kakao && !window.Kakao.isInitialized()) {
           window.Kakao.init("788c9afcb57d04021e2f0c6df11eb2b1");
-          console.log("카카오 SDK 로드 및 초기화 완료");
         }
       };
       document.head.appendChild(script);
     } else if (!window.Kakao.isInitialized()) {
       window.Kakao.init("788c9afcb57d04021e2f0c6df11eb2b1");
-      console.log("카카오 SDK 초기화 완료");
     }
   }, []);
 
@@ -538,50 +503,41 @@ const Short = () => {
         });
         setVideoInteractions(initialInteractions);
       } catch (error) {
-        console.error("Failed to load short videos data:", error);
+        // Silent error handling for production
       }
     };
 
     loadData();
   }, []);
 
-  // 🎮 카드 네비게이션 핸들러 (수정됨 - 비디오 정지 추가)
+  // 🎮 카드 네비게이션 핸들러 - 간소화 (VideoCard에서 자동 정지 처리)
   const handlePrevCard = useCallback(() => {
-    // 모든 비디오 정지 및 초기화
-    stopAllVideos();
-
     setActiveIndex((prev) => {
       const newIndex = prev === 0 ? shortsVideos.length - 1 : prev - 1;
       return newIndex;
     });
-  }, [shortsVideos.length, stopAllVideos]);
+  }, [shortsVideos.length]);
 
   const handleNextCard = useCallback(() => {
-    // 모든 비디오 정지 및 초기화
-    stopAllVideos();
-
     setActiveIndex((prev) => {
       const newIndex = prev === shortsVideos.length - 1 ? 0 : prev + 1;
       return newIndex;
     });
-  }, [shortsVideos.length, stopAllVideos]);
+  }, [shortsVideos.length]);
 
   const handleCardClick = useCallback(
     (index) => {
       if (index !== activeIndex) {
-        // 모든 비디오 정지 및 초기화
-        stopAllVideos();
         setActiveIndex(index);
       }
     },
-    [activeIndex, stopAllVideos]
+    [activeIndex]
   );
 
   // 🎬 비디오 ref 등록 함수
   const registerVideoRef = useCallback((videoId, videoElement) => {
     if (videoElement && videoId) {
       videoRefs.current[videoId] = videoElement;
-      console.log(`✅ Video ref registered for: ${videoId}`);
     }
   }, []);
 
@@ -607,13 +563,12 @@ const Short = () => {
     }));
   }, []);
 
-  // 💬 댓글 클릭 핸들러 (수정됨)
+  // 💬 댓글 클릭 핸들러
   const handleCommentClick = useCallback(
     (e, video) => {
       e.stopPropagation();
 
       if (commentOpen) {
-        // 댓글창이 이미 열려있으면 닫기
         setCommentOpen(false);
         setVideoInteractions((prev) => ({
           ...prev,
@@ -623,7 +578,6 @@ const Short = () => {
           },
         }));
       } else {
-        // 댓글창 열기
         setCommentOpen(true);
         setVideoInteractions((prev) => ({
           ...prev,
@@ -719,12 +673,19 @@ const Short = () => {
                   handleCommentClick={handleCommentClick}
                   handleShareClick={handleShareClick}
                   registerVideoRef={registerVideoRef}
+                  // 🎵 전역 볼륨 관련 props
+                  globalVolume={globalVolume}
+                  globalMuted={globalMuted}
+                  onVolumeChange={handleGlobalVolumeChange}
+                  onMuteToggle={handleGlobalMuteToggle}
+                  // 🎬 비디오 제어 관련 props
+                  onVideoReady={handleVideoReady}
                 />
               </CardWrapper>
             ))}
           </CarouselContainer>
 
-          {/* 💬 댓글 컴포넌트 - 현재 활성화된 비디오의 댓글 표시 */}
+          {/* 💬 댓글 컴포넌트 */}
           <Comment
             isOpen={commentOpen}
             onClose={closeCommentModal}
