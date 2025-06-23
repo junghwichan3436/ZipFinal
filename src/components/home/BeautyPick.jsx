@@ -22,13 +22,13 @@ const MainTitle = styled.div`
 `;
 const Title = styled.h2`
   color: var(--dark-color);
-  font-size: 10rem;
+  font-size: 8rem;
   letter-spacing: -4px;
   font-family: "EHNormalTrial";
   font-weight: 500;
-
   @media screen and (max-width: 1024px) {
-    font-size: 7rem;
+    font-size: 6rem;
+    letter-spacing: -3px;
   }
   @media screen and (max-width: 768px) {
     font-size: 5rem;
@@ -37,7 +37,7 @@ const Title = styled.h2`
 `;
 const Button = styled.button`
   font-size: 2rem;
-  padding: 22px 50px;
+  padding: 22px 40px;
   color: var(--light-color);
   background: var(--dark-color);
   font-family: "EHNormalTrial";
@@ -48,7 +48,7 @@ const Button = styled.button`
 
   @media screen and (max-width: 1024px) {
     font-size: 1.6rem;
-    padding: 20px 40px;
+    padding: 16px 28px;
   }
   @media screen and (max-width: 767px) {
     font-size: 1.2rem;
@@ -56,14 +56,14 @@ const Button = styled.button`
   }
 `;
 const ProductList = styled.ul`
-  padding: 100px 0;
+  padding: 70px 0;
   text-transform: uppercase;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-gap: 12px;
   padding-bottom: 1px;
   @media screen and (max-width: 1024px) {
-    padding: 50px 0;
+    padding: 40px 0;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 8px;
   }

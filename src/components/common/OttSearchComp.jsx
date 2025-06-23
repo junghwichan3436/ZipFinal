@@ -11,12 +11,13 @@ const Container = styled.div`
   @media screen and (max-width: 1400px) {
     min-width: 75%;
   }
+  @media screen and (max-width: 1024px) {
+  }
 `;
 const OttSearchComp = ({
-  ottSearchClick,
   setOttSearchClick,
-  setSearchClick,
   inputValue,
+  scrollAreaRef
 }) => {
   return (
     <Container>
@@ -26,6 +27,7 @@ const OttSearchComp = ({
         <OttSearchUpdate
           setOttSearchClick={setOttSearchClick}
           inputValue={inputValue}
+          scrollAreaRef={scrollAreaRef}
         />
       )}
     </Container>

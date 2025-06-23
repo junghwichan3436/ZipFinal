@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay, Pagination, Navigation, Parallax } from "swiper/modules"; 
+import { Autoplay, Pagination, Navigation, Parallax } from "swiper/modules";
 
 /*--- 스타일 ---*/
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Container = styled.div`
   padding-top: 82px;
   background: #ffffff;
   overflow: hidden;
-    
+
   @media screen and (max-width: 1024px) {
     height: 100%;
     padding-top: 0;
@@ -86,7 +86,7 @@ const ImgSection = styled.div`
     left: 5%;
     color: #fff;
     font-size: 6rem;
-    line-height: 6.8rem;
+    line-height: 1.2;
     font-family: "EHNormalTrial";
     letter-spacing: -2px;
     z-index: 2;
@@ -112,8 +112,8 @@ const ImgSection = styled.div`
       opacity: 1;
       z-index: 2;
       position: absolute;
-      font-size: 7rem;
-      line-height: 7.8rem;
+      font-size: 5rem;
+      line-height: 1.2;
     }
     .swiper-pagination {
       z-index: 3;
@@ -122,10 +122,10 @@ const ImgSection = styled.div`
   @media screen and (max-width: 767px) {
     height: 100%;
     h4 {
-      bottom: 16%;
-      left: 5%;
-      font-size: 4.6rem;
-      line-height: 5.4rem;
+      bottom: 14%;
+      left: 3%;
+      font-size: 3.6rem;
+      line-height: 1.2;
       font-family: "EHNormalTrial";
       letter-spacing: -2px;
       z-index: 2;
@@ -141,11 +141,10 @@ const InfoSection = styled.div`
   justify-content: end;
   h4 {
     font-weight: 600;
-    font-size: 9rem;
-    line-height: 9.4rem;
-    letter-spacing: -5px;
+    font-size: 8rem;
+    letter-spacing: -4px;
     b {
-      font-size: 9.6rem;
+      font-size: 8.7rem;
       font-family: "EHNormalTrial";
       font-weight: 500;
     }
@@ -161,10 +160,9 @@ const InfoSection = styled.div`
     display: none;
     grid-column: span 0;
     h4 {
-      font-size: 8rem;
-      line-height: 8rem;
+      font-size: 5rem;
       b {
-        font-size: 8.6rem;
+        font-size: 5rem;
       }
     }
   }

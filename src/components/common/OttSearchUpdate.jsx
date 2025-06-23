@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
 import { StarData, useAllDataViews, playlistIds } from "../../StarData";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +14,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-
   .videoWrapper {
     display: flex;
     width: 100%;
@@ -29,61 +28,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none; /* 안 보일 때 클릭 안 되게 */
-    background: var(--light-color);
-    border-radius: 50%;
-    color: var(--dark-color);
-    width: 40px;
-    height: 40px;
-    &::after {
-      font-size: 3rem;
-    }
-  }
-  &:hover {
-    .swiper-button-prev,
-    .swiper-button-next {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-  .swiper-button-prev::after {
-    content: "<";
-  }
-  .swiper-button-next::after {
-    content: ">";
+    cursor: pointer;
   }
 
-  @media screen and (max-width: 1024px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-      opacity: 1;
-    }
-  }
   @media screen and (max-width: 767px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.3s ease;
-      pointer-events: none; /* 안 보일 때 클릭 안 되게 */
-      background: var(--light-color);
-      border-radius: 50%;
-      color: var(--dark-color);
-      width: 32px;
-      height: 32px;
-      &::after {
-        font-size: 2rem;
-      }
-    }
   }
 `;
 const Value = styled.p`
@@ -105,8 +53,8 @@ const StarResult = styled.div`
   font-size: 1.4rem;
   text-align: center;
   img {
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -170,6 +118,7 @@ const VideoWrap = styled.div`
         h3 {
           font-size: 1.8rem;
           line-height: 2.4rem;
+          cursor: pointer;
         }
         p {
           overflow: hidden;
@@ -214,8 +163,41 @@ const VideoWrap = styled.div`
       }
     }
   }
+  @media screen and (max-width: 560px) {
+    div {
+      &:nth-child(1) {
+        img {
+          width: 250px;
+        }
+      }
+    }
+  }
 `;
-const OttSearchUpdate = ({ inputValue }) => {
+const PaginationWrap = styled.div`
+  width: 100%;
+  padding-bottom: 30px;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    li {
+      width: 30px;
+      height: 30px;
+    }
+  }
+`;
+
+const OttSearchUpdate = ({ inputValue, scrollAreaRef }) => {
+  console.log(scrollAreaRef);
+  const [page, setPage] = useState(1); //현재 페이지
+  const changePageHandler = (pageNumber) => {
+    setPage(pageNumber);
+    scrollAreaRef.current.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const { isLoading, data } = StarData();
   const { isLoading: loading02, data: data02 } = useAllDataViews(playlistIds);
   const navigate = useNavigate();
@@ -236,7 +218,11 @@ const OttSearchUpdate = ({ inputValue }) => {
   const today = `${date.getFullYear()}-${month}-${day}`;
   const calc = 1000 * 60 * 60 * 24;
 
-  console.log(today);
+  const itemsPerPage = 12;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = video?.slice(startIndex, endIndex);
+
   return (
     <Container>
       {star.length === 0 && video.length === 0 ? (
@@ -249,26 +235,36 @@ const OttSearchUpdate = ({ inputValue }) => {
       {star.length > 0 ? (
         <StarResult>
           <Swiper
-            modules={[Navigation]}
-            navigation={true}
             breakpoints={{
               1920: {
+                slidesPerView: 7,
+                spaceBetween: 20,
+              },
+              1440: {
                 slidesPerView: 5,
                 spaceBetween: 20,
               },
               1024: {
-                slidesPerView: 4,
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+              767: {
+                slidesPerView: 5,
                 spaceBetween: 20,
               },
               0: {
-                slidesPerView: 3, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
+                slidesPerView: 4, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
                 spaceBetween: 20,
               },
             }}
             className={"videoWrapper"}
           >
             {star?.map((artist) => (
-              <SwiperSlide>
+              <SwiperSlide
+                onClick={() => {
+                  navigate(`/star/${encodeURIComponent(artist.artistName)}`);
+                }}
+              >
                 <div>
                   <img src={artist.artistImg} alt={artist.artistName} />
                 </div>
@@ -279,7 +275,7 @@ const OttSearchUpdate = ({ inputValue }) => {
         </StarResult>
       ) : null}
       <VideoResult>
-        {video?.map((item) => {
+        {paginatedItems?.map((item) => {
           const artist = data?.artists?.find((artist) =>
             item.title.includes(artist.artistName)
           );
@@ -298,14 +294,20 @@ const OttSearchUpdate = ({ inputValue }) => {
             <VideoWrap>
               <div
                 onClick={() => {
-                  navigate(`detail/${encodeURIComponent(item.title)}`);
+                  navigate(`/ott/detail/${encodeURIComponent(item.title)}`);
                 }}
               >
                 <img src={item.thumbnails.high.url} alt="" />
               </div>
               <div>
                 <div>
-                  <h3>{item.title}</h3>
+                  <h3
+                    onClick={() => {
+                      navigate(`/ott/detail/${encodeURIComponent(item.title)}`);
+                    }}
+                  >
+                    {item.title}
+                  </h3>
                   <div>
                     <span
                       onClick={() => navigate(`/star/${artist?.artistName}`)}
@@ -327,6 +329,20 @@ const OttSearchUpdate = ({ inputValue }) => {
           );
         })}
       </VideoResult>
+      {star.length === 0 && video.length === 0 ? null : (
+        <PaginationWrap>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={itemsPerPage}
+            totalItemsCount={video?.length}
+            pageRangeDisplayed={5}
+            prevPageText={"‹"}
+            nextPageText={"›"}
+            hideFirstLastPages={true}
+            onChange={changePageHandler}
+          />
+        </PaginationWrap>
+      )}
     </Container>
   );
 };

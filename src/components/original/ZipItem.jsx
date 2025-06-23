@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+/*--- 스타일 ---*/
 const ZipItems = styled.li`
   width: 49%;
-  /* grid-column-gap: 1.042vw; */
-  /* grid-column-gap: 2vw; */
-  /* grid-row-gap: 6.25vw; */
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
   overflow: hidden;
   position: relative;
-
   .img_container {
     position: relative;
     width: 100%;
@@ -59,14 +56,8 @@ const ZipItems = styled.li`
   @media screen and (max-width: 1024px) {
     width: 100%;
     margin-bottom: 30px;
-    /* align-items: center; */
-    .img_container {
-      /* width: 80%; */
-      /* height: 360px; */
-    }
     p {
       font-size: 1.6rem;
-      /* margin-top: 18px; */
     }
     span {
       display: inline-block;
@@ -77,19 +68,8 @@ const ZipItems = styled.li`
   @media screen and (max-width: 767px) {
     width: 100%;
     height: 100%;
-    /* padding: 0 3%; */
-    /* margin-bottom: 12px; */
-    .img_container {
-      /* width: 100%; */
-      /* height: 360px; */
-    }
     p {
       font-size: 1.6rem;
-      /* margin-top: 14px; */
-    }
-    span {
-      /* font-size: 1.4rem; */
-      /* margin: 8px 0 20px; */
     }
   }
 `;
@@ -110,16 +90,13 @@ const OverlayTop = styled.div`
   z-index: 3;
   width: 100%;
   height: 100%;
-  transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg)
-    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
   opacity: 0;
   &:hover {
     opacity: 1;
-    transform: scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)
-      skew(0deg, 0deg);
+    transform: scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d;
     will-change: transform;
-    /* overflow: hidden; */
   }
   .scrolling-text {
     display: flex;
@@ -130,7 +107,7 @@ const OverlayTop = styled.div`
 
   @keyframes scrollLeft {
     0% {
-      /* transform: translateX(100%); */
+      transform: translateX(0%);
     }
     100% {
       transform: translateX(-100%);
@@ -145,16 +122,13 @@ const OverlayTop = styled.div`
     gap: 40px;
   }
   @media screen and (max-width: 767px) {
-    /* font-size: 1.6rem; */
     gap: 40px;
   }
 `;
 const KeywordList = styled.ul`
   display: flex;
   gap: 10px;
-  /* color: #a0a0a0; */
   li {
-    /* font-weight: 300; */
     font-size: 1.4rem;
     padding: 12px 24px;
     border: 1px solid #585858;
@@ -162,28 +136,9 @@ const KeywordList = styled.ul`
   }
 `;
 
-const ZipItem = ({
-  id,
-  thumbnail,
-  staticThumbnail,
-  mainTitle,
-  subTitle,
-  starName,
-  keyword,
-  characterName,
-  episode,
-}) => {
+/*--- 출력 ---*/
+const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword }) => {
   const navigate = useNavigate();
-
-  const [sildeData, setSlideData] = useState([]);
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    fetch("/API/homeData.json")
-      .then((response) => response.json())
-      .then((data) => setSlideData(data.sildeData));
-  }, []);
 
   const onClickItem = () => {
     navigate(`/ott/originalDetail/${id}`);
@@ -191,25 +146,14 @@ const ZipItem = ({
 
   return (
     <ZipItems onClick={onClickItem}>
-      <div
-        className="img_container"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <div className="img_container">
         <OverlayTop>
           <div className="scrolling-text">
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
-            <div>view</div>
+            {Array(20)
+              .fill("view")
+              .map((text, i) => (
+                <div key={i}>{text}</div>
+              ))}
           </div>
         </OverlayTop>
         <img className="static" src={staticThumbnail} alt="static" />
@@ -228,4 +172,4 @@ const ZipItem = ({
   );
 };
 
-export default ZipItem;
+export default React.memo(ZipItem);

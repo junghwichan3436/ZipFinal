@@ -20,6 +20,7 @@ const Container = styled.div`
     }
   }
   @media screen and (max-width: 1024px) {
+    height: 100%;
     form {
       width: 100%;
     }

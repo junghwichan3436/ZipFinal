@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import CardItem from "../home/CardItem";
 import RollingBanner from "../home/RollingBanner";
@@ -7,14 +6,12 @@ import YouTube from "react-youtube";
 /*--- 스와이퍼 ---*/
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/effect-fade";
-// import "swiper/css/navigation";
 
+/*--- 스타일 ---*/
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  letter-spacing: -0.1rem;
+  letter-spacing: -0.75px;
   color: var(--light-color);
   text-transform: uppercase;
 `;
@@ -156,7 +153,6 @@ const CharaterSection = styled.section`
     justify-content: space-between;
     align-items: flex-start;
     & > h4 {
-      /* width: 50%; */
       font-size: 4rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
@@ -196,7 +192,7 @@ const CharaterSection = styled.section`
 
   @media screen and (max-width: 1024px) {
     padding-top: 60px;
-    padding: 60px 3%;
+    padding: 60px 3% 0;
     aside {
       & > h4 {
         font-size: 3.2rem;
@@ -211,7 +207,6 @@ const CharaterSection = styled.section`
           font-size: 1.2rem;
         }
         & > ul {
-          /* gap: 8px; */
           li {
             padding: 8px 14px;
             font-size: 1rem;
@@ -252,7 +247,7 @@ const CharaterSection = styled.section`
 const CardList = styled.div`
   width: 100%;
   height: 580px;
-  margin-top: 30px;
+  margin-top: 40px;
   overflow: hidden;
   .swiper {
     width: 100%;
@@ -261,20 +256,15 @@ const CardList = styled.div`
       height: 100%;
       margin-right: 0;
       display: flex;
+      gap: 20px;
       .swiper-slide {
         margin-right: 0;
       }
     }
-    @media screen and (max-width: 1024px) {
-      /* margin: 80px 0 100px 0; */
-    }
-    @media screen and (max-width: 767px) {
-      /* margin: 50px 0 80px 0; */
-    }
   }
 
   @media screen and (max-width: 1200px) {
-    height: 450px;
+    height: 400px;
   }
   @media screen and (max-width: 767px) {
     height: 340px;
@@ -294,35 +284,22 @@ const RealStarSection = styled.div`
     justify-content: space-between;
     margin: 60px 0;
     & > h4 {
-      /* width: 36%; */
       font-size: 4rem;
       letter-spacing: -2px;
       font-family: "EHNormalTrial";
     }
     & > .video-container {
-      /* width: 600px; */
       width: 70%;
-      /* aspect-ratio: 16 / 9; */
       cursor: pointer;
       overflow: hidden;
-      /* position: relative; */
-      border-radius: 6px;
+      border-radius: 8px;
+      cursor: pointer;
       .videoImg {
         width: 100%;
         height: 100%;
         aspect-ratio: 16 / 9;
         overflow: hidden;
         position: relative;
-        img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: opacity 0.3s ease;
-          z-index: 2;
-        }
         iframe {
           position: absolute;
           top: 0;
@@ -344,10 +321,6 @@ const RealStarSection = styled.div`
       & > h4 {
         font-size: 3.2rem;
         width: 40%;
-      }
-      & > .video-container {
-        /* background: #00f; */
-        /* width: 65%; */
       }
     }
   }
@@ -376,7 +349,6 @@ const ShortSection = styled.div`
   width: 100%;
   height: 100%;
   & > h4 {
-    /* width: 50%; */
     width: 100%;
     font-size: 4rem;
     letter-spacing: -2px;
@@ -394,7 +366,6 @@ const ShortSection = styled.div`
       gap: 20px;
       li {
         width: 50%;
-        /* flex: 1; */
         .thumbnail-info {
           width: 100%;
           height: 100%;
@@ -404,22 +375,12 @@ const ShortSection = styled.div`
           border-radius: 8px;
           cursor: pointer;
           position: relative;
-          /* img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: none;
-            pointer-events: none;
-            } */
           iframe {
             position: absolute;
             top: 0;
             left: 0;
-            /* z-index: 1; */
             width: 100%;
             height: 100%;
-
-            /* pointer-events: none; */
           }
         }
         .short-info {
@@ -430,7 +391,6 @@ const ShortSection = styled.div`
             font-size: 2rem;
             font-weight: 500;
             line-height: 1.2;
-            /* margin-bottom: 14px; */
             cursor: pointer;
           }
           div {
@@ -452,22 +412,16 @@ const ShortSection = styled.div`
     width: 100%;
     & > h4 {
       width: 100%;
-      /* width: 50%; */
       font-size: 3.2rem;
       margin-bottom: 30px;
     }
     & > .shorts-container {
       ul {
-        /* gap: 14px; */
-        /* display: flex; */
-        /* flex-direction: column; */
         flex-wrap: wrap;
         justify-content: center;
         justify-content: space-around;
         li {
           width: 30%;
-          /* height: 100%; */
-
           &:last-child {
             display: none;
           }
@@ -499,7 +453,6 @@ const ShortSection = styled.div`
     }
     & > .shorts-container {
       ul {
-        /* flex-direction: column; */
         li {
           width: 47%;
           &:last-child {
@@ -510,7 +463,6 @@ const ShortSection = styled.div`
             margin-top: 10px;
             p {
               font-size: 1.6rem;
-              /* line-height: 1.4; */
             }
             div {
               width: 100%;
@@ -525,6 +477,8 @@ const ShortSection = styled.div`
     }
   }
 `;
+
+/*--- 출력 ---*/
 const DetailItem = ({
   mainTitle,
   subTitle,
@@ -538,16 +492,13 @@ const DetailItem = ({
   items,
   videoUrl,
 }) => {
-  const navigate = useNavigate();
-
-  const [sildeData, setSlideData] = useState([]);
+  const VideoRef = useRef([]);
 
   useEffect(() => {
-    fetch("/API/originalData.json")
-      .then((response) => response.json())
-      .then((data) => setSlideData(data.slideData));
+    window.scrollTo({ top: 0 });
   }, []);
 
+  // 유튜브 재생 옵션
   const opts = {
     width: "100%",
     height: "100%",
@@ -564,8 +515,6 @@ const DetailItem = ({
       enablejsapi: 1, // JS API 활성화
     },
   };
-
-  const VideoRef = useRef([]);
 
   const handleReady = (event) => {
     VideoRef.current = event.target;
@@ -596,9 +545,45 @@ const DetailItem = ({
   const handleMouseLeave = (index) => {
     const player = VideoRef.current[index];
     if (player) {
-      player.pauseVideo(); // stopVideo()보다 자연스럽습니다.
+      player.pauseVideo();
     }
   };
+
+  const keywordList = useMemo(() => keyword?.map((item, index) => <li key={index}>{item}</li>), [keyword]);
+
+  const characterKeywordList = useMemo(
+    () =>
+      characterKeyword?.map((item, index) => (
+        <li className="hashtag" key={index}>
+          # {item}
+        </li>
+      )),
+    [characterKeyword]
+  );
+  const swiperItems = useMemo(
+    () =>
+      items?.map((item, index) => (
+        <SwiperSlide key={index}>
+          <CardItem subtitle={item.subtitle} title={item.title} img={item.img} detailURL={item.detailURL} />
+        </SwiperSlide>
+      )),
+    [items]
+  );
+  const shortsList = useMemo(
+    () =>
+      shorts?.map((item, index) => (
+        <li key={index}>
+          <div
+            className="thumbnail-info"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <YouTube videoId={item.shortVideo} opts={opts} onReady={(e) => handleVideoReady(e, index)} />
+          </div>
+        </li>
+      )),
+    [shorts]
+  );
 
   return (
     <Container>
@@ -612,11 +597,7 @@ const DetailItem = ({
             {subTitle} <br />
             {starName}의 가방을 열다
           </p>
-          <ul>
-            {keyword.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+          <ul>{keywordList}</ul>
         </div>
       </TitleSection>
       <ImgSection>
@@ -625,19 +606,14 @@ const DetailItem = ({
       </ImgSection>
       <CharaterSection>
         <aside>
-          <h4 className="">ZIP scene</h4>
+          <h4>ZIP scene</h4>
           <div>
             <h5>{episode}</h5>
             <p>{description}</p>
-            <ul>
-              {characterKeyword.map((item, index) => (
-                <li className="hashtag" key={index}>
-                  # {item}
-                </li>
-              ))}
-            </ul>
+            <ul>{characterKeywordList}</ul>
           </div>
         </aside>
+
         <aside className="item-zip">
           <h4>item ZIP</h4>
           <div>
@@ -647,39 +623,17 @@ const DetailItem = ({
         <CardList>
           <Swiper
             className="swiper"
-            // slidesPerView={4}
-            // spaceBetween={400}
             loop={true}
-            // loopedSlides={8}
-            // modules={[]}
             style={{ overflow: "visible" }}
             breakpoints={{
-              1920: {
-                slidesPerView: 4,
-              },
-              // 1500: {
-              //   slidesPerView: 4,
-              // },
-              960: {
-                slidesPerView: 3, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
-                // spaceBetween: 20,
-              },
-              0: {
-                slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
-                // spaceBetween: 20,
-              },
+              1920: { slidesPerView: 4 },
+              1000: { slidesPerView: 4 },
+              980: { slidesPerView: 3 },
+              510: { slidesPerView: 3 },
+              0: { slidesPerView: 2 },
             }}
           >
-            {items?.map((item, index) => (
-              <SwiperSlide key={index}>
-                <CardItem
-                  subtitle={item.subtitle}
-                  title={item.title}
-                  img={item.img}
-                  detailURL={item.detailURL}
-                />
-              </SwiperSlide>
-            ))}
+            {swiperItems}
           </Swiper>
         </CardList>
       </CharaterSection>
@@ -688,41 +642,17 @@ const DetailItem = ({
         <p className="real-title">캐릭터가 아닌, 진짜 {starName}의 취향은?</p>
         <div className="contents-container">
           <h4>bag ZIP</h4>
-          <div
-            className="video-container"
-            onMouseEnter={VideoPlay}
-            onMouseLeave={VideoStop}
-          >
+          <div className="video-container" onMouseEnter={VideoPlay} onMouseLeave={VideoStop}>
             <div className="videoImg">
               <YouTube videoId={videoUrl} opts={opts} onReady={handleReady} />
             </div>
           </div>
         </div>
+
         <ShortSection>
           <h4>short ZIP</h4>
           <div className="shorts-container">
-            <ul>
-              {shorts?.map((item, index) => (
-                <li key={index}>
-                  <div
-                    className="thumbnail-info"
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={() => handleMouseLeave(index)}
-                  >
-                    <YouTube
-                      videoId={item.shortVideo}
-                      opts={opts}
-                      onReady={(e) => handleVideoReady(e, index)}
-                    />
-                  </div>
-                  {/* <div className="short-info">
-                    <p>{item.shortTitle}</p>
-                    <div></div>
-                    <span>조회수 {item.viewRated.toLocaleString()}회</span>
-                  </div> */}
-                </li>
-              ))}
-            </ul>
+            <ul>{shortsList}</ul>
           </div>
         </ShortSection>
       </RealStarSection>

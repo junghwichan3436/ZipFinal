@@ -140,15 +140,16 @@ export const CommentContainer = styled.div`
 
   @media screen and (min-width: 1025px) {
     position: relative;
-    width: 450px;
+    width: 480px; /* 400px에서 480px로 증가 */
     height: auto;
-    margin-top: 100px;
-    min-height: 600px;
-    max-height: 800px;
+    margin-top: 0;
+    margin-left: 20px;
+    min-height: 500px;
+    max-height: calc(100vh - 100px);
     animation: none;
     transform: none;
     flex-shrink: 0;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 100%);
@@ -209,11 +210,11 @@ export const CommentHeader = styled.div`
   }
 
   @media screen and (min-width: 1025px) {
-    border-radius: 16px 16px 0 0;
-    padding: 20px 24px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 20px;
 
     h3 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
     }
   }
 
@@ -335,6 +336,10 @@ export const CommentItemWrapper = styled.div`
     width: 3px;
   }
 
+  @media screen and (min-width: 1025px) {
+    padding: 16px 20px;
+  }
+
   @media screen and (max-width: 768px) {
     padding: 16px 20px;
   }
@@ -358,6 +363,12 @@ export const UserAvatar = styled.div`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.1);
 
+  @media screen and (min-width: 1025px) {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
   @media screen and (max-width: 768px) {
     width: 36px;
     height: 36px;
@@ -370,6 +381,11 @@ export const CommentUserInfo = styled.div`
   align-items: center;
   gap: 14px;
   margin-bottom: 12px;
+
+  @media screen and (min-width: 1025px) {
+    gap: 12px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -383,6 +399,10 @@ export const UserName = styled.div`
   margin-bottom: 2px;
   font-family: "Pretendard", sans-serif;
 
+  @media screen and (min-width: 1025px) {
+    font-size: 1.3rem;
+  }
+
   @media screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
@@ -392,6 +412,10 @@ export const CommentTime = styled.div`
   color: #aaa;
   font-size: 1.2rem;
   font-weight: 400;
+
+  @media screen and (min-width: 1025px) {
+    font-size: 1.1rem;
+  }
 
   @media screen and (max-width: 768px) {
     font-size: 1.1rem;
@@ -406,6 +430,11 @@ export const CommentText = styled.p`
   word-break: break-word;
   font-weight: 400;
 
+  @media screen and (min-width: 1025px) {
+    font-size: 1.3rem;
+    margin: 0 0 12px 0;
+  }
+
   @media screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
@@ -416,6 +445,11 @@ export const CommentActions = styled.div`
   align-items: center;
   gap: 16px;
   margin-left: 56px;
+
+  @media screen and (min-width: 1025px) {
+    margin-left: 48px;
+    gap: 12px;
+  }
 
   @media screen and (max-width: 768px) {
     margin-left: 52px;
@@ -451,6 +485,12 @@ export const ActionButton = styled.button`
     transform: translateY(0);
   }
 
+  @media screen and (min-width: 1025px) {
+    font-size: 1.1rem;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
   @media screen and (max-width: 768px) {
     font-size: 1.1rem;
     gap: 6px;
@@ -481,6 +521,11 @@ export const ReplyButton = styled.button`
 
   &:active {
     transform: translateY(0);
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 1.1rem;
+    padding: 6px 10px;
   }
 
   @media screen and (max-width: 768px) {
@@ -524,6 +569,25 @@ export const EmptyState = styled.div`
     line-height: 1.5;
     color: #999;
   }
+
+  @media screen and (min-width: 1025px) {
+    height: 200px;
+    padding: 0 30px;
+
+    .icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 export const ReplyContainer = styled.div`
@@ -533,6 +597,11 @@ export const ReplyContainer = styled.div`
   border-left: 2px solid rgba(74, 158, 255, 0.3);
   background: rgba(74, 158, 255, 0.05);
   border-radius: 0 12px 12px 0;
+
+  @media screen and (min-width: 1025px) {
+    margin-left: 48px;
+    padding-left: 12px;
+  }
 
   @media screen and (max-width: 768px) {
     margin-left: 48px;

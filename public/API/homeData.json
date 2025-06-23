@@ -2,42 +2,42 @@
   "mainData": [
     {
       "artistName": "윈터",
-      "image": "/img/윈터.jpg",
+      "image": "/img/1.jpg",
       "title": "윈터의",
       "video": "/videos/main_2.mp4",
       "videoURL": "https://youtu.be/n1dsiTJsliQ"
     },
     {
       "artistName": "공명",
-      "image": "/img/공명.jpg",
+      "image": "/img/2.jpg",
       "title": "공명 & 김민하의",
       "video": "/videos/main_3.mp4",
       "videoURL": "https://youtu.be/nE5pEjJsQYM"
     },
     {
       "artistName": "고민시",
-      "image": "/img/고민시.jpg",
+      "image": "/img/3.jpg",
       "title": "고민시의",
       "video": "/videos/main_4.mp4",
       "videoURL": "https://youtu.be/nXJ35n2KgpE"
     },
     {
       "artistName": "차은우",
-      "image": "/img/차은우.jpg",
+      "image": "/img/4.jpg",
       "title": "차은우의",
       "video": "/videos/main_5.mp4",
       "videoURL": "https://youtu.be/5Lbvb1phZT8"
     },
     {
       "artistName": "아일릿",
-      "image": "/img/아일릿.jpg",
+      "image": "/img/5.jpg",
       "title": "아일릿의",
       "video": "/videos/main_6.mp4",
       "videoURL": "https://youtu.be/qxl572HCmek"
     },
     {
       "artistName": "서강준",
-      "image": "/img/서강준.jpg",
+      "image": "/img/6.jpg",
       "title": "서강준의",
       "video": "/videos/main_1.mp4",
       "videoURL": "https://youtu.be/QOZcIWeQYBc"
@@ -103,7 +103,7 @@
     {
       "img": "https://i.ibb.co/Wp6gvJWx/9.png",
       "subtitle": "immun",
-      "name": "오쏘몰 멀티비타민&미네랄",
+      "name": "멀티비타민&미네랄",
       "price": 300000,
       "artistName": "영케이",
       "detailURL": "오쏘뮬 이뮨"

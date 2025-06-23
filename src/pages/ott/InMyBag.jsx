@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { bagData, StarData, bagDataWithViews } from "../../StarData";
+import { StarData, bagDataWithViews } from "../../StarData";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
@@ -151,14 +151,13 @@ const VideoText = styled.div`
   align-items: center;
   gap: 10px;
   img {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
   }
   p {
     &:nth-child(1) {
-      /* font-weight: bold; */
       line-height: 1.2;
       margin-bottom: 10px;
       display: -webkit-box;
@@ -207,7 +206,6 @@ const PaginationWrap = styled.div`
 const InMyBag = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [sortOrder, setSortOrder] = useState("latest");
-  // const { data, isLoading, error } = bagData();
   const { data, isLoading, error } = bagDataWithViews();
   const {
     data: starData,
@@ -215,6 +213,7 @@ const InMyBag = () => {
     error: starError,
   } = StarData();
   const navigate = useNavigate();
+
   const [page, setPage] = useState(1); //현재 페이지
   const itemsPerPage = 12;
   const changePageHandler = (pageNumber) => {
@@ -243,18 +242,6 @@ const InMyBag = () => {
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = filteredItems?.slice(startIndex, endIndex);
 
-  // const opts = {
-  //   width: "100%",
-  //   height: "100%",
-  //   playerVars: {
-  //     mute: 1,
-  //     rel: 0, //관련 동영상 표시하지 않음
-  //     modestbranding: 1, // 유튜브 로고 최소화
-  //     controls: 0, // 컨트롤 바 숨기기
-  //     fs: 0, // 전체화면 버튼 숨기기
-  //     disablekb: 1, // 키보드 제어 비활성화
-  //   },
-  // };
   return (
     <Container>
       <Title>
@@ -340,8 +327,6 @@ const InMyBag = () => {
           itemsCountPerPage={itemsPerPage}
           totalItemsCount={filteredItems?.length}
           pageRangeDisplayed={5}
-          // prevPageText={"‹"}
-          // nextPageText={"›"}
           hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
           onChange={changePageHandler} // 페이지 바뀔때 함수
         />

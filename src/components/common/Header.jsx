@@ -629,8 +629,8 @@ const Header = () => {
               <li onClick={() => navigate("/ott/bagzip")} data-li="Bag">
                 <span>Bag</span>
               </li>
-              <li onClick={() => navigate("/ott/stylezip")} data-li="Style">
-                <span>Style</span>
+              <li onClick={() => navigate("/ott/workzip")} data-li="Work">
+                <span>Work</span>
               </li>
               <li onClick={() => navigate("/ott/talkzip")} data-li="Talk">
                 <span>Talk</span>
