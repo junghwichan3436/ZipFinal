@@ -112,7 +112,6 @@ const VolumeSlider = styled.input`
   outline: none;
   border-radius: 2px;
   cursor: pointer;
-  -webkit-appearance: none;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
