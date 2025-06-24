@@ -32,12 +32,20 @@ const Title = styled.div`
       font: normal bold 3.8rem/1 "EHNormalTrial";
     }
   }
+  @media screen and (max-width: 767px) {
+    h3 {
+      font-size: 3rem;
+      span {
+        font-size: 3rem;
+      }
+    }
+  }
 `;
 
 const SelectionInfo = styled.div`
   text-align: center;
-  color: #666;
-  font-size: 1.4rem;
+  color: var(--subTitle);
+  /* font-size: 1.4rem; */
   margin-bottom: 10px;
 
   .count {
@@ -45,22 +53,29 @@ const SelectionInfo = styled.div`
     font-weight: bold;
     font-size: 1.6rem;
   }
+  @media screen and (max-width: 767px) {
+    span {
+      font-size: 1.4rem;
+    }
+  }
 `;
 
 const Contents = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   height: 400px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   overflow-y: auto;
   padding: 20px;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
 
-  @media screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  @media screen and (max-width: 767px) {
+    /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
+    /* grid-template-columns: repeat(2, 1fr); */
+    max-width: 500px;
     gap: 15px;
     height: 350px;
   }
@@ -134,7 +149,7 @@ const SelectionBadge = styled.div`
   top: -5px;
   right: -5px;
   background: #28a745;
-  color: white;
+  color: var(--light-color);
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -167,6 +182,9 @@ const ButtonSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media screen and (max-width: 767px) {
+    max-width: 500px;
+  }
 `;
 
 const Skip = styled.p`
@@ -196,7 +214,7 @@ const Button = styled.button`
   background: var(--light-color);
   border: 1px solid var(--dark-color);
   cursor: pointer;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   transition: all 0.3s ease;
 
   &:hover {
@@ -213,8 +231,6 @@ const SignupBtn = styled(Button)`
   border: none;
   background: var(--dark-color);
   color: var(--light-color);
-  font-weight: bold;
-
   &:hover:not(:disabled) {
     background: #333;
   }
