@@ -38,11 +38,28 @@ const Artist = styled.div`
     flex-direction: column;
     gap: 10px;
     font-size: 1.6rem;
+    &:hover {
+      img {
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
     img {
       width: 100%;
       aspect-ratio: 1 / 1;
       border-radius: 50%;
       object-fit: cover;
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s;
+      }
     }
   }
   @media screen and (max-width: 1300px) {
@@ -125,7 +142,7 @@ const VideoText = styled.div`
   gap: 100px;
   div {
     p {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       line-height: 1.2;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -177,13 +194,14 @@ const Filter = styled.div`
       height: 100%;
       object-fit: cover;
       position: relative;
-      filter: brightness(70%);
+      filter: brightness(50%);
       transition: all 0.3s;
     }
     p {
       position: absolute;
-      left: 3%;
-      bottom: 3%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       text-transform: uppercase;
       font-family: "EHNormalTrial";
       transition: all 0.3s;
@@ -191,15 +209,23 @@ const Filter = styled.div`
     &:hover {
       img {
         filter: brightness(100%);
-      }
-      p {
-        color: var(--dark-color);
+        border-radius: 8px;
       }
     }
   }
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }
+`;
+
+const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--ott-bg-color);
+  color: var(--light-color);
 `;
 
 const OttSearchResult = () => {
@@ -220,8 +246,6 @@ const OttSearchResult = () => {
   }, [topRatedData, data02?.artists]);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
-
-  console.log(artist);
 
   const handleReady = (event) => {
     // event.target은 YT.Player 인스턴스
@@ -258,6 +282,39 @@ const OttSearchResult = () => {
       enablejsapi: 1, // JS API 활성화
     },
   };
+
+  const filterData = [
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/0bf865aa-d118-4ae2-5102-1e603d1b2b00/w=1024,h=1501",
+      name: "bag",
+      navigate: "/ott/bagzip",
+    },
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/90ad10b6-524b-4b8c-88e4-9dde3b207b00/w=1024,h=1280",
+      name: "work",
+      navigate: "/ott/workzip",
+    },
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f697c35d-1c7a-42a9-5235-03da1b8a8900/w=1920,h=2400",
+      name: "talk",
+      navigate: "/ott/talkzip",
+    },
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/7071f104-b0ec-41fb-2934-f6bb2dd8a700/w=1024,h=835",
+      name: "short",
+      navigate: "/ott/short",
+    },
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/e8e268c7-70da-4236-f4a2-8b4c2b46c300/w=1024,h=1280",
+      name: "star",
+      navigate: "/star",
+    },
+    {
+      img: "https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/9173af32-2c46-444f-3dbd-2477803ce200/w=1024,h=1500",
+      name: "original",
+      navigate: "/ott/original",
+    },
+  ];
   return (
     <Wrapper>
       {!allLoading ? (
@@ -357,65 +414,19 @@ const OttSearchResult = () => {
           <FilterWrap>
             <SlideTitle>BROWSE ALL</SlideTitle>
             <Filter>
-              <div onClick={() => navigate(`/ott/bagzip`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/cf88bc1e-e18e-436f-06ee-89ba28dabd00/w=1024,h=1024,fit=crop"
-                    alt=""
-                  />
-                  <p>Bag</p>
+              {filterData.map((item) => (
+                <div onClick={() => navigate(`${item.navigate}`)}>
+                  <div>
+                    <img src={item.img} alt="bag" />
+                    <p>{item.name}</p>
+                  </div>
                 </div>
-              </div>
-              <div onClick={() => navigate(`/ott/stylezip`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/8665c12f-5a09-4a35-084c-5df2169e5900/w=1024,h=1280"
-                    alt=""
-                  />
-                  <p>WORK</p>
-                </div>
-              </div>
-              <div onClick={() => navigate(`/ott/talkzip`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/57bf338a-e313-4b3f-8b8c-319643327900/w=1024,h=1280"
-                    alt=""
-                  />
-                  <p>Talk</p>
-                </div>
-              </div>
-              <div onClick={() => navigate(`/ott/short`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/7590d225-7bb5-48e8-d0ec-40d7fd569d00/w=1024,h=1280"
-                    alt=""
-                  />
-                  <p>Shorts</p>
-                </div>
-              </div>
-              <div onClick={() => navigate(`/star`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/f08e38ff-57f2-4b57-c671-5c778c8f1200/w=1024,h=1345"
-                    alt=""
-                  />
-                </div>
-                <p>Star</p>
-              </div>
-              <div onClick={() => navigate(`/ott/original`)}>
-                <div>
-                  <img
-                    src="https://imagedelivery.net/djfufN1Ft6CV8Emdrip5jA/a44fb309-73a5-4d88-a58a-2b3bd7f3a900/w=1024,h=1024,fit=crop"
-                    alt=""
-                  />
-                  <p>Orginal</p>
-                </div>
-              </div>
+              ))}
             </Filter>
           </FilterWrap>
         </Container>
       ) : (
-        <div>넵</div>
+        <Loading>Loading...</Loading>
       )}
     </Wrapper>
   );

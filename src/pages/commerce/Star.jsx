@@ -123,29 +123,13 @@ const FilterItemName = styled.p`
 
 const PaginationWrap = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-bottom: 30px;
   ul {
     display: flex;
+    justify-content: center;
     li {
       width: 30px;
       height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid var(--border-color);
-      border-right: none;
-      font-family: "Pretendard";
-      &:last-child {
-        border-right: 1px solid var(--border-color);
-      }
-      &.active {
-        color: var(--dark-color);
-        background: var(--light-color);
-      }
-      a {
-      }
     }
   }
 `;

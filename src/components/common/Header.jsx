@@ -2,14 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import SearchComp from "./SearchComp";
 import OttSearchWrap from "./OttSearchWrap";
-import { Link, useMatch, useNavigate, useParams } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useCart from "../../hooks/useCart";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
-import { CART_ITEMS_KEY } from "../../constants/queryKeys";
 
 const Container = styled.header``;
 
@@ -28,10 +27,9 @@ const Wrapper = styled.div`
   color: #fff;
   mix-blend-mode: difference;
   background: transparent;
-  /* backdrop-filter: blur(16px) saturate(180%); */
-  z-index: 2;
+  z-index: 3;
   &.active {
-    transform: translateY(-100px);
+    backdrop-filter: blur(16px) saturate(180%);
   }
   &.filterUnActive {
     mix-blend-mode: normal;
@@ -52,8 +50,7 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   transform-origin: top left;
-  padding-top: 24px;
-  width: 160px;
+  width: 138px;
   z-index: 3;
   transition: all 0.3s;
   a {
@@ -66,6 +63,7 @@ const Logo = styled.div`
     width: 100px !important;
   }
 `;
+
 const HeaderLogoImg = styled.img`
   width: 100%;
 `;
@@ -152,7 +150,7 @@ const HeaderGnb = styled.ul`
     width: 100%;
     height: 100vh;
     display: block;
-    padding: 160px 3%;
+    padding: 140px 3%;
     li {
       font-size: 2.4rem;
       margin-bottom: 30px;
@@ -369,6 +367,7 @@ const TopBtn = styled.div`
 `;
 
 const Header = () => {
+  const [headerActive, setHeaderActive] = useState(false);
   const [filterCheck, setFilterCheck] = useState(false);
   const [menuClick, setMenuClick] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
@@ -386,6 +385,7 @@ const Header = () => {
   const detailMatch = useMatch("/detail/:itemName");
   const loginMatch = useMatch("/login");
   const signUpMatch = useMatch("/signup");
+  const signUpMatch02 = useMatch("/signupv2");
   const eventMatch = useMatch("/event");
   const promotionMatch = useMatch("/event/:promotion");
   const cartMatch = useMatch("/cart");
@@ -412,12 +412,6 @@ const Header = () => {
     setToggleClick(false);
   };
 
-  const toStar = () => {
-    navigate("./star");
-    setMenuClick(false);
-    setToggleClick(false);
-  };
-
   const filterFunc = () => {
     if (
       commerceMatch ||
@@ -426,7 +420,9 @@ const Header = () => {
       eventMatch ||
       cartMatch ||
       searchMatch ||
-      promotionMatch
+      promotionMatch ||
+      mypageMatch ||
+      mypageMatch02
     ) {
       setFilterCheck(true);
     } else {
@@ -445,6 +441,8 @@ const Header = () => {
     eventMatch,
     searchMatch,
     promotionMatch,
+    mypageMatch,
+    mypageMatch02,
   ]);
 
   gsap.registerPlugin(ScrollTrigger);
@@ -505,23 +503,6 @@ const Header = () => {
     };
   }, [getCartItemCount]);
 
-  // const getCartCountDirectly = () => {
-  //   try {
-  //     const userId =
-  //       isLoggedIn && auth.currentUser ? auth.currentUser.uid : "guest";
-  //     const cartKey =
-  //       userId === "guest" ? CART_ITEMS_KEY : `${CART_ITEMS_KEY}_${userId}`;
-  //     const cartData = localStorage.getItem(cartKey);
-  //     if (!cartData) return 0;
-
-  //     const items = JSON.parse(cartData);
-  //     return items.reduce((total, item) => total + (item.quantity || 1), 0);
-  //   } catch (error) {
-  //     console.error("장바구니 개수 계산 오류:", error);
-  //     return 0;
-  //   }
-  // };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -529,8 +510,10 @@ const Header = () => {
   window.addEventListener("scroll", () => {
     if (window.scrollY > 100) {
       setTopBtnScroll(true);
+      setHeaderActive(true);
     } else {
       setTopBtnScroll(false);
+      setHeaderActive(false);
     }
   });
 
@@ -566,7 +549,10 @@ const Header = () => {
 
   return (
     <Container>
-      <Wrapper ref={headerRef} className={menuClick ? "filterUnActive" : ""}>
+      <Wrapper
+        ref={headerRef}
+        className={menuClick ? "filterUnActive" : headerActive ? "active" : ""}
+      >
         <HeaderLeft>
           <Logo className="logo">
             <Link
@@ -577,7 +563,8 @@ const Header = () => {
                 starMatch ||
                 starDetailMatch ||
                 loginMatch ||
-                signUpMatch
+                signUpMatch ||
+                signUpMatch02
                   ? "/ott"
                   : "/"
               }
@@ -590,9 +577,7 @@ const Header = () => {
             </Link>
           </Logo>
           <HeaderSelect>
-            {loginMatch ? (
-              <></>
-            ) : filterCheck ? (
+            {filterCheck ? (
               <div>
                 <p>COMMERCE</p>
                 <span>|</span>
