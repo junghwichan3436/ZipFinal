@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { StarData } from "../../../StarData";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,26 +7,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-
-  @media screen and (max-width: 767px) {
-    overflow-y: auto;
-  }
-`;
-
 const Container = styled.div`
-  /* width: 600px; */
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin-top: 30px; */
-  gap: 50px;
+  gap: 30px;
+  padding: 40px 20px;
   span {
     font-size: 1.6rem;
   }
@@ -38,38 +26,43 @@ const Title = styled.div`
   flex-direction: column;
   text-align: center;
   gap: 10px;
-  /* margin-bottom: 50px; */
   h3 {
     font-size: 3.8rem;
-    /* font-weight: bold; */
     span {
       font: normal bold 3.8rem/1 "EHNormalTrial";
     }
   }
-  @media screen and (max-width: 767px) {
-    h3 {
-      font-size: 3rem;
-      span {
-        font-size: 3rem;
-      }
-    }
+`;
+
+const SelectionInfo = styled.div`
+  text-align: center;
+  color: #666;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+
+  .count {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.6rem;
   }
 `;
 
 const Contents = styled.div`
-  /* width: 100%; */
-  /* height: 100%; */
-  width: 600px;
-  height: 500px;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 20px;
   overflow-y: auto;
-  @media screen and (max-width: 767px) {
-    /* width: 400px; */
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* height: auto;
-    overflow-y: none; */
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    height: 350px;
   }
 `;
 
@@ -79,16 +72,23 @@ const Star = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* text-align: center; */
-  gap: 5px;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
 `;
 
 const ImgWrap = styled.div`
   position: relative;
-  width: 130px;
-  height: 130px;
-  &:hover .overlay {
-    opacity: 1;
+  width: 100px;
+  height: 100px;
+
+  @media screen and (max-width: 768px) {
+    width: 80px;
+    height: 80px;
   }
 `;
 
@@ -98,7 +98,9 @@ const Img = styled.img`
   border-radius: 50%;
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  cursor: pointer;
+  transition: all 0.3s ease;
+  border: ${(props) =>
+    props.$isSelected ? "3px solid #007bff" : "2px solid transparent"};
 `;
 
 const Overlay = styled.div`
@@ -108,7 +110,7 @@ const Overlay = styled.div`
   top: 0;
   left: 0;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 123, 255, 0.7);
   opacity: ${(props) => (props.$isVisible ? 1 : 0)};
   transition: opacity 0.3s;
   pointer-events: none;
@@ -120,64 +122,162 @@ const StyledIcon = styled(FontAwesomeIcon)`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  color: var(--light-color);
-  font-size: 2.6rem;
+  color: white;
+  font-size: 2.2rem;
   opacity: ${(props) => (props.$isVisible ? 1 : 0)};
   transition: opacity 0.3s;
 `;
 
-// const Skip = styled.p`
-//   text-align: right;
-//   margin-bottom: 10px;
-//   cursor: pointer;
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// `;
+// 선택된 개수 표시 배지
+const SelectionBadge = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #28a745;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 4;
+  opacity: ${(props) => (props.$isVisible ? 1 : 0)};
+  transition: opacity 0.3s;
+`;
+
+const ArtistName = styled.p`
+  margin: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  color: ${(props) => (props.$isSelected ? "#007bff" : "#333")};
+  font-weight: ${(props) => (props.$isSelected ? "bold" : "normal")};
+  transition: color 0.3s ease;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const ButtonSection = styled.div`
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const Skip = styled.p`
+  text-align: right;
+  margin: 0;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.4rem;
+
+  &:hover {
+    text-decoration: underline;
+    color: #333;
+  }
+`;
 
 const ButtonWrap = styled.div`
-  /* width: 100%; */
-  width: 600px;
+  width: 100%;
   display: flex;
-  gap: 20px;
+  gap: 15px;
 `;
 
 const Button = styled.button`
-  width: 100%;
-  padding: 20px 0;
+  flex: 1;
+  padding: 16px 0;
   font-family: "pretendard";
+  font-size: 1.5rem;
   background: var(--light-color);
   border: 1px solid var(--dark-color);
   cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
-const Btn = styled(Button)`
+const SignupBtn = styled(Button)`
   border: none;
   background: var(--dark-color);
   color: var(--light-color);
+  font-weight: bold;
+
+  &:hover:not(:disabled) {
+    background: #333;
+  }
+`;
+
+const LoadingSpinner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.6rem;
+  color: #666;
 `;
 
 const Signupv2 = () => {
-  const { data, isLoading: loading } = StarData();
-  const starData = data?.artists || [];
-  const [selectedArtist, setSelectedArtist] = useState([]);
+  const [starData, setStarData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedArtists, setSelectedArtists] = useState([]); // 배열로 변경
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
   const userData = location.state;
 
-  const handleonClick = (id) => {
-    setSelectedArtist((prev) =>
-      prev.includes(id)
-        ? prev.filter((artistId) => artistId !== id)
-        : [...prev, id]
-    );
+  useEffect(() => {
+    fetch("/API/index.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setStarData(data.artists);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading artists:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // 아티스트 선택/해제 핸들러
+  const handleArtistClick = (artistId) => {
+    setSelectedArtists((prev) => {
+      if (prev.includes(artistId)) {
+        // 이미 선택된 경우 제거
+        return prev.filter((id) => id !== artistId);
+      } else {
+        // 선택되지 않은 경우 추가
+        return [...prev, artistId];
+      }
+    });
   };
 
+  // 회원가입 처리 (선택된 아티스트들과 함께)
   const handleSignup = async () => {
-    const selectedArtistNames = starData
-      .filter((item) => selectedArtist.includes(item.id))
-      .map((item) => item.artistName);
+    if (isSigningUp) return;
+
+    setIsSigningUp(true);
+
+    // 선택된 아티스트들의 이름 배열 생성
+    const selectedArtistNames = selectedArtists
+      .map((id) => {
+        const artist = starData.find((item) => item.id === id);
+        return artist?.artistName || "";
+      })
+      .filter((name) => name !== "");
 
     const { email, password, username, name } = userData;
 
@@ -195,52 +295,135 @@ const Signupv2 = () => {
         name,
         address: userData.address,
         createdAt: new Date(),
-        favoriteArtist: selectedArtistNames.join(","),
+        favoriteArtists: selectedArtistNames, // 배열로 저장
       });
 
       console.log("회원가입 성공:", credential.user);
+      console.log("선택된 아티스트들:", selectedArtistNames);
       alert("회원가입이 완료되었습니다!");
       navigate("/");
     } catch (error) {
       console.error("회원가입 에러:", error.message);
       alert(error.message);
+    } finally {
+      setIsSigningUp(false);
+    }
+  };
+
+  // 건너뛰기 (아티스트 선택 없이 회원가입)
+  const handleSkip = async () => {
+    if (isSigningUp) return;
+
+    setIsSigningUp(true);
+
+    const { email, password, username, name } = userData;
+
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = credential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email,
+        username,
+        name,
+        address: userData.address,
+        createdAt: new Date(),
+        favoriteArtists: [], // 빈 배열로 저장
+      });
+
+      console.log("회원가입 성공 (아티스트 선택 건너뛰기):", credential.user);
+      alert("회원가입이 완료되었습니다!");
+      navigate("/");
+    } catch (error) {
+      console.error("회원가입 에러:", error.message);
+      alert(error.message);
+    } finally {
+      setIsSigningUp(false);
     }
   };
 
   return (
     <Container>
       <Title>
-        <span>좋아하는 아티스트를 선택해주세요</span>
+        <span>좋아하는 아티스트를 선택해주세요 (복수 선택 가능)</span>
         <h3>
           당신의 <span>FAVORITE STAR</span>는?
         </h3>
       </Title>
+
+      <SelectionInfo>
+        {selectedArtists.length > 0 ? (
+          <span>
+            <span className="count">{selectedArtists.length}명</span>의
+            아티스트를 선택했습니다 ❤️
+          </span>
+        ) : (
+          <span>
+            아티스트를 선택하거나 건너뛰고 나중에 마이페이지에서 설정할 수
+            있어요
+          </span>
+        )}
+      </SelectionInfo>
+
       {loading ? (
-        <p>로딩 중...</p>
+        <LoadingSpinner>아티스트 목록을 불러오는 중...</LoadingSpinner>
       ) : (
         <Contents>
-          {starData.map((artist) => (
-            <Star key={artist.id}>
-              <ImgWrap onClick={() => handleonClick(artist.id)}>
-                <Img src={artist.artistImg} alt={artist.artistName} />
-                <Overlay
-                  className="overlay"
-                  $isVisible={selectedArtist.includes(artist.id)}
-                />
-                <StyledIcon
-                  icon={faCheck}
-                  $isVisible={selectedArtist.includes(artist.id)}
-                />
-              </ImgWrap>
-              <p>{artist.artistName}</p>
-            </Star>
-          ))}
+          {starData.map((artist, index) => {
+            const isSelected = selectedArtists.includes(artist.id);
+            const selectionOrder = selectedArtists.indexOf(artist.id) + 1;
+
+            return (
+              <Star
+                key={artist.id}
+                onClick={() => handleArtistClick(artist.id)}
+              >
+                <ImgWrap>
+                  <Img
+                    src={artist.artistImg}
+                    alt={artist.artistName}
+                    $isSelected={isSelected}
+                  />
+                  <Overlay $isVisible={isSelected} />
+                  {isSelected && (
+                    <>
+                      <StyledIcon icon={faCheck} $isVisible={isSelected} />
+                      <SelectionBadge $isVisible={isSelected}>
+                        {selectionOrder}
+                      </SelectionBadge>
+                    </>
+                  )}
+                </ImgWrap>
+                <ArtistName $isSelected={isSelected}>
+                  {artist.artistName}
+                </ArtistName>
+              </Star>
+            );
+          })}
         </Contents>
       )}
-      <ButtonWrap>
-        <Button onClick={() => navigate(-1)}>이전</Button>
-        <Btn onClick={handleSignup}>회원가입 하기</Btn>
-      </ButtonWrap>
+
+      <ButtonSection>
+        <Skip onClick={handleSkip}>
+          {isSigningUp ? "처리중..." : "건너뛰고 회원가입하기"}
+        </Skip>
+        <ButtonWrap>
+          <Button onClick={() => navigate(-1)} disabled={isSigningUp}>
+            이전
+          </Button>
+          <SignupBtn onClick={handleSignup} disabled={isSigningUp}>
+            {isSigningUp
+              ? "가입 중..."
+              : selectedArtists.length > 0
+              ? `${selectedArtists.length}명과 함께 가입하기`
+              : "회원가입 하기"}
+          </SignupBtn>
+        </ButtonWrap>
+      </ButtonSection>
     </Container>
   );
 };

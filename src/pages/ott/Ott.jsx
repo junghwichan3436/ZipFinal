@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useRef, useMemo } from "react";
 import styled from "styled-components";
 import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
@@ -12,10 +12,8 @@ import {
   bagData,
   interviewData,
   workingData,
-  allData,
   useAllDataViews,
   playlistIds,
-  bagDataWithViews,
 } from "../../StarData";
 import OttBanner from "./OttBanner";
 
@@ -73,11 +71,17 @@ const UserLike = styled.div`
       pointer-events: auto;
     }
   }
-  .swiper-button-prev::after {
-    content: "<";
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    width: 16px;
+    font-size: 16px;
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .swiper-button-next::after {
-    content: ">";
+    left: 60%;
   }
   @media screen and (max-width: 767px) {
     padding: 10% 3%;
@@ -160,7 +164,7 @@ const VideoText = styled.div`
       gap: 10px;
       p {
         &:first-child {
-          font-size: 1.4rem;
+          font-size: 1.6rem;
           line-height: 1.2;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -205,17 +209,15 @@ const BagInside = styled(UserLike)``;
 
 const Interview = styled(UserLike)``;
 
-const ZipShorts = styled(UserLike)`
-  .swiper-slide {
-    div {
-      img,
-      iframe {
-        aspect-ratio: 4 / 6;
-      }
-    }
-  }
+const Loading = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--ott-bg-color);
+  color: var(--light-color);
 `;
-
 const Ott = () => {
   const { isLoading, data } = StarData();
   const { isLoading: loading05, data: data05 } = useAllDataViews(playlistIds);
@@ -606,68 +608,9 @@ const Ott = () => {
               })}
             </Swiper>
           </Interview>
-          {/* <ZipShorts>
-          <SlideTitle>ZIP. SHORTS</SlideTitle>
-          <Swiper
-            className="videoWrapper"
-            modules={[Navigation]}
-            navigation={true}
-            breakpoints={{
-              1920: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-              0: {
-                slidesPerView: 2, // ✅ 모바일용 설정 추가 (예: 1개 보여줌)
-                spaceBetween: 20,
-              },
-            }}
-          >
-            {data05?.items?.map((video) => {
-              const shorts = data?.artists.find((artist) =>
-                video?.snippet?.title.includes(artist.artistName)
-              );
-              return shorts ? (
-                <SwiperSlide key={video.snippet.position}>
-                  <VideoCon
-                    onMouseEnter={VideoPlay}
-                    onMouseLeave={VideoStop}
-                    onClick={() =>
-                      navigate(
-                        `/ott/detail/${encodeURIComponent(video.snippet.title)}`
-                      )
-                    }
-                  >
-                    <img src={video.snippet.thumbnails.high.url} alt="" />
-                    <YouTube
-                      videoId={video.snippet.resourceId.videoId}
-                      opts={opts}
-                      onReady={handleReady}
-                    />
-                  </VideoCon>
-                  <VideoText>
-                    <div onClick={() => navigate(`/star/${shorts.artistName}`)}>
-                      <img src={shorts?.artistImg} alt="" />
-                    </div>
-                    <div>
-                      <p>{video.snippet.title}</p>
-                      <p>{video.snippet.videoOwnerChannelTitle}</p>
-                    </div>
-                  </VideoText>
-                </SwiperSlide>
-              ) : (
-                <div></div>
-              );
-            })}
-          </Swiper>
-        </ZipShorts> */}
         </Container>
       ) : (
-        <div>넵</div>
+        <Loading>Loading...</Loading>
       )}
     </div>
   );
