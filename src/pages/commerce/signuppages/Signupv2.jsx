@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { StarData } from "../../../StarData";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +7,16 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  @media screen and (max-width: 767px) {
+    overflow-y: auto;
+  }
+`;
 
 const Container = styled.div`
   /* width: 600px; */
@@ -35,6 +46,14 @@ const Title = styled.div`
       font: normal bold 3.8rem/1 "EHNormalTrial";
     }
   }
+  @media screen and (max-width: 767px) {
+    h3 {
+      font-size: 3rem;
+      span {
+        font-size: 3rem;
+      }
+    }
+  }
 `;
 
 const Contents = styled.div`
@@ -46,6 +65,12 @@ const Contents = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   overflow-y: auto;
+  @media screen and (max-width: 767px) {
+    /* width: 400px; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* height: auto;
+    overflow-y: none; */
+  }
 `;
 
 const Star = styled.div`
@@ -101,14 +126,14 @@ const StyledIcon = styled(FontAwesomeIcon)`
   transition: opacity 0.3s;
 `;
 
-const Skip = styled.p`
-  text-align: right;
-  margin-bottom: 10px;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+// const Skip = styled.p`
+//   text-align: right;
+//   margin-bottom: 10px;
+//   cursor: pointer;
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// `;
 
 const ButtonWrap = styled.div`
   /* width: 100%; */
@@ -133,34 +158,26 @@ const Btn = styled(Button)`
 `;
 
 const Signupv2 = () => {
-  const [starData, setStarData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedArtist, setSelectedArtist] = useState(null);
+  const { data, isLoading: loading } = StarData();
+  const starData = data?.artists || [];
+  const [selectedArtist, setSelectedArtist] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
   const userData = location.state;
 
-  useEffect(() => {
-    fetch("/API/index.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setStarData(data.artists);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error loading artists:", err);
-        setLoading(false);
-      });
-  }, []);
-
   const handleonClick = (id) => {
-    setSelectedArtist(id === selectedArtist ? null : id);
+    setSelectedArtist((prev) =>
+      prev.includes(id)
+        ? prev.filter((artistId) => artistId !== id)
+        : [...prev, id]
+    );
   };
 
   const handleSignup = async () => {
-    const artist = starData.find((item) => item.id === selectedArtist);
-    const artistName = artist?.artistName || "";
+    const selectedArtistNames = starData
+      .filter((item) => selectedArtist.includes(item.id))
+      .map((item) => item.artistName);
 
     const { email, password, username, name } = userData;
 
@@ -178,7 +195,7 @@ const Signupv2 = () => {
         name,
         address: userData.address,
         createdAt: new Date(),
-        favoriteArtist: artistName,
+        favoriteArtist: selectedArtistNames.join(","),
       });
 
       console.log("회원가입 성공:", credential.user);
@@ -208,27 +225,22 @@ const Signupv2 = () => {
                 <Img src={artist.artistImg} alt={artist.artistName} />
                 <Overlay
                   className="overlay"
-                  $isVisible={selectedArtist === artist.id}
+                  $isVisible={selectedArtist.includes(artist.id)}
                 />
-                {selectedArtist === artist.id && (
-                  <StyledIcon
-                    icon={faCheck}
-                    $isVisible={selectedArtist === artist.id}
-                  />
-                )}
+                <StyledIcon
+                  icon={faCheck}
+                  $isVisible={selectedArtist.includes(artist.id)}
+                />
               </ImgWrap>
               <p>{artist.artistName}</p>
             </Star>
           ))}
         </Contents>
       )}
-      <div>
-        <Skip>건너뛰기</Skip>
-        <ButtonWrap>
-          <Button onClick={() => navigate(-1)}>이전</Button>
-          <Btn onClick={handleSignup}>회원가입 하기</Btn>
-        </ButtonWrap>
-      </div>
+      <ButtonWrap>
+        <Button onClick={() => navigate(-1)}>이전</Button>
+        <Btn onClick={handleSignup}>회원가입 하기</Btn>
+      </ButtonWrap>
     </Container>
   );
 };
