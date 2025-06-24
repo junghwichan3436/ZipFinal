@@ -93,10 +93,9 @@ const CloseBtn = styled.button`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     border-bottom: 1px solid var(--dark-color);
     width: 50%;
-    height: 2px;
+    height: 1px;
     transition: all 0.3s;
     &:first-child {
       transform: translate(-50%, -50%) rotate(45deg);
@@ -108,7 +107,7 @@ const CloseBtn = styled.button`
   @media screen and (max-width: 1024px) {
     right: 4%;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 600px) {
     right: 6%;
   }
   &.active {

@@ -64,8 +64,6 @@ const Footer = () => {
   const navigate = useNavigate();
   const commerceMatch = useMatch("/");
   const detailMatch = useMatch("/detail/:itemName");
-  const loginMatch = useMatch("/login");
-  const signUpMatch = useMatch("/signup");
   const eventMatch = useMatch("/event");
   const promotionMatch = useMatch("/event/:promotion");
   const cartMatch = useMatch("/cart");
@@ -73,8 +71,6 @@ const Footer = () => {
   const searchMatch = useMatch("/search/:name");
   const mypageMatch = useMatch("/mypage");
   const mypageMatch02 = useMatch("/mypage/:name");
-  const starMatch = useMatch("/star");
-  const starDetailMatch = useMatch("/star/:starName");
   const filterFunc = () => {
     if (
       commerceMatch ||
@@ -83,7 +79,9 @@ const Footer = () => {
       eventMatch ||
       cartMatch ||
       searchMatch ||
-      promotionMatch
+      promotionMatch ||
+      mypageMatch ||
+      mypageMatch02
     ) {
       setFilterCheck(true);
     } else {

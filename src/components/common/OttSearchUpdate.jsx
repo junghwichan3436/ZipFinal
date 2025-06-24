@@ -36,7 +36,7 @@ const Container = styled.div`
 `;
 const Value = styled.p`
   font-size: 2.4rem;
-  p {
+  span {
     font-weight: bold;
     display: inline-block;
   }
@@ -176,7 +176,6 @@ const VideoWrap = styled.div`
 const PaginationWrap = styled.div`
   width: 100%;
   padding-bottom: 30px;
-
   ul {
     display: flex;
     justify-content: center;
@@ -229,7 +228,8 @@ const OttSearchUpdate = ({ inputValue, scrollAreaRef }) => {
         <NotFound>검색결과가 없습니다.</NotFound>
       ) : (
         <Value>
-          <p>'{inputValue}'</p>에 대한 검색결과입니다.
+          "<span>{inputValue}</span>" 에 대한 검색결과(
+          <span>{star.length + video.length}건</span>)입니다.
         </Value>
       )}
       {star.length > 0 ? (
