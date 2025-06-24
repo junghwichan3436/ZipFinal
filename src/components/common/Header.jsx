@@ -731,7 +731,8 @@ const Header = () => {
       ottMatch03 ||
       starMatch ||
       starDetailMatch ||
-      loginMatch ? (
+      loginMatch ||
+      signUpMatch02 ? (
         <OttSearchWrap
           ottSearchClick={ottSearchClick}
           setOttSearchClick={setOttSearchClick}

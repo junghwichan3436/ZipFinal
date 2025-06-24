@@ -6,14 +6,14 @@ import Pagination from "react-js-pagination";
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   padding: 0 3%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   background: var(--ott-bg-color);
   color: var(--light-color);
+  padding-top: 120px;
 `;
 
 const Title = styled.div`
@@ -21,7 +21,6 @@ const Title = styled.div`
   display: flex;
   align-items: end;
   gap: 40px;
-  padding-top: 120px;
   padding-bottom: 30px;
   /* border-bottom: 1px solid #3c3c3c; */
   h4 {
@@ -40,19 +39,23 @@ const Title = styled.div`
       font-size: 5rem;
     }
     p {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
     }
   }
   @media (max-width: 767px) {
     flex-direction: column;
     align-items: start;
     gap: 20px;
-    /* h4 {
-      font-size: 3rem;
-    } */
+    h4 {
+      font-size: 4rem;
+    }
     p {
-      display: flex;
-      /* letter-spacing: 0.1rem; */
+      display: inline;
+      white-space: nowrap;
+      font-size: 1.4rem;
+    }
+    p br {
+      display: none;
     }
   }
 `;
@@ -197,6 +200,14 @@ const PaginationWrap = styled.div`
   }
 `;
 
+const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Work = () => {
   const [sortOrder, setSortOrder] = useState("latest");
   const [page, setPage] = useState(1); //현재 페이지
@@ -229,76 +240,87 @@ const Work = () => {
 
   return (
     <Container>
-      <Title>
-        <h4>WORK ZIP</h4>
-        <p>
-          스타의 프로페셔널한 모습,
-          <br />
-          한눈에 <b>ZIP</b>
-        </p>
-      </Title>
-      <FilterGroup>
-        <Category>
-          <li>ALL</li>
-        </Category>
-        <select
-          name="filter"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="latest">최신순</option>
-          <option value="popular">인기순</option>
-          {/* <option value="">조회순</option> */}
-        </select>
-      </FilterGroup>
-      <Contents>
-        {paginatedItems?.map((item) => {
-          const title = item.title || item.snippet?.title;
-          const videoId = item.resourceId?.videoId || item.videoId || item.id;
-          const thumbnail =
-            item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
-          const videoOwnerChannelTitle =
-            item.videoOwnerChannelTitle || item.snippet?.videoOwnerChannelTitle;
+      {isLoading ? (
+        <Loading>Loading...</Loading>
+      ) : (
+        <div>
+          <Title>
+            <h4>WORK ZIP</h4>
+            <p>
+              스타의 프로페셔널한 모습,
+              <br />
+              한눈에 <b>ZIP</b>
+            </p>
+          </Title>
+          <FilterGroup>
+            <Category>
+              <li>ALL</li>
+            </Category>
+            <select
+              name="filter"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="latest">최신순</option>
+              <option value="popular">인기순</option>
+              {/* <option value="">조회순</option> */}
+            </select>
+          </FilterGroup>
+          <Contents>
+            {paginatedItems?.map((item) => {
+              const title = item.title || item.snippet?.title;
+              const videoId =
+                item.resourceId?.videoId || item.videoId || item.id;
+              const thumbnail =
+                item.thumbnails?.maxres?.url || item.thumbnails?.high?.url;
+              const videoOwnerChannelTitle =
+                item.videoOwnerChannelTitle ||
+                item.snippet?.videoOwnerChannelTitle;
 
-          const matchedArtist = starData?.artists?.find((artist) =>
-            title.includes(artist.artistName)
-          );
+              const matchedArtist = starData?.artists?.find((artist) =>
+                title.includes(artist.artistName)
+              );
 
-          return (
-            <Video key={videoId}>
-              <img
-                src={thumbnail}
-                alt={title}
-                onClick={() =>
-                  navigate(`/ott/detail/${encodeURIComponent(title)}`)
-                }
-              />
-              <VideoText>
-                <div>
+              return (
+                <Video key={videoId}>
                   <img
-                    src={matchedArtist ? matchedArtist.artistImg : ""}
-                    alt={matchedArtist?.artistName || "artist"}
+                    src={thumbnail}
+                    alt={title}
+                    onClick={() =>
+                      navigate(`/ott/detail/${encodeURIComponent(title)}`)
+                    }
                   />
-                </div>
-                <div>
-                  <p>{title}</p>
-                  <p>{videoOwnerChannelTitle}</p>
-                </div>
-              </VideoText>
-            </Video>
-          );
-        })}
-      </Contents>
-      <PaginationWrap>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={itemsPerPage}
-          totalItemsCount={filteredItems?.length}
-          pageRangeDisplayed={5}
-          hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
-          onChange={changePageHandler} // 페이지 바뀔때 함수
-        />
-      </PaginationWrap>
+                  <VideoText>
+                    <div>
+                      <img
+                        src={matchedArtist ? matchedArtist.artistImg : ""}
+                        alt={matchedArtist?.artistName || "artist"}
+                        onClick={() =>
+                          navigate(`/star/${matchedArtist.artistName}`)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <p>{title}</p>
+                      <p>{videoOwnerChannelTitle}</p>
+                    </div>
+                  </VideoText>
+                </Video>
+              );
+            })}
+          </Contents>
+          <PaginationWrap>
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsPerPage}
+              totalItemsCount={filteredItems?.length}
+              pageRangeDisplayed={5}
+              hideFirstLastPages={true} // 첫페이지, 끝페이지 버튼 숨기기
+              onChange={changePageHandler} // 페이지 바뀔때 함수
+            />
+          </PaginationWrap>
+        </div>
+      )}
     </Container>
   );
 };
