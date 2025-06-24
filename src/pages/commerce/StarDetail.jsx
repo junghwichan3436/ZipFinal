@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { StarData, useAllDataViews, playlistIds } from "../../StarData";
-import YouTube from "react-youtube";
 
 const Container = styled.div`
   color: var(--light-color);
@@ -25,13 +24,36 @@ const ArtistBg = styled.div`
   width: 100%;
   position: relative;
   z-index: 1;
-  height: 60vh;
-  p {
+  height: 100vh;
+  margin-bottom: -300px;
+  div {
     position: absolute;
-    top: 50%;
-    left: 3%;
-    transform: translateY(-50%);
-    font-size: 4rem;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    p {
+      &:nth-child(1) {
+      }
+      &:nth-child(2) {
+        font-size: 6rem;
+        font-weight: bold;
+        font-family: "EHNormalTrial";
+        line-height: 1.2;
+      }
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    z-index: -1;
   }
 `;
 
@@ -67,13 +89,6 @@ const RelateProducts = styled.div`
         }
       }
     }
-  }
-`;
-
-const RelateProductsTitle = styled.h3`
-  font-size: 3.2rem;
-  @media screen and (max-width: 1024px) {
-    font-size: 2.4rem;
   }
 `;
 
@@ -141,7 +156,8 @@ const UserLike = styled.div`
   flex-direction: column;
   gap: 40px;
   width: 100%;
-  padding: 5% 3%;
+  padding: 3% 3%;
+  cursor: pointer;
   .swiper-slide {
     display: flex;
     flex-direction: column;
@@ -204,10 +220,13 @@ const VideoText = styled.div`
     justify-content: space-between;
     gap: 10px;
     p {
-      &:nth-child(2) {
-        font-size: 1.4rem;
-        color: var(--subTitle);
-      }
+      font-size: 1.6rem;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   img {
@@ -230,7 +249,6 @@ const VideoText = styled.div`
 
 const StarDetail = () => {
   const navigate = useNavigate();
-  const VideoRef = useRef(null);
   const { starName } = useParams();
   const { isLoading, data } = StarData();
   const { isLoading: loading02, data: data02 } = useAllDataViews(playlistIds);
@@ -250,23 +268,21 @@ const StarDetail = () => {
     }
   }, [data, starName, navigate]);
 
-  const handleReady = (event) => {
-    // event.target은 YT.Player 인스턴스
-    VideoRef.current = event.target;
-  };
-
   return (
     <Container>
       <ArtistBg
         style={{
-          background: `linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent), url(${
+          background: ` url(${
             filterData?.artistBanner
-              ? filterData.artistBanner
-              : filterData.artistImg
+              ? filterData?.artistBanner
+              : filterData?.artistImg
           }) center/cover no-repeat`,
         }}
       >
-        <p>{starName}</p>
+        <div>
+          <p>{filterData?.jobCategory.toUpperCase()}</p>
+          <p>{starName}</p>
+        </div>
       </ArtistBg>
       {isLoading ? (
         <></>
@@ -292,14 +308,16 @@ const StarDetail = () => {
               }}
             >
               {artistVideo?.map((video) => (
-                <SwiperSlide key={video.title}>
+                <SwiperSlide
+                  key={video.title}
+                  onClick={() => navigate(`/ott/detail/${video.title}`)}
+                >
                   <VideoCon>
                     <img src={video.thumbnails.high.url} alt="" />
                   </VideoCon>
                   <VideoText>
                     <div>
                       <p>{video.title}</p>
-                      <p>{video.videoOwnerChannelTitle}</p>
                     </div>
                   </VideoText>
                 </SwiperSlide>
@@ -316,7 +334,7 @@ const StarDetail = () => {
                   spaceBetween: 20,
                 },
                 1024: {
-                  slidesPerView: 4,
+                  slidesPerView: 5,
                   spaceBetween: 20,
                 },
                 768: {

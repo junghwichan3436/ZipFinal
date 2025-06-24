@@ -36,6 +36,9 @@ const TextBox = styled.div`
   align-items: flex-start;
   padding: 0 5%;
   gap: 40px;
+  .artistName {
+    cursor: pointer;
+  }
   @media screen and (max-width: 1024px) {
     max-height: 500px;
     width: 100%;
@@ -395,7 +398,12 @@ const Detail = () => {
                   <DetailSwiper enabled={swiperActive} product={product} />
                 </SwiperBox>
                 <TextBox>
-                  <p>{artist.artistName} PICK</p>
+                  <p
+                    className="artistName"
+                    onClick={() => navigate(`/star/${artist.artistName}`)}
+                  >
+                    {artist.artistName} PICK
+                  </p>
                   <ItemName>{product.itemName}</ItemName>
                   <ItemPrice>
                     KRW {product.price.toLocaleString("ko-KR")}
@@ -449,7 +457,7 @@ const Detail = () => {
                   spaceBetween: 20,
                 },
                 1024: {
-                  slidesPerView: 4,
+                  slidesPerView: 5,
                   spaceBetween: 20,
                 },
                 768: {

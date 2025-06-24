@@ -1,9 +1,13 @@
-// components/mypage/FavoriteArtist.jsx - 기본 UI만 구성
-import React, { useState, useMemo } from "react";
+// components/mypage/FavoriteArtist.jsx - Firebase 연동 버전
+import React, { useState, useMemo, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { StarData } from "../../../StarData";
+import useAuthStore from "../../../components/shorts/stores/authStore";
+import { useAuth } from "../../../hooks/useAuth"; // 기존 훅도 사용 가능
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -165,7 +169,6 @@ const DropdownItem = styled.div`
   }
 `;
 
-// 새로운 ActionBar 컴포넌트
 const ActionBar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -221,6 +224,14 @@ const ActionButton = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
+`;
+
+const LoadingText = styled.p`
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+  color: #666;
+  font-style: italic;
 `;
 
 const ResultText = styled.p`
@@ -403,8 +414,12 @@ const Loading = styled.div`
 `;
 
 const FavoriteArtist = () => {
-  // 기본 로컬 상태만 사용 (나중에 상태관리 연결 예정)
-  const [savedArtists, setSavedArtists] = useState([]); // 저장된 아티스트 목록
+  // 기존 Context 방식과 Zustand 방식 모두 사용 가능
+  const { currentUser, isAuthenticated } = useAuth(); // 기존 방식
+  const { user, userProfile, updateFavoriteArtists } = useAuthStore(); // Zustand 방식
+
+  // 상태 관리
+  const [savedArtists, setSavedArtists] = useState([]); // Firebase에서 가져온 저장된 아티스트
   const [selectedArtists, setSelectedArtists] = useState([]); // 수정 중인 아티스트 목록
   const [showHeartAnimation, setShowHeartAnimation] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
@@ -412,19 +427,50 @@ const FavoriteArtist = () => {
   const [sortOrder, setSortOrder] = useState("이름순(ㄱ - ㅎ)");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   const itemsPerPage = 12;
-  const { isLoading, data } = StarData();
-
+  const { isLoading: starDataLoading, data } = StarData();
   const allArtists = data?.artists?.map((artist) => artist).flat() || [];
 
-  // 표시할 아티스트 목록 결정 (수정 모드면 전체, 일반 모드면 저장된 것만)
+  // Firebase에서 사용자의 선호 아티스트 정보 불러오기
+  useEffect(() => {
+    if (userProfile) {
+      // 이미 로드된 프로필 정보가 있으면 사용
+      const favoriteArtists = userProfile.favoriteArtists || [];
+      setSavedArtists(favoriteArtists);
+      setSelectedArtists(favoriteArtists);
+      setIsLoading(false);
+    } else if (currentUser?.uid) {
+      // 프로필 정보가 없으면 Firebase에서 직접 로드
+      const loadUserFavoriteArtists = async () => {
+        try {
+          const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            const favoriteArtists = userData.favoriteArtists || [];
+            setSavedArtists(favoriteArtists);
+            setSelectedArtists(favoriteArtists);
+          }
+        } catch (error) {
+          console.error("사용자 데이터 로드 실패:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      loadUserFavoriteArtists();
+    } else {
+      setIsLoading(false);
+    }
+  }, [currentUser, userProfile]);
+
+  // 표시할 아티스트 목록 결정
   const displayArtists = useMemo(() => {
     if (isEditMode) {
-      // 수정 모드일 때는 전체 아티스트 중에서 필터링/정렬
       return allArtists;
     } else {
-      // 일반 모드일 때는 저장된 아티스트만 표시
       return allArtists.filter((artist) =>
         savedArtists.includes(artist.artistName)
       );
@@ -435,7 +481,6 @@ const FavoriteArtist = () => {
   const filteredAndSortedArtists = useMemo(() => {
     let filtered = displayArtists;
 
-    // 수정 모드일 때만 필터링 적용
     if (isEditMode && activeFilter !== "ALL") {
       filtered = filtered.filter(
         (artist) =>
@@ -444,7 +489,6 @@ const FavoriteArtist = () => {
       );
     }
 
-    // 정렬
     if (sortOrder === "이름순(ㄱ - ㅎ)") {
       filtered = [...filtered].sort((a, b) =>
         a.artistName.localeCompare(b.artistName, "ko")
@@ -483,9 +527,8 @@ const FavoriteArtist = () => {
   // 수정 모드 토글
   const handleToggleEditMode = () => {
     if (!isEditMode) {
-      // 수정 모드로 진입할 때 현재 저장된 아티스트를 선택된 상태로 설정
       setSelectedArtists([...savedArtists]);
-      setCurrentPage(0); // 첫 페이지로 이동
+      setCurrentPage(0);
     }
     setIsEditMode(!isEditMode);
   };
@@ -496,7 +539,6 @@ const FavoriteArtist = () => {
 
     const isCurrentlySelected = selectedArtists.includes(artistName);
 
-    // 선택/해제
     setSelectedArtists((prev) => {
       if (prev.includes(artistName)) {
         return prev.filter((name) => name !== artistName);
@@ -521,22 +563,43 @@ const FavoriteArtist = () => {
     }
   };
 
-  // 저장 핸들러 (나중에 상태관리 연결)
-  const handleSave = () => {
-    // 선택된 아티스트들을 저장된 상태로 업데이트
-    setSavedArtists([...selectedArtists]);
-    console.log("저장할 아티스트:", selectedArtists);
-    setIsEditMode(false);
-    setCurrentPage(0); // 첫 페이지로 이동
-    alert("저장되었습니다!");
+  // Firebase에 저장하는 함수
+  const handleSave = async () => {
+    if (!currentUser?.uid || isSaving) return;
+
+    setIsSaving(true);
+
+    try {
+      // Firebase에 업데이트
+      await updateDoc(doc(db, "users", currentUser.uid), {
+        favoriteArtists: selectedArtists,
+        updatedAt: new Date(),
+      });
+
+      // 로컬 상태 업데이트
+      setSavedArtists([...selectedArtists]);
+
+      // Zustand 스토어에도 업데이트
+      updateFavoriteArtists(selectedArtists);
+
+      setIsEditMode(false);
+      setCurrentPage(0);
+
+      console.log("저장된 아티스트:", selectedArtists);
+      alert("선호 아티스트가 성공적으로 저장되었습니다!");
+    } catch (error) {
+      console.error("저장 실패:", error);
+      alert("저장에 실패했습니다. 다시 시도해 주세요.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   // 취소 핸들러
   const handleCancel = () => {
-    // 원래 저장된 상태로 되돌리기
     setSelectedArtists([...savedArtists]);
     setIsEditMode(false);
-    setCurrentPage(0); // 첫 페이지로 이동
+    setCurrentPage(0);
   };
 
   // 페이지 번호 생성
@@ -560,10 +623,19 @@ const FavoriteArtist = () => {
     return pages;
   };
 
-  if (isLoading) {
+  if (starDataLoading || isLoading) {
     return (
       <Container>
         <Loading>Loading...</Loading>
+      </Container>
+    );
+  }
+
+  if (!currentUser) {
+    return (
+      <Container>
+        <PageTitle>FAVORITE ARTIST</PageTitle>
+        <LoadingText>로그인이 필요한 서비스입니다.</LoadingText>
       </Container>
     );
   }
@@ -612,22 +684,28 @@ const FavoriteArtist = () => {
         </FilterSection>
       )}
 
-      {/* ActionBar - 텍스트와 버튼을 한 줄로 배치 */}
+      {/* ActionBar */}
       <ActionBar>
         <ActionText>
           {isEditMode
             ? "좋아하는 아티스트를 재선택해주세요!"
-            : "현재 선택된 아티스트입니다"}
+            : savedArtists.length > 0
+            ? "현재 선택된 아티스트입니다"
+            : "아직 선택된 아티스트가 없습니다"}
         </ActionText>
 
         {!isEditMode ? (
-          <ActionButton onClick={handleToggleEditMode}>수정</ActionButton>
+          <ActionButton onClick={handleToggleEditMode}>
+            {savedArtists.length > 0 ? "수정" : "아티스트 선택"}
+          </ActionButton>
         ) : (
           <ButtonGroup>
-            <ActionButton onClick={handleSave} primary>
-              완료
+            <ActionButton onClick={handleSave} primary disabled={isSaving}>
+              {isSaving ? "저장 중..." : "완료"}
             </ActionButton>
-            <ActionButton onClick={handleCancel}>취소</ActionButton>
+            <ActionButton onClick={handleCancel} disabled={isSaving}>
+              취소
+            </ActionButton>
           </ButtonGroup>
         )}
       </ActionBar>
@@ -636,73 +714,90 @@ const FavoriteArtist = () => {
         {isEditMode
           ? selectedArtists.length > 0 &&
             `이 아티스트들을 좋아해요 ❤️: ${selectedArtists.length}명`
-          : savedArtists.length > 0 &&
-            `총 ${savedArtists.length}명의 아티스트를 선택하셨습니다`}
+          : savedArtists.length > 0
+          ? `총 ${savedArtists.length}명의 아티스트를 선택하셨습니다`
+          : "아티스트를 선택해보세요!"}
       </ResultText>
 
-      <ArtistGrid>
-        {currentArtists.map((artist, index) => (
-          <ArtistCard
-            key={`${artist.artistName}-${index}`}
-            onClick={() => handleArtistClick(artist.artistName)}
-            disabled={!isEditMode}
+      {/* 아티스트가 없을 때 메시지 */}
+      {!isEditMode && savedArtists.length === 0 ? (
+        <div style={{ textAlign: "center", padding: "60px 20px" }}>
+          <p
+            style={{ fontSize: "1.8rem", color: "#666", marginBottom: "20px" }}
           >
-            <ArtistImageWrapper
-              isSelected={
-                isEditMode
-                  ? selectedArtists.includes(artist.artistName)
-                  : savedArtists.includes(artist.artistName)
-              }
-            >
-              <ArtistImage src={artist.artistImg} alt={artist.artistName} />
-              <HeartIcon show={showHeartAnimation[artist.artistName]}>
-                <FontAwesomeIcon icon={faHeart} />
-              </HeartIcon>
-              {!isEditMode && savedArtists.includes(artist.artistName) && (
-                <SelectedBadge>✓</SelectedBadge>
-              )}
-            </ArtistImageWrapper>
-            <ArtistName
-              isSelected={
-                isEditMode
-                  ? selectedArtists.includes(artist.artistName)
-                  : savedArtists.includes(artist.artistName)
-              }
-            >
-              {artist.artistName}
-            </ArtistName>
-          </ArtistCard>
-        ))}
-      </ArtistGrid>
+            아직 선택된 아티스트가 없습니다
+          </p>
+          <ActionButton onClick={handleToggleEditMode} primary>
+            아티스트 선택하기
+          </ActionButton>
+        </div>
+      ) : (
+        <>
+          <ArtistGrid>
+            {currentArtists.map((artist, index) => (
+              <ArtistCard
+                key={`${artist.artistName}-${index}`}
+                onClick={() => handleArtistClick(artist.artistName)}
+                disabled={!isEditMode}
+              >
+                <ArtistImageWrapper
+                  isSelected={
+                    isEditMode
+                      ? selectedArtists.includes(artist.artistName)
+                      : savedArtists.includes(artist.artistName)
+                  }
+                >
+                  <ArtistImage src={artist.artistImg} alt={artist.artistName} />
+                  <HeartIcon show={showHeartAnimation[artist.artistName]}>
+                    <FontAwesomeIcon icon={faHeart} />
+                  </HeartIcon>
+                  {!isEditMode && savedArtists.includes(artist.artistName) && (
+                    <SelectedBadge>✓</SelectedBadge>
+                  )}
+                </ArtistImageWrapper>
+                <ArtistName
+                  isSelected={
+                    isEditMode
+                      ? selectedArtists.includes(artist.artistName)
+                      : savedArtists.includes(artist.artistName)
+                  }
+                >
+                  {artist.artistName}
+                </ArtistName>
+              </ArtistCard>
+            ))}
+          </ArtistGrid>
 
-      {totalPages > 1 && (
-        <PaginationWrapper>
-          <PaginationButton
-            onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
-            disabled={currentPage === 0}
-          >
-            ‹
-          </PaginationButton>
+          {totalPages > 1 && (
+            <PaginationWrapper>
+              <PaginationButton
+                onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
+                disabled={currentPage === 0}
+              >
+                ‹
+              </PaginationButton>
 
-          {getPageNumbers().map((pageNum) => (
-            <PaginationButton
-              key={pageNum}
-              active={currentPage === pageNum}
-              onClick={() => setCurrentPage(pageNum)}
-            >
-              {pageNum + 1}
-            </PaginationButton>
-          ))}
+              {getPageNumbers().map((pageNum) => (
+                <PaginationButton
+                  key={pageNum}
+                  active={currentPage === pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                >
+                  {pageNum + 1}
+                </PaginationButton>
+              ))}
 
-          <PaginationButton
-            onClick={() =>
-              setCurrentPage(Math.min(totalPages - 1, currentPage + 1))
-            }
-            disabled={currentPage === totalPages - 1}
-          >
-            ›
-          </PaginationButton>
-        </PaginationWrapper>
+              <PaginationButton
+                onClick={() =>
+                  setCurrentPage(Math.min(totalPages - 1, currentPage + 1))
+                }
+                disabled={currentPage === totalPages - 1}
+              >
+                ›
+              </PaginationButton>
+            </PaginationWrapper>
+          )}
+        </>
       )}
     </Container>
   );
