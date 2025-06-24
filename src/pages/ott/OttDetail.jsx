@@ -34,22 +34,22 @@ const MainContent = styled.div`
 
   @media (max-width: 1400px) {
     flex-direction: column; /* 순서 바뀜 */
-    padding: 100px 30px 0 30px;
+    padding: 100px 0 0 0;
     gap: 60px;
   }
 
   @media (max-width: 1024px) {
-    padding: 80px 30px 0 30px;
+    padding: 80px 0 0 0;
     gap: 50px;
   }
 
   @media (max-width: 768px) {
-    padding: 60px 20px 0 20px;
+    padding: 60px 0 0 0;
     gap: 40px;
   }
 
   @media (max-width: 480px) {
-    padding: 40px 15px 0 15px;
+    padding: 40px 0 0 0;
     gap: 30px;
   }
 `;
@@ -195,11 +195,11 @@ const Buttons = styled.div`
   /* gap: 10px; */
 
   @media (max-width: 768px) {
-    padding: 15px 0 0 30px;
+    /* padding: 15px 0 0 30px; */
   }
 
   @media (max-width: 480px) {
-    padding: 10px 0 0 20px;
+    /* padding: 10px 0 0 20px; */
   }
 `;
 
@@ -282,7 +282,10 @@ const ContentVideo = styled.div`
 `;
 
 const Toptitle = styled.div`
-font-size: 5rem;
+font-size: 4rem;
+@media (max-width: 1400px) {
+  font-size: 3rem;
+  }
 `
 const Profile = styled.div`
   display: flex;
@@ -359,9 +362,9 @@ const RelateProducts = styled.div`
 `;
 
 const RelateProductsTitle = styled.h3`
-  font-size: 3.2rem;
+  font-size: 4rem;
   @media screen and (max-width: 1024px) {
-    font-size: 2.4rem;
+    font-size: 3rem;
   }
 `;
 const FilterItem = styled.div`
@@ -428,44 +431,37 @@ const FilterItemPrice = styled.div`
   }
 `;
 
-const StyledYouTubeWrapper = styled.span`
-  position: absolute;
-  /* display: none; */
-  width: 100%;
-  height: 100%;
-  padding-bottom: 56.25%; /* 16:9 비율 (9 / 16 = 0.5625) */
-  /* height: 0; */
-  /* overflow: hidden; */
-  margin: 40px 0 25px 0;
-  /* opacity: 0%; */
-  /* z-index: 100; */
-  iframe {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
-    border: none;
-    &:hover {
-      /* display: block; */
-    }
-  }
-`;
+// const StyledYouTubeWrapper = styled.span`
+//   position: absolute;
+//   /* display: none; */
+//   width: 100%;
+//   height: 100%;
+//   padding-bottom: 56.25%; /* 16:9 비율 (9 / 16 = 0.5625) */
+//   /* height: 0; */
+//   /* overflow: hidden; */
+//   margin: 40px 0 25px 0;
+//   /* opacity: 0%; */
+//   /* z-index: 100; */
+//   iframe {
+//     /* position: absolute; */
+//     width: 100%;
+//     height: 100%;
+//     border: none;
+//     &:hover {
+//       /* display: block; */
+//     }
+//   }
+// `;
 
 
 
-const Thumbnails = styled.span`
-position: relative;
+const Thumbnails = styled.div`
 width: 100%;
 height: 100%;
-/* padding-bottom: 56.25%; */
-margin: 40px 0 25px 0;
-/* z-index: 1000; */
-/* opacity: 0%; */
 cursor: pointer;
 img {
+  display: block;
   width: 100%;
-  &:hover {
-    /* display: none; */
-  }
 }
 `
 
@@ -718,7 +714,6 @@ const matchedDataLists = YoutubeDatas?.filter((YoutubeData) =>
             </SwiperSlide>
           ))}
           </Swiper>
-          <div></div>
         </VideoContents>
         </Container>
 )}
