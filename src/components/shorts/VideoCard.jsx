@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -211,7 +212,7 @@ const InteractionButton = styled.button`
   }
 `;
 
-const ItemInfoLink = styled.a`
+const ItemInfoButton = styled.button`
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -281,7 +282,6 @@ const VideoCard = React.memo(
     isActive,
     videoInteractions,
     handleVideoInteraction,
-    handleItemInfoClick,
     handleCommentClick,
     handleShareClick,
     registerVideoRef,
@@ -291,6 +291,7 @@ const VideoCard = React.memo(
     onMuteToggle,
     onVideoReady,
   }) => {
+    const navigate = useNavigate();
     const containerRef = useRef(null);
     const playerRef = useRef(null);
     const [showVolumeControl, setShowVolumeControl] = useState(false);
@@ -654,11 +655,21 @@ const VideoCard = React.memo(
       [handleCommentClick, video]
     );
 
+    // 🛍️ 아이템 정보 페이지로 이동 (navigate 사용)
     const onItemInfoClick = useCallback(
       (e) => {
-        handleItemInfoClick(e, video.id, video.itemUrl);
+        e.stopPropagation();
+
+        // 아이템 인터랙션 상태 업데이트
+        handleVideoInteraction(video.id, "itemInfo");
+        const itemName = video.itemUrl;
+        if (itemName) {
+          navigate(`/detail/${itemName}`);
+        } else {
+          console.warn("아이템 정보가 없습니다:", video);
+        }
       },
-      [handleItemInfoClick, video.id, video.itemUrl]
+      [video.id, video.itemUrl, handleVideoInteraction, navigate]
     );
 
     const onShareClick = useCallback(
@@ -754,10 +765,7 @@ const VideoCard = React.memo(
             )}
           </InteractionButton>
 
-          <ItemInfoLink
-            href={video.itemUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <ItemInfoButton
             $active={videoInteractions[video.id]?.itemInfo}
             onClick={onItemInfoClick}
           >
@@ -765,7 +773,7 @@ const VideoCard = React.memo(
             {videoInteractions[video.id]?.itemInfo && (
               <InteractionCount>아이템</InteractionCount>
             )}
-          </ItemInfoLink>
+          </ItemInfoButton>
 
           <ShareButton
             $active={videoInteractions[video.id]?.shared}
