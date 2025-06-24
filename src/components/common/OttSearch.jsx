@@ -117,8 +117,11 @@ const CloseBtn = styled.button`
   }
 `;
 const OttSearch = ({ setInputValue, value, onChange }) => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <Container>
+    <Container onSubmit={onSubmit}>
       <Search>
         <input
           className="searchBar"
