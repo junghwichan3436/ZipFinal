@@ -27,11 +27,11 @@ const ZipItems = styled.li`
     transition: opacity 0.3s ease;
   }
   .img_container img.static {
-    z-index: 1;
+    z-index: 0;
     opacity: 1;
   }
   .img_container img.hover {
-    z-index: 2;
+    z-index: 1;
     opacity: 0;
   }
   .img_container:hover img.hover {
@@ -87,7 +87,7 @@ const OverlayTop = styled.div`
   color: var(--light-color);
   font-size: 1.8rem;
   font-weight: 700;
-  z-index: 3;
+  z-index: 2;
   width: 100%;
   height: 100%;
   transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
