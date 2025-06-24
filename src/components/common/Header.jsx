@@ -611,22 +611,64 @@ const Header = () => {
             </HeaderGnb>
           ) : (
             <HeaderGnb className={menuClick ? "active" : ""}>
-              <li onClick={() => navigate("/ott/bagzip")} data-li="Bag">
+              <li
+                onClick={() => {
+                  navigate("/ott/bagzip");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Bag"
+              >
                 <span>Bag</span>
               </li>
-              <li onClick={() => navigate("/ott/workzip")} data-li="Work">
+              <li
+                onClick={() => {
+                  navigate("/ott/workzip");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Work"
+              >
                 <span>Work</span>
               </li>
-              <li onClick={() => navigate("/ott/talkzip")} data-li="Talk">
+              <li
+                onClick={() => {
+                  navigate("/ott/talkzip");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Talk"
+              >
                 <span>Talk</span>
               </li>
-              <li onClick={() => navigate("/ott/short")} data-li="Shorts">
+              <li
+                onClick={() => {
+                  navigate("/ott/short");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Shorts"
+              >
                 <span>Shorts</span>
               </li>
-              <li onClick={() => navigate("/star")} data-li="Star">
+              <li
+                onClick={() => {
+                  navigate("/star");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Star"
+              >
                 <span>Star</span>
               </li>
-              <li onClick={() => navigate("/ott/original")} data-li="Original">
+              <li
+                onClick={() => {
+                  navigate("/ott/original");
+                  setMenuClick(false);
+                  setToggleClick(false);
+                }}
+                data-li="Original"
+              >
                 <span>Original</span>
               </li>
             </HeaderGnb>

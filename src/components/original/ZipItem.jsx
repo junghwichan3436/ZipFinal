@@ -90,11 +90,13 @@ const OverlayTop = styled.div`
   z-index: 2;
   width: 100%;
   height: 100%;
-  transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform: translate3d(0px, -3vw, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
   opacity: 0;
   &:hover {
     opacity: 1;
-    transform: scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    transform: scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)
+      skew(0deg, 0deg);
     transform-style: preserve-3d;
     will-change: transform;
   }
@@ -137,7 +139,15 @@ const KeywordList = styled.ul`
 `;
 
 /*--- 출력 ---*/
-const ZipItem = ({ id, thumbnail, staticThumbnail, mainTitle, subTitle, starName, keyword }) => {
+const ZipItem = ({
+  id,
+  thumbnail,
+  staticThumbnail,
+  mainTitle,
+  subTitle,
+  starName,
+  keyword,
+}) => {
   const navigate = useNavigate();
 
   const onClickItem = () => {
