@@ -258,7 +258,6 @@ const Ott = () => {
       .slice(0, 8);
   }, [allLoading, data05]);
 
-  console.log(allDataViewSlice);
   const VideoRef = useRef(null);
   const navigate = useNavigate();
   const handleReady = (event) => {
